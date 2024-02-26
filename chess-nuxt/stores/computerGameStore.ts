@@ -1,6 +1,9 @@
 import { useBoardStore } from "~/stores/boardStore"
 import services from "~/services/index";
-import Game from "chess-legal-moves";
+
+import GameDev from "../../chess-legal-moves/src/index";
+import GameProd from "chess-legal-moves";
+const Game = process.env.NODE_ENV === 'development' ? GameDev : GameProd;
 
 export const useComputerGameStore = defineStore('computerGame', {
   state: () => ({
