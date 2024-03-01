@@ -3,6 +3,7 @@ defineProps<{
     label?: string
     modelValue: boolean
 }>()
+defineEmits(['update:modelValue'])
 </script>
 
 <template>

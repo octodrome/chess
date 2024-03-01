@@ -6,6 +6,7 @@ defineProps<{
     vertical?: boolean
     label?: string
 }>()
+defineEmits(['update:modelValue'])
 </script>
 
 <template>

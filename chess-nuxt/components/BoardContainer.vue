@@ -19,7 +19,7 @@ const boardStore = useBoardStore()
             :is-check-mated="false"
         />
 
-        <Board :board="board" />
+        <ChessBoard :board="board" />
 
         <HasToPlayLine
             :is-checked="boardStore.isPlayerKingChecked"

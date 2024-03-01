@@ -5,6 +5,7 @@ defineProps<{
     content: string
     action?: 'delete' | 'message'
 }>()
+defineEmits(['delete', 'message'])
 </script>
 
 <template>

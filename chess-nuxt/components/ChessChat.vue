@@ -4,10 +4,6 @@ import { useUserStore } from '~/stores/userStore'
 import moment from 'moment'
 import services from '~/services'
 
-const emit = defineEmits<{
-    (e: 'close'): void
-}>()
-
 const route = useRoute()
 const humanGameStore = useHumanGameStore()
 const userStore = useUserStore()
@@ -20,9 +16,6 @@ const createdAt = computed(() =>
         ? moment(humanGameStore.opponent.createdAt).fromNow()
         : ''
 )
-const email = computed(() =>
-    humanGameStore.opponent ? humanGameStore.opponent.email : ''
-)
 const isUserMessage = computed(
     () => (message) =>
         humanGameStore.opponent
@@ -33,7 +26,6 @@ const messages = computed(() =>
     humanGameStore.currentGame ? humanGameStore.currentGame.messages : []
 )
 
-const close = () => emit('close')
 const sendMessage = () => {
     if (userStore.user && !isMessageEmpty) {
         services.socket.sendMessage({

@@ -15,7 +15,7 @@ const isOpponentDialogOpened = ref(false)
         />
 
         <div v-if="isOpponentDialogOpened" max-width="500">
-            <Chat @close="isOpponentDialogOpened = false" />
+            <ChessChat @close="isOpponentDialogOpened = false" />
         </div>
     </div>
 </template>
