@@ -62,9 +62,9 @@ const start = () => {
         text="Set your new game choosing the level and which color you will play with."
     >
         <BaseRadioGroup
+            v-model="computerLevel"
             :options="levels"
             name="levels"
-            v-model="computerLevel"
             label="Choose your level :"
             vertical
         />
@@ -72,16 +72,16 @@ const start = () => {
         <br />
 
         <BaseRadioGroup
+            v-model="color"
             :options="colors"
             name="colors"
-            v-model="color"
             label="Choose your color :"
             vertical
         />
     </BaseCardMain>
 
     <BaseCardFooter>
-        <BaseButton type="text" @click="cancel" class="mr-2">Cancel</BaseButton>
+        <BaseButton type="text" class="mr-2" @click="cancel">Cancel</BaseButton>
 
         <BaseButton type="text" @click="start">Start</BaseButton>
     </BaseCardFooter>

@@ -22,23 +22,23 @@ const cancel = () => emit('close')
         text="Add some information about you. This will be visible when other players choose to play with you."
     >
         <BaseTextField
-            type="text"
             v-model="userStore.user.email"
+            type="text"
             label="Email"
             disabled
         />
 
-        <BaseTextField type="text" v-model="firstName" label="First name" />
+        <BaseTextField v-model="firstName" type="text" label="First name" />
 
-        <BaseTextField type="text" v-model="lastName" label="Last name" />
+        <BaseTextField v-model="lastName" type="text" label="Last name" />
 
-        <BaseTextField type="text" v-model="age" label="Age" />
+        <BaseTextField v-model="age" type="text" label="Age" />
 
-        <BaseTextField type="text" v-model="bio" label="About me" />
+        <BaseTextField v-model="bio" type="text" label="About me" />
     </BaseCardMain>
 
     <BaseCardFooter>
-        <BaseButton type="text" @click="cancel()" class="mr-2"
+        <BaseButton type="text" class="mr-2" @click="cancel()"
             >Cancel</BaseButton
         >
 

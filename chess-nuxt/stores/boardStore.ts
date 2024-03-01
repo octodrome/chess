@@ -53,10 +53,10 @@ export const useBoardStore = defineStore('board', {
         },
 
         // @TODO get king state from lib
-        isPlayerKingChecked: (state) => false,
+        isPlayerKingChecked: () => false,
 
         // @TODO get king state from lib
-        isOpponentKingChecked: (state) => false,
+        isOpponentKingChecked: () => false,
     },
 
     actions: {

@@ -30,10 +30,10 @@ const deleteThisGame = (gameId) => {
         <BaseDrawerItem
             v-for="game in gameList"
             :key="game.id"
-            @click="goToGame(game.id)"
             icon="robot"
             :content="game.computerName"
             action="delete"
+            @click="goToGame(game.id)"
             @delete="deleteThisGame(game.id)"
         />
     </ul>

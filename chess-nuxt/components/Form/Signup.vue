@@ -60,29 +60,29 @@ const submit = handleSubmit((values) => {
         <BaseTextField
             type="email"
             :model-value="email"
-            @change="handleEmailChange"
             label="Email"
             required
             :error="errors.email"
+            @change="handleEmailChange"
         />
 
         <BaseTextField
             type="password"
             :model-value="password"
-            @change="handlePasswordChange"
             label="Password"
             required
             :error="errors.password"
+            @change="handlePasswordChange"
         />
 
         <BaseCheckbox
-            label="Receive newsletter from Vue Chess"
             v-model="newsletterPermission"
+            label="Receive newsletter from Vue Chess"
         />
     </BaseCardMain>
 
     <BaseCardFooter>
-        <BaseButton type="text" @click="close" class="mr-2">
+        <BaseButton type="text" class="mr-2" @click="close">
             Cancel
         </BaseButton>
 

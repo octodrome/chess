@@ -4,7 +4,6 @@ import { useHumanGameStore } from '~/stores/humanGameStore'
 import { useUserStore } from '~/stores/userStore'
 
 const route = useRoute()
-const router = useRouter()
 
 const humanGameStore = useHumanGameStore()
 const userStore = useUserStore()
@@ -34,9 +33,9 @@ const goToGame = (gameId) => {
         <BaseDrawerItem
             v-for="game in humanGameStore.gameList"
             :key="game._id"
-            @click="goToGame(game._id)"
             icon="account"
             :content="opponentEmail(game)"
+            @click="goToGame(game._id)"
         />
     </ul>
 </template>

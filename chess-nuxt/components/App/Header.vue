@@ -5,7 +5,7 @@ const layoutStore = useLayoutStore()
 
 <template>
     <header class="p-2">
-        <BaseButton @click="layoutStore.toggleLeftDrawer" type="icon">
+        <BaseButton type="icon" @click="layoutStore.toggleLeftDrawer">
             <BaseIcon
                 v-if="!layoutStore.drawer.leftIsOpened"
                 name="menu"
@@ -16,8 +16,8 @@ const layoutStore = useLayoutStore()
 
         <BaseButton
             v-if="$route.path !== '/'"
-            @click="layoutStore.toggleRightDrawer"
             type="icon"
+            @click="layoutStore.toggleRightDrawer"
         >
             <BaseIcon
                 v-if="!layoutStore.drawer.rightIsOpened"

@@ -54,16 +54,16 @@ const start = () => {
 
     <BaseCardMain text="Choose your opponent among the players list.">
         <BaseRadioGroup
+            v-model="selectedOpponentId"
             :options="opponentsOptions"
             name="users"
-            v-model="selectedOpponentId"
             label="Players"
             vertical
         />
     </BaseCardMain>
 
     <BaseCardFooter>
-        <BaseButton type="text" @click="close" class="mr-2">Cancel</BaseButton>
+        <BaseButton type="text" class="mr-2" @click="close">Cancel</BaseButton>
 
         <BaseButton type="text" @click="start"> Start </BaseButton>
     </BaseCardFooter>

@@ -26,9 +26,9 @@ const updateInput = (event) => emit('update:modelValue', event.target.value)
             class="border border-solid border-slate-300 rounded pl-1"
             :class="{ 'border-red-500': error }"
             :value="modelValue"
-            @input="updateInput"
             :required="required"
             :disabled="disabled"
+            @input="updateInput"
         />
         <div
             v-if="error"

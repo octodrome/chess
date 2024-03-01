@@ -22,7 +22,7 @@ const boardStore = useBoardStore()
                 class="cell"
                 :class="`cell--${cell.color}`"
             >
-                <Piece
+                <ChessPiece
                     v-if="cell.piece"
                     :color="cell.piece.color"
                     :type="cell.piece.type"

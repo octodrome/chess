@@ -17,7 +17,10 @@ const capturedPieces = computed(() =>
 <template>
     <div class="captured-pieces flex" :class="`captured-pieces--${side}`">
         <div v-for="(capturedPiece, index) in capturedPieces" :key="index">
-            <Piece :color="capturedPiece.color" :type="capturedPiece.type" />
+            <ChessPiece
+                :color="capturedPiece.color"
+                :type="capturedPiece.type"
+            />
         </div>
     </div>
 </template>

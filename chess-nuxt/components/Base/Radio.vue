@@ -12,8 +12,8 @@ defineProps<{
         :checked="modelValue === value"
         :value="value"
         name="pets"
-        @change="$emit('udpate:modelValue', value)"
         v-bind="$attrs"
+        @change="$emit('udpate:modelValue', value)"
     />
     <label v-if="label" class="ml-2">{{ label }}</label>
 </template>

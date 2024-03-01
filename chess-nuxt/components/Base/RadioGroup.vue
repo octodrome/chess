@@ -14,9 +14,9 @@ defineProps<{
     <br v-if="vertical" />
 
     <component
+        :is="vertical ? 'div' : 'span'"
         v-for="option in options"
         :key="option.value"
-        :is="vertical ? 'div' : 'span'"
         :class="{ 'mr-3': !vertical }"
     >
         <BaseRadio
@@ -24,8 +24,8 @@ defineProps<{
             :value="option.value"
             :name="name"
             :model-value="modelValue"
-            @update:modelValue="$emit('update:modelValue', $event)"
             class="mt-1 mb-1"
+            @update:model-value="$emit('update:modelValue', $event)"
         />
     </component>
 </template>
