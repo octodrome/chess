@@ -10,7 +10,7 @@
         "lint": "eslint .",
         "format:check": "prettier --check .",
         "format:fix": "prettier --write . && eslint --ext \".vue\" . --fix",
-        "ts:check": "vue-tsc"
+        "ts:check": "vue-tsc --noEmit"
     },
     "devDependencies": {
         "@nuxt/eslint-config": "^0.2.0",
@@ -41,5 +41,8 @@
         "vue-i18n": "^9.2.2",
         "vue-router": "^4.3.0",
         "yup": "^0.32.11"
+    },
+    "overrides": {
+        "chess-legal-moves": "link:../chess-legal-moves/src"
     }
 }
