@@ -11,7 +11,7 @@
         "format:check": "prettier --check .",
         "format:fix": "prettier --write . && eslint --ext \".vue\" . --fix",
         "ts:check": "vue-tsc --noEmit",
-        "test:unit": "vitest"
+        "test:unit": "vitest run"
     },
     "devDependencies": {
         "@nuxt/eslint-config": "^0.2.0",
