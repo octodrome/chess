@@ -1,5 +1,5 @@
 <script setup lang="ts">
-defineProps<{
+const props = defineProps<{
     type?: string
     modelValue?: string
     label?: string
@@ -18,23 +18,25 @@ const updateInput = (event) => emit('update:modelValue', event.target.value)
 
 <template>
     <div class="mt-2 mb-2 flex flex-col h-16 relative">
-        <label v-if="label" :for="uniqueName" class="mb-1">{{ label }} :</label>
+        <label v-if="props.label" :for="uniqueName" class="mb-1"
+            >{{ props.label }} :</label
+        >
 
         <input
             :id="uniqueName"
-            :type="type"
+            :type="props.type"
             class="border border-solid border-slate-300 rounded pl-1"
-            :class="{ 'border-red-500': error }"
-            :value="modelValue"
-            :required="required"
-            :disabled="disabled"
+            :class="{ 'border-red-500': props.error }"
+            :value="props.modelValue"
+            :required="props.required"
+            :disabled="props.disabled"
             @input="updateInput"
         />
         <div
-            v-if="error"
+            v-if="props.error"
             class="text-red-500 text-xs absolute -bottom-2 left-0"
         >
-            {{ error }}
+            {{ props.error }}
         </div>
     </div>
 </template>

@@ -11,5 +11,5 @@ const iconColor = computed(() => {
 </script>
 
 <template>
-    <span :class="`mdi mdi-${name} ${iconColor}`"></span>
+    <span :class="`mdi mdi-${props.name} ${iconColor}`"></span>
 </template>

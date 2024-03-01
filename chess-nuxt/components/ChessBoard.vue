@@ -2,7 +2,7 @@
 import { useBoardStore } from '~/stores/boardStore'
 import type { ICell } from '~/types/board'
 
-defineProps<{
+const props = defineProps<{
     board: ICell[][]
 }>()
 
@@ -12,7 +12,7 @@ const boardStore = useBoardStore()
 <template>
     <div class="flex relative drop-shadow-lg">
         <div
-            v-for="(column, columnIndex) in board"
+            v-for="(column, columnIndex) in props.board"
             :key="columnIndex"
             class="board-row"
         >

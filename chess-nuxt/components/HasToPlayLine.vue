@@ -21,7 +21,7 @@ const lineClasses = computed(() => {
 </script>
 
 <template>
-    <div v-if="boardStore.hasToPlay === color" :class="lineClasses" />
+    <div v-if="boardStore.hasToPlay === props.color" :class="lineClasses" />
 </template>
 
 <style scoped lang="scss">

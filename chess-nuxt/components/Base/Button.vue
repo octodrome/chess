@@ -1,5 +1,5 @@
 <script setup lang="ts">
-defineProps<{
+const props = defineProps<{
     type: 'text' | 'icon'
     disabled?: boolean
 }>()
@@ -8,16 +8,16 @@ defineProps<{
 <template>
     <div>
         <button
-            v-if="type === 'icon'"
-            :disabled="disabled"
+            v-if="props.type === 'icon'"
+            :disabled="props.disabled"
             class="hover:bg-gray-300 transition duration-300 w-12 h-12 rounded-full"
         >
             <slot />
         </button>
 
         <button
-            v-if="type === 'text'"
-            :disabled="disabled"
+            v-if="props.type === 'text'"
+            :disabled="props.disabled"
             class="hover:bg-gray-300 transition duration-300 p-2 rounded"
         >
             <slot />

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-defineProps<{
+const props = defineProps<{
     options: { label: string; value: string | number }[]
     name: string
     modelValue: string | number
@@ -10,21 +10,21 @@ defineEmits(['update:modelValue'])
 </script>
 
 <template>
-    <label v-if="label">{{ label }}</label>
+    <label v-if="props.label">{{ props.label }}</label>
 
-    <br v-if="vertical" />
+    <br v-if="props.vertical" />
 
     <component
-        :is="vertical ? 'div' : 'span'"
-        v-for="option in options"
+        :is="props.vertical ? 'div' : 'span'"
+        v-for="option in props.options"
         :key="option.value"
-        :class="{ 'mr-3': !vertical }"
+        :class="{ 'mr-3': !props.vertical }"
     >
         <BaseRadio
             :label="option.label"
             :value="option.value"
-            :name="name"
-            :model-value="modelValue"
+            :name="props.name"
+            :model-value="props.modelValue"
             class="mt-1 mb-1"
             @update:model-value="$emit('update:modelValue', $event)"
         />

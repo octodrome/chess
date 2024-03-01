@@ -2,7 +2,7 @@
 import type { ICell } from '~/types/board'
 import { useBoardStore } from '~/stores/boardStore'
 
-defineProps<{
+const props = defineProps<{
     board: ICell[][]
 }>()
 
@@ -19,7 +19,7 @@ const boardStore = useBoardStore()
             :is-check-mated="false"
         />
 
-        <ChessBoard :board="board" />
+        <ChessBoard :board="props.board" />
 
         <HasToPlayLine
             :is-checked="boardStore.isPlayerKingChecked"

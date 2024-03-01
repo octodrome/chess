@@ -2,7 +2,7 @@
 import { useBoardStore } from '~/stores/boardStore'
 import type { ICell } from '~/types/board'
 
-defineProps<{
+const props = defineProps<{
     color: string
     type: string
     selected: boolean
@@ -16,12 +16,12 @@ const boardStore = useBoardStore()
     <transition name="slide" appear>
         <div
             class="piece-container"
-            :class="{ selected: selected }"
-            @click="boardStore.selectOrigin(cell)"
+            :class="{ selected: props.selected }"
+            @click="boardStore.selectOrigin(props.cell)"
         >
             <img
                 class="piece"
-                :src="`/_nuxt/assets/pieces/${type}_${color}.svg`"
+                :src="`/_nuxt/assets/pieces/${props.type}_${props.color}.svg`"
             />
         </div>
     </transition>

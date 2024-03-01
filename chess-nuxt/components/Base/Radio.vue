@@ -1,5 +1,5 @@
 <script setup lang="ts">
-defineProps<{
+const props = defineProps<{
     label: string
     modelValue: string | number
     value: string | number
@@ -10,11 +10,11 @@ defineEmits(['update:modelValue'])
 <template>
     <input
         type="radio"
-        :checked="modelValue === value"
-        :value="value"
+        :checked="props.modelValue === props.value"
+        :value="props.value"
         name="pets"
         v-bind="$attrs"
-        @change="$emit('update:modelValue', value)"
+        @change="$emit('update:modelValue', props.value)"
     />
-    <label v-if="label" class="ml-2">{{ label }}</label>
+    <label v-if="props.label" class="ml-2">{{ props.label }}</label>
 </template>
