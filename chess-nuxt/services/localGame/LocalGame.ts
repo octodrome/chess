@@ -7,17 +7,17 @@ import {
     removeGameFromLocalDB,
     updateOneGameInLocalDB,
 } from './localDB'
-import {
+import type {
     IComputerGame,
     ICreateComputerGameParams,
     IUpdateComputerGameParams,
 } from '~/types/computerGame'
 import {
     uniqueNamesGenerator,
-    Config,
     adjectives,
     animals,
 } from 'unique-names-generator'
+import type { Config } from 'unique-names-generator'
 const nameGeneretorConfig: Config = {
     dictionaries: [adjectives, animals],
     separator: '-',

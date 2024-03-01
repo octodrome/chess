@@ -16,7 +16,7 @@ const computerGameStore = useComputerGameStore()
 onMounted(() => {
     const LocalStorage = process.client ? localStorage : null
 
-    function parseToken(token) {
+    function parseToken(token: string) {
         return JSON.parse(atob(token.split('.')[1]))
     }
     const userToken = LocalStorage.getItem('token')
