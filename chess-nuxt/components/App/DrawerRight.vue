@@ -1,13 +1,13 @@
 <template>
-  <BaseDrawer>
-    <div>
-      <GameOpponent />
+    <BaseDrawer>
+        <div>
+            <GameOpponent />
 
-      <BaseDrawerSeparator />
+            <BaseDrawerSeparator />
 
-      <GameInfos />
-    </div>
+            <GameInfos />
+        </div>
 
-    <GameMoves />
-  </BaseDrawer>
+        <GameMoves />
+    </BaseDrawer>
 </template>

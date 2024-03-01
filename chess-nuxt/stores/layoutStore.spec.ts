@@ -1,6 +1,6 @@
 import { describe, expect, it, beforeEach } from 'vitest'
 import { setActivePinia, createPinia } from 'pinia'
-import {useLayoutStore} from './layoutStore'
+import { useLayoutStore } from './layoutStore'
 let layoutStore
 
 describe('layoutStore', async () => {
@@ -12,16 +12,16 @@ describe('layoutStore', async () => {
     it('initial state', () => {
         expect(layoutStore.drawer).toStrictEqual({
             leftIsOpened: false,
-            rightIsOpened: false, 
+            rightIsOpened: false,
         })
         expect(layoutStore.modal).toStrictEqual({
             isOpened: false,
-            content: "",
+            content: '',
         })
         expect(layoutStore.snackbar).toStrictEqual({
             isOpened: false,
-            message: "",
-            color: "",
+            message: '',
+            color: '',
         })
     })
 
@@ -62,14 +62,14 @@ describe('layoutStore', async () => {
         layoutStore.closeModal()
         expect(layoutStore.modal.isOpened).toBe(false)
         expect(layoutStore.modal.content).toBe('')
-    });
+    })
 
     it('openSnackbar', () => {
-        layoutStore.openSnackbar({message: 'message', color: 'red'})
+        layoutStore.openSnackbar({ message: 'message', color: 'red' })
         expect(layoutStore.snackbar).toStrictEqual({
             message: 'message',
             color: 'red',
-            isOpened: true
+            isOpened: true,
         })
     })
 
@@ -78,23 +78,24 @@ describe('layoutStore', async () => {
         expect(layoutStore.snackbar).toStrictEqual({
             message: 'message',
             color: 'error',
-            isOpened: true
+            isOpened: true,
         })
         layoutStore.closeSnackbar()
         layoutStore.openSnackbarError()
         expect(layoutStore.snackbar).toStrictEqual({
-            message: "Une erreur est survenue. Veuillez réessayer ulterieurement.",
+            message:
+                'Une erreur est survenue. Veuillez réessayer ulterieurement.',
             color: 'error',
-            isOpened: true
+            isOpened: true,
         })
     })
 
     it('openSnackbarSuccess', () => {
-        layoutStore.openSnackbarSuccess("message")
+        layoutStore.openSnackbarSuccess('message')
         expect(layoutStore.snackbar).toStrictEqual({
             message: 'message',
             color: 'success',
-            isOpened: true
+            isOpened: true,
         })
     })
 

@@ -1,9 +1,10 @@
 # Chess-front
+
 ![alt text](./public/img/app_screenshot.png?raw=true)
 
 A Nuxt3/typescript app to play chess against computer or distant opponents.
 
-- github repository : https://github.com/colinfaivre/chess-front-nuxt3
+-   github repository : https://github.com/colinfaivre/chess-front-nuxt3
 
 ## Setup
 
@@ -51,11 +52,12 @@ https://logaretm.com/blog/2019-12-21-vuex-off-mainthread/
 
 Stockfish commands :
 $stockfish
->uci
->ucinewgame
->position startpos
->go movetime 1000
->position startpos moves e2e4
->go movetime 1000
->position startpos moves e2e4 e7e5
-etc...
+
+> uci
+> ucinewgame
+> position startpos
+> go movetime 1000
+> position startpos moves e2e4
+> go movetime 1000
+> position startpos moves e2e4 e7e5
+> etc...

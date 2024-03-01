@@ -1,67 +1,67 @@
 export const useLayoutStore = defineStore('layout', {
-  state: () => ({
-      drawer: {
-        leftIsOpened: false,
-        rightIsOpened: false, 
-      },
+    state: () => ({
+        drawer: {
+            leftIsOpened: false,
+            rightIsOpened: false,
+        },
 
-      modal: {
-        isOpened: false,
-        content: "",
-      },
-      
-      snackbar: {
-        isOpened: false,
-        message: "",
-        color: "",
-      }
-  }),
+        modal: {
+            isOpened: false,
+            content: '',
+        },
 
-  actions: {
-    toggleLeftDrawer() {
-      this.drawer.leftIsOpened = !this.drawer.leftIsOpened;
-    },
+        snackbar: {
+            isOpened: false,
+            message: '',
+            color: '',
+        },
+    }),
 
-    toggleRightDrawer() {
-      this.drawer.rightIsOpened = !this.drawer.rightIsOpened;
-    },
+    actions: {
+        toggleLeftDrawer() {
+            this.drawer.leftIsOpened = !this.drawer.leftIsOpened
+        },
 
-    closeRightDrawer() {
-      this.drawer.rightIsOpened = false;
-    },
+        toggleRightDrawer() {
+            this.drawer.rightIsOpened = !this.drawer.rightIsOpened
+        },
 
-    openModal(content) {
-      this.modal.isOpened = true;
-      this.modal.content = content;
-    },
+        closeRightDrawer() {
+            this.drawer.rightIsOpened = false
+        },
 
-    closeModal() {
-      this.modal.isOpened = false;
-      this.modal.content = "";
-    },
+        openModal(content) {
+            this.modal.isOpened = true
+            this.modal.content = content
+        },
 
-    openSnackbar(params) {
-      this.snackbar.message = params.message;
-      this.snackbar.color = params.color;
-      this.snackbar.isOpened = true;
-    },
-  
-    openSnackbarError(message) {
-      this.snackbar.message = message ? message : "Une erreur est survenue. Veuillez réessayer ulterieurement.",
-      this.snackbar.color = "error";
-      this.snackbar.isOpened = true;
+        closeModal() {
+            this.modal.isOpened = false
+            this.modal.content = ''
+        },
 
-    },
-  
-    openSnackbarSuccess(message) {
-      this.snackbar.message = message;
-      this.snackbar.color = "success";
-      this.snackbar.isOpened = true;
+        openSnackbar(params) {
+            this.snackbar.message = params.message
+            this.snackbar.color = params.color
+            this.snackbar.isOpened = true
+        },
 
+        openSnackbarError(message) {
+            ;(this.snackbar.message = message
+                ? message
+                : 'Une erreur est survenue. Veuillez réessayer ulterieurement.'),
+                (this.snackbar.color = 'error')
+            this.snackbar.isOpened = true
+        },
+
+        openSnackbarSuccess(message) {
+            this.snackbar.message = message
+            this.snackbar.color = 'success'
+            this.snackbar.isOpened = true
+        },
+
+        closeSnackbar() {
+            this.snackbar.isOpened = false
+        },
     },
-  
-    closeSnackbar() {
-      this.snackbar.isOpened = false;
-    },
-  },
 })
