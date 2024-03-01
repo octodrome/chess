@@ -9,7 +9,7 @@
         "postinstall": "nuxt prepare",
         "lint": "eslint .",
         "format:check": "prettier --check .",
-        "format:fix": "prettier --write ."
+        "format:fix": "prettier --write . && eslint --ext \".vue\" . --fix"
     },
     "devDependencies": {
         "@nuxt/eslint-config": "^0.2.0",
