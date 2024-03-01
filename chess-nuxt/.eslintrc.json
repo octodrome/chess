@@ -1,5 +1,5 @@
 {
-    "plugins": ["nuxt"], // the same as "eslint-plugin-nuxt"
+    "plugins": ["nuxt", "vitest"], // the same as "eslint-plugin-nuxt"
     "extends": [
         "@nuxt", // same as "@nuxt/eslint-config"
         "plugin:prettier/recommended", //same as "plugin:eslint-plugin-prettier/recommended"
