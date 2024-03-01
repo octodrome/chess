@@ -24,7 +24,7 @@ export function getNormalCoords(anCoords: string): ICellPosition {
 }
 
 // Converts an algebric notation move into an IMove
-export function getMoveFromAN(anMove) {
+export function getMoveFromAN(anMove: string) {
     const castlingMoves: { [index: string]: string } = {
         e8g8: 'h8f8',
         e8c8: 'a8d8',

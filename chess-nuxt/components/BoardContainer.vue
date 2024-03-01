@@ -27,7 +27,7 @@ const boardStore = useBoardStore()
             color="white"
         />
 
-        <CapturedPiecesArea side="player" />
+        <CapturedPiecesArea side="human" />
     </div>
 </template>
 
