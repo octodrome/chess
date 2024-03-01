@@ -8,10 +8,8 @@ export default defineNuxtConfig({
             },
         ],
         '@nuxtjs/tailwindcss',
+        '@nuxtjs/eslint-module',
     ],
-    css: [
-        '@mdi/font/css/materialdesignicons.min.css',
-        '@/assets/css/main.css',
-    ],
+    css: ['@mdi/font/css/materialdesignicons.min.css', '@/assets/css/main.css'],
     devtools: { enabled: true },
 })

@@ -1,0 +1,13 @@
+{
+    "plugins": ["nuxt"], // the same as "eslint-plugin-nuxt"
+    "extends": [
+        "@nuxt", // same as "@nuxt/eslint-config"
+        "plugin:prettier/recommended", //same as "plugin:eslint-plugin-prettier/recommended"
+        "prettier" // same as "eslint-config-prettier"
+    ],
+    "ignorePatterns": ["public/*"],
+    "env": {
+        "browser": true,
+        "node": true
+    }
+}

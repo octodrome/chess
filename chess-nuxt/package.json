@@ -1,32 +1,42 @@
 {
-  "name": "nuxt-chess",
-  "private": true,
-  "scripts": {
-    "build": "nuxt build",
-    "dev": "nuxt dev",
-    "generate": "nuxt generate",
-    "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
-  },
-  "devDependencies": {
-    "@nuxtjs/tailwindcss": "^6.11.4",
-    "sass": "^1.54.9",
-    "tailwindcss": "^3.2.0"
-  },
-  "dependencies": {
-    "@mdi/font": "^7.0.96",
-    "@pinia/nuxt": "^0.5.1",
-    "axios": "^0.21.0",
-    "chess-legal-moves": "^2.3.2",
-    "moment": "^2.29.4",
-    "nuxt": "^3.10.3",
-    "socket.io-client": "^4.4.1",
-    "unique-names-generator": "^4.7.1",
-    "uuid": "^8.3.2",
-    "vee-validate": "^4.5.8",
-    "vue": "^3.4.19",
-    "vue-i18n": "^9.2.2",
-    "yup": "^0.32.11",
-    "vue-router": "^4.3.0"
-  }
+    "name": "nuxt-chess",
+    "private": true,
+    "scripts": {
+        "build": "nuxt build",
+        "dev": "nuxt dev",
+        "generate": "nuxt generate",
+        "preview": "nuxt preview",
+        "postinstall": "nuxt prepare",
+        "lint": "eslint .",
+        "format:check": "prettier --check .",
+        "format:fix": "prettier --write ."
+    },
+    "devDependencies": {
+        "@nuxt/eslint-config": "^0.2.0",
+        "@nuxtjs/eslint-module": "^4.1.0",
+        "@nuxtjs/tailwindcss": "^6.11.4",
+        "eslint": "^8.57.0",
+        "eslint-config-prettier": "^9.1.0",
+        "eslint-plugin-nuxt": "^4.0.0",
+        "eslint-plugin-prettier": "^5.1.3",
+        "prettier": "^3.2.5",
+        "sass": "^1.54.9",
+        "tailwindcss": "^3.2.0"
+    },
+    "dependencies": {
+        "@mdi/font": "^7.0.96",
+        "@pinia/nuxt": "^0.5.1",
+        "axios": "^0.21.0",
+        "chess-legal-moves": "^2.3.2",
+        "moment": "^2.29.4",
+        "nuxt": "^3.10.3",
+        "socket.io-client": "^4.4.1",
+        "unique-names-generator": "^4.7.1",
+        "uuid": "^8.3.2",
+        "vee-validate": "^4.5.8",
+        "vue": "^3.4.19",
+        "vue-i18n": "^9.2.2",
+        "vue-router": "^4.3.0",
+        "yup": "^0.32.11"
+    }
 }
