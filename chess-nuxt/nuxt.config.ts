@@ -12,4 +12,7 @@ export default defineNuxtConfig({
     ],
     css: ['@mdi/font/css/materialdesignicons.min.css', '@/assets/css/main.css'],
     devtools: { enabled: true },
+    typescript: {
+        strict: true,
+    },
 })
