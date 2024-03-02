@@ -11,3 +11,12 @@
 > - [chess front](/chess-nuxt) - Play vs computer
 > - [chess back](/chess-back) - Service to play against other users
 > - [chess legal moves](/chess-legal-moves) - Returns legal moves from current game position
+
+## Setup and play
+- clone and install project: `pnpm` `node version` `VsCode extensions`
+
+## Workflow
+- [select an issue](https://github.com/orgs/octodrome/projects/3/views/1)
+- open a pull request : `pr template`
+- [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/)
+- [github flow](https://docs.github.com/en/get-started/using-github/github-flow)
