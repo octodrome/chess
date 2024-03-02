@@ -16,4 +16,7 @@ export default defineNuxtConfig({
     typescript: {
         strict: true,
     },
+    runtimeConfig: {
+        mongoDbUri: process.env.MONGODB_URI,
+    },
 })
