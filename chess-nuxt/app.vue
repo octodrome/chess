@@ -29,6 +29,9 @@ onMounted(() => {
 
     computerGameStore.getGames()
 })
+
+// Try requests here
+// const { data } = await useFetch('/api/game/bla', { method: 'put' })
 </script>
 
 <template>
