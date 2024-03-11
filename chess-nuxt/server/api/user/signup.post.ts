@@ -2,7 +2,7 @@ import bcrypt from 'bcrypt'
 import { createUserInDB } from '../../db/user.service'
 
 export default defineEventHandler(async (event) => {
-    console.log('POST /api/signup')
+    console.log('POST /api/user/signup')
     const body = await readBody(event)
 
     try {

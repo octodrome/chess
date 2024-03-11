@@ -31,6 +31,7 @@ const start = () => {
     if (userStore.user && selectedOpponentId) {
         humanGameStore
             .createGame({
+                creator: userStore.user._id,
                 guest: selectedOpponentId.value,
                 hasToPlay: userStore.user._id,
                 moves: [],

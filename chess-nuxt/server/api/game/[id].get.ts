@@ -1,12 +1,18 @@
-// export const getOneGame = async (
-//     req: Request,
-//     res: Response,
-//     next: NextFunction
-// ) => {
-//     try {
-//         const game = await findOneGameInDB(req.params.id)
-//         return res.status(200).json(game)
-//     } catch (error) {
-//         return next(error)
-//     }
-// }
+import { findOneGameInDB } from '../../db/game.service'
+
+export default defineEventHandler(async (event) => {
+    console.log('GET api/game/:id')
+    const id = getRouterParam(event, 'id')
+
+    try {
+        const game = await findOneGameInDB(id)
+        return game
+    } catch (error) {
+        console.error(error)
+        event.node.res.statusCode = 500
+        return {
+            code: 'ERROR',
+            message: 'Something went wrong.',
+        }
+    }
+})

@@ -1,12 +1,18 @@
-// export const deleteGame = async (
-//     req: Request,
-//     res: Response,
-//     next: NextFunction
-// ) => {
-//     try {
-//         await removeGameFromDB(req.params.id)
-//         return res.status(200).json({ message: 'Game successfully deleted' })
-//     } catch (error) {
-//         return next(error)
-//     }
-// }
+import { removeGameFromDB } from '../../db/game.service'
+
+export default defineEventHandler(async (event) => {
+    console.log('DELETE api/game/:id')
+    const id = getRouterParam(event, 'id')
+
+    try {
+        const games = await removeGameFromDB(id)
+        return games
+    } catch (error) {
+        console.error(error)
+        event.node.res.statusCode = 500
+        return {
+            code: 'ERROR',
+            message: 'Something went wrong.',
+        }
+    }
+})
