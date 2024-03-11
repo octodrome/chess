@@ -13,7 +13,7 @@ const userStore = useUserStore()
 const humanGameStore = useHumanGameStore()
 const computerGameStore = useComputerGameStore()
 
-onMounted(() => {
+onMounted(async () => {
     const LocalStorage = process.client ? localStorage : null
 
     function parseToken(token: string) {
@@ -31,10 +31,11 @@ onMounted(() => {
 })
 
 // Try requests here
-// const { data } = await useFetch('/api/game/bla', { method: 'put' })
+// const data = await useCustomFetch('/api/users').data
 </script>
 
 <template>
+    <!-- {{ data }} -->
     <div class="bg-gray-200 h-screen flex justify-between">
         <AppDrawerLeft v-if="layoutStore.drawer.leftIsOpened" />
 
