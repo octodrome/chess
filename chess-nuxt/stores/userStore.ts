@@ -62,6 +62,7 @@ export const useUserStore = defineStore('user', {
 
         getUser(userId) {
             return services.user.getUser(userId).then((user) => {
+                console.log('hello from getUser', user)
                 this.user = user
             })
         },

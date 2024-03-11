@@ -1,16 +1,23 @@
-// export const signup = async (
-//     req: Request,
-//     res: Response,
-//     next: NextFunction
-// ) => {
-//     try {
-//         const hashedPassword = await bcrypt.hash(req.body.password, 10)
-//         await createUserInDB({
-//             email: req.body.email,
-//             password: hashedPassword,
-//         })
-//         return res.status(201).json({ message: 'User successfully created' })
-//     } catch (error) {
-//         return next(error)
-//     }
-// }
+import bcrypt from 'bcrypt'
+import { createUserInDB } from '../../db/user.service'
+
+export default defineEventHandler(async (event) => {
+    console.log('POST /api/signup')
+    const body = await readBody(event)
+
+    try {
+        const hashedPassword = await bcrypt.hash(body.password, 10)
+        const user = await createUserInDB({
+            email: body.email,
+            password: hashedPassword,
+        })
+        return user
+    } catch (error) {
+        console.error(error)
+        event.node.res.statusCode = 500
+        return {
+            code: 'ERROR',
+            message: 'Something went wrong.',
+        }
+    }
+})

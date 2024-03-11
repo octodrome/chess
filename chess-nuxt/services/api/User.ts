@@ -4,22 +4,35 @@ import type {
     ILoginUserResponse,
     IUser,
 } from '~/types/user'
-import { HTTP } from './axios-config'
 
 export default class User {
     async getAllOpponents(userId: string): Promise<IUser[]> {
-        return (await HTTP.get(`user?except=${userId}`)).data
+        return (
+            await useCustomFetch(`api/user`, {
+                query: { except: userId },
+            })
+        ).data.value
     }
 
     async getUser(userId: string): Promise<IUser> {
-        return (await HTTP.get(`user/${userId}`)).data
+        const { data } = await useCustomFetch(`api/user/${userId}`)
+        return data.value
     }
 
     async signup(params: ISignupUserRequestParams): Promise<IUser> {
-        return (await HTTP.post('user/signup', params)).data
+        return (
+            await useCustomFetch('api/user/signup', {
+                method: 'post',
+                body: params,
+            })
+        ).data.value
     }
 
     async login(params: ILoginUserRequestParams): Promise<ILoginUserResponse> {
-        return (await HTTP.post('user/login', params)).data
+        const { data } = await useCustomFetch('api/user/login', {
+            method: 'post',
+            body: params,
+        })
+        return data.value
     }
 }

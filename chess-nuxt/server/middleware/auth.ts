@@ -35,3 +35,9 @@
 //     const userId = decodeToken.userId
 //     return userId
 // }
+
+// @TODO add log for http verb and url for each request
+export default defineEventHandler((event) => {
+    // const headers = getRequestHeaders(event)
+    // console.log('Headers: ', headers)
+})

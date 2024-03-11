@@ -1,12 +1,18 @@
-// export const deleteUser = async (
-//     req: Request,
-//     res: Response,
-//     next: NextFunction
-// ) => {
-//     try {
-//         await removeUserFromDB(req.params.id)
-//         return res.status(200).json({ message: 'User successfully deleted' })
-//     } catch (error) {
-//         return next(error)
-//     }
-// }
+import { removeUserFromDB } from '../../db/user.service'
+
+export default defineEventHandler(async (event) => {
+    console.log('DELETE api/user/:id')
+    const id = getRouterParam(event, 'id')
+
+    try {
+        const users = await removeUserFromDB(id)
+        return users
+    } catch (error) {
+        console.error(error)
+        event.node.res.statusCode = 500
+        return {
+            code: 'ERROR',
+            message: 'Something went wrong.',
+        }
+    }
+})
