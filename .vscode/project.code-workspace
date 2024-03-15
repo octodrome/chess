@@ -1,0 +1,16 @@
+{
+    "folders": [
+      {
+        "name": "chess-nuxt",
+        "path": "../chess-nuxt"
+      },
+      {
+        "name": "chess-back",
+        "path": "../chess-back"
+      },
+      {
+        "name": "chess-legal-moves",
+        "path": "../chess-legal-moves"
+      },
+    ],
+  }
