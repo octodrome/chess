@@ -37,7 +37,7 @@
 // }
 
 // @TODO add log for http verb and url for each request
-export default defineEventHandler((event) => {
+export default defineEventHandler(() => {
     // const headers = getRequestHeaders(event)
     // console.log('Headers: ', headers)
 })
