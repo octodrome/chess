@@ -29,7 +29,7 @@ const goToGame = (gameId) => {
 </script>
 
 <template>
-    <ul v-if="humanGameStore.gameList.length !== 0">
+    <ul v-if="humanGameStore.gameList?.length !== 0">
         <BaseDrawerItem
             v-for="game in humanGameStore.gameList"
             :key="game._id"

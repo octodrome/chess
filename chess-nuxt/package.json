@@ -45,6 +45,7 @@
         "chess-legal-moves": "^2.3.2",
         "moment": "^2.29.4",
         "nuxt": "^3.10.3",
+        "socket.io": "^4.7.5",
         "socket.io-client": "^4.4.1",
         "unique-names-generator": "^4.7.1",
         "uuid": "^8.3.2",

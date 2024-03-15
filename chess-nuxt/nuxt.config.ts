@@ -12,7 +12,13 @@ export default defineNuxtConfig({
         '@nuxt/test-utils/module',
     ],
     css: ['@mdi/font/css/materialdesignicons.min.css', '@/assets/css/main.css'],
-    devtools: { enabled: true },
+    devtools: {
+      enabled: true,
+
+      timeline: {
+        enabled: true,
+      },
+    },
     typescript: {
         strict: true,
     },
@@ -20,4 +26,10 @@ export default defineNuxtConfig({
         mongoDbUri: process.env.MONGODB_URI,
         jwtSecret: process.env.JWT_SECRET,
     },
+    serverHandlers: [
+        {
+            route: '/ws',
+            handler: '~/server/middleware/socket',
+        },
+    ],
 })
