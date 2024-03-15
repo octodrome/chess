@@ -55,7 +55,7 @@ const submit = handleSubmit((values) => {
     <BaseCardHeader title="Sign up" />
 
     <BaseCardMain
-        text="Create your Vue chess account to play with anybody around the world. You already have an account ? Click here to log in."
+        text="Create your Nuxt chess account to play with anybody around the world. You already have an account ? Click here to log in."
     >
         <BaseTextField
             type="email"
@@ -77,7 +77,7 @@ const submit = handleSubmit((values) => {
 
         <BaseCheckbox
             v-model="newsletterPermission"
-            label="Receive newsletter from Vue Chess"
+            label="Receive newsletter from Nuxt Chess"
         />
     </BaseCardMain>
 

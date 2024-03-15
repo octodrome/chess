@@ -43,7 +43,7 @@ const submit = handleSubmit((values) => {
     <BaseCardHeader title="Login" />
 
     <BaseCardMain
-        text="Login to you Vue chess account to play with anybody around the world. You don't have an account yet ? Click here to sign up."
+        text="Login to you Nuxt chess account to play with anybody around the world. You don't have an account yet ? Click here to sign up."
     >
         <form>
             <BaseTextField
