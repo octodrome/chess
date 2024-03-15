@@ -10,21 +10,15 @@ export const useHumanGameStore = defineStore('humanGame', {
     }),
 
     getters: {
-        opponent: (state) => {
+        opponent(state) {
             const userStore = useUserStore()
-            if (state.currentGame && userStore.user) {
-                return state.currentGame.guest._id !== userStore.user._id
-                    ? state.currentGame.guest
-                    : state.currentGame.creator
-            }
+            return state.currentGame?.guest._id !== userStore.user?._id
+                ? state.currentGame.guest
+                : state.currentGame.creator
         },
 
-        opponentPseudo: (state) => {
-            if (state.currentGame && this.opponent) {
-                return this.opponent.email.split('@')[0]
-            } else {
-                return ''
-            }
+        opponentPseudo() {
+            return this.opponent.email.split('@')[0]
         },
     },
 
@@ -54,6 +48,7 @@ export const useHumanGameStore = defineStore('humanGame', {
 
         getGame(gameId) {
             return services.game.getGame(gameId).then((game) => {
+                console.log('game from getGame()', game)
                 this.currentGame = game
                 const boardStore = useBoardStore()
                 boardStore.continueGame('human')
