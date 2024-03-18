@@ -1,14 +1,24 @@
 import { createGameInDB } from '../../../db/game.service'
+import { z } from 'zod'
 
-// @TODO use zod for body validation ?
+const gameSchema = z.object({
+    creator: z.string(),
+    guest: z.string(),
+    hasToPlay: z.string(),
+    moves: z.array(z.string()),
+})
+
 export default defineEventHandler(async (event) => {
-    const body = await readBody(event)
+    const result = await readValidatedBody(event, (body) =>
+        gameSchema.parse(body)
+    )
 
     const game = await createGameInDB({
-        creator: body.creator,
-        guest: body.guest,
-        hasToPlay: body.hasToPlay,
-        moves: body.moves,
+        creator: result.creator,
+        guest: result.guest,
+        hasToPlay: result.hasToPlay,
+        moves: result.moves,
     })
+
     return game
 })
