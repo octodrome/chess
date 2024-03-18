@@ -1,24 +1,16 @@
 ## TODO
-
--   Make drawer buttons part of drawers
--   Animate drawer sliding
+-   Animate drawer sliding + Mobile version + drawer buttons part of drawers
+-   Animate modal appear + Mobile version
 -   Animate Snackbar sliding
--   Animate modal appear
--   accessibility
--   Mobile versions of drawers
--   Mobile versions of modals
--   Update repo description
--   Update README.md
--   Add CONTRIBUTE.md
+-   accessibility check
+-   Update repo description/README.md/CONTRIBUTE.md
 ---
--   finish creating form base components (vue mastery advices)
+-   finish creating form base components
 -   Add translation for form errors
--   Add the settings modal
+-   Add the settings modal w/ locale set
 -   Add lang on userStore
--   Choose locale from settings modale
--   Create a token storage service to use on app onMounted hook
--   Use store getters instead of computed properties manipulation in components
+-   Create a token storage service
 -   Use stockfish computer level in NewGameComputer
 -   HumanGame : init board from human game id
--   Add captured pieces on computer games storage
--   Add captured pieces on human games storage
+-   Add captured pieces on computer/human games storage
+-   fix chat
