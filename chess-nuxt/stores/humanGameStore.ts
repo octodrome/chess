@@ -1,11 +1,16 @@
 import { useUserStore } from '~/stores/userStore'
 import { useBoardStore } from '~/stores/boardStore'
 import services from '~/services/index'
+import type { ApiGame, ApiMessage } from '~/server/models/game.model'
+import type {
+    ICreateHumanGameRequestParams,
+    IUpdateHumanGameRequestParams,
+} from '~/types/humanGame'
 
 export const useHumanGameStore = defineStore('humanGame', {
     state: () => ({
-        gameList: [],
-        currentGame: null,
+        gameList: [] as ApiGame[],
+        currentGame: null as ApiGame | null,
         isAgainstHuman: false,
     }),
 
@@ -23,7 +28,7 @@ export const useHumanGameStore = defineStore('humanGame', {
     },
 
     actions: {
-        createGame(params) {
+        createGame(params: ICreateHumanGameRequestParams) {
             return services.game.createGame(params).then((game) => {
                 this.currentGame = game
                 this.gameList = [...this.gameList, game]
@@ -33,20 +38,20 @@ export const useHumanGameStore = defineStore('humanGame', {
             })
         },
 
-        sendMove(params) {
+        sendMove(params: IUpdateHumanGameRequestParams) {
             return services.game.sendMove(params).then((game) => {
                 this.currentGame = game
                 return game
             })
         },
 
-        getUserGames(userId) {
+        getUserGames(userId: string) {
             return services.game.getUserGames(userId).then((gameList) => {
                 this.gameList = gameList
             })
         },
 
-        getGame(gameId) {
+        getGame(gameId: string) {
             return services.game.getGame(gameId).then((game) => {
                 console.log('game from getGame()', game)
                 this.currentGame = game
@@ -55,7 +60,7 @@ export const useHumanGameStore = defineStore('humanGame', {
             })
         },
 
-        addMessage(message) {
+        addMessage(message: ApiMessage) {
             if (this.currentGame) {
                 this.currentGame.messages = [
                     ...this.currentGame.messages,

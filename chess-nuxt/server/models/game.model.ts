@@ -1,6 +1,11 @@
 import mongoose from 'mongoose'
 const { Schema } = mongoose
 
+export type ApiMessage = {
+    from: string
+    content: string
+}
+
 const messageSchema = new Schema(
     {
         from: { type: String },
@@ -8,6 +13,17 @@ const messageSchema = new Schema(
     },
     { timestamps: true }
 )
+
+export type ApiGame = {
+    _id: string
+    creator: string
+    guest: string
+    hasToPlay: string
+    moves: string[]
+    messages: ApiMessage[]
+    createdAt: Date
+    updatedAt: Date
+}
 
 const gameSchema = new Schema(
     {

@@ -13,12 +13,10 @@ export default defineEventHandler(async (event) => {
         gameSchema.parse(body)
     )
 
-    const game = await createGameInDB({
+    return await createGameInDB({
         creator: result.creator,
         guest: result.guest,
         hasToPlay: result.hasToPlay,
         moves: result.moves,
     })
-
-    return game
 })

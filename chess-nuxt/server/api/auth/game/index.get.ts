@@ -6,11 +6,6 @@ import {
 export default defineEventHandler(async (event) => {
     const query = getQuery(event)
 
-    let gameList
-    if (query.user) {
-        gameList = await findAllGamesFromUserInDB(query.user as string)
-    } else {
-        gameList = await findAllGamesInDB()
-    }
-    return gameList
+    if (query.user) return await findAllGamesFromUserInDB(query.user as string)
+    else return await findAllGamesInDB()
 })

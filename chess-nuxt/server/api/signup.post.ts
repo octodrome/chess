@@ -13,9 +13,8 @@ export default defineEventHandler(async (event) => {
     )
 
     const hashedPassword = await bcrypt.hash(result.password, 10)
-    const user = await createUserInDB({
+    return await createUserInDB({
         email: result.email,
         password: hashedPassword,
     })
-    return user
 })

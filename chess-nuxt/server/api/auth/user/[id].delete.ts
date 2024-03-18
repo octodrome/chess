@@ -2,7 +2,10 @@ import { removeUserFromDB } from '../../../db/user.service'
 
 export default defineEventHandler(async (event) => {
     const id = getRouterParam(event, 'id')
+    if (id) return await removeUserFromDB(id)
 
-    const users = await removeUserFromDB(id)
-    return users
+    throw createError({
+        statusCode: 400,
+        statusMessage: 'User id was not provided',
+    })
 })

@@ -1,6 +1,15 @@
 import mongoose from 'mongoose'
 const { Schema } = mongoose
 
+export type ApiUser = {
+    _id: any
+    email: string
+    password: string
+    games: string[]
+    createdAt: Date
+    updatedAt: Date
+}
+
 const userSchema = new Schema(
     {
         email: {

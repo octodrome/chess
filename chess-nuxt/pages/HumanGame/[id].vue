@@ -9,15 +9,15 @@ const userStore = useUserStore()
 const boardStore = useBoardStore()
 const humanGameStore = useHumanGameStore()
 
-watch(userStore.user, () => joinGame(route.params.id))
+watch(userStore.user, () => joinGame(route.params.id as string))
 watch(route, (newValue, oldValue) => {
-    leaveGame(oldValue.params.id)
-    joinGame(newValue.params.id)
+    leaveGame(oldValue.params.id as string)
+    joinGame(newValue.params.id as string)
 })
 
-onMounted(() => joinGame(route.params.id))
+onMounted(() => joinGame(route.params.id as string))
 
-const joinGame = (gameId) => {
+const joinGame = (gameId: string) => {
     console.log('joining human game:', gameId)
     humanGameStore.getGame(gameId)
     if (userStore.user) {
@@ -28,7 +28,7 @@ const joinGame = (gameId) => {
     }
 }
 
-const leaveGame = (gameId) => {
+const leaveGame = (gameId: string) => {
     console.log('leaving human game:', gameId)
     if (userStore.user) {
         services.socket.leaveGame({

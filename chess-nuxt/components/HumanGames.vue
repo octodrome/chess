@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { ApiGame } from '~/server/models/game.model'
 import { useBoardStore } from '~/stores/boardStore'
 import { useHumanGameStore } from '~/stores/humanGameStore'
 import { useUserStore } from '~/stores/userStore'
@@ -9,7 +10,7 @@ const humanGameStore = useHumanGameStore()
 const userStore = useUserStore()
 const boardStore = useBoardStore()
 
-const opponentEmail = (game) => {
+const opponentEmail = (game: ApiGame) => {
     if (userStore.user) {
         return game.guest.email === userStore.user.email
             ? game.creator.email
@@ -17,7 +18,7 @@ const opponentEmail = (game) => {
     }
 }
 
-const goToGame = (gameId) => {
+const goToGame = (gameId: string) => {
     if (route.params.id === gameId) return
 
     humanGameStore.getGame(gameId)

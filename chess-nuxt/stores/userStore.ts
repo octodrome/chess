@@ -1,11 +1,16 @@
 import { useHumanGameStore } from '~/stores/humanGameStore'
 import { useBoardStore } from '~/stores/boardStore'
 import services from '~/services/index'
+import type { ApiUser } from '~/server/models/user.model'
+import type {
+    ILoginUserRequestParams,
+    ISignupUserRequestParams,
+} from '~/types/user'
 
 export const useUserStore = defineStore('user', {
     state: () => ({
-        user: null,
-        users: [],
+        user: null as ApiUser | null,
+        users: [] as ApiUser[],
         token: useCookie('token'),
     }),
 
@@ -14,13 +19,13 @@ export const useUserStore = defineStore('user', {
     },
 
     actions: {
-        signup(params) {
+        signup(params: ISignupUserRequestParams) {
             return services.user.signup(params).then((user) => {
                 return user
             })
         },
 
-        login(params) {
+        login(params: ILoginUserRequestParams) {
             return services.user.login(params).then(({ user, token }) => {
                 this.user = user
                 this.token = token

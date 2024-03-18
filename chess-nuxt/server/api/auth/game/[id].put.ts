@@ -6,6 +6,13 @@ export default defineEventHandler(async (event) => {
     const headers = getRequestHeaders(event)
     const body = await readBody(event)
 
+    if (!id) {
+        throw createError({
+            statusCode: 400,
+            statusMessage: 'Game id was not provided',
+        })
+    }
+
     const game = await findOneGameInDB(id)
 
     if (isNotAllowedOnTheGame(game, headers)) {
@@ -19,6 +26,13 @@ export default defineEventHandler(async (event) => {
         throw createError({
             statusCode: 400,
             statusMessage: 'User not allowed on this turn',
+        })
+    }
+
+    if (!game) {
+        throw createError({
+            statusCode: 404,
+            statusMessage: 'This game does not exist',
         })
     }
 

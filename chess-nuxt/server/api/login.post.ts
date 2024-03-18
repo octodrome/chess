@@ -4,7 +4,6 @@ import { findOneUserByEmailInDB } from '../db/user.service'
 const config = useRuntimeConfig()
 
 export default defineEventHandler(async (event) => {
-    console.log('POST /api/user/login')
     const body = await readBody(event)
 
     const user = await findOneUserByEmailInDB(body.email)
