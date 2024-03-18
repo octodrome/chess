@@ -9,19 +9,17 @@ export default defineEventHandler(async (event) => {
     const game = await findOneGameInDB(id)
 
     if (isNotAllowedOnTheGame(game, headers)) {
-        event.node.res.statusCode = 400
-        return {
-            code: 'ERROR',
-            message: 'User not allowed on this game',
-        }
+        throw createError({
+            statusCode: 400,
+            statusMessage: 'User not allowed on this game',
+        })
     }
 
     if (isWrongTurn(game, headers)) {
-        event.node.res.statusCode = 400
-        return {
-            code: 'ERROR',
-            message: 'User not allowed on this turn',
-        }
+        throw createError({
+            statusCode: 400,
+            statusMessage: 'User not allowed on this turn',
+        })
     }
 
     // Adds the played move

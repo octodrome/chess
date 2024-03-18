@@ -9,19 +9,17 @@ export default defineEventHandler(async (event) => {
 
     const user = await findOneUserByEmailInDB(body.email)
     if (!user) {
-        event.node.res.statusCode = 404
-        return {
-            code: 'ERROR',
-            message: 'User not found',
-        }
+        throw createError({
+            statusCode: 404,
+            statusMessage: 'User not found',
+        })
     }
     const validation = await bcrypt.compare(body.password, user.password)
     if (!validation) {
-        event.node.res.statusCode = 400
-        return {
-            code: 'ERROR',
-            message: 'Wrong password',
-        }
+        throw createError({
+            statusCode: 400,
+            statusMessage: 'Wrong password',
+        })
     }
 
     return {
