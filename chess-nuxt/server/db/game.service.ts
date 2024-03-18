@@ -1,4 +1,4 @@
-import createError from 'http-errors'
+import { createError } from '#imports'
 import Game from '../models/game.model'
 import { IGame } from '../../types'
 
@@ -9,7 +9,10 @@ export const createGameInDB = async (createGameBody: IGame): Promise<IGame> => {
         await game.populate(['creator', 'guest'])
         return game
     } catch {
-        throw createError(500, 'Error while creating the game in DB')
+        throw createError({
+            statusCode: 500,
+            statusMessage: 'Error while creating the game in DB',
+        })
     }
 }
 
@@ -18,7 +21,10 @@ export const findAllGamesInDB = async () => {
         const games = await Game.find().populate(['creator', 'guest'])
         return games
     } catch (error) {
-        throw createError(500, 'Error while finding all the games in DB')
+        throw createError({
+            statusCode: 500,
+            statusMessage: 'Error while finding all the games in DB',
+        })
     }
 }
 
@@ -29,7 +35,10 @@ export const findAllGamesFromUserInDB = async (userId: string) => {
         }).populate(['creator', 'guest'])
         return userGames
     } catch (error) {
-        throw createError(500, 'Error while finding user games in DB')
+        throw createError({
+            statusCode: 500,
+            statusMessage: 'Error while finding user games in DB',
+        })
     }
 }
 
@@ -41,7 +50,10 @@ export const findOneGameInDB = async (id: string) => {
         ])
         return game
     } catch (error) {
-        throw createError(500, 'Error while finding this game in DB')
+        throw createError({
+            statusCode: 500,
+            statusMessage: 'Error while finding this game in DB',
+        })
     }
 }
 
@@ -55,7 +67,10 @@ export const updateOneGameInDB = async (
         })
         return game
     } catch (error) {
-        throw createError(500, 'Error while updating this game in DB')
+        throw createError({
+            statusCode: 500,
+            statusMessage: 'Error while updating this game in DB',
+        })
     }
 }
 
@@ -64,6 +79,9 @@ export const removeGameFromDB = async (id: string) => {
         const games = await Game.deleteOne({ _id: id })
         return games
     } catch (error) {
-        throw createError(500, 'Error while removing the game from DB')
+        throw createError({
+            statusCode: 500,
+            statusMessage: 'Error while removing the game from DB',
+        })
     }
 }
