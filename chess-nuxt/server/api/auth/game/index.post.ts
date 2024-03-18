@@ -1,4 +1,4 @@
-import { createGameInDB } from '../../db/game.service.ts'
+import { createGameInDB } from '../../../db/game.service'
 
 // @TODO use zod for body validation ?
 export default defineEventHandler(async (event) => {

@@ -1,4 +1,4 @@
-import { findOneGameInDB } from '../../db/game.service'
+import { findOneGameInDB } from '../../../db/game.service'
 
 export default defineEventHandler(async (event) => {
     console.log('GET api/game/:id')

@@ -1,12 +1,12 @@
-import { removeUserFromDB } from '../../db/user.service'
+import { findOneUserByIDInDB } from '../../../db/user.service'
 
 export default defineEventHandler(async (event) => {
-    console.log('DELETE api/user/:id')
+    console.log('GET api/user/:id')
     const id = getRouterParam(event, 'id')
 
     try {
-        const users = await removeUserFromDB(id)
-        return users
+        const user = await findOneUserByIDInDB(id)
+        return user
     } catch (error) {
         console.error(error)
         event.node.res.statusCode = 500

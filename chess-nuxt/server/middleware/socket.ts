@@ -1,9 +1,10 @@
+import { findOneGameInDB, updateOneGameInDB } from '../db/game.service'
 import { Server } from 'socket.io'
 
 const io = new Server(5000, {
     cors: {
         origin: '*',
-        methods: ['GET', 'POST'],
+        methods: ['GET', 'POST', 'PUT', 'DELETE'],
     },
 })
 
@@ -18,7 +19,7 @@ io.on('connection', (socket) => {
             )
         socket.on('message', async (message) => {
             socket.to(gameId).emit('message', message)
-            const messages = (await findOneGameInDB(gameId)).messages
+            const messages = (await findOneGameInDB(gameId))?.messages
             messages.push(message)
             updateOneGameInDB(gameId, { messages })
         })

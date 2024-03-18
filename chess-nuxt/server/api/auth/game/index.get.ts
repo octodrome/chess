@@ -1,17 +1,20 @@
-import { findAllOpponentsInDB, findAllUsersInDB } from '../../db/user.service'
+import {
+    findAllGamesFromUserInDB,
+    findAllGamesInDB,
+} from '../../../db/game.service'
 
 export default defineEventHandler(async (event) => {
     const query = getQuery(event)
     console.log('query', query)
 
     try {
-        let userList
-        if (query.except) {
-            userList = await findAllOpponentsInDB(query.except as string)
+        let gameList
+        if (query.user) {
+            gameList = await findAllGamesFromUserInDB(query.user as string)
         } else {
-            userList = await findAllUsersInDB()
+            gameList = await findAllGamesInDB()
         }
-        return userList
+        return gameList
     } catch (error) {
         console.error(error)
         event.node.res.statusCode = 500

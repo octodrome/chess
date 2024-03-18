@@ -1,12 +1,12 @@
-import { removeGameFromDB } from '../../db/game.service'
+import { removeUserFromDB } from '../../../db/user.service'
 
 export default defineEventHandler(async (event) => {
-    console.log('DELETE api/game/:id')
+    console.log('DELETE api/user/:id')
     const id = getRouterParam(event, 'id')
 
     try {
-        const games = await removeGameFromDB(id)
-        return games
+        const users = await removeUserFromDB(id)
+        return users
     } catch (error) {
         console.error(error)
         event.node.res.statusCode = 500

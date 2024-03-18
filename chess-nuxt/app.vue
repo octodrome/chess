@@ -29,13 +29,9 @@ onMounted(async () => {
 
     computerGameStore.getGames()
 })
-
-// Try requests here
-// const data = await useCustomFetch('/api/users').data
 </script>
 
 <template>
-    <!-- {{ data }} -->
     <div class="bg-gray-200 h-screen flex justify-between">
         <AppDrawerLeft v-if="layoutStore.drawer.leftIsOpened" />
 

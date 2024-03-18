@@ -8,20 +8,20 @@ import type {
 export default class User {
     async getAllOpponents(userId: string): Promise<IUser[]> {
         return (
-            await useCustomFetch(`api/user`, {
+            await useCustomFetch(`api/auth/user`, {
                 query: { except: userId },
             })
         ).data.value
     }
 
     async getUser(userId: string): Promise<IUser> {
-        const { data } = await useCustomFetch(`api/user/${userId}`)
+        const { data } = await useCustomFetch(`api/auth/user/${userId}`)
         return data.value
     }
 
     async signup(params: ISignupUserRequestParams): Promise<IUser> {
         return (
-            await useCustomFetch('api/user/signup', {
+            await useCustomFetch('api/signup', {
                 method: 'post',
                 body: params,
             })
@@ -29,7 +29,7 @@ export default class User {
     }
 
     async login(params: ILoginUserRequestParams): Promise<ILoginUserResponse> {
-        const { data } = await useCustomFetch('api/user/login', {
+        const { data } = await useCustomFetch('api/login', {
             method: 'post',
             body: params,
         })

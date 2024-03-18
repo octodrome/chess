@@ -1,6 +1,6 @@
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
-import { findOneUserByEmailInDB } from '../../db/user.service'
+import { findOneUserByEmailInDB } from '../db/user.service'
 const config = useRuntimeConfig()
 
 export default defineEventHandler(async (event) => {

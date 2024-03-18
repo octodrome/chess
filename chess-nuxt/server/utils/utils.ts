@@ -1,3 +1,12 @@
+import jwt, { JwtPayload } from 'jsonwebtoken'
+const config = useRuntimeConfig()
+
+declare module 'jsonwebtoken' {
+    export interface JwtPayload {
+        userId: string
+    }
+}
+
 export const isNotAllowedOnTheGame = (game: IGame, headers): boolean => {
     const isNotCreator =
         game.creator !== getUserIdFromHeader(headers.authorization!)

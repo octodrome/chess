@@ -1,5 +1,5 @@
-import { findOneGameInDB, updateOneGameInDB } from '../../db/game.service'
-import { isNotAllowedOnTheGame, isWrongTurn } from '../../utils/utils'
+import { findOneGameInDB, updateOneGameInDB } from '../../../db/game.service'
+import { isNotAllowedOnTheGame, isWrongTurn } from '../../../utils/utils'
 
 export default defineEventHandler(async (event) => {
     console.log('PUT api/game/:id')
