@@ -32,7 +32,7 @@ export const useBoardStore = defineStore('board', {
                 for (const row in state.board[column]) {
                     if (
                         state.board[column][row].piece !== null &&
-                        state.board[column][row].piece.selected === true
+                        state.board[column][row].piece?.selected === true
                     ) {
                         return {
                             columnIndex: parseInt(column),
@@ -156,7 +156,7 @@ export const useBoardStore = defineStore('board', {
             })
         },
 
-        setPlayerColor(color) {
+        setPlayerColor(color: string) {
             // @TODO use it with computer games
             this.SET_PLAYER_COLOR(color)
         },
@@ -273,11 +273,11 @@ export const useBoardStore = defineStore('board', {
             this.round++
         },
 
-        SET_ROUND(round) {
+        SET_ROUND(round: number) {
             this.round = round
         },
 
-        SET_PLAYER_COLOR(color) {
+        SET_PLAYER_COLOR(color: string) {
             this.playerColor = color
         },
 

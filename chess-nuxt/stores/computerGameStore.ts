@@ -1,6 +1,7 @@
 import { useBoardStore } from '~/stores/boardStore'
 import services from '~/services/index'
 import Game from 'chess-legal-moves'
+import type { ICreateComputerGameParams } from '~/types/computerGame'
 
 export const useComputerGameStore = defineStore('computerGame', {
     state: () => ({
@@ -9,7 +10,7 @@ export const useComputerGameStore = defineStore('computerGame', {
     }),
 
     actions: {
-        createGame(params) {
+        createGame(params: ICreateComputerGameParams) {
             return services.localGame
                 .createLocalGame(params)
                 .then((newGame) => {
@@ -20,7 +21,7 @@ export const useComputerGameStore = defineStore('computerGame', {
                 })
         },
 
-        sendMove(move) {
+        sendMove(move: string) {
             if (this.currentGame) {
                 // @TODO update the lib to prevent from creating a second object like this
                 const game = new Game(this.currentGame.fen)
@@ -53,7 +54,7 @@ export const useComputerGameStore = defineStore('computerGame', {
             })
         },
 
-        getGame(gameId) {
+        getGame(gameId: string) {
             return services.localGame.getLocalGame(gameId).then((game) => {
                 const gameAnalysis = new Game(game.fen)
 
@@ -71,7 +72,7 @@ export const useComputerGameStore = defineStore('computerGame', {
             })
         },
 
-        deleteGame(gameId) {
+        deleteGame(gameId: string) {
             return services.localGame.deleteLocalGame(gameId).then((game) => {
                 this.DELETE_GAME(game.id)
                 this.RESET_CURRENT_GAME()
@@ -95,7 +96,7 @@ export const useComputerGameStore = defineStore('computerGame', {
             this.gameList = [...this.gameList, game]
         },
 
-        DELETE_GAME(gameId) {
+        DELETE_GAME(gameId: string) {
             this.gameList = this.gameList.filter((game) => game.id !== gameId)
         },
     },

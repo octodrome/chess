@@ -15,14 +15,14 @@ export async function createGameInLocalDB(
     newGame: IComputerGame
 ): Promise<IComputerGame> {
     const gameList = await findAllGamesInLocalDB()
-    LocalStorage.setItem('games', JSON.stringify([...gameList, newGame]))
+    LocalStorage?.setItem('games', JSON.stringify([...gameList, newGame]))
 
     return newGame
 }
 
 export async function findAllGamesInLocalDB(): Promise<IComputerGame[]> {
     return (await JSON.parse(
-        LocalStorage.getItem('games') as string
+        LocalStorage?.getItem('games') as string
     )) as IComputerGame[]
 }
 
@@ -43,7 +43,7 @@ export async function updateOneGameInLocalDB(
     const newGameList = (await findAllGamesInLocalDB()).filter(
         (game) => game.id !== id
     )
-    LocalStorage.setItem(
+    LocalStorage?.setItem(
         'games',
         JSON.stringify([...newGameList, gameToUpdate])
     )
@@ -58,7 +58,7 @@ export async function removeGameFromLocalDB(
     const newGameList = (await findAllGamesInLocalDB()).filter(
         (game) => game.id !== id
     )
-    LocalStorage.setItem('games', JSON.stringify([...newGameList]))
+    LocalStorage?.setItem('games', JSON.stringify([...newGameList]))
 
     return deletedGame
 }

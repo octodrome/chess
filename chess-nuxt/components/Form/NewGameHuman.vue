@@ -13,7 +13,7 @@ const humanGameStore = useHumanGameStore()
 const boardStore = useBoardStore()
 const layoutStore = useLayoutStore()
 
-const opponents = await userStore.getAllOpponents(userStore.user._id)
+const opponents = await userStore.getAllOpponents(userStore.user?._id)
 const selectedOpponentId = ref(opponents[0]._id)
 
 const opponentsOptions = computed(() => {

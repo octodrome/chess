@@ -1,5 +1,7 @@
 import jwt from 'jsonwebtoken'
 import type { JwtPayload } from 'jsonwebtoken'
+import type { ApiGame } from '../models/game.model'
+import type { HTTPHeaderName } from 'h3'
 const config = useRuntimeConfig()
 
 declare module 'jsonwebtoken' {
@@ -8,7 +10,10 @@ declare module 'jsonwebtoken' {
     }
 }
 
-export const isNotAllowedOnTheGame = (game: IGame, headers): boolean => {
+export const isNotAllowedOnTheGame = (
+    game: ApiGame,
+    headers: Partial<Record<HTTPHeaderName, string | undefined>>
+): boolean => {
     const isNotCreator =
         game.creator !== getUserIdFromHeader(headers.authorization!)
     const isNotGuest =
@@ -17,7 +22,10 @@ export const isNotAllowedOnTheGame = (game: IGame, headers): boolean => {
     return isNotCreator && isNotGuest
 }
 
-export const isWrongTurn = (game: IGame, headers): boolean => {
+export const isWrongTurn = (
+    game: ApiGame,
+    headers: Partial<Record<HTTPHeaderName, string | undefined>>
+): boolean => {
     return game.hasToPlay !== getUserIdFromHeader(headers.authorization!)
 }
 

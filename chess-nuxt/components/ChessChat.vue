@@ -3,6 +3,7 @@ import { useHumanGameStore } from '~/stores/humanGameStore'
 import { useUserStore } from '~/stores/userStore'
 import moment from 'moment'
 import services from '~/services'
+import type { ApiMessage } from '~/server/models/game.model'
 
 const route = useRoute()
 const humanGameStore = useHumanGameStore()
@@ -17,7 +18,7 @@ const createdAt = computed(() =>
         : ''
 )
 const isUserMessage = computed(
-    () => (message) =>
+    () => (message: ApiMessage) =>
         humanGameStore.opponent
             ? message.from !== humanGameStore.opponent.email
             : false
@@ -36,7 +37,7 @@ const sendMessage = () => {
     }
 }
 
-onMounted(() => humanGameStore.getGame(route.params.id))
+onMounted(() => humanGameStore.getGame(route.params.id as string))
 </script>
 
 <template>

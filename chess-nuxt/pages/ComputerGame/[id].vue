@@ -6,7 +6,7 @@ const route = useRoute()
 const computerGameStore = useComputerGameStore()
 const boardStore = useBoardStore()
 
-onMounted(() => computerGameStore.getGame(route.params.id))
+onMounted(() => computerGameStore.getGame(route.params.id as string))
 </script>
 
 <template>

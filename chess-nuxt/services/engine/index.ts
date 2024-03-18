@@ -12,11 +12,13 @@ export default class Engine {
     }
 
     public init(): void {
-        this.stockfishWorker.postMessage('uci')
-        this.stockfishWorker.postMessage('ucinewgame')
+        if (this.stockfishWorker) {
+            this.stockfishWorker.postMessage('uci')
+            this.stockfishWorker.postMessage('ucinewgame')
 
-        this.stockfishWorker.onmessage = function (e) {
-            console.log(e.data)
+            this.stockfishWorker.onmessage = function (e) {
+                console.log(e.data)
+            }
         }
     }
 
@@ -25,21 +27,23 @@ export default class Engine {
         console.log('moves', movesAsString)
 
         return new Promise((resolve, reject) => {
-            this.stockfishWorker.postMessage(
+            this.stockfishWorker?.postMessage(
                 `position startpos moves ${movesAsString}`
             )
-            this.stockfishWorker.postMessage(
+            this.stockfishWorker?.postMessage(
                 `go movetime ${this.computerLevel * 1000}`
             )
 
-            this.stockfishWorker.onmessage = (e) => {
-                if (e.data.split(' ')[0] === 'bestmove') {
-                    resolve(e.data.split(' ')[1])
+            if (this.stockfishWorker) {
+                this.stockfishWorker.onmessage = (e) => {
+                    if (e.data.split(' ')[0] === 'bestmove') {
+                        resolve(e.data.split(' ')[1])
+                    }
                 }
-            }
 
-            this.stockfishWorker.onerror = (error) => {
-                reject(error)
+                this.stockfishWorker.onerror = (error) => {
+                    reject(error)
+                }
             }
         })
     }

@@ -16,6 +16,7 @@ export interface IHumanGame {
 }
 
 export interface ICreateHumanGameRequestParams {
+    creator?: string
     guest: string
     hasToPlay: string
     moves: string[]
