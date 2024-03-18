@@ -12,19 +12,18 @@ const layoutStore = useLayoutStore()
 const userStore = useUserStore()
 const humanGameStore = useHumanGameStore()
 const computerGameStore = useComputerGameStore()
+async function parseToken(token: string) {
+    return await JSON.parse(atob(token.split('.')[1]))
+}
+const userToken = useCookie('token')
 
 onMounted(async () => {
-    const LocalStorage = process.client ? localStorage : null
-
-    function parseToken(token: string) {
-        return JSON.parse(atob(token.split('.')[1]))
-    }
-    const userToken = LocalStorage.getItem('token')
-
-    if (userToken) {
-        const userId = parseToken(userToken).userId
-        userStore.getUser(userId)
-        humanGameStore.getUserGames(userId)
+    if (userToken.value) {
+        console.log('token', userToken.value)
+        const userId = (await parseToken(userToken.value)).userId
+        console.log('userId', userId)
+        await userStore.getUser(userId)
+        await humanGameStore.getUserGames(userId)
     }
 
     computerGameStore.getGames()

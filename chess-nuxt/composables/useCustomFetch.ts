@@ -1,12 +1,11 @@
 import type { UseFetchOptions } from '#app'
 import { defu } from 'defu'
 
-const token = process.client ? localStorage.getItem('token') : ''
-
 export function useCustomFetch<T>(
     url: string | (() => string),
     options: UseFetchOptions<T> = {}
 ) {
+    const token = useCookie('token')
     // const userAuth = useCookie('token')
     // const config = useRuntimeConfig()
 

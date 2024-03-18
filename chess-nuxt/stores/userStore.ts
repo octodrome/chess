@@ -2,13 +2,11 @@ import { useHumanGameStore } from '~/stores/humanGameStore'
 import { useBoardStore } from '~/stores/boardStore'
 import services from '~/services/index'
 
-const LocalStorage = process.client ? localStorage : null
-
 export const useUserStore = defineStore('user', {
     state: () => ({
         user: null,
         users: [],
-        token: LocalStorage ? LocalStorage.getItem('token') : '',
+        token: useCookie('token'),
     }),
 
     getters: {
@@ -26,7 +24,8 @@ export const useUserStore = defineStore('user', {
             return services.user.login(params).then(({ user, token }) => {
                 this.user = user
                 this.token = token
-                LocalStorage.setItem('token', token)
+                const cookie = useCookie('token')
+                cookie.value = this.token
                 // location.reload();
 
                 const humanGameStore = useHumanGameStore()
@@ -38,8 +37,9 @@ export const useUserStore = defineStore('user', {
 
         async logout() {
             this.user = null
-            this.token = ''
-            LocalStorage.removeItem('token')
+            this.token = null
+            const cookie = useCookie('token')
+            cookie.value = this.token
             await navigateTo('/')
             location.reload()
             this.users = []
@@ -51,7 +51,7 @@ export const useUserStore = defineStore('user', {
             boardStore.startNewGame('computer')
         },
 
-        getAllOpponents(userId) {
+        getAllOpponents(userId: string) {
             return services.user
                 .getAllOpponents(userId)
                 .then((opponentList) => {
@@ -60,11 +60,9 @@ export const useUserStore = defineStore('user', {
                 })
         },
 
-        getUser(userId) {
-            return services.user.getUser(userId).then((user) => {
-                console.log('hello from getUser', user)
-                this.user = user
-            })
+        async getUser(userId: string) {
+            const user = await services.user.getUser(userId)
+            this.user = user
         },
     },
 })
