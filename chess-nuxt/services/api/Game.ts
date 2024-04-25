@@ -25,6 +25,13 @@ export default class Game {
         return data.value as Promise<ApiGame>
     }
 
+    async deleteGame(gameId: string) {
+        const { data } = await useCustomFetch(`api/auth/game/${gameId}`, {
+            method: 'delete',
+        })
+        return data.value as Promise<ApiGame>
+    }
+
     async sendMove(params: IUpdateHumanGameRequestParams) {
         const { data } = await useCustomFetch(
             `api/auth/game/${params.gameId}`,

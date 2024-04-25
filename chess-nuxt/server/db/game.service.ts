@@ -78,8 +78,8 @@ export const updateOneGameInDB = async (
 
 export const removeGameFromDB = async (id: string) => {
     try {
-        const games = await Game.deleteOne({ _id: id })
-        return games as unknown as ApiGame[]
+        const result = await Game.deleteOne({ _id: id })
+        return result
     } catch {
         throw createError({
             statusCode: 500,

@@ -27,6 +27,11 @@ const goToGame = (gameId: string) => {
         path: `/HumanGame/${gameId}`,
     })
 }
+
+const deleteThisGame = (gameId: string) => {
+    humanGameStore.deleteGame(gameId)
+    if (route.params.id === gameId) navigateTo({ path: '/' })
+}
 </script>
 
 <template>
@@ -36,7 +41,9 @@ const goToGame = (gameId: string) => {
             :key="game._id"
             icon="account"
             :content="opponentEmail(game)"
+            action="delete"
             @click="goToGame(game._id)"
+            @delete="deleteThisGame(game._id)"
         />
     </ul>
 </template>

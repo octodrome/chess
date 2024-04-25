@@ -28,7 +28,7 @@ export const useHumanGameStore = defineStore('humanGame', {
     },
 
     actions: {
-        createGame(params: ICreateHumanGameRequestParams) {
+        async createGame(params: ICreateHumanGameRequestParams) {
             return services.game.createGame(params).then((game) => {
                 this.currentGame = game
                 this.gameList = [...this.gameList, game]
@@ -38,20 +38,29 @@ export const useHumanGameStore = defineStore('humanGame', {
             })
         },
 
-        sendMove(params: IUpdateHumanGameRequestParams) {
+        async deleteGame(gameId: string) {
+            return services.game.deleteGame(gameId).then(() => {
+                this.currentGame = null
+                this.gameList = this.gameList.filter(
+                    (game) => game._id !== gameId
+                )
+            })
+        },
+
+        async sendMove(params: IUpdateHumanGameRequestParams) {
             return services.game.sendMove(params).then((game) => {
                 this.currentGame = game
                 return game
             })
         },
 
-        getUserGames(userId: string) {
+        async getUserGames(userId: string) {
             return services.game.getUserGames(userId).then((gameList) => {
                 this.gameList = gameList
             })
         },
 
-        getGame(gameId: string) {
+        async getGame(gameId: string) {
             return services.game.getGame(gameId).then((game) => {
                 console.log('game from getGame()', game)
                 this.currentGame = game
