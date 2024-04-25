@@ -3,6 +3,6 @@
     "extends": "./.nuxt/tsconfig.json",
     "compilerOptions": {
         "jsx": "preserve",
-        "skipDefaultLibCheck": true,
-    },
+        "skipDefaultLibCheck": true
+    }
 }
