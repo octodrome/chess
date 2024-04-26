@@ -40,17 +40,9 @@ export const useLayoutStore = defineStore('layout', {
             this.modal.content = ''
         },
 
-        openSnackbar(params: { message: string; color: string }) {
-            this.snackbar.message = params.message
-            this.snackbar.color = params.color
-            this.snackbar.isOpened = true
-        },
-
         openSnackbarError(message: string) {
-            ;(this.snackbar.message = message
-                ? message
-                : 'Une erreur est survenue. Veuillez réessayer ulterieurement.'),
-                (this.snackbar.color = 'error')
+            this.snackbar.message = message
+            this.snackbar.color = 'error'
             this.snackbar.isOpened = true
         },
 
@@ -62,6 +54,8 @@ export const useLayoutStore = defineStore('layout', {
 
         closeSnackbar() {
             this.snackbar.isOpened = false
+            this.snackbar.message = ''
+            this.snackbar.color = ''
         },
     },
 })
