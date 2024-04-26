@@ -10,7 +10,7 @@ export const useComputerGameStore = defineStore('computerGame', {
     }),
 
     actions: {
-        createGame(params: ICreateComputerGameParams) {
+        async createGame(params: ICreateComputerGameParams) {
             return services.localGame
                 .createLocalGame(params)
                 .then((newGame) => {
@@ -46,7 +46,7 @@ export const useComputerGameStore = defineStore('computerGame', {
             }
         },
 
-        getGames() {
+        async getGames() {
             return services.localGame.getLocalGames().then((gameList) => {
                 this.SET_GAME_LIST(gameList)
 
@@ -54,7 +54,7 @@ export const useComputerGameStore = defineStore('computerGame', {
             })
         },
 
-        getGame(gameId: string) {
+        async getGame(gameId: string) {
             return services.localGame.getLocalGame(gameId).then((game) => {
                 const gameAnalysis = new Game(game.fen)
 
@@ -72,7 +72,7 @@ export const useComputerGameStore = defineStore('computerGame', {
             })
         },
 
-        deleteGame(gameId: string) {
+        async deleteGame(gameId: string) {
             return services.localGame.deleteLocalGame(gameId).then((game) => {
                 this.DELETE_GAME(game.id)
                 this.RESET_CURRENT_GAME()

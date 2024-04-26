@@ -19,13 +19,13 @@ export const useUserStore = defineStore('user', {
     },
 
     actions: {
-        signup(params: ISignupUserRequestParams) {
+        async signup(params: ISignupUserRequestParams) {
             return services.user.signup(params).then((user) => {
                 return user
             })
         },
 
-        login(params: ILoginUserRequestParams) {
+        async login(params: ILoginUserRequestParams) {
             return services.user.login(params).then(({ user, token }) => {
                 this.user = user
                 this.token = token
@@ -56,7 +56,7 @@ export const useUserStore = defineStore('user', {
             boardStore.startNewGame('computer')
         },
 
-        getAllOpponents(userId: string) {
+        async getAllOpponents(userId: string) {
             return services.user
                 .getAllOpponents(userId)
                 .then((opponentList) => {
