@@ -9,7 +9,7 @@ vi.mock('../services/index.ts', () => {
         default: {
             engine: {},
             localGame: {
-                createLocalGame: vi.fn(() => Promise.resolve({}))
+                createLocalGame: vi.fn(() => Promise.resolve({})),
             },
             user: {},
             game: {},
@@ -17,7 +17,6 @@ vi.mock('../services/index.ts', () => {
         },
     }
 })
-
 
 describe('ComputerGame Store', () => {
     beforeEach(() => {

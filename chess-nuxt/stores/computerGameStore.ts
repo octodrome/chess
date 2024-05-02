@@ -1,12 +1,15 @@
 import { useBoardStore } from '~/stores/boardStore'
 import services from '~/services/index'
 import Game from 'chess-legal-moves'
-import type { ICreateComputerGameParams } from '~/types/computerGame'
+import type {
+    IComputerGame,
+    ICreateComputerGameParams,
+} from '~/types/computerGame'
 
 export const useComputerGameStore = defineStore('computerGame', {
     state: () => ({
-        gameList: [],
-        currentGame: null,
+        gameList: [] as IComputerGame[],
+        currentGame: null as IComputerGame | null,
     }),
 
     actions: {
@@ -80,11 +83,11 @@ export const useComputerGameStore = defineStore('computerGame', {
             })
         },
 
-        SET_CURRENT_GAME(game) {
+        SET_CURRENT_GAME(game: IComputerGame) {
             this.currentGame = game
         },
 
-        SET_GAME_LIST(gameList) {
+        SET_GAME_LIST(gameList: IComputerGame[]) {
             this.gameList = gameList
         },
 
@@ -92,7 +95,7 @@ export const useComputerGameStore = defineStore('computerGame', {
             this.currentGame = null
         },
 
-        ADD_GAME(game) {
+        ADD_GAME(game: IComputerGame) {
             this.gameList = [...this.gameList, game]
         },
 
