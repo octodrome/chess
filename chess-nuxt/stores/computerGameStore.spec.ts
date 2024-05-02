@@ -10,6 +10,7 @@ vi.mock('../services/index.ts', () => {
             engine: {},
             localGame: {
                 createLocalGame: vi.fn(() => Promise.resolve({})),
+                getLocalGames: vi.fn(() => Promise.resolve([])),
             },
             user: {},
             game: {},
@@ -34,25 +35,43 @@ describe('ComputerGame Store', () => {
             vi.restoreAllMocks()
         })
 
+        const fakeGame: IComputerGame = {
+            id: 'fake-id',
+            computerName: 'fake-name',
+            createdAt: new Date(),
+            updatedAt: new Date(),
+            playerColor: 'white',
+            computerLevel: 1,
+            fen: 'fake-fen',
+        }
+
         it('createGame()', async () => {
-            const fakeGame: IComputerGame = {
-                id: 'fake-id',
-                computerName: 'fake-name',
-                createdAt: new Date(),
-                updatedAt: new Date(),
-                playerColor: 'white',
-                computerLevel: 1,
-                fen: 'fake-fen',
-            }
+            const computerGameStore = useComputerGameStore()
             services.localGame.createLocalGame.mockResolvedValue(fakeGame)
 
-            const computerGameStore = useComputerGameStore()
+            expect(computerGameStore.currentGame).toStrictEqual(null)
+            expect(computerGameStore.gameList).toStrictEqual([])
             await computerGameStore.createGame({
                 playerColor: 'white',
                 computerLevel: 1,
             })
             expect(computerGameStore.currentGame).toStrictEqual(fakeGame)
             expect(computerGameStore.gameList).toStrictEqual([fakeGame])
+        })
+
+        it('getGames()', async () => {
+            const computerGameStore = useComputerGameStore()
+            services.localGame.getLocalGames.mockResolvedValue([
+                fakeGame,
+                fakeGame,
+            ])
+
+            expect(computerGameStore.gameList).toStrictEqual([])
+            await computerGameStore.getGames()
+            expect(computerGameStore.gameList).toStrictEqual([
+                fakeGame,
+                fakeGame,
+            ])
         })
     })
 })
