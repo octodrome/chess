@@ -3,5 +3,9 @@
         "chess-legal-moves",
         "chess-front",
         "chess-back",
-    ]
+    ],
+    "go.toolsEnvVars": {
+        "GOOS": "js",
+        "GOARCH": "wasm",
+    }
 }
