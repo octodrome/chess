@@ -1,52 +1,32 @@
 package main
 
 import (
-	"fmt"
+	"encoding/json"
 	"syscall/js"
 )
 
-func add(this js.Value, inputs []js.Value) interface{} {
-	return inputs[0].Float() + inputs[1].Float()
-}
+func wrapper(_ js.Value, args []js.Value) interface{} {
+	var fenString string = args[0].String()
+	// @TODO error if multiple args
+	// @TODO error if invalid fen string
 
-func provideGame(_ js.Value, args []js.Value) interface{} {
-	game := ReturnGame()
+	game := GenerateGame(fenString)
+	jsonGame, err := json.Marshal(game)
 
-	// @TODO find how to simply return json instead of rebuilding the whole thing like below...
-	// jsonGame, err := json.Marshal(game)
-	// if err != nil {
-	// 	return map[string]interface{}{
-	// 		"error": "error from chess lib",
-	// 	}
-	// }
-
-	return map[string]interface{}{
-		"state": map[string]interface{}{
-			"fenBoard":           game.state.fenBoard,
-			"hasToPlay":          game.state.hasToPlay,
-			"availableCastlings": game.state.availableCastlings,
-			"enPassantTarget":    game.state.enPassantTarget,
-			"halfMoveClock":      game.state.halfMoveClock,
-			"fullMoveClock":      game.state.fullMoveClock,
-		},
-		"scan": map[string]interface{}{
-			// @TODO for some reason it is not possible to pass the slice of strings game.scan.legalMoves
-			"legalMoves": []interface{}{"est", "test"},
-			"kingState": map[string]interface{}{
-				"isChecked":    game.scan.kingState.isChecked,
-				"isCheckMated": game.scan.kingState.isCheckMated,
-				"isDraw":       game.scan.kingState.isDraw,
-			},
-		},
+	if err != nil {
+		// @TODO return JSON error
+		return map[string]interface{}{
+			"error": "error from chess lib",
+		}
 	}
+
+	return string(jsonGame)
 }
 
 func main() {
 	c := make(chan int)
-	js.Global().Set("add", js.FuncOf(add))
-	js.Global().Set("provideGame", js.FuncOf(provideGame))
 
-	fmt.Println("Hello from wasm")
+	js.Global().Set("generateGame", js.FuncOf(wrapper))
 
 	<-c
 }

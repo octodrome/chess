@@ -1,47 +1,58 @@
 package main
 
+import (
+	"strconv"
+	"strings"
+)
+
+// @TODO format JSON fields snake_case ?
 type Game struct {
-	state State
-	scan  Scan
+	State State
+	Scan  Scan
 }
 
 type State struct {
-	fenBoard           string
-	hasToPlay          rune
-	availableCastlings string
-	enPassantTarget    string
-	halfMoveClock      int
-	fullMoveClock      int
+	FenBoard           string
+	HasToPlay          string
+	AvailableCastlings string
+	EnPassantTarget    string
+	HalfMoveClock      int
+	FullMoveClock      int
 }
 
 type Scan struct {
-	legalMoves []string
-	kingState  KingState
+	LegalMoves []string
+	KingState  KingState
 }
 
 type KingState struct {
-	isChecked    bool
-	isCheckMated bool
-	isDraw       bool
+	IsChecked    bool
+	IsCheckMated bool
+	IsDraw       bool
 }
 
-func ReturnGame() Game {
+func GenerateGame(fenString string) Game {
+	fenList := strings.Split(fenString, " ")
+	// @TODO don't ignore errors
+	halfMoveClock, _ := strconv.Atoi(fenList[4])
+	fullMoveClock, _ := strconv.Atoi(fenList[5])
+
 	return Game{
-		state: State{
-			fenBoard:           "asdflkjasfd",
-			hasToPlay:          'w',
-			availableCastlings: "asdf",
-			enPassantTarget:    "dasf",
-			halfMoveClock:      2,
-			fullMoveClock:      2,
+		State: State{
+			FenBoard:           fenList[0],
+			HasToPlay:          fenList[1],
+			AvailableCastlings: fenList[2],
+			EnPassantTarget:    fenList[3],
+			HalfMoveClock:      halfMoveClock,
+			FullMoveClock:      fullMoveClock,
 		},
 
-		scan: Scan{
-			legalMoves: []string{"e2e4", "e2e3"},
-			kingState: KingState{
-				isChecked:    false,
-				isCheckMated: false,
-				isDraw:       false,
+		Scan: Scan{
+			LegalMoves: []string{"e2e4", "e2e3"},
+			KingState: KingState{
+				IsChecked:    false,
+				IsCheckMated: false,
+				IsDraw:       false,
 			},
 		},
 	}
