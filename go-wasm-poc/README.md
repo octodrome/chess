@@ -17,7 +17,16 @@
 GOOS=js GOARCH=wasm go build -o main.wasm
 ```
 
-🎉 use VSCode live server extension and in the browser console run
-```js
-JSON.parse(generateGame('rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1'))
+🚚 then move main.wasm file to chess-nuxt/public/
+
+🎉 use generateGame() in front app:
+```ts
+import services from '~/services/index'
+
+console.log(
+    '🚀 GoWasmPOC generateGame',
+    services.goWasmPOC.generateGame(
+        'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1'
+    )
+)
 ```
