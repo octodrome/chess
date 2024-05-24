@@ -8,6 +8,7 @@ import (
 	"github.com/joho/godotenv"
 	"github.com/octodrome/chess/go-rest-api-poc/controller"
 	"github.com/octodrome/chess/go-rest-api-poc/database"
+	"github.com/octodrome/chess/go-rest-api-poc/middleware"
 	"github.com/octodrome/chess/go-rest-api-poc/model"
 )
 
@@ -33,9 +34,15 @@ func loadEnv() {
 func serveApplication() {
 	router := gin.Default()
 
-	apiRoutes := router.Group("/api")
-	apiRoutes.GET("/user", controller.GetUsers)
-	apiRoutes.GET("/game", controller.GetGames)
-	router.Run(":8000")
-	fmt.Println("Server running on port 8000")
+	publicRoutes := router.Group("/auth")
+	publicRoutes.POST("/register", controller.Register)
+	publicRoutes.POST("/login", controller.Login)
+
+	protectedRoutes := router.Group("/api")
+	protectedRoutes.Use(middleware.JWTAuthMiddleware())
+	protectedRoutes.POST("/game", controller.AddGame)
+	protectedRoutes.GET("/game", controller.GetAllUserGames)
+
+	router.Run(":8001")
+	fmt.Println("Server running on port 8001")
 }

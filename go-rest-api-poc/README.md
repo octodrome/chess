@@ -1,7 +1,13 @@
 # Database
 linux-u db-u same pw 2000
+useful link: https://www.digitalocean.com/community/tutorials/how-to-install-postgresql-on-ubuntu-20-04-quickstart
 
-## PostgreSQL commands
+## PostgreSQL commands 
+
+connect to chess db with psql:
+```bash
+sudo -u chess psql
+```
 
 \l                  show dbs
 \c <dbname>         choose a db
