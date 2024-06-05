@@ -20,3 +20,12 @@ func (game *Game) Save() (*Game, error) {
 	}
 	return game, nil
 }
+
+func FindGameById(id string) (Game, error) {
+	var game Game
+	err := database.Database.Where("ID=?", id).Find(&game).Error
+	if err != nil {
+		return Game{}, err
+	}
+	return game, nil
+}

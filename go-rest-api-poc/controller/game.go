@@ -8,8 +8,13 @@ import (
 	"github.com/octodrome/chess/go-rest-api-poc/model"
 )
 
-func GetGames(context *gin.Context) {
-	context.JSON(http.StatusOK, gin.H{"data": "all the games"})
+func GetGameById(context *gin.Context) {
+	game, err := model.FindGameById(context.Param("id"))
+	if err != nil {
+		context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+	context.JSON(http.StatusOK, gin.H{"data": game})
 }
 
 func AddGame(context *gin.Context) {
