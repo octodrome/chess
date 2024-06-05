@@ -47,11 +47,20 @@ func FindUserByEmail(email string) (User, error) {
 	return user, nil
 }
 
-func FindUserById(id uint) (User, error) {
+func FindUserById(id string) (User, error) {
 	var user User
 	err := database.Database.Preload("Games").Where("ID=?", id).Find(&user).Error
 	if err != nil {
 		return User{}, err
 	}
 	return user, nil
+}
+
+func FindAllUsers() ([]User, error) {
+	var userList []User
+	err := database.Database.Find(&userList).Error
+	if err != nil {
+		return []User{}, err
+	}
+	return userList, nil
 }
