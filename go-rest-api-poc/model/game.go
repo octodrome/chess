@@ -29,3 +29,13 @@ func FindGameById(id string) (Game, error) {
 	}
 	return game, nil
 }
+
+// @TODO also remove game reference from users
+func RemoveGame(id string) (Game, error) {
+	var deletedGame Game
+	err := database.Database.Delete(&deletedGame, id).Error
+	if err != nil {
+		return Game{}, err
+	}
+	return deletedGame, nil
+}
