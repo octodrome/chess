@@ -39,3 +39,17 @@ func RemoveGame(id string) (Game, error) {
 	}
 	return deletedGame, nil
 }
+
+type UpdateGameInput struct {
+	Moves string `json:"moves"`
+}
+
+func UpdateGame(id string, input UpdateGameInput) (Game, error) {
+	var updatedGame Game
+	err := database.Database.Where("ID=?", id).First(&updatedGame).Error
+	if err != nil {
+		return Game{}, err
+	}
+	database.Database.Model(&updatedGame).Updates(input)
+	return updatedGame, nil
+}

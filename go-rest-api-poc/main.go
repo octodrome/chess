@@ -46,6 +46,7 @@ func serveApplication() {
 	protectedRoutes.GET("/game", controller.GetAllUserGames)
 	protectedRoutes.GET("/game/:id", controller.GetGameById)
 	protectedRoutes.DELETE("/game/:id", controller.DeleteGame)
+	protectedRoutes.PUT("/game/:id", controller.PutGame)
 
 	router.Run(":8001")
 	fmt.Println("Server running on port 8001")
