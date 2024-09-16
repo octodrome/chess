@@ -10,6 +10,7 @@ sudo apt-get install postgresql postgresql-contrib
 ```
 
 ## Init database
+https://dev.to/karthikeyan_/install-and-configure-postgresql-with-golang-2ldi
 
 run postgres:
 ```bash
