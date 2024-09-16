@@ -7,10 +7,10 @@ import (
 
 type Game struct {
 	gorm.Model
-	UserID uint
-	// GuestID     uint
-	// HasToPlayID uint
-	Moves string `gorm:"size:255;not null;" json:"moves"`
+	UserID      uint
+	GuestID     uint
+	HasToPlayID uint
+	Moves       string `gorm:"size:255;not null;" json:"moves"`
 }
 
 func (game *Game) Save() (*Game, error) {
