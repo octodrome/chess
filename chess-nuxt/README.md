@@ -11,8 +11,8 @@ A Nuxt3/typescript app to play chess against computer or distant opponents.
 Make sure to install the dependencies:
 
 ```bash
-# yarn
-yarn
+# pnpm
+pnpm
 ```
 
 ## Development Server
@@ -20,7 +20,7 @@ yarn
 Start the development server on http://localhost:3000
 
 ```bash
-yarn dev
+pnpm dev
 ```
 
 ## Production
@@ -28,13 +28,13 @@ yarn dev
 Build the application for production:
 
 ```bash
-yarn build
+pnpm build
 ```
 
 Locally preview production build:
 
 ```bash
-yarn preview
+pnpm preview
 ```
 
 Checkout the [deployment documentation](https://v3.nuxtjs.org/guide/deploy/presets) for more information.
