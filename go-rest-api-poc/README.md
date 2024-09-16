@@ -1,12 +1,45 @@
-# Database
-linux-u db-u same pw 2000
-useful link: https://www.digitalocean.com/community/tutorials/how-to-install-postgresql-on-ubuntu-20-04-quickstart
+# Go REST API
 
-## PostgreSQL commands 
+
+## Install PostgreSQL
+
+installation:
+```bash
+sudo apt-get update
+sudo apt-get install postgresql postgresql-contrib
+```
+
+## Init database
+
+run postgres:
+```bash
+sudo service postgresql start
+sudo -u postgres psql
+```
+
+check your `./.env` file and replace:
+- `<myuser>` with `DB_USER`
+- `<mydb>` with `DB_NAME`
+- `<mypassword>` with `DB_PASSWORD`
+
+```sql
+CREATE USER <myuser> WITH PASSWORD '<mypassword>';
+CREATE DATABASE <mydb>;
+GRANT ALL PRIVILEGES ON DATABASE <mydb> TO <myuser>;
+```
+
+## Run the REST API
+```bash
+go run .
+```
+
+## Useful
+
+### PostgreSQL commands 
 
 connect to chess db with psql:
 ```bash
-sudo -u chess psql
+sudo -u postgres psql -d <mydb>
 ```
 
 \l                  show dbs
@@ -16,9 +49,9 @@ sudo -u chess psql
 \password <dbname>  change db pw
 \dt                 show tables
 
-## SQL useful queries
+### SQL queries
 
 ```sql
-    SELECT * FROM users;  -- show all rows in users table
-    INSERT INTO users (email, password) VALUES ('test@test.com', 'super-pw');
+SELECT * FROM users;  -- show all rows in users table
+INSERT INTO users (email, password) VALUES ('test@test.com', 'super-pw');
 ```
