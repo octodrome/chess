@@ -11,6 +11,7 @@ type Game struct {
 	GuestID     uint
 	HasToPlayID uint
 	Moves       string `gorm:"size:255;not null;" json:"moves"`
+	Messages    []Message
 }
 
 func (game *Game) Save() (*Game, error) {
