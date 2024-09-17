@@ -56,3 +56,37 @@ sudo -u postgres psql -d <mydb>
 SELECT * FROM users;  -- show all rows in users table
 INSERT INTO users (email, password) VALUES ('test@test.com', 'super-pw');
 ```
+
+```mermaid
+---
+title: Entity Relationship Diagram
+---
+erDiagram
+
+USER ||--o{ GAME : hasmany
+USER {
+    ID uint
+    CreatedAt date
+    UpdatedAt date
+    DeletedAt date
+    Email string
+    Password string
+    Games ids
+}
+GAME {
+    ID uint
+    CreatedAt date
+    UpdatedAt date
+    DeletedAt date
+    UserID uint
+    GuestID uint
+    HasToPlayID uint
+    Moves string
+}
+MESSAGE {
+    ID uint
+    CreatedAt date
+    UpdatedAt date
+    DeletedAt date
+}
+```
