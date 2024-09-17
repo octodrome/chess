@@ -11,10 +11,13 @@ const userStore = useUserStore()
 const boardStore = useBoardStore()
 
 const opponentEmail = (game: ApiGame) => {
+    console.log("userStore.user", userStore.user)
+    console.log("game", game)
+
     if (userStore.user) {
-        return game.guest.email === userStore.user.email
-            ? game.creator.email
-            : game.guest.email
+        return game.GuestID === userStore.user.data.ID
+            ? game.UserID
+            : game.GuestID
     }
 }
 
@@ -38,12 +41,12 @@ const deleteThisGame = (gameId: string) => {
     <ul v-if="humanGameStore.gameList?.length !== 0">
         <BaseDrawerItem
             v-for="game in humanGameStore.gameList"
-            :key="game._id"
+            :key="game.ID"
             icon="account"
             :content="opponentEmail(game)"
             action="delete"
-            @click="goToGame(game._id)"
-            @delete="deleteThisGame(game._id)"
+            @click="goToGame(game.ID)"
+            @delete="deleteThisGame(game.ID)"
         />
     </ul>
 </template>

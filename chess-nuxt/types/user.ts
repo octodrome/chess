@@ -26,7 +26,7 @@ export interface ILoginUserResponse {
 export interface IUser {
     email: string
     createdAt: Date
-    _id: string
+    ID: string
 }
 
 export interface ICreateGameRequestParams {}

@@ -5,21 +5,17 @@ export function useCustomFetch<T>(
     url: string,
     options: UseFetchOptions<T> = {}
 ) {
-    const token = useCookie('token')
-    // const userAuth = useCookie('token')
+    const userAuth = useCookie('token')
     // const config = useRuntimeConfig()
 
     const defaults: UseFetchOptions<T> = {
-        baseURL: `http://localhost:3000/`,
+        baseURL: `http://localhost:8001/`,
         key: url,
 
         // set user token if connected
-        // headers: userAuth.value
-        //     ? { Authorization: `Bearer ${userAuth.value}` }
-        //     : {},
-        headers: {
-            Authorization: `Bearer ${token}`,
-        },
+        headers: userAuth.value
+            ? { Authorization: `Bearer ${userAuth.value}` }
+            : {},
 
         // onResponse(_ctx) {
         //     // _ctx.response._data = new myBusinessResponse(_ctx.response._data)

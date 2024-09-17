@@ -20,10 +20,10 @@ const userToken = useCookie('token')
 onMounted(async () => {
     if (userToken.value) {
         console.log('token', userToken.value)
-        const userId = (await parseToken(userToken.value)).userId
+        const userId = (await parseToken(userToken.value)).id
         console.log('userId', userId)
         await userStore.getUser(userId)
-        await humanGameStore.getUserGames(userId)
+        await humanGameStore.getUserGames()
     }
 
     computerGameStore.getGames()

@@ -23,10 +23,10 @@ export default defineEventHandler(async (event) => {
 
     return {
         user: {
-            _id: user._id,
+            _id: user.ID,
             email: user.email,
         },
-        token: jwt.sign({ userId: user._id }, config.jwtSecret as string, {
+        token: jwt.sign({ userId: user.ID }, config.jwtSecret as string, {
             expiresIn: '24h',
         }),
     }

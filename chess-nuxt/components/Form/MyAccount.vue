@@ -22,7 +22,7 @@ const cancel = () => emit('close')
         text="Add some information about you. This will be visible when other players choose to play with you."
     >
         <BaseTextField
-            v-model="userStore.user.email"
+            v-model="userStore.user.data.email"
             type="text"
             label="Email"
             disabled

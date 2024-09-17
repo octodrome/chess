@@ -17,7 +17,7 @@ export const useHumanGameStore = defineStore('humanGame', {
     getters: {
         opponent(state) {
             const userStore = useUserStore()
-            return state.currentGame?.guest._id !== userStore.user?._id
+            return state.currentGame?.guest.ID !== userStore.user?.ID
                 ? state.currentGame.guest
                 : state.currentGame.creator
         },
@@ -42,7 +42,7 @@ export const useHumanGameStore = defineStore('humanGame', {
             return services.game.deleteGame(gameId).then(() => {
                 this.currentGame = null
                 this.gameList = this.gameList.filter(
-                    (game) => game._id !== gameId
+                    (game) => game.ID !== gameId
                 )
             })
         },
@@ -54,9 +54,10 @@ export const useHumanGameStore = defineStore('humanGame', {
             })
         },
 
-        async getUserGames(userId: string) {
-            return services.game.getUserGames(userId).then((gameList) => {
+        async getUserGames() {
+            return services.game.getUserGames().then((gameList) => {
                 this.gameList = gameList
+                console.log('this.gameList', this.gameList)
             })
         },
 

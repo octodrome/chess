@@ -12,7 +12,7 @@ export interface IHumanGame {
     moves: string[]
     createdAt: Date
     messages: IMessage[]
-    _id: string
+    ID: string
 }
 
 export interface ICreateHumanGameRequestParams {

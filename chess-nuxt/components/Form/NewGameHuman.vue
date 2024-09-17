@@ -13,14 +13,15 @@ const humanGameStore = useHumanGameStore()
 const boardStore = useBoardStore()
 const layoutStore = useLayoutStore()
 
-const opponents = await userStore.getAllOpponents(userStore.user?._id)
-const selectedOpponentId = ref(opponents[0]._id)
+const userId = userStore.user?.data.ID
+const opponents = await userStore.getAllOpponents(userId)
+const selectedOpponentId = ref(opponents[0].ID)
 
 const opponentsOptions = computed(() => {
     return opponents.map((user) => {
         return {
             label: user.email,
-            value: user._id,
+            value: user.ID,
         }
     })
 })
@@ -31,17 +32,19 @@ const start = () => {
     if (userStore.user && selectedOpponentId) {
         humanGameStore
             .createGame({
-                creator: userStore.user._id,
+                creator: userStore.user.data.ID,
                 guest: selectedOpponentId.value,
-                hasToPlay: userStore.user._id,
-                moves: [],
+                hasToPlay: userStore.user.data.ID,
+                moves: "",
             })
             .then((game) => {
+                console.log('hoooolooooo')
                 close()
                 boardStore.startNewGame('human')
-                navigateTo({ path: `/HumanGame/${game._id}` })
+                navigateTo({ path: `/HumanGame/${game.data.ID}` })
             })
-            .catch(() => {
+            .catch((e) => {
+                console.log(e)
                 layoutStore.openSnackbarError(
                     'Une erreur est survenue pendant la création de la partie'
                 )

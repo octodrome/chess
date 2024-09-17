@@ -49,7 +49,7 @@ onMounted(() => humanGameStore.getGame(route.params.id as string))
 
             <div
                 v-for="message in messages"
-                :key="message._id"
+                :key="message.ID"
                 class="message"
                 :class="{
                     'is-right': isUserMessage(message),
