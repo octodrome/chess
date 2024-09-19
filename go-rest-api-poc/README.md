@@ -51,6 +51,8 @@ sudo -u postgres psql -d <mydb>
 \conninfo           get connexion info
 \password <dbname>  change db pw
 \dt                 show tables
+\conninfo           show current db user, socket and port
+\du                 show users
 
 ### SQL queries
 

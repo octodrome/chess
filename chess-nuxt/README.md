@@ -2,7 +2,7 @@
 
 A Nuxt3/typescript app to play chess against computer or distant opponents.
 
--   github repository : https://github.com/colinfaivre/chess-front-nuxt3
+- github repository : https://github.com/colinfaivre/chess-front-nuxt3
 
 ## Install node with nvm
 https://nodejs.org/en/download/package-manager
@@ -15,8 +15,8 @@ https://nodejs.org/en/download/package-manager
 Make sure to install the dependencies:
 
 ```bash
-# pnpm
-pnpm
+# npm
+npm install
 ```
 
 ## Development Server
@@ -24,7 +24,7 @@ pnpm
 Start the development server on http://localhost:3000
 
 ```bash
-pnpm dev
+npm run dev
 ```
 
 ## Production
@@ -32,13 +32,13 @@ pnpm dev
 Build the application for production:
 
 ```bash
-pnpm build
+npm run build
 ```
 
 Locally preview production build:
 
 ```bash
-pnpm preview
+npm run preview
 ```
 
 Checkout the [deployment documentation](https://v3.nuxtjs.org/guide/deploy/presets) for more information.
