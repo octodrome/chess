@@ -24,7 +24,7 @@
   "homepage": "https://github.com/colinfaivre/chess-legal-moves",
   "scripts": {
     "build": "tsc",
-    "dev": "pnpm build --watch --preserveWatchOutput",
+    "dev": "npm build --watch --preserveWatchOutput",
     "test:unit": "jest",
     "lint": "eslint src --ext js,ts",
     "format": "prettier --ignore-path .gitignore --write \"**/*.+(js|ts|json)\""
