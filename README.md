@@ -11,7 +11,10 @@
 > - [chess legal moves](/chess-legal-moves) - Returns legal moves from current game position
 
 ## Setup and play
-- clone and install project: `pnpm` `node version` `VsCode extensions`
+- Install Docker
+https://docs.docker.com/desktop/install/linux/ubuntu/
+
+- clone and install project: `npm` `node version` `VsCode extensions`
 
 ## Workflow
 - [select an issue](https://github.com/orgs/octodrome/projects/3/views/1)

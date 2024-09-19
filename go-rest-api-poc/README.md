@@ -1,12 +1,14 @@
 # Go REST API
 
+## Install Go
+https://go.dev/doc/install
 
 ## Install PostgreSQL
 
 installation:
 ```bash
 sudo apt-get update
-sudo apt-get install postgresql postgresql-contrib
+sudo apt-get install postgresql
 ```
 
 ## Init database

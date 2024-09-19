@@ -1,10 +1,14 @@
 # Chess-front
 
-![alt text](./public/img/app_screenshot.png?raw=true)
-
 A Nuxt3/typescript app to play chess against computer or distant opponents.
 
 -   github repository : https://github.com/colinfaivre/chess-front-nuxt3
+
+## Install node with nvm
+https://nodejs.org/en/download/package-manager
+
+![alt text](./public/img/app_screenshot.png?raw=true)
+
 
 ## Setup
 
