@@ -1,8 +1,8 @@
 {
     "conventionalCommits.scopes": [
         "chess-legal-moves",
-        "chess-front",
-        "chess-back",
+        "front",
+        "back",
     ],
     "go.toolsEnvVars": {
         "GOOS": "js",
