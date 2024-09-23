@@ -3,7 +3,7 @@ import Engine from './engine'
 import Game from './api/Game'
 import SocketIO from './socket'
 import LocalGame from './localGame/LocalGame'
-import GoWasmPOC from './go-wasm-poc'
+// import GoWasmPOC from './go-wasm-poc'
 
 export default {
     user: new User(),
@@ -11,5 +11,5 @@ export default {
     game: new Game(),
     socket: new SocketIO(),
     localGame: new LocalGame(),
-    goWasmPOC: new GoWasmPOC(),
+    // goWasmPOC: new GoWasmPOC(),
 }
