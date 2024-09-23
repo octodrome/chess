@@ -1,0 +1,23 @@
+version: '3.1'
+
+services:
+  front:
+    image: # Optional if you use build
+    command: # Optional, replace the default CMD specified by the image
+    environment: # Optional, same as -e in docker run
+    volumes: # Optional, same as -v in docker run
+  back:
+    image:
+    command:
+    environment:
+    volumes:
+  database:
+    image:
+    command:
+    environment:
+    volumes:
+
+volumes:
+
+networks:
+
