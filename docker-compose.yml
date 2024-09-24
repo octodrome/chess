@@ -1,23 +1,51 @@
-version: '3.1'
-
 services:
   front:
-    image: # Optional if you use build
-    command: # Optional, replace the default CMD specified by the image
-    environment: # Optional, same as -e in docker run
-    volumes: # Optional, same as -v in docker run
+    build:
+      context: ./front
+    container_name: front
+    hostname: front
+    networks:
+      - mynet
+    ports:
+      - 3000:3000
+
   back:
-    image:
-    command:
+    env_file:
+      - ./back/.env
+    depends_on:
+      - db
+    build:
+      context: ./back
+    container_name: back
+    hostname: back
+    networks:
+      - mynet
+    ports:
+      - 8001:8001
     environment:
+      - DB_HOST
+      - DB_USER
+      - DB_PASSWORD
+      - DB_NAME
+      - DB_PORT
+      - TOKEN_TTL
+      - JWT_PRIVATE_KEY
+
+  db:
+    image: postgres:16-alpine
+    container_name: db
+    hostname: db
+    networks:
+      - mynet
+    ports:
+      - 5431:5432
     volumes:
-  database:
-    image:
-    command:
-    environment:
-    volumes:
+      - db:/var/lib/postgresql/data
 
 volumes:
+  db:
 
 networks:
+  mynet:
+    driver: bridge
 
