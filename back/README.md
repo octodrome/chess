@@ -21,9 +21,9 @@ sudo -u postgres psql
 ```
 
 check your `./.env` file and replace:
-- `<myuser>` with `DB_USER`
-- `<mydb>` with `DB_NAME`
-- `<mypassword>` with `DB_PASSWORD`
+- `<myuser>` with `POSTGRES_USER`
+- `<mydb>` with `POSTGRES_DB`
+- `<mypassword>` with `POSTGRES_PASSWORD`
 
 ```sql
 CREATE USER <myuser> WITH PASSWORD '<mypassword>';

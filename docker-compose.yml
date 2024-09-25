@@ -1,3 +1,6 @@
+# Don't use environment variables to pass sensitive information. Use secrets instead:
+# https://docs.docker.com/compose/how-tos/use-secrets/
+
 services:
   front:
     build:
@@ -10,10 +13,10 @@ services:
       - 3000:3000
 
   back:
-    env_file:
-      - ./back/.env
     depends_on:
-      - db
+      db:
+        condition: service_healthy
+        restart: true
     build:
       context: ./back
     container_name: back
@@ -23,24 +26,35 @@ services:
     ports:
       - 8001:8001
     environment:
-      - DB_HOST
-      - DB_USER
-      - DB_PASSWORD
-      - DB_NAME
-      - DB_PORT
-      - TOKEN_TTL
-      - JWT_PRIVATE_KEY
+      - DB_HOST=${DB_HOST}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+      - DB_PORT=${DB_PORT}
+      - TOKEN_TTL=${TOKEN_TTL}
+      - JWT_PRIVATE_KEY=${JWT_PRIVATE_KEY}
 
   db:
     image: postgres:16-alpine
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 10s
+      retries: 5
+      start_period: 30s
+      timeout: 10s
     container_name: db
     hostname: db
     networks:
       - mynet
     ports:
       - 5431:5432
+      - 8080:8080
     volumes:
       - db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
 
 volumes:
   db:
@@ -48,4 +62,3 @@ volumes:
 networks:
   mynet:
     driver: bridge
-
