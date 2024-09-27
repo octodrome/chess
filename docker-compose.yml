@@ -5,11 +5,13 @@
 # @TODO use docker compose in production:
 # https://docs.docker.com/compose/how-tos/production/
 # @TODO see if networks, container names and host names can be removed, ports mapping?
+# @TODO edit test and prod docker-compose files
 
 services:
   front:
     build:
       context: ./front
+      target: dev
     develop:
       watch:
         - action: sync
@@ -36,6 +38,7 @@ services:
         restart: true
     build:
       context: ./back
+      target: dev
     develop:
       watch:
         - action: rebuild
