@@ -1,22 +1,31 @@
-# @TODO same dockerfile for development and production: --target=dev / --target=prod
-# https://dev.to/massivebrains/use-same-dockerfile-for-dev-production-1l7f
-# @TODO dev and prod inspiration: https://www.horsfallnathan.com/blog/golang-docker-setup-for-development-and-production-with-multistage-builds
-# @TODO could use google distroless in prod https://github.com/GoogleContainerTools/distroless
+################################
+#### IMAGE DOCUMENTATION 🐳 ####
+################################
+# - dev and prod inspiration: https://www.horsfallnathan.com/blog/golang-docker-setup-for-development-and-production-with-multistage-builds
+# - Google distroless in prod https://github.com/GoogleContainerTools/distroless
 
-#### IMAGE_DOCUMENTATION 🐳
-# https://hub.docker.com/_/golang
-# https://docs.docker.com/guides/language/golang/build-images/
-# $ docker build --tag <image_tag> .
-# $ docker container run <image_tag>
+##########################
+### Test dev container ###
+# $ docker build --target dev -t chess_back_dev ./back
+# $ docker container run -p 8080:8080 chess_back_dev
 
-FROM golang:1.23-alpine AS dev
+##########################
+### Test prod container ##
+# $ docker build --target prod -t chess_back_prod ./back
+# $ docker container run -p 8080:8080 chess_back_prod
 
+FROM golang:1.23-alpine AS base
+RUN go install github.com/air-verse/air@latest
 WORKDIR /app
-# pre-copy/cache go.mod for pre-downloading dependencies and only redownloading them in subsequent builds if they change
 COPY go.mod go.sum ./
 RUN go mod download && go mod verify
 COPY . .
-RUN go build -o main .
 EXPOSE 8080
+RUN go build -o main .
 
+FROM base AS dev
+CMD ["air"]
+
+FROM gcr.io/distroless/static-debian11 AS prod
+COPY --from=base /app /
 CMD ["./main"]
