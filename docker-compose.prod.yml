@@ -3,9 +3,7 @@
 
 services:
   front:
-    build:
-      context: ./front
-      target: prod
+    image: colinfaivre/chess_front_prod
     container_name: front
     hostname: front
     networks:
@@ -18,9 +16,7 @@ services:
       db:
         condition: service_healthy
         restart: true
-    build:
-      context: ./back
-      target: prod
+    image: colinfaivre/chess_back_prod
     container_name: back
     hostname: back
     networks:
