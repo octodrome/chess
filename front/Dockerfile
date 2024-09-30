@@ -5,13 +5,13 @@
 
 ##########################
 ### Test dev container ###
-# $ docker build --target dev -t chess_front_dev ./front
+# $ docker image build --target dev -t chess_front_dev ./front
 # $ docker container run -p 3000:3000 chess_front_dev
 ##########################
 
 ##########################
 ### Test prod container ##
-# $ docker build --target prod -t chess_front_prod ./front
+# $ docker image build --target prod -t chess_front_prod ./front
 # $ docker container run -p 80:3000 chess_front_prod
 # Access inside to see what is wrong:
 # $ docker container run -it -p 80:3000 chess_front_prod sh

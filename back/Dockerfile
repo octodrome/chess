@@ -6,12 +6,12 @@
 
 ##########################
 ### Test dev container ###
-# $ docker build --target dev -t chess_back_dev ./back
+# $ docker image build --target dev -t chess_back_dev ./back
 # $ docker container run -p 8080:8080 chess_back_dev
 
 ##########################
 ### Test prod container ##
-# $ docker build --target prod -t chess_back_prod ./back
+# $ docker image build --target prod -t chess_back_prod ./back
 # $ docker container run -p 8080:8080 chess_back_prod
 
 FROM golang:1.23-alpine AS base
