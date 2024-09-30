@@ -1,0 +1,66 @@
+# @TODO use docker compose in production:
+# https://docs.docker.com/compose/how-tos/production/
+
+services:
+  front:
+    build:
+      context: ./front
+      target: prod
+    container_name: front
+    hostname: front
+    networks:
+      - mynet
+    ports:
+      - 80:3000
+
+  back:
+    depends_on:
+      db:
+        condition: service_healthy
+        restart: true
+    build:
+      context: ./back
+      target: prod
+    container_name: back
+    hostname: back
+    networks:
+      - mynet
+    ports:
+      - 8001:8001
+    environment:
+      - DB_HOST=${DB_HOST}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+      - DB_PORT=${DB_PORT}
+      - TOKEN_TTL=${TOKEN_TTL}
+      - JWT_PRIVATE_KEY=${JWT_PRIVATE_KEY}
+
+  db:
+    image: postgres:16-alpine
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 10s
+      retries: 5
+      start_period: 30s
+      timeout: 10s
+    container_name: db
+    hostname: db
+    networks:
+      - mynet
+    ports:
+      - 5431:5432
+      - 8080:8080
+    volumes:
+      - db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+
+volumes:
+  db:
+
+networks:
+  mynet:
+    driver: bridge

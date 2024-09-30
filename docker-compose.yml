@@ -2,10 +2,7 @@
 # https://docs.docker.com/compose/how-tos/use-secrets/
 # @TODO how to access db from command line?
 # @TODO db port?
-# @TODO use docker compose in production:
-# https://docs.docker.com/compose/how-tos/production/
 # @TODO see if networks, container names and host names can be removed, ports mapping?
-# @TODO edit test and prod docker-compose files
 
 services:
   front:
