@@ -1,5 +1,9 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+    experimental: {
+        // fix pieces images not showing on prod 
+        appManifest: false
+    },
     modules: [
         [
             '@pinia/nuxt',
