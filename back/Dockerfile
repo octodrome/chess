@@ -20,12 +20,13 @@ WORKDIR /app
 COPY go.mod go.sum ./
 RUN go mod download && go mod verify
 COPY . .
-EXPOSE 8080
 RUN go build -o main .
 
 FROM base AS dev
+EXPOSE 8001
 CMD ["air"]
 
 FROM gcr.io/distroless/static-debian11 AS prod
 COPY --from=base /app /
+EXPOSE 8001
 CMD ["./main"]
