@@ -1,5 +1,7 @@
-# @TODO use docker compose in production:
-# https://docs.docker.com/compose/how-tos/production/
+### Run in production: ###
+# $ ssh root@165.22.119.201
+# $ docker compose -f docker-compose.prod.yml up --detach
+###
 
 services:
   front:
