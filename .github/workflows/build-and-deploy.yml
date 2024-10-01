@@ -1,4 +1,5 @@
 # from here: https://faun.pub/full-ci-cd-with-docker-github-actions-digitalocean-droplets-container-registry-db2938db8246
+# @TODO chage GITHUB_SHA with date and time
 
 name: build-and-deploy
 
@@ -7,9 +8,9 @@ on:
     branches: [ main ]
 
 env:
-  REGISTRY: "your-digital-ocean-registry"
-  FRONT_IMAGE_NAME: "chess_front_img"
-  BACK_IMAGE_NAME: "chess_back_img"
+  REGISTRY: "colinfaivre"
+  FRONT_IMAGE_NAME: "chess_front_prod"
+  BACK_IMAGE_NAME: "chess_back_prod"
 
 jobs:
   build_and_push_to_registry:
