@@ -11,8 +11,9 @@
 
 ##########################
 ### Test prod container ##
-# $ docker image build --target prod -t chess_back_prod ./back
+# $ docker image build --target prod -t colinfaivre/chess_back_prod ./back
 # $ docker container run -p 8080:8080 chess_back_prod
+# $ docker image push colinfaivre/chess_back_prod
 
 FROM golang:1.23-alpine AS base
 RUN go install github.com/air-verse/air@latest

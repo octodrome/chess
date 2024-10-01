@@ -1,5 +1,11 @@
 ### Run in production: ###
 # $ ssh root@165.22.119.201
+# $ cd chess_app/
+# $ docker compose -f docker-compose.prod.yml up --detach
+# $ docker compose -f docker-compose.prod.yml down
+# $ docker pull colinfaivre/chess_front_prod:latest
+# $ docker pull colinfaivre/chess_back_prod:latest
+# $ docker compose -f docker-compose.prod.yml build
 # $ docker compose -f docker-compose.prod.yml up --detach
 ###
 

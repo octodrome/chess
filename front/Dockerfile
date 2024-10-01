@@ -2,6 +2,7 @@
 #### IMAGE DOCUMENTATION 🐳 ####
 ################################
 # - Multi-stage build: https://docs.docker.com/build/building/multi-stage/
+# - @TODO try minimizing production image size: https://dev.to/sliplane/minimizing-nuxt-3-docker-images-5d5g
 
 ##########################
 ### Test dev container ###
@@ -11,10 +12,11 @@
 
 ##########################
 ### Test prod container ##
-# $ docker image build --target prod -t chess_front_prod ./front
+# $ docker image build --target prod -t colinfaivre/chess_front_prod ./front
 # $ docker container run -p 80:3000 chess_front_prod
 # Access inside to see what is wrong:
 # $ docker container run -it -p 80:3000 chess_front_prod sh
+# $ docker image push colinfaivre/chess_front_prod
 ##########################
 
 FROM node:20-alpine AS base
