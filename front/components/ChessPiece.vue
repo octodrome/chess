@@ -21,7 +21,7 @@ const boardStore = useBoardStore()
         >
             <img
                 class="piece"
-                :src="`/_nuxt/public/img/pieces/${props.type}_${props.color}.svg`"
+                :src="`/img/pieces/${props.type}_${props.color}.svg`"
             />
         </div>
     </transition>
