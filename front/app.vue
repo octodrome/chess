@@ -5,7 +5,7 @@ import { useUserStore } from './stores/userStore'
 import { useHumanGameStore } from './stores/humanGameStore'
 
 useHead({
-    title: 'Nuxt chess',
+    title: 'Chess',
 })
 
 const layoutStore = useLayoutStore()

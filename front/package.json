@@ -1,5 +1,5 @@
 {
-    "name": "nuxt-chess",
+    "name": "chess",
     "private": true,
     "scripts": {
         "build": "nuxt build",
