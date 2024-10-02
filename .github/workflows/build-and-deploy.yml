@@ -1,6 +1,3 @@
-# from here: https://faun.pub/full-ci-cd-with-docker-github-actions-digitalocean-droplets-container-registry-db2938db8246
-# @TODO chage GITHUB_SHA with date and time
-
 name: build-and-deploy
 
 on:
@@ -57,3 +54,4 @@ jobs:
             docker compose -f docker-compose.prod.yml down
             # Run docker compose with the latest prod images
             docker compose -f docker-compose.prod.yml up --build --detach
+            docker image prune -f
