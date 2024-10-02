@@ -12,7 +12,7 @@ const layoutStore = useLayoutStore()
     <BaseDrawer>
         <ul>
             <NuxtLink to="/">
-                <BaseDrawerItem icon="chess-knight" content="Chess" />
+                <BaseDrawerItem icon="chess-knight" content="ChessChess" />
             </NuxtLink>
 
             <BaseDrawerSeparator />

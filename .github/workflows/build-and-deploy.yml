@@ -25,19 +25,10 @@ jobs:
       - name: Build back image
         run: docker build -t $(echo $REGISTRY)/$(echo $BACK_IMAGE_NAME):$(echo $GITHUB_SHA | head -c7) --target=prod ./back
 
-      - name: Install doctl
-        uses: digitalocean/action-doctl@v2
-        with:
-          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
-
-      - name: Log in to DigitalOcean Container Registry with short-lived credentials
-        run: doctl registry login --expiry-seconds 600
+      - name: Login to DockerHub Registry
+        run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
       
-      - name: Remove all old front images
-        run: if [ ! -z "$(doctl registry repository list | grep "$(echo $FRONT_IMAGE_NAME)")" ]; then doctl registry repository delete-manifest $(echo $FRONT_IMAGE_NAME) $(doctl registry repository list-tags $(echo $FRONT_IMAGE_NAME) | grep -o "sha.*") --force; else echo "No repository"; fi
-
-      - name: Remove all old back images
-        run: if [ ! -z "$(doctl registry repository list | grep "$(echo $BACK_IMAGE_NAME)")" ]; then doctl registry repository delete-manifest $(echo $BACK_IMAGE_NAME) $(doctl registry repository list-tags $(echo $BACK_IMAGE_NAME) | grep -o "sha.*") --force; else echo "No repository"; fi
+      # - name: Remove all old front and back images
       
       - name: Push front image to DigitalOcean Container Registry
         run: docker push $(echo $REGISTRY)/$(echo $FRONT_IMAGE_NAME):$(echo $GITHUB_SHA | head -c7)
@@ -59,22 +50,11 @@ jobs:
           script: |
             # Login to registry
             docker login -u ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }} -p ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }} registry.digitalocean.com
-            
-            ##
-            ###
-            #### @TODO use docker-compose.prod.yml with registry front and back images
-            ###
-            ##
-
-            ##### Instead of following
-            ####
-            ###
-            # Stop running container
-            docker stop $(echo $IMAGE_NAME)
-            # Remove old container
-            docker rm $(echo $IMAGE_NAME)
-            # Run a new container from a new image
-            docker run -d \
-            --restart always \
-            --name $(echo $IMAGE_NAME) \
-            $(echo $REGISTRY)/$(echo $IMAGE_NAME):$(echo $GITHUB_SHA | head -c7)
+            # Pull latest front and back prod images from dockerhub
+            docker pull $(echo $REGISTRY)/$(echo $FRONT_IMAGE_NAME):$(echo $GITHUB_SHA | head -c7)
+            docker pull $(echo $REGISTRY)/$(echo $BACK_IMAGE_NAME):$(echo $GITHUB_SHA | head -c7)
+            cd chess_app
+            # Stop the running docker compose
+            docker compose -f docker-compose.prod.yml down
+            # Run docker compose with the latest prod images
+            docker compose -f docker-compose.prod.yml up --build --detach
