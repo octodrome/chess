@@ -30,10 +30,10 @@ jobs:
       
       # - name: Remove all old front and back images
       
-      - name: Push front image to DigitalOcean Container Registry
+      - name: Push front image to Dockerhub Container Registry
         run: docker push $(echo $REGISTRY)/$(echo $FRONT_IMAGE_NAME):$(echo $GITHUB_SHA | head -c7)
       
-      - name: Push back image to DigitalOcean Container Registry
+      - name: Push back image to Dockerhub Container Registry
         run: docker push $(echo $REGISTRY)/$(echo $BACK_IMAGE_NAME):$(echo $GITHUB_SHA | head -c7)
 
   deploy:
@@ -48,8 +48,8 @@ jobs:
           key: ${{ secrets.DROPLET_SSH_KEY }}
           envs: FRONT_IMAGE_NAME,BACK_IMAGE_NAME,REGISTRY,{{ secrets.DIGITALOCEAN_ACCESS_TOKEN }},GITHUB_SHA
           script: |
-            # Login to registry
-            docker login -u ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }} -p ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }} registry.digitalocean.com
+            # Login to dockerhub registry
+            echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
             # Pull latest front and back prod images from dockerhub
             docker pull $(echo $REGISTRY)/$(echo $FRONT_IMAGE_NAME):$(echo $GITHUB_SHA | head -c7)
             docker pull $(echo $REGISTRY)/$(echo $BACK_IMAGE_NAME):$(echo $GITHUB_SHA | head -c7)
