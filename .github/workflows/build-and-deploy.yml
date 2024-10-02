@@ -26,7 +26,6 @@ jobs:
       - name: Build and push front image
         uses: docker/build-push-action@v6
         context: front
-        file: front/Dockerfile
         target: prod
         with:
           push: true
@@ -36,8 +35,7 @@ jobs:
       
       - name: Build and push back image
         uses: docker/build-push-action@v6
-        context: front
-        file: front/Dockerfile
+        context: back
         target: prod
         with:
           push: true
