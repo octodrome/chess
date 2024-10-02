@@ -25,9 +25,9 @@ jobs:
 
       - name: Build and push front image
         uses: docker/build-push-action@v6
-        context: front
-        target: prod
         with:
+          context: "{{defaultContext}}:front"
+          target: prod
           push: true
           tags: $(echo $REGISTRY)/$(echo $FRONT_IMAGE_NAME)
           cache-from: type=gha
@@ -35,9 +35,9 @@ jobs:
       
       - name: Build and push back image
         uses: docker/build-push-action@v6
-        context: back
-        target: prod
         with:
+          context: "{{defaultContext}}:back"
+          target: prod
           push: true
           tags: $(echo $REGISTRY)/$(echo $BACK_IMAGE_NAME)
           cache-from: type=gha
