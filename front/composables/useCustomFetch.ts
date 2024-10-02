@@ -5,11 +5,11 @@ export function useCustomFetch<T>(
     url: string,
     options: UseFetchOptions<T> = {}
 ) {
+    const config = useRuntimeConfig()
     const userAuth = useCookie('token')
-    // const config = useRuntimeConfig()
 
     const defaults: UseFetchOptions<T> = {
-        baseURL: `http://localhost:8001/`,
+        baseURL: config.public.restApiUrl as string,
         key: url,
 
         // set user token if connected
