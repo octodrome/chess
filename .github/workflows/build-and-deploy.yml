@@ -29,7 +29,7 @@ jobs:
           context: "{{defaultContext}}:front"
           target: prod
           push: true
-          tags: $(echo $REGISTRY)/$(echo $FRONT_IMAGE_NAME)
+          tags: colinfaivre/chess_front_prod
           cache-from: type=gha
           cache-to: type=gha,mode=max
       
@@ -39,7 +39,7 @@ jobs:
           context: "{{defaultContext}}:back"
           target: prod
           push: true
-          tags: $(echo $REGISTRY)/$(echo $BACK_IMAGE_NAME)
+          tags: colinfaivre/chess_back_prod
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
