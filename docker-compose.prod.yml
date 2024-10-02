@@ -39,6 +39,7 @@ services:
       - DB_PORT=${DB_PORT}
       - TOKEN_TTL=${TOKEN_TTL}
       - JWT_PRIVATE_KEY=${JWT_PRIVATE_KEY}
+      - GIN_MODE=release
 
   db:
     image: postgres:16-alpine
