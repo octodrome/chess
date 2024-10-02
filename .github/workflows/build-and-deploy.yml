@@ -10,7 +10,7 @@ env:
   BACK_IMAGE_NAME: "chess_back_prod"
 
 jobs:
-  build-images:
+  build-push-images:
     name: Build and push images
     runs-on: ubuntu-latest
     steps:
@@ -23,7 +23,7 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
-      - name: Build and push front image
+      - name: Build and push front image to Docker Hub
         uses: docker/build-push-action@v6
         with:
           context: "{{defaultContext}}:front"
@@ -33,7 +33,7 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
       
-      - name: Build and push back image
+      - name: Build and push back image to Docker Hub
         uses: docker/build-push-action@v6
         with:
           context: "{{defaultContext}}:back"
@@ -45,7 +45,7 @@ jobs:
 
   deploy:
     runs-on: ubuntu-latest
-    needs: build-images
+    needs: build-push-images
     
     steps:
       - name: Deploy to Digital Ocean droplet via SSH action
