@@ -20,20 +20,19 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Build front image
-        run: docker build -t $(echo $REGISTRY)/$(echo $FRONT_IMAGE_NAME):$(echo $GITHUB_SHA | head -c7) --target=prod ./front
+        run: docker build -t $(echo $REGISTRY)/$(echo $FRONT_IMAGE_NAME) --target=prod ./front
 
       - name: Build back image
-        run: docker build -t $(echo $REGISTRY)/$(echo $BACK_IMAGE_NAME):$(echo $GITHUB_SHA | head -c7) --target=prod ./back
+        run: docker build -t $(echo $REGISTRY)/$(echo $BACK_IMAGE_NAME) --target=prod ./back
 
       - name: Login to DockerHub Registry
         run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
-      # - name: Remove all old front and back images
       
       - name: Push front image to Dockerhub Container Registry
-        run: docker push $(echo $REGISTRY)/$(echo $FRONT_IMAGE_NAME):$(echo $GITHUB_SHA | head -c7)
+        run: docker push $(echo $REGISTRY)/$(echo $FRONT_IMAGE_NAME)
       
       - name: Push back image to Dockerhub Container Registry
-        run: docker push $(echo $REGISTRY)/$(echo $BACK_IMAGE_NAME):$(echo $GITHUB_SHA | head -c7)
+        run: docker push $(echo $REGISTRY)/$(echo $BACK_IMAGE_NAME)
 
   deploy:
     runs-on: ubuntu-latest
@@ -51,8 +50,8 @@ jobs:
             # Login to dockerhub registry
             echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
             # Pull latest front and back prod images from dockerhub
-            docker pull $(echo $REGISTRY)/$(echo $FRONT_IMAGE_NAME):$(echo $GITHUB_SHA | head -c7)
-            docker pull $(echo $REGISTRY)/$(echo $BACK_IMAGE_NAME):$(echo $GITHUB_SHA | head -c7)
+            docker pull $(echo $REGISTRY)/$(echo $FRONT_IMAGE_NAME)
+            docker pull $(echo $REGISTRY)/$(echo $BACK_IMAGE_NAME)
             cd chess_app
             # Stop the running docker compose
             docker compose -f docker-compose.prod.yml down
