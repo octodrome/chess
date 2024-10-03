@@ -2,7 +2,9 @@ name: Build and deploy
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main
+  pull_request:
 
 env:
   REGISTRY: "colinfaivre"
@@ -23,7 +25,7 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
-      - name: Build front and export to Docker
+      - name: Build front image and export to Docker
         uses: docker/build-push-action@v6
         with:
           context: "{{defaultContext}}:front"
@@ -43,7 +45,7 @@ jobs:
         with:
           context: "{{defaultContext}}:front"
           target: prod
-          push: true
+          push: ${{ github.event_name != 'pull_request' }}
           tags: colinfaivre/chess_front_prod
           cache-from: type=gha
           cache-to: type=gha,mode=max
@@ -53,12 +55,13 @@ jobs:
         with:
           context: "{{defaultContext}}:back"
           target: prod
-          push: true
+          push: ${{ github.event_name != 'pull_request' }}
           tags: colinfaivre/chess_back_prod
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
   deploy:
+    if: ${{ github.event_name != 'pull_request' }}
     runs-on: ubuntu-latest
     needs: build-push-images
     
@@ -69,7 +72,7 @@ jobs:
           host: ${{ secrets.DROPLET_HOST_IP }}
           username: ${{ secrets.DROPLET_USERNAME }}
           key: ${{ secrets.DROPLET_SSH_KEY }}
-          envs: FRONT_IMAGE_NAME,BACK_IMAGE_NAME,REGISTRY,GITHUB_SHA
+          envs: FRONT_IMAGE_NAME,BACK_IMAGE_NAME,REGISTRY
           script: |
             # Login to dockerhub registry
             echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
