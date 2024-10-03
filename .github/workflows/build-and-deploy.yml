@@ -25,7 +25,7 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
-      - name: Build front image and export to Docker
+      - name: Build front image and export to Docker Engine
         uses: docker/build-push-action@v6
         with:
           context: "{{defaultContext}}:front"
@@ -39,6 +39,21 @@ jobs:
       - name: Check front format/linting/unit-testing in Docker
         run: |
           docker run --rm ${{ github.run_id }} echo "npm run format:check && npm run lint && npm run test:unit"
+
+      - name: Build back image and export to Docker
+        uses: docker/build-push-action@v6
+        with:
+          context: "{{defaultContext}}:back"
+          target: dev
+          push: false
+          load: true # Export to Docker Engine rather than pushing to a registry
+          tags: ${{ github.run_id }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Check back unit-testing in Docker Engine
+        run: |
+          docker run --rm ${{ github.run_id }} echo "ginkgo -r"
 
       - name: Build and push front image to Docker Hub
         uses: docker/build-push-action@v6

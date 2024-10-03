@@ -16,7 +16,6 @@
 # $ docker image push colinfaivre/chess_back_prod
 
 FROM golang:1.23-alpine AS base
-RUN go install github.com/air-verse/air@latest
 WORKDIR /app
 COPY go.mod go.sum ./
 RUN go mod download && go mod verify
@@ -24,8 +23,9 @@ COPY . .
 RUN go build -o main .
 
 FROM base AS dev
+RUN go install github.com/onsi/ginkgo/ginkgo
 EXPOSE 8001
-CMD ["air"]
+CMD ["./main"]
 
 FROM gcr.io/distroless/static-debian11 AS prod
 COPY --from=base /app /
