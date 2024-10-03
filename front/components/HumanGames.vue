@@ -11,8 +11,8 @@ const userStore = useUserStore()
 const boardStore = useBoardStore()
 
 const opponentEmail = (game: ApiGame) => {
-    console.log("userStore.user", userStore.user)
-    console.log("game", game)
+    console.log('userStore.user', userStore.user)
+    console.log('game', game)
 
     if (userStore.user) {
         return game.GuestID === userStore.user.data.ID

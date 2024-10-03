@@ -1,8 +1,8 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
     experimental: {
-        // fix pieces images not showing on prod 
-        appManifest: false
+        // fix pieces images not showing on prod
+        appManifest: false,
     },
     modules: [
         [
@@ -31,7 +31,7 @@ export default defineNuxtConfig({
         jwtSecret: process.env.JWT_SECRET,
         public: {
             restApiUrl: process.env.REST_API_URL,
-        }
+        },
     },
     serverHandlers: [
         {

@@ -35,7 +35,7 @@ const start = () => {
                 creator: userStore.user.data.ID,
                 guest: selectedOpponentId.value,
                 hasToPlay: userStore.user.data.ID,
-                moves: "",
+                moves: '',
             })
             .then((game) => {
                 console.log('hoooolooooo')
