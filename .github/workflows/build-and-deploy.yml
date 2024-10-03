@@ -26,15 +26,14 @@ jobs:
       - name: Build front and export to Docker
         uses: docker/build-push-action@v6
         with:
+          context: "{{defaultContext}}:front"
+          target: prod
           push: false
           load: true # Export to Docker Engine rather than pushing to a registry
           tags: ${{ github.run_id }}
-          target: prod
           cache-from: type=gha
           cache-to: type=gha,mode=max
-          platforms: linux/amd64
 
-        # for simple tests (npm test, etc.) just run a local image in docker
       - name: Check format/linting/unit-testing in Docker
         run: |
           docker run --rm ${{ github.run_id }} echo "npm run format:check"
