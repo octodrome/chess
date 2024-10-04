@@ -3,6 +3,9 @@
 ################################
 # - dev and prod inspiration: https://www.horsfallnathan.com/blog/golang-docker-setup-for-development-and-production-with-multistage-builds
 # - Google distroless in prod https://github.com/GoogleContainerTools/distroless
+# @TODO Security: By default docker uses root to run container
+#                 Images vendors typically set a user to be used,
+#                 it is your job to use it in production ex: USER: node 
 
 ##########################
 ### Test dev container ###

@@ -3,6 +3,9 @@
 ################################
 # - Multi-stage build: https://docs.docker.com/build/building/multi-stage/
 # - @TODO try minimizing production image size: https://dev.to/sliplane/minimizing-nuxt-3-docker-images-5d5g
+# @TODO Security: By default docker uses root to run container
+#                 Images vendors typically set a user to be used,
+#                 it is your job to use it in production ex: USER: node 
 
 ##########################
 ### Test dev container ###
