@@ -16,6 +16,17 @@ type User struct {
 	Games    []Game
 }
 
+type UserRepository interface {
+	FindAllUsers() ([]User, error)
+	FindUserById(id string) (User, error)
+}
+
+type userRepoImpl struct{}
+
+func NewUserRepository() UserRepository {
+	return &userRepoImpl{}
+}
+
 func (user *User) Save() (*User, error) {
 	err := database.Database.Create(&user).Error
 	if err != nil {
@@ -47,7 +58,7 @@ func FindUserByEmail(email string) (User, error) {
 	return user, nil
 }
 
-func FindUserById(id string) (User, error) {
+func (r *userRepoImpl) FindUserById(id string) (User, error) {
 	var user User
 	err := database.Database.Preload("Games").Where("ID=?", id).Find(&user).Error
 	if err != nil {
@@ -56,7 +67,7 @@ func FindUserById(id string) (User, error) {
 	return user, nil
 }
 
-func FindAllUsers() ([]User, error) {
+func (r *userRepoImpl) FindAllUsers() ([]User, error) {
 	var userList []User
 	err := database.Database.Find(&userList).Error
 	if err != nil {

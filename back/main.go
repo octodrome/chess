@@ -57,8 +57,13 @@ func serveApplication() {
 
 	protectedRoutes := router.Group("/api")
 	protectedRoutes.Use(middleware.JWTAuthMiddleware())
-	protectedRoutes.GET("/user", controller.GetAllUsers)
-	protectedRoutes.GET("/user/:id", controller.GetUserById)
+	userRepo := model.NewUserRepository()
+	protectedRoutes.GET("/user", func(c *gin.Context) {
+		controller.GetAllUsers(c, userRepo)
+	})
+	protectedRoutes.GET("/user/:id", func(c *gin.Context) {
+		controller.GetUserById(c, userRepo)
+	})
 	protectedRoutes.POST("/game", controller.AddGame)
 	protectedRoutes.GET("/game", controller.GetAllUserGames)
 	protectedRoutes.GET("/game/:id", controller.GetGameById)

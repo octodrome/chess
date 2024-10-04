@@ -14,6 +14,7 @@ import (
 )
 
 var privateKey = []byte(os.Getenv("JWT_PRIVATE_KEY"))
+var userRepo = model.NewUserRepository()
 
 func GenerateJWT(user model.User) (string, error) {
 	tokenTTL, _ := strconv.Atoi(os.Getenv("TOKEN_TTL"))
@@ -46,7 +47,7 @@ func CurrentUser(context *gin.Context) (model.User, error) {
 	claims, _ := token.Claims.(jwt.MapClaims)
 	userId := int(claims["id"].(float64))
 
-	user, err := model.FindUserById(strconv.Itoa(userId))
+	user, err := userRepo.FindUserById(strconv.Itoa(userId))
 	if err != nil {
 		return model.User{}, err
 	}
