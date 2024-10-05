@@ -1,23 +1,25 @@
-# Chess
-> `Nuxt3` `TS` `tailwind` `pinia` `axios` `vue-router` `vue-i18n` `jest` `mongoDB` `sockets`<br>
-> `TS` `jest`<br>
->
-> Chess app to play against computer or connected users.<br>
-> Stockfish web assembly chess engine running on a web worker.<br>
-> Web sockets to play and chat with another connected user.<br>
-> Using the latest tools from the vue.js ecosystem on the frontend.<br>
-> Building a Typescript library to generate possible moves with the help of chess-programming-wiki<br>
-> - [chess front](/chess-nuxt) - Play vs computer
-> - [chess legal moves](/chess-legal-moves) - Returns legal moves from current game position
+# Chess Web App
+
+## Overview
+Welcome to the Chess Web App! This project began as a proof of concept, driven by a desire to explore the full development pipeline, from frontend to backend and DevOps. The goal was to create a fully functional online chess game, blending real-world gameplay mechanics with modern web technologies.
+
+This web app allows users to seamlessly play chess directly in their browser, either against an AI opponent or with friends in real-time.
+
+Feel free to explore the app while I am building it: http://165.22.119.201/
+
+## Tech Stack
+- [front](/front): TS - Nuxt
+- [back](/back): Go - Gin
+- postgresql
 
 ## Setup and play
 - Install Docker
 https://docs.docker.com/desktop/install/linux/ubuntu/
+- Clone the project
+- Use [docker-compose.yml](/docker-compose.yml) to run the project locally 
 
-- clone and install project: `npm` `node version` `VsCode extensions`
-
-## Workflow
-- [select an issue](https://github.com/orgs/octodrome/projects/3/views/1)
+## Contribution Workflow
+- [select an issue](https://github.com/orgs/octodrome/projects/3)
 - open a pull request : `pr template`
 - [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/)
 - [github flow](https://docs.github.com/en/get-started/using-github/github-flow)
