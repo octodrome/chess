@@ -18,8 +18,6 @@ services:
       - mynet
     ports:
       - 80:3000
-    environment:
-      - FRONT_URL=http://165.22.119.201
 
   back:
     depends_on:
@@ -42,6 +40,7 @@ services:
       - TOKEN_TTL=${TOKEN_TTL}
       - JWT_PRIVATE_KEY=${JWT_PRIVATE_KEY}
       - GIN_MODE=release
+      - FRONT_URL=http://165.22.119.201
 
   db:
     image: postgres:16-alpine
