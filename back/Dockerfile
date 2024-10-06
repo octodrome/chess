@@ -31,6 +31,7 @@ EXPOSE 8001
 CMD ["./main"]
 
 FROM gcr.io/distroless/static-debian11 AS prod
+ENV FRONT_URL=http://165.22.119.201/
 COPY --from=base /app /
 EXPOSE 8001
 CMD ["./main"]
