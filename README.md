@@ -1,23 +1,45 @@
-# Chess
-> `Nuxt3` `TS` `tailwind` `pinia` `axios` `vue-router` `vue-i18n` `jest` `mongoDB` `sockets`<br>
-> `TS` `jest`<br>
->
-> Chess app to play against computer or connected users.<br>
-> Stockfish web assembly chess engine running on a web worker.<br>
-> Web sockets to play and chat with another connected user.<br>
-> Using the latest tools from the vue.js ecosystem on the frontend.<br>
-> Building a Typescript library to generate possible moves with the help of chess-programming-wiki<br>
-> - [chess front](/chess-nuxt) - Play vs computer
-> - [chess legal moves](/chess-legal-moves) - Returns legal moves from current game position
+# Chess Web App
 
-## Setup and play
-- Install Docker
-https://docs.docker.com/desktop/install/linux/ubuntu/
+## Overview
+Welcome to the **Chess Web App**! This project started as a **proof of concept**, aimed at exploring the entire development pipeline—from frontend to backend and DevOps. The goal is to build a fully functional online chess game, combining real-world chess mechanics with modern web technologies.
 
-- clone and install project: `npm` `node version` `VsCode extensions`
+Users can seamlessly play chess directly in their browser, either against an AI opponent or in real-time with friends.
 
-## Workflow
-- [select an issue](https://github.com/orgs/octodrome/projects/3/views/1)
-- open a pull request : `pr template`
-- [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/)
-- [github flow](https://docs.github.com/en/get-started/using-github/github-flow)
+Feel free to explore the app as it evolves:  
+[http://165.22.119.201/](http://165.22.119.201/)
+
+## Tech Stack
+- [**Front**](/front): [Typescript](https://www.typescriptlang.org/) - [Nuxt](https://nuxt.com/)
+- [**Back**](/back): [Go](https://go.dev/) - [Gin](https://gin-gonic.com/)
+- **Database**: [PostgreSQL](https://www.postgresql.org/)
+
+## Setup and Play
+1. **Install Docker**:  
+   Follow the installation guide for your operating system:  
+   https://docs.docker.com/desktop/install/linux/ubuntu/
+   
+2. **Clone the project**:
+   ```bash
+   git clone https://github.com/username/chess-web-app.git
+   cd chess-web-app
+   ```
+
+3. **Run the project locally**:  
+   Use the provided [docker-compose.yml](/docker-compose.yml) to get started:
+   ```bash
+   docker-compose up
+   ```
+
+## Contribution Workflow
+1. **Select an issue**:  
+   Find a task you'd like to contribute to: [Project Board](https://github.com/orgs/octodrome/projects/3)
+
+2. **Open a pull request**:  
+   Use the provided PR template for consistency.
+
+3. **Use conventional commits**:  
+   Follow the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) specification for clear and meaningful commit messages.
+
+4. **Follow the GitHub Flow**:  
+   Learn more about the contribution process here: [GitHub Flow](https://docs.github.com/en/get-started/using-github/github-flow)
+
