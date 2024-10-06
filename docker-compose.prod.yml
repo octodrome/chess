@@ -40,7 +40,7 @@ services:
       - TOKEN_TTL=${TOKEN_TTL}
       - JWT_PRIVATE_KEY=${JWT_PRIVATE_KEY}
       - GIN_MODE=release
-      - FRONT_URL=http://165.22.119.201
+      - FRONT_URL=${FRONT_URL}
 
   db:
     image: postgres:16-alpine
