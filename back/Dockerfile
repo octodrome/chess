@@ -23,14 +23,15 @@ WORKDIR /app
 COPY go.mod go.sum ./
 RUN go mod download && go mod verify
 COPY . .
-RUN go build -o main .
 
 FROM base AS dev
+RUN go build -o main .
 RUN go install github.com/onsi/ginkgo/ginkgo
 EXPOSE 8001
 CMD ["./main"]
 
 FROM base AS prod
 ENV FRONT_URL=http://165.22.119.201
+RUN go build -o main .
 EXPOSE 8001
 CMD ["./main"]
