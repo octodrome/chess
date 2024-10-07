@@ -30,7 +30,7 @@ RUN go install github.com/onsi/ginkgo/ginkgo
 EXPOSE 8001
 CMD ["./main"]
 
-FROM golang:1.23-alpine AS prod
+FROM base AS prod
 ENV FRONT_URL=http://165.22.119.201
 EXPOSE 8001
 CMD ["./main"]
