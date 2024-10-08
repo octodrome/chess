@@ -9,8 +9,8 @@ Feel free to explore the app as it evolves:
 [http://165.22.119.201/](http://165.22.119.201/)
 
 ## Tech Stack
-- [**Front**](/front): [Typescript](https://www.typescriptlang.org/) - [Nuxt](https://nuxt.com/)
-- [**Back**](/back): [Go](https://go.dev/) - [Gin](https://gin-gonic.com/)
+- [**Front**](/front/README.md): [Typescript](https://www.typescriptlang.org/) - [Nuxt](https://nuxt.com/)
+- [**Back**](/back/README.md): [Go](https://go.dev/) - [Gin](https://gin-gonic.com/)
 - **Database**: [PostgreSQL](https://www.postgresql.org/)
 
 ## Setup and Play
