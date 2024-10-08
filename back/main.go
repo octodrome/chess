@@ -2,11 +2,9 @@ package main
 
 import (
 	"fmt"
-	// "log"
 	"os"
 
 	"github.com/gin-gonic/gin"
-	// "github.com/joho/godotenv"
 	"github.com/octodrome/chess/go-rest-api-poc/controller"
 	"github.com/octodrome/chess/go-rest-api-poc/database"
 	"github.com/octodrome/chess/go-rest-api-poc/middleware"
@@ -14,7 +12,6 @@ import (
 )
 
 func main() {
-	// loadEnv()
 	loadDatabase()
 	serveApplication()
 }
@@ -24,13 +21,6 @@ func loadDatabase() {
 	database.Database.AutoMigrate(&model.User{})
 	database.Database.AutoMigrate(&model.Game{})
 }
-
-// func loadEnv() {
-// 	err := godotenv.Load("./.env")
-// 	if err != nil {
-// 		log.Fatal("Error loading .env file")
-// 	}
-// }
 
 func CORSMiddleware() gin.HandlerFunc {
 	return func(c *gin.Context) {
