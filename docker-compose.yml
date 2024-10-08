@@ -58,6 +58,7 @@ services:
       - DB_PORT=${DB_PORT}
       - TOKEN_TTL=${TOKEN_TTL}
       - JWT_PRIVATE_KEY=${JWT_PRIVATE_KEY}
+      - FRONT_URL=${FRONT_URL}
 
   db:
     image: postgres:16-alpine
