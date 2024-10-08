@@ -10,12 +10,12 @@ type Game struct {
 	UserID      uint
 	GuestID     uint
 	HasToPlayID uint
-	Moves       string `gorm:"size:255;not null;" json:"moves"`
-	Messages    []Message
+	Moves       string    `gorm:"size:255;not null;" json:"moves"`
+	Messages    []Message `gorm:"constraint:OnUpdate:CASCADE,OnDelete:SET NULL"`
 }
 
 func (game *Game) Save() (*Game, error) {
-	err := database.Database.Create(&game).Error
+	err := database.Database.Preload("UserID").Preload("Guest").Create(&game).Error
 	if err != nil {
 		return &Game{}, err
 	}

@@ -18,8 +18,7 @@ func main() {
 
 func loadDatabase() {
 	database.Connect()
-	database.Database.AutoMigrate(&model.User{})
-	database.Database.AutoMigrate(&model.Game{})
+	database.Database.AutoMigrate(&model.Game{}, &model.User{}, &model.Message{})
 }
 
 func CORSMiddleware() gin.HandlerFunc {

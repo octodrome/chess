@@ -32,9 +32,9 @@ const start = () => {
     if (userStore.user && selectedOpponentId) {
         humanGameStore
             .createGame({
-                creator: userStore.user.data.ID,
-                guest: selectedOpponentId.value,
-                hasToPlay: userStore.user.data.ID,
+                creatorId: userStore.user.data.ID,
+                guestId: selectedOpponentId.value,
+                hasToPlayId: userStore.user.data.ID,
                 moves: '',
             })
             .then((game) => {

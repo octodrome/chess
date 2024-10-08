@@ -13,7 +13,7 @@ type User struct {
 	gorm.Model
 	Email    string `gorm:"size:255;not null;unique" json:"email"`
 	Password string `gorm:"size:255;not null;" json:"-"`
-	Games    []Game
+	Games    []Game `gorm:"constraint:OnUpdate:CASCADE,OnDelete:SET NULL"`
 }
 
 type UserRepository interface {

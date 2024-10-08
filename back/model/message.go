@@ -8,7 +8,8 @@ import (
 type Message struct {
 	gorm.Model
 	GameID  uint
-	From    uint
+	FromID  uint
+	ToID    uint
 	Content string `gorm:"size:255;not null;" json:"content"`
 }
 
