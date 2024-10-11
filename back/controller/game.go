@@ -40,7 +40,7 @@ func AddGame(context *gin.Context) {
 		return
 	}
 
-	input.UserID = user.ID
+	input.CreatorID = user.ID
 
 	savedEntry, err := input.Save()
 
@@ -60,7 +60,7 @@ func GetAllUserGames(context *gin.Context) {
 		return
 	}
 
-	context.JSON(http.StatusOK, gin.H{"data": user.Games})
+	context.JSON(http.StatusOK, gin.H{"data": user.GamesAsCreator})
 }
 
 func PutGame(context *gin.Context) {

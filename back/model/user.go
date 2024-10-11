@@ -11,9 +11,10 @@ import (
 
 type User struct {
 	gorm.Model
-	Email    string `gorm:"size:255;not null;unique" json:"email"`
-	Password string `gorm:"size:255;not null;" json:"-"`
-	Games    []Game `gorm:"constraint:OnUpdate:CASCADE,OnDelete:SET NULL"`
+	Email          string `gorm:"size:255;not null;unique" json:"email"`
+	Password       string `gorm:"size:255;not null;" json:"-"`
+	GamesAsCreator []Game `gorm:"foreignKey:CreatorID;constraint:OnUpdate:CASCADE,OnDelete:SET NULL" json:"games_as_creator"`
+	GamesAsGuest   []Game `gorm:"foreignKey:GuestID;constraint:OnUpdate:CASCADE,OnDelete:SET NULL" json:"games_as_guest"`
 }
 
 type UserRepository interface {
@@ -60,7 +61,7 @@ func FindUserByEmail(email string) (User, error) {
 
 func (r *userRepoImpl) FindUserById(id string) (User, error) {
 	var user User
-	err := database.Database.Preload("Games").Where("ID=?", id).Find(&user).Error
+	err := database.Database.Preload("GamesAsCreator").Where("ID=?", id).Find(&user).Error
 	if err != nil {
 		return User{}, err
 	}
