@@ -8,8 +8,6 @@ A Nuxt3/typescript app to play chess against computer or distant opponents.
 
 https://nodejs.org/en/download/package-manager
 
-![alt text](./public/img/app_screenshot.png?raw=true)
-
 ## Setup
 
 Make sure to install the dependencies:

@@ -5,6 +5,8 @@ Welcome to the **Chess Web App**! This project started as a **proof of concept**
 
 Users can seamlessly play chess directly in their browser, either against an AI opponent or in real-time with friends.
 
+![alt text](./documentation/app_screenshot.png?raw=true)
+
 Feel free to explore the app as it evolves:  
 [http://165.22.119.201/](http://165.22.119.201/)
 
