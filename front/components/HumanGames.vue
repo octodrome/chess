@@ -6,7 +6,6 @@ import { useUserStore } from '~/stores/userStore'
 const route = useRoute()
 
 const humanGameStore = useHumanGameStore()
-const userStore = useUserStore()
 const boardStore = useBoardStore()
 
 const goToGame = (gameId: string) => {
@@ -28,7 +27,7 @@ const deleteThisGame = (gameId: string) => {
 <template>
     <ul v-if="humanGameStore.gameList?.length !== 0">
         <BaseDrawerItem
-            v-for="game in userStore.user.data.games_as_creator"
+            v-for="game in humanGameStore.gameList"
             :key="game.ID"
             icon="account"
             :content="game.guest.email"

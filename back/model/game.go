@@ -38,6 +38,15 @@ func FindGameById(id string) (Game, error) {
 	return game, nil
 }
 
+func FindGameByUserId(userId string) ([]Game, error) {
+	var gameList []Game
+	err := database.Database.Preload("Creator").Preload("Guest").Where("creator_id=?", userId).Or("guest_id=?", userId).Find(&gameList).Error
+	if err != nil {
+		return []Game{}, err
+	}
+	return gameList, nil
+}
+
 // @TODO also remove game reference from users
 func RemoveGame(id string) (Game, error) {
 	var deletedGame Game

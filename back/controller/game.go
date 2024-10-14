@@ -2,6 +2,7 @@ package controller
 
 import (
 	"net/http"
+	"strconv"
 
 	"github.com/gin-gonic/gin"
 	"github.com/octodrome/chess/go-rest-api-poc/helper"
@@ -60,7 +61,14 @@ func GetAllUserGames(context *gin.Context) {
 		return
 	}
 
-	context.JSON(http.StatusOK, gin.H{"data": user.GamesAsCreator})
+	games, err := model.FindGameByUserId(strconv.FormatUint(uint64(user.ID), 10))
+
+	if err != nil {
+		context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	context.JSON(http.StatusOK, gin.H{"data": games})
 }
 
 func PutGame(context *gin.Context) {
