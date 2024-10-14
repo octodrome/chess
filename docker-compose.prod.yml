@@ -1,3 +1,6 @@
+#######################################
+#### COMPOSE PROD DOCUMENTATION 🐳 ####
+#######################################
 ### Run in production: ###
 # $ ssh root@165.22.119.201
 # $ cd chess_app/
@@ -7,7 +10,12 @@
 # $ docker pull colinfaivre/chess_back_prod:latest
 # $ docker compose -f docker-compose.prod.yml build
 # $ docker compose -f docker-compose.prod.yml up --detach
-###
+### Execute a command inside a running compose service
+# $ docker compose -f docker-compose.prod.yml exec db bash
+# db:/# psql -h localhost -d chess -U chess -p 5432
+# chess=# \dt
+
+# @TODO Use docker swarm instead of compose in production
 
 services:
   front:
