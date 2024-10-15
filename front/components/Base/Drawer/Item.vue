@@ -28,12 +28,14 @@ defineEmits(['delete', 'message'])
                 v-if="props.action === 'delete'"
                 name="delete"
                 @click.stop="$emit('delete')"
+                class="hover:text-gray-400"
             />
 
             <BaseIcon
                 v-if="props.action === 'message'"
                 name="message"
                 @click.stop="$emit('message')"
+                class="hover:text-gray-400"
             />
         </div>
     </div>

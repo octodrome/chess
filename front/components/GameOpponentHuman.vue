@@ -12,9 +12,7 @@ const isOpponentDialogOpened = ref(false)
             icon="account-circle"
             :content="humanGameStore.opponentPseudo"
             action="message"
-            @message="isOpponentDialogOpened = true"
+            @message="layoutStore.openModal('Chat')"
         />
-
-        <button @click="layoutStore.openModal('Chat')">open chat</button>
     </div>
 </template>
