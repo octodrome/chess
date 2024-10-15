@@ -1,4 +1,4 @@
-# Go REST API
+# Backend
 
 ## Install Go
 https://go.dev/doc/install

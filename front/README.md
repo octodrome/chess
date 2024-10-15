@@ -1,4 +1,4 @@
-# Chess-front
+# Frontend
 
 A Nuxt3/typescript app to play chess against computer or distant opponents.
 

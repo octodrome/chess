@@ -1,7 +1,7 @@
-# Chess Web App
+# Chess
 
 ## Overview
-Welcome to the **Chess Web App**! This project started as a **proof of concept**, aimed at exploring the entire development pipeline—from frontend to backend and DevOps. The goal is to build a fully functional online chess game, combining real-world chess mechanics with modern web technologies.
+Welcome to **Chess**! This project started as a **proof of concept**, aimed at exploring the entire development pipeline—from frontend to backend and DevOps. The goal is to build a fully functional online chess game, combining real-world chess mechanics with modern web technologies.
 
 Users can seamlessly play chess directly in their browser, either against an AI opponent or in real-time with friends.
 
@@ -13,6 +13,7 @@ Feel free to explore the app as it evolves:
 ## Tech Stack
 - [**Front**](/front/README.md): [Typescript](https://www.typescriptlang.org/) - [Nuxt](https://nuxt.com/)
 - [**Back**](/back/README.md): [Go](https://go.dev/) - [Gin](https://gin-gonic.com/)
+- [**Socket-Server**](/socket-server/README.md): [Go](https://go.dev/)
 - **Database**: [PostgreSQL](https://www.postgresql.org/)
 
 ## Setup and Play
