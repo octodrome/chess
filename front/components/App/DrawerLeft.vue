@@ -41,7 +41,7 @@ const layoutStore = useLayoutStore()
             <BaseDrawerItem
                 v-if="userStore.loggedIn"
                 icon="card-account-details"
-                content="My Account"
+                :content="$t('options.account')"
                 @click="layoutStore.openModal('MyAccount')"
             />
 

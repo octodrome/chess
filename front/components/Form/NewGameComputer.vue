@@ -59,13 +59,13 @@ const start = () => {
     <BaseCardHeader title="New game VS computer" />
 
     <BaseCardMain
-        text="Set your new game choosing the level and which color you will play with."
+        :text="$t('modals.new_game_computer.text')"
     >
         <BaseRadioGroup
             v-model="computerLevel"
             :options="levels"
             name="levels"
-            label="Choose your level :"
+            :label="$t('modals.new_game_computer.level.label')"
             vertical
         />
 
@@ -75,14 +75,14 @@ const start = () => {
             v-model="color"
             :options="colors"
             name="colors"
-            label="Choose your color :"
+            :label="$t('modals.new_game_computer.color.label')"
             vertical
         />
     </BaseCardMain>
 
     <BaseCardFooter>
-        <BaseButton type="text" class="mr-2" @click="cancel">Cancel</BaseButton>
+        <BaseButton type="text" class="mr-2" @click="cancel">{{ $t('actions.cancel') }}</BaseButton>
 
-        <BaseButton type="text" @click="start">Start</BaseButton>
+        <BaseButton type="text" @click="start">{{ $t('actions.confirm') }}</BaseButton>
     </BaseCardFooter>
 </template>

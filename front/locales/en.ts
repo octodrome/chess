@@ -6,6 +6,7 @@ export default {
         newComputerGame: 'New game VS computer',
         newHumanGame: 'New game VS human',
         settings: 'Settings',
+        account: 'Account'
     },
     gameInfos: {
         level: 'Level',
@@ -13,4 +14,32 @@ export default {
         whiteToPlay: 'White to play',
         blackToPlay: 'Black to play',
     },
+    modals: {
+        account: {
+            text: 'Add some information about you. This will be visible when other players choose to play with you.',
+            email: 'Email',
+            first_name: 'First Name',
+            last_name: 'Last Name',
+            age: 'Age',
+            about: 'About me',
+        },
+        new_game_computer: {
+            text: 'Set your new game choosing the level and which color you will play with.',
+            level: {
+                label: 'Choose your level',
+                easy: 'Easy',
+                medium: 'Medium',
+                hard: 'Hard',
+            },
+            color: {
+                label: "Choose your color:",
+                white: "White",
+                black: "Black",
+            }
+        }
+    },
+    actions: {
+        cancel: 'Cancel',
+        confirm: 'Confirm',
+    }
 }

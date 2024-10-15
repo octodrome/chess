@@ -16,32 +16,32 @@ const cancel = () => emit('close')
 </script>
 
 <template>
-    <BaseCardHeader title="My account" />
+    <BaseCardHeader :title="$t('options.account')" />
 
     <BaseCardMain
-        text="Add some information about you. This will be visible when other players choose to play with you."
+        :text="$t('modals.account.text')"
     >
         <BaseTextField
             v-model="userStore.user.data.email"
             type="text"
-            label="Email"
+            :label="$t('modals.account.email')"
             disabled
         />
 
-        <BaseTextField v-model="firstName" type="text" label="First name" />
+        <BaseTextField v-model="firstName" type="text" :label="$t('modals.account.first_name')" />
 
-        <BaseTextField v-model="lastName" type="text" label="Last name" />
+        <BaseTextField v-model="lastName" type="text" :label="$t('modals.account.last_name')" />
 
-        <BaseTextField v-model="age" type="text" label="Age" />
+        <BaseTextField v-model="age" type="text" :label="$t('modals.account.age')" />
 
-        <BaseTextField v-model="bio" type="text" label="About me" />
+        <BaseTextField v-model="bio" type="text" :label="$t('modals.account.about')" />
     </BaseCardMain>
 
     <BaseCardFooter>
         <BaseButton type="text" class="mr-2" @click="cancel()"
-            >Cancel</BaseButton
+            >{{ $t('actions.cancel') }}</BaseButton
         >
 
-        <BaseButton type="text">Confirm</BaseButton>
+        <BaseButton type="text">{{ $t('actions.confirm') }}</BaseButton>
     </BaseCardFooter>
 </template>
