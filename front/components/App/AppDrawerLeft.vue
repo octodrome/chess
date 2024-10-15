@@ -73,7 +73,11 @@ const layoutStore = useLayoutStore()
 
             <BaseDrawerSeparator />
 
-            <BaseDrawerItem icon="cog" :content="$t('options.settings')" />
+            <BaseDrawerItem
+                icon="cog"
+                :content="$t('options.settings')"
+                @click="layoutStore.openModal('Settings')"
+            />
         </ul>
     </BaseDrawer>
 </template>

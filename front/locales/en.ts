@@ -40,7 +40,16 @@ export default {
         new_game_human: {
             text: 'Choose your opponent among the players list.',
             players: "Players",
-        },        
+        },
+        settings: {
+            text: 'Manage your preferences.',
+            color_scheme: {
+                label: 'Choose your color scheme:'
+            },
+            language: {
+                label: 'Choose your language:'
+            }
+        }     
     },
     actions: {
         cancel: 'Cancel',
