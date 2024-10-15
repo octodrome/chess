@@ -36,7 +36,11 @@ export default {
                 white: "White",
                 black: "Black",
             }
-        }
+        },
+        new_game_human: {
+            text: 'Choose your opponent among the players list.',
+            players: "Players",
+        },        
     },
     actions: {
         cancel: 'Cancel',

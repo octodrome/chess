@@ -56,7 +56,7 @@ const start = () => {
 </script>
 
 <template>
-    <BaseCardHeader title="New game VS computer" />
+    <BaseCardHeader :title="$t('options.newComputerGame')" />
 
     <BaseCardMain
         :text="$t('modals.new_game_computer.text')"

@@ -54,21 +54,21 @@ const start = () => {
 </script>
 
 <template>
-    <BaseCardHeader title="New game VS human" />
+    <BaseCardHeader :title="$t('options.newHumanGame')" />
 
-    <BaseCardMain text="Choose your opponent among the players list.">
+    <BaseCardMain :text="$t('modals.new_game_human.text')">
         <BaseRadioGroup
             v-model="selectedOpponentId"
             :options="opponentsOptions"
             name="users"
-            label="Players"
+            :label="$t('modals.new_game_human.players')"
             vertical
         />
     </BaseCardMain>
 
     <BaseCardFooter>
-        <BaseButton type="text" class="mr-2" @click="close">Cancel</BaseButton>
+        <BaseButton type="text" class="mr-2" @click="close">{{ $t('actions.cancel') }}</BaseButton>
 
-        <BaseButton type="text" @click="start"> Start </BaseButton>
+        <BaseButton type="text" @click="start">{{ $t('actions.confirm') }}</BaseButton>
     </BaseCardFooter>
 </template>

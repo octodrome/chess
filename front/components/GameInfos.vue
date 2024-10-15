@@ -8,7 +8,7 @@ const humanGameStore = useHumanGameStore()
 
 const gameStartedSince = computed(() => {
     if (humanGameStore.currentGame)
-        return moment(humanGameStore.currentGame.createdAt).fromNow()
+        return moment(humanGameStore.currentGame.CreatedAt).fromNow()
     return ''
 })
 </script>

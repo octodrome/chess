@@ -36,7 +36,11 @@ export default {
                 white: "Blanc",
                 black: "Noir",
             }
-        }
+        },
+        new_game_human: {
+            text: 'Choisissez votre adversaire parmi la liste des joueurs.',
+            players: "Joueurs",
+        },  
     },
     actions: {
         cancel: 'Annuler',
