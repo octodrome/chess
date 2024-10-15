@@ -7,13 +7,13 @@ import (
 
 type Game struct {
 	gorm.Model
-	CreatorID   uint   `json:"creator_id"`
-	Creator     User   `gorm:"foreignKey:CreatorID" json:"creator"`
-	GuestID     uint   `json:"guest_id"`
-	Guest       User   `gorm:"foreignKey:GuestID" json:"guest"`
-	HasToPlayID uint   `json:"has_to_play_id"`
-	Moves       string `gorm:"size:255;not null;" json:"moves"`
-	// Messages    []Message `gorm:"constraint:OnUpdate:CASCADE,OnDelete:SET NULL"`
+	CreatorID   uint      `json:"creator_id"`
+	Creator     User      `gorm:"foreignKey:CreatorID" json:"creator"`
+	GuestID     uint      `json:"guest_id"`
+	Guest       User      `gorm:"foreignKey:GuestID" json:"guest"`
+	HasToPlayID uint      `json:"has_to_play_id"`
+	Moves       string    `gorm:"size:255;not null;" json:"moves"`
+	Messages    []Message `gorm:"constraint:OnUpdate:CASCADE,OnDelete:SET NULL" json:"messages"`
 }
 
 func (game *Game) Save() (*Game, error) {
@@ -31,7 +31,7 @@ func (game *Game) Save() (*Game, error) {
 
 func FindGameById(id string) (Game, error) {
 	var game Game
-	err := database.Database.Where("ID=?", id).Find(&game).Error
+	err := database.Database.Preload("Creator").Preload("Guest").Preload("Messages").Where("ID=?", id).Find(&game).Error
 	if err != nil {
 		return Game{}, err
 	}

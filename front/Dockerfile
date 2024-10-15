@@ -31,6 +31,7 @@ RUN npm install
 COPY . .
 
 FROM base AS dev
+RUN apk add curl
 EXPOSE 3000
 CMD ["npm", "run", "dev"]
 

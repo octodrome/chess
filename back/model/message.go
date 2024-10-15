@@ -7,9 +7,10 @@ import (
 
 type Message struct {
 	gorm.Model
-	GameID  uint
-	FromID  uint
-	ToID    uint
+	GameID  uint   `json:"game_id"`
+	Game    Game   `gorm:"foreignKey:GameID" json:"game"`
+	FromID  uint   `json:"from_id"`
+	ToID    uint   `json:"to_id"`
 	Content string `gorm:"size:255;not null;" json:"content"`
 }
 

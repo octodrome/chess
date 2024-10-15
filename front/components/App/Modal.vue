@@ -12,6 +12,7 @@ const modals = {
     NewGameComputer: resolveComponent('FormNewGameComputer'),
     NewGameHuman: resolveComponent('FormNewGameHuman'),
     Signup: resolveComponent('FormSignup'),
+    Chat: resolveComponent('ChessChat'),
 }
 </script>
 

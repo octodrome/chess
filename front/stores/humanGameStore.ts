@@ -1,7 +1,6 @@
 import { useUserStore } from '~/stores/userStore'
 import { useBoardStore } from '~/stores/boardStore'
 import services from '~/services/index'
-import type { ApiGame, ApiMessage } from '~/server/models/game.model'
 import type {
     ICreateHumanGameRequestParams,
     IUpdateHumanGameRequestParams,
@@ -9,8 +8,8 @@ import type {
 
 export const useHumanGameStore = defineStore('humanGame', {
     state: () => ({
-        gameList: [] as ApiGame[],
-        currentGame: null as ApiGame | null,
+        gameList: [],
+        currentGame: null,
         isAgainstHuman: false,
     }),
 
@@ -64,13 +63,13 @@ export const useHumanGameStore = defineStore('humanGame', {
         async getGame(gameId: string) {
             return services.game.getGame(gameId).then((game) => {
                 console.log('game from getGame()', game)
-                this.currentGame = game
+                this.currentGame = game.data
                 const boardStore = useBoardStore()
                 boardStore.continueGame('human')
             })
         },
 
-        addMessage(message: ApiMessage) {
+        addMessage(message) {
             if (this.currentGame) {
                 this.currentGame.messages = [
                     ...this.currentGame.messages,

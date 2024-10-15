@@ -17,6 +17,8 @@
 
 services:
   front:
+    depends_on:
+      - socket-server
     build:
       context: ./front
       target: dev
@@ -70,6 +72,26 @@ services:
       - TOKEN_TTL=${TOKEN_TTL}
       - JWT_PRIVATE_KEY=${JWT_PRIVATE_KEY}
       - FRONT_URL=${FRONT_URL}
+
+  socket-server:
+    restart: always
+    build:
+      context: ./socket-server
+      target: dev
+    develop:
+      watch:
+        - action: rebuild
+          path: ./socket-server
+          files:
+            - ./socket-server/**/*.go
+            - ./socket-server/go.mod
+            - ./socket-server/go.sum
+    container_name: socket-server
+    hostname: socket-server
+    networks:
+      - mynet
+    ports:
+      - 5000:5000
 
   db:
     image: postgres:16-alpine

@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { useBoardStore } from '~/stores/boardStore'
 import { useHumanGameStore } from '~/stores/humanGameStore'
-import { useUserStore } from '~/stores/userStore'
 
 const route = useRoute()
 

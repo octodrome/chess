@@ -15,7 +15,7 @@ export default class SocketIO {
     socket: Socket
 
     constructor() {
-        this.socket = io('ws://localhost:5000', { autoConnect: false })
+        this.socket = io('ws://localhost:5000')
         this.socket.on('message', (message) => {
             const humanGameStore = useHumanGameStore()
 
@@ -26,7 +26,6 @@ export default class SocketIO {
 
     sendMessage(message: IMessage): void {
         const humanGameStore = useHumanGameStore()
-
         humanGameStore.addMessage(message)
         this.socket.emit('message', message)
     }

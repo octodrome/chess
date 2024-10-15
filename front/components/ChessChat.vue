@@ -3,7 +3,6 @@ import { useHumanGameStore } from '~/stores/humanGameStore'
 import { useUserStore } from '~/stores/userStore'
 import moment from 'moment'
 import services from '~/services'
-import type { ApiMessage } from '~/server/models/game.model'
 
 const route = useRoute()
 const humanGameStore = useHumanGameStore()
@@ -18,7 +17,7 @@ const createdAt = computed(() =>
         : ''
 )
 const isUserMessage = computed(
-    () => (message: ApiMessage) =>
+    () => (message) =>
         humanGameStore.opponent
             ? message.from !== humanGameStore.opponent.email
             : false
@@ -28,13 +27,11 @@ const messages = computed(() =>
 )
 
 const sendMessage = () => {
-    if (userStore.user && !isMessageEmpty) {
-        services.socket.sendMessage({
-            from: userStore.user.email,
-            content: messageContent.value,
-        })
-        messageContent.value = ''
-    }
+    services.socket.sendMessage({
+        from: userStore.user.data.email,
+        content: messageContent.value,
+    })
+    messageContent.value = ''
 }
 
 onMounted(() => humanGameStore.getGame(route.params.id as string))
@@ -42,11 +39,9 @@ onMounted(() => humanGameStore.getGame(route.params.id as string))
 
 <template>
     <div>
-        <h2 class="headline">{{ humanGameStore.opponent.email }}</h2>
+        <BaseCardHeader :title="humanGameStore.opponent.email" />
 
-        <div class="d-flex flex-column">
-            <div class="mt-0 mb-10">Registered {{ createdAt }}</div>
-
+        <BaseCardMain :text="`Registered ${createdAt}`">
             <div
                 v-for="message in messages"
                 :key="message.ID"
@@ -59,9 +54,9 @@ onMounted(() => humanGameStore.getGame(route.params.id as string))
             >
                 {{ message.content }}
             </div>
-        </div>
+        </BaseCardMain>
 
-        <div>
+        <BaseCardFooter>
             <input
                 v-model="messageContent"
                 label="Your message"
@@ -79,7 +74,7 @@ onMounted(() => humanGameStore.getGame(route.params.id as string))
             >
                 <BaseIcon name="send" />
             </button>
-        </div>
+        </BaseCardFooter>
     </div>
 </template>
 

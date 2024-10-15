@@ -2,6 +2,7 @@
 import { useHumanGameStore } from '~/stores/humanGameStore'
 
 const humanGameStore = useHumanGameStore()
+const layoutStore = useLayoutStore()
 const isOpponentDialogOpened = ref(false)
 </script>
 
@@ -14,8 +15,6 @@ const isOpponentDialogOpened = ref(false)
             @message="isOpponentDialogOpened = true"
         />
 
-        <div v-if="isOpponentDialogOpened" max-width="500">
-            <ChessChat @close="isOpponentDialogOpened = false" />
-        </div>
+        <button @click="layoutStore.openModal('Chat')">open chat</button>
     </div>
 </template>

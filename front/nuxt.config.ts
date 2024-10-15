@@ -33,10 +33,4 @@ export default defineNuxtConfig({
             restApiUrl: process.env.REST_API_URL,
         },
     },
-    serverHandlers: [
-        {
-            route: '/ws',
-            handler: '~/server/middleware/socket',
-        },
-    ],
 })
