@@ -1,13 +1,9 @@
 <script setup lang="ts">
-import { useComputerGameStore } from '~/stores/computerGameStore'
-
 const emit = defineEmits<{
     (e: 'close'): void
 }>()
 
-const computerGameStore = useComputerGameStore()
-
-const colorSchemes = ref([
+const displaySchemes = ref([
     {
         label: 'Dark mode',
         value: 'dark_mode',
@@ -17,8 +13,7 @@ const colorSchemes = ref([
         value: 'light_mode',
     },
 ])
-
-const colorScheme = ref('dark_mode')
+const displayScheme = ref(localStorage.getItem('display_scheme') || 'light_mode')
 
 const languages = ref([
     {
@@ -35,9 +30,12 @@ const language = ref(localStorage.getItem('locale') || 'en')
 
 const cancel = () => emit('close')
 
-const confirm = () => {}
+const confirm = () => {
+    localStorage.setItem('locale', language.value)
+    localStorage.setItem('display_scheme', displayScheme.value)
 
-watch(language, () => localStorage.setItem('locale', language.value))
+    location.reload()
+}
 </script>
 
 <template>
@@ -47,10 +45,10 @@ watch(language, () => localStorage.setItem('locale', language.value))
         :text="$t('modals.settings.text')"
     >
         <BaseRadioGroup
-            v-model="colorScheme"
-            :options="colorSchemes"
-            name="colorSchemes"
-            :label="$t('modals.settings.color_scheme.label')"
+            v-model="displayScheme"
+            :options="displaySchemes"
+            name="displaySchemes"
+            :label="$t('modals.settings.display_scheme.label')"
             vertical
         />
 

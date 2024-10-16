@@ -43,8 +43,8 @@ export default {
         },
         settings: {
             text: 'Manage your preferences.',
-            color_scheme: {
-                label: 'Choose your color scheme:'
+            display_scheme: {
+                label: 'Choose your display scheme:'
             },
             language: {
                 label: 'Choose your language:'

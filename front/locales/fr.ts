@@ -43,8 +43,8 @@ export default {
         },
         settings: {
             text: 'Gérez vos preferences.',
-            color_scheme: {
-                label: 'Choisissez votre gamme de couleurs:'
+            display_scheme: {
+                label: 'Choisissez votre thème:'
             },
             language: {
                 label: 'Choisissez votre langue:'
