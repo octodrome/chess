@@ -29,11 +29,11 @@ export const useHumanGameStore = defineStore('humanGame', {
     actions: {
         async createGame(params: ICreateHumanGameRequestParams) {
             return services.game.createGame(params).then((game) => {
-                this.currentGame = game
-                this.gameList = [...this.gameList, game]
+                this.currentGame = game.data
+                this.gameList = [...this.gameList, game.data]
                 const boardStore = useBoardStore()
                 boardStore.startNewGame('human')
-                return game
+                return game.data
             })
         },
 

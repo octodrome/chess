@@ -40,10 +40,9 @@ const start = () => {
             .then((game) => {
                 close()
                 boardStore.startNewGame('human')
-                navigateTo({ path: `/HumanGame/${game.data.ID}` })
+                navigateTo({ path: `/HumanGame/${game.ID}` })
             })
             .catch((e) => {
-                console.log(e)
                 layoutStore.openSnackbarError(
                     'Une erreur est survenue pendant la création de la partie'
                 )
