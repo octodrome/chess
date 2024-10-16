@@ -1,11 +1,20 @@
 {
-    "conventionalCommits.scopes": [
-        "chess-legal-moves",
-        "front",
-        "back",
-    ],
+    "conventionalCommits.scopes": ["chess-legal-moves", "front", "back"],
     "go.toolsEnvVars": {
         "GOOS": "js",
-        "GOARCH": "wasm",
+        "GOARCH": "wasm"
+    },
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "[javascript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[typescript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "prettier.configPath": "./front/.prettierrc.json",
+    "[go]": {
+        "editor.defaultFormatter": "golang.go",
+        "editor.formatOnSave": true
     }
 }
