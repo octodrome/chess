@@ -27,8 +27,6 @@ export default defineNuxtConfig({
         strict: true,
     },
     runtimeConfig: {
-        mongoDbUri: process.env.MONGODB_URI,
-        jwtSecret: process.env.JWT_SECRET,
         public: {
             restApiUrl: process.env.REST_API_URL,
         },
