@@ -7,15 +7,24 @@ function resolveEN(lang: string) {
 }
 
 function getLang() {
-    if (navigator.languages != undefined) return navigator.languages[0]
-    else return navigator.language
+    if (process.client) {
+        if (localStorage.getItem('locale')) {
+            return localStorage.getItem('locale') || 'en'
+        }
+        if (navigator.languages != undefined) {
+            return navigator.languages[0]
+        }
+        else return navigator.language
+    } else {
+        return 'en'
+    }
 }
 
 export default defineNuxtPlugin(({ vueApp }) => {
     const i18n = createI18n({
         legacy: false,
         globalInjection: true,
-        locale: process.client ? resolveEN(getLang()) : 'en',
+        locale: resolveEN(getLang()),
         messages: {
             en,
             fr,

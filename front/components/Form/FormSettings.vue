@@ -31,11 +31,13 @@ const languages = ref([
     },
 ])
 
-const language = ref('en')
+const language = ref(localStorage.getItem('locale') || 'en')
 
 const cancel = () => emit('close')
 
 const confirm = () => {}
+
+watch(language, () => localStorage.setItem('locale', language.value))
 </script>
 
 <template>
