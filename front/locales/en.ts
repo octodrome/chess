@@ -6,7 +6,7 @@ export default {
         newComputerGame: 'New game VS computer',
         newHumanGame: 'New game VS human',
         settings: 'Settings',
-        account: 'Account'
+        account: 'Account',
     },
     gameInfos: {
         level: 'Level',
@@ -32,27 +32,27 @@ export default {
                 hard: 'Hard',
             },
             color: {
-                label: "Choose your color:",
-                white: "White",
-                black: "Black",
-            }
+                label: 'Choose your color:',
+                white: 'White',
+                black: 'Black',
+            },
         },
         new_game_human: {
             text: 'Choose your opponent among the players list.',
-            players: "Players",
+            players: 'Players',
         },
         settings: {
             text: 'Manage your preferences.',
             display_scheme: {
-                label: 'Choose your display scheme:'
+                label: 'Choose your display scheme:',
             },
             language: {
-                label: 'Choose your language:'
-            }
-        }     
+                label: 'Choose your language:',
+            },
+        },
     },
     actions: {
         cancel: 'Cancel',
         confirm: 'Confirm',
-    }
+    },
 }

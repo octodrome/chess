@@ -13,7 +13,9 @@ const displaySchemes = ref([
         value: 'light_mode',
     },
 ])
-const displayScheme = ref(localStorage.getItem('display_scheme') || 'light_mode')
+const displayScheme = ref(
+    localStorage.getItem('display_scheme') || 'light_mode'
+)
 
 const languages = ref([
     {
@@ -41,9 +43,7 @@ const confirm = () => {
 <template>
     <BaseCardHeader :title="$t('options.settings')" />
 
-    <BaseCardMain
-        :text="$t('modals.settings.text')"
-    >
+    <BaseCardMain :text="$t('modals.settings.text')">
         <BaseRadioGroup
             v-model="displayScheme"
             :options="displaySchemes"
@@ -64,8 +64,12 @@ const confirm = () => {
     </BaseCardMain>
 
     <BaseCardFooter>
-        <BaseButton type="text" class="mr-2" @click="cancel">{{ $t('actions.cancel') }}</BaseButton>
+        <BaseButton type="text" class="mr-2" @click="cancel">{{
+            $t('actions.cancel')
+        }}</BaseButton>
 
-        <BaseButton type="text" @click="confirm">{{ $t('actions.confirm') }}</BaseButton>
+        <BaseButton type="text" @click="confirm">{{
+            $t('actions.confirm')
+        }}</BaseButton>
     </BaseCardFooter>
 </template>

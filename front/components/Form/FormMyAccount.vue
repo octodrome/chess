@@ -18,9 +18,7 @@ const cancel = () => emit('close')
 <template>
     <BaseCardHeader :title="$t('options.account')" />
 
-    <BaseCardMain
-        :text="$t('modals.account.text')"
-    >
+    <BaseCardMain :text="$t('modals.account.text')">
         <BaseTextField
             v-model="userStore.user.data.email"
             type="text"
@@ -28,19 +26,35 @@ const cancel = () => emit('close')
             disabled
         />
 
-        <BaseTextField v-model="firstName" type="text" :label="$t('modals.account.first_name')" />
+        <BaseTextField
+            v-model="firstName"
+            type="text"
+            :label="$t('modals.account.first_name')"
+        />
 
-        <BaseTextField v-model="lastName" type="text" :label="$t('modals.account.last_name')" />
+        <BaseTextField
+            v-model="lastName"
+            type="text"
+            :label="$t('modals.account.last_name')"
+        />
 
-        <BaseTextField v-model="age" type="text" :label="$t('modals.account.age')" />
+        <BaseTextField
+            v-model="age"
+            type="text"
+            :label="$t('modals.account.age')"
+        />
 
-        <BaseTextField v-model="bio" type="text" :label="$t('modals.account.about')" />
+        <BaseTextField
+            v-model="bio"
+            type="text"
+            :label="$t('modals.account.about')"
+        />
     </BaseCardMain>
 
     <BaseCardFooter>
-        <BaseButton type="text" class="mr-2" @click="cancel()"
-            >{{ $t('actions.cancel') }}</BaseButton
-        >
+        <BaseButton type="text" class="mr-2" @click="cancel()">{{
+            $t('actions.cancel')
+        }}</BaseButton>
 
         <BaseButton type="text">{{ $t('actions.confirm') }}</BaseButton>
     </BaseCardFooter>

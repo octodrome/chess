@@ -58,9 +58,7 @@ const start = () => {
 <template>
     <BaseCardHeader :title="$t('options.newComputerGame')" />
 
-    <BaseCardMain
-        :text="$t('modals.new_game_computer.text')"
-    >
+    <BaseCardMain :text="$t('modals.new_game_computer.text')">
         <BaseRadioGroup
             v-model="computerLevel"
             :options="levels"
@@ -81,8 +79,12 @@ const start = () => {
     </BaseCardMain>
 
     <BaseCardFooter>
-        <BaseButton type="text" class="mr-2" @click="cancel">{{ $t('actions.cancel') }}</BaseButton>
+        <BaseButton type="text" class="mr-2" @click="cancel">{{
+            $t('actions.cancel')
+        }}</BaseButton>
 
-        <BaseButton type="text" @click="start">{{ $t('actions.confirm') }}</BaseButton>
+        <BaseButton type="text" @click="start">{{
+            $t('actions.confirm')
+        }}</BaseButton>
     </BaseCardFooter>
 </template>

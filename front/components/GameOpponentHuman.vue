@@ -3,7 +3,6 @@ import { useHumanGameStore } from '~/stores/humanGameStore'
 
 const humanGameStore = useHumanGameStore()
 const layoutStore = useLayoutStore()
-const isOpponentDialogOpened = ref(false)
 </script>
 
 <template>

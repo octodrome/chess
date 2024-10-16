@@ -42,7 +42,7 @@ const start = () => {
                 boardStore.startNewGame('human')
                 navigateTo({ path: `/HumanGame/${game.ID}` })
             })
-            .catch((e) => {
+            .catch(() => {
                 layoutStore.openSnackbarError(
                     'Une erreur est survenue pendant la création de la partie'
                 )
@@ -65,8 +65,12 @@ const start = () => {
     </BaseCardMain>
 
     <BaseCardFooter>
-        <BaseButton type="text" class="mr-2" @click="close">{{ $t('actions.cancel') }}</BaseButton>
+        <BaseButton type="text" class="mr-2" @click="close">{{
+            $t('actions.cancel')
+        }}</BaseButton>
 
-        <BaseButton type="text" @click="start">{{ $t('actions.confirm') }}</BaseButton>
+        <BaseButton type="text" @click="start">{{
+            $t('actions.confirm')
+        }}</BaseButton>
     </BaseCardFooter>
 </template>

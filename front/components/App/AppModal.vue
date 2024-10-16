@@ -13,7 +13,7 @@ const modals = {
     NewGameHuman: resolveComponent('FormNewGameHuman'),
     Signup: resolveComponent('FormSignup'),
     Chat: resolveComponent('ChessChat'),
-    Settings: resolveComponent('FormSettings')
+    Settings: resolveComponent('FormSettings'),
 }
 </script>
 

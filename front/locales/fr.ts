@@ -6,7 +6,7 @@ export default {
         newComputerGame: "Partie contre l'ordinateur",
         newHumanGame: 'Partie contre un humain',
         settings: 'Réglages',
-        account: 'Mon compte'
+        account: 'Mon compte',
     },
     gameInfos: {
         level: 'Niveau',
@@ -16,7 +16,7 @@ export default {
     },
     modals: {
         account: {
-            text: 'Ajoutez quelques informations à propos de vous. Elles seront visibles quand d\'autres joueurs choisiront de jouer avec vous',
+            text: "Ajoutez quelques informations à propos de vous. Elles seront visibles quand d'autres joueurs choisiront de jouer avec vous",
             email: 'Email',
             first_name: 'Prénom',
             last_name: 'Nom',
@@ -32,27 +32,27 @@ export default {
                 hard: 'Difficile',
             },
             color: {
-                label: "Choisissez votre couleur:",
-                white: "Blanc",
-                black: "Noir",
-            }
+                label: 'Choisissez votre couleur:',
+                white: 'Blanc',
+                black: 'Noir',
+            },
         },
         new_game_human: {
             text: 'Choisissez votre adversaire parmi la liste des joueurs.',
-            players: "Joueurs",
+            players: 'Joueurs',
         },
         settings: {
             text: 'Gérez vos preferences.',
             display_scheme: {
-                label: 'Choisissez votre thème:'
+                label: 'Choisissez votre thème:',
             },
             language: {
-                label: 'Choisissez votre langue:'
-            }
-        }
+                label: 'Choisissez votre langue:',
+            },
+        },
     },
     actions: {
         cancel: 'Annuler',
         confirm: 'Confirmer',
-    }
+    },
 }

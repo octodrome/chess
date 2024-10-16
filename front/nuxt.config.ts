@@ -4,12 +4,18 @@ export default defineNuxtConfig({
         // fix pieces images not showing on prod
         appManifest: false,
     },
-    modules: [[
-        '@pinia/nuxt',
-        {
-            autoImports: ['defineStore', 'acceptHMRUpdate'],
-        },
-    ], '@nuxtjs/tailwindcss', '@nuxtjs/eslint-module', '@nuxt/test-utils/module', '@nuxtjs/storybook'],
+    modules: [
+        [
+            '@pinia/nuxt',
+            {
+                autoImports: ['defineStore', 'acceptHMRUpdate'],
+            },
+        ],
+        '@nuxtjs/tailwindcss',
+        '@nuxtjs/eslint-module',
+        '@nuxt/test-utils/module',
+        '@nuxtjs/storybook',
+    ],
     css: ['@mdi/font/css/materialdesignicons.min.css', '@/assets/css/main.css'],
     devtools: {
         enabled: true,
