@@ -1,4 +1,3 @@
-import type { ApiGame } from '~/server/models/game.model'
 import type {
     ICreateHumanGameRequestParams,
     IUpdateHumanGameRequestParams,

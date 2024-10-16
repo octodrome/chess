@@ -1,4 +1,3 @@
-import type { ApiUser } from '~/server/models/user.model'
 import type {
     ILoginUserRequestParams,
     ISignupUserRequestParams,
