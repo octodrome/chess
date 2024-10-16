@@ -38,7 +38,6 @@ const start = () => {
                 moves: '',
             })
             .then((game) => {
-                console.log('hoooolooooo')
                 close()
                 boardStore.startNewGame('human')
                 navigateTo({ path: `/HumanGame/${game.data.ID}` })

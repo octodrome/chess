@@ -18,7 +18,6 @@ watch(route, (newValue, oldValue) => {
 onMounted(() => joinGame(route.params.id as string))
 
 const joinGame = (gameId: string) => {
-    console.log('joining human game:', gameId)
     humanGameStore.getGame(gameId)
     if (userStore.user?.data) {
         services.socket.joinGame({
@@ -29,7 +28,6 @@ const joinGame = (gameId: string) => {
 }
 
 const leaveGame = (gameId: string) => {
-    console.log('leaving human game:', gameId)
     if (userStore.user) {
         services.socket.leaveGame({
             gameId: gameId,

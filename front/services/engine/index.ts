@@ -24,7 +24,6 @@ export default class Engine {
 
     public sendMove(movesAsString: string): Promise<string> {
         //@TODO send fenstring to stockfish instead of move list string
-        console.log('moves', movesAsString)
 
         return new Promise((resolve, reject) => {
             this.stockfishWorker?.postMessage(

@@ -8,7 +8,6 @@ export async function initLocalDB(): Promise<void> {
         const emptyGameList: IComputerGame[] = []
         LocalStorage.setItem('games', JSON.stringify(emptyGameList))
     }
-    console.log('Local game storage successfully initialized')
 }
 
 export async function createGameInLocalDB(

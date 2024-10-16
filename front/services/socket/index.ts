@@ -20,7 +20,6 @@ export default class SocketIO {
             const humanGameStore = useHumanGameStore()
 
             humanGameStore.addMessage(message)
-            console.log(message)
         })
     }
 

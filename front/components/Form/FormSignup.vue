@@ -37,8 +37,6 @@ const submit = handleSubmit((values) => {
         password: values.password,
     }
 
-    console.log('values', values)
-
     userStore
         .signup(signupUserParams)
         .then(() => userStore.login(signupUserParams))
