@@ -24,6 +24,7 @@ export const useHumanGameStore = defineStore('humanGame', {
         },
 
         opponentPseudo() {
+            // @ts-ignore
             return this.opponent?.email.split('@')[0]
         },
     },

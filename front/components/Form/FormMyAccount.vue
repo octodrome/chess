@@ -20,7 +20,7 @@ const cancel = () => emit('close')
 
     <BaseCardMain :text="$t('modals.account.text')">
         <BaseTextField
-            v-model="userStore.user.email"
+            :model-value="userStore.user?.email"
             type="text"
             :label="$t('modals.account.email')"
             disabled

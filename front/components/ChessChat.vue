@@ -42,7 +42,7 @@ onMounted(() => humanGameStore.getGame(route.params.id as string))
 
 <template>
     <div>
-        <BaseCardHeader :title="humanGameStore.opponent.email" />
+        <BaseCardHeader :title="humanGameStore.opponent?.email || ''" />
 
         <BaseCardMain :text="`Registered ${createdAt}`">
             <div

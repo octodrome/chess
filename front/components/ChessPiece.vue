@@ -1,12 +1,12 @@
 <script setup lang="ts">
+import type { ICellPosition } from 'chess-legal-moves/dist/types'
 import { useBoardStore } from '~/stores/boardStore'
-import type { ICell } from '~/types/board'
 
 const props = defineProps<{
     color: string
     type: string
     selected?: boolean
-    cell?: ICell
+    cell?: ICellPosition
 }>()
 
 const boardStore = useBoardStore()

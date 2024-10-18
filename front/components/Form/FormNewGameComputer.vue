@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useComputerGameStore } from '~/stores/computerGameStore'
+import type { IColor } from '~/types/computerGame'
 
 const emit = defineEmits<{
     (e: 'close'): void
@@ -22,7 +23,7 @@ const levels = ref([
     },
 ])
 
-const color = ref('white')
+const color = ref('white' as IColor)
 
 const colors = ref([
     {

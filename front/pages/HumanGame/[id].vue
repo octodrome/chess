@@ -9,7 +9,7 @@ const userStore = useUserStore()
 const boardStore = useBoardStore()
 const humanGameStore = useHumanGameStore()
 
-watch(userStore.user, () => joinGame(route.params.id as string))
+// watch(userStore.user, () => joinGame(route.params.id as string))
 watch(route, (newValue, oldValue) => {
     leaveGame(oldValue.params.id as string)
     joinGame(newValue.params.id as string)
