@@ -13,7 +13,8 @@ const emit = defineEmits<{
 
 const uniqueName = ref(Date.now().toString())
 
-const updateInput = (event) => emit('update:modelValue', event.target.value)
+const updateInput = (event: Event) =>
+    emit('update:modelValue', event.target.value)
 </script>
 
 <template>

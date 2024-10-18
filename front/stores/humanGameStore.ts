@@ -3,13 +3,15 @@ import { useBoardStore } from '~/stores/boardStore'
 import services from '~/services/index'
 import type {
     ICreateHumanGameRequestParams,
+    IMessage,
     IUpdateHumanGameRequestParams,
 } from '~/types/humanGame'
+import type { ApiGame } from '~/types/api/game'
 
 export const useHumanGameStore = defineStore('humanGame', {
     state: () => ({
-        gameList: [],
-        currentGame: null,
+        gameList: [] as ApiGame[],
+        currentGame: null as ApiGame | null,
         isAgainstHuman: false,
     }),
 
@@ -17,23 +19,23 @@ export const useHumanGameStore = defineStore('humanGame', {
         opponent(state) {
             const userStore = useUserStore()
             return state.currentGame?.guest.ID !== userStore.user?.ID
-                ? state.currentGame.guest
-                : state.currentGame.creator
+                ? state.currentGame?.guest
+                : state.currentGame?.creator
         },
 
         opponentPseudo() {
-            return this.opponent.email.split('@')[0]
+            return this.opponent?.email.split('@')[0]
         },
     },
 
     actions: {
         async createGame(params: ICreateHumanGameRequestParams) {
             return services.game.createGame(params).then((game) => {
-                this.currentGame = game.data
-                this.gameList = [...this.gameList, game.data]
+                this.currentGame = game
+                this.gameList = [...this.gameList, game]
                 const boardStore = useBoardStore()
                 boardStore.startNewGame('human')
-                return game.data
+                return game
             })
         },
 
@@ -41,7 +43,7 @@ export const useHumanGameStore = defineStore('humanGame', {
             return services.game.deleteGame(gameId).then(() => {
                 this.currentGame = null
                 this.gameList = this.gameList.filter(
-                    (game) => game.ID !== gameId
+                    (game) => game.ID !== Number(gameId)
                 )
             })
         },
@@ -61,13 +63,13 @@ export const useHumanGameStore = defineStore('humanGame', {
 
         async getGame(gameId: string) {
             return services.game.getGame(gameId).then((game) => {
-                this.currentGame = game.data
+                this.currentGame = game
                 const boardStore = useBoardStore()
                 boardStore.continueGame('human')
             })
         },
 
-        addMessage(message) {
+        addMessage(message: IMessage) {
             if (this.currentGame) {
                 this.currentGame.messages = [
                     ...this.currentGame.messages,

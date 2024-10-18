@@ -1,8 +1,9 @@
+import type { ApiGame } from './api/game'
 import type { IUser } from './user'
 
 export interface IHumanGameState {
-    gameList: IGame[]
-    currentGame: IGame | null
+    gameList: ApiGame[]
+    currentGame: ApiGame | null
 }
 
 export interface IHumanGame {

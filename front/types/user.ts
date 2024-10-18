@@ -1,3 +1,5 @@
+import type { ApiUser } from './api/user'
+
 export interface IUserState {
     user: IUser | null
     users: IUser[]
@@ -19,7 +21,7 @@ export interface ILoginUserRequestParams {
 }
 
 export interface ILoginUserResponse {
-    user: IUser
+    user: ApiUser
     token: string
 }
 

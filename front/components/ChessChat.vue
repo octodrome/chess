@@ -13,7 +13,7 @@ const messageContent = ref('')
 const isMessageEmpty = computed(() => messageContent.value.trim().length === 0)
 const createdAt = computed(() =>
     humanGameStore.opponent
-        ? moment(humanGameStore.opponent.createdAt).fromNow()
+        ? moment(humanGameStore.opponent.CreatedAt).fromNow()
         : ''
 )
 const isUserMessage = computed(

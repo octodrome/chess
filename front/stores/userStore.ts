@@ -1,7 +1,7 @@
 import { useHumanGameStore } from '~/stores/humanGameStore'
 import { useBoardStore } from '~/stores/boardStore'
 import services from '~/services/index'
-import type { ApiUser } from '~/server/models/user.model'
+import type { ApiUser } from '~/types/api/user'
 import type {
     ILoginUserRequestParams,
     ISignupUserRequestParams,

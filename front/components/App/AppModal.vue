@@ -3,7 +3,14 @@ import { useLayoutStore } from '~/stores/layoutStore'
 const layoutStore = useLayoutStore()
 
 const props = defineProps<{
-    content: string
+    content:
+        | 'Login'
+        | 'MyAccount'
+        | 'NewGameComputer'
+        | 'NewGameHuman'
+        | 'Signup'
+        | 'Chat'
+        | 'Settings'
 }>()
 
 const modals = {

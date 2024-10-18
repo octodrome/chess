@@ -1,3 +1,4 @@
+import type { ApiUser } from '~/types/api/user'
 import type {
     ILoginUserRequestParams,
     ISignupUserRequestParams,
@@ -7,7 +8,7 @@ import type {
 export default class User {
     async getAllOpponents(userId: string) {
         return (
-            await useCustomFetch(`api/user`, {
+            await useCustomFetch('api/user', {
                 query: { except: userId },
             })
         ).data.value.data as Promise<ApiUser[]>

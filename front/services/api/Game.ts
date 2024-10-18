@@ -1,3 +1,4 @@
+import type { ApiGame } from '~/types/api/game'
 import type {
     ICreateHumanGameRequestParams,
     IUpdateHumanGameRequestParams,
@@ -11,7 +12,7 @@ export default class Game {
 
     async getGame(gameId: string) {
         const { data } = await useCustomFetch(`api/game/${gameId}`)
-        return data.value as Promise<ApiGame>
+        return data.value.data as Promise<ApiGame>
     }
 
     async createGame(params: ICreateHumanGameRequestParams) {
@@ -19,14 +20,14 @@ export default class Game {
             method: 'post',
             body: params,
         })
-        return data.value as Promise<ApiGame>
+        return data.value.data as Promise<ApiGame>
     }
 
     async deleteGame(gameId: string) {
         const { data } = await useCustomFetch(`api/game/${gameId}`, {
             method: 'delete',
         })
-        return data.value as Promise<ApiGame>
+        return data.value.data as Promise<ApiGame>
     }
 
     async sendMove(params: IUpdateHumanGameRequestParams) {
@@ -34,6 +35,6 @@ export default class Game {
             method: 'post',
             body: params.moves,
         })
-        return data.value as Promise<ApiGame>
+        return data.value.data as Promise<ApiGame>
     }
 }
