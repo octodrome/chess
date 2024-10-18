@@ -22,7 +22,7 @@ export const useLayoutStore = defineStore('layout', {
 
         modal: {
             isOpened: false,
-            content: 'Login',
+            content: '',
         } as IModal,
 
         snackbar: {

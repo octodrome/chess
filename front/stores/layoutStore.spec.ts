@@ -46,7 +46,7 @@ describe('Layout Store', () => {
             const layoutStore = useLayoutStore()
             layoutStore.openModal('Settings')
             expect(layoutStore.modal.isOpened).toBe(true)
-            expect(layoutStore.modal.content).toBe('modal content')
+            expect(layoutStore.modal.content).toBe('Settings')
         })
 
         it('closeModal()', () => {
