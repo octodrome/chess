@@ -59,14 +59,14 @@ onMounted(() => humanGameStore.getGame(route.params.id as string))
             </div>
         </BaseCardMain>
 
-        <BaseCardFooter>
+        <BaseCardFooter class="mt-3">
             <input
                 v-model="messageContent"
                 label="Your message"
                 outlined
                 dense
                 hide-details="auto"
-                class="mr-2"
+                class="mr-2 border border-gray-200 rounded-full px-3 w-full"
                 @keyup.enter="sendMessage()"
             />
 
@@ -74,6 +74,7 @@ onMounted(() => humanGameStore.getGame(route.params.id as string))
                 color="blue-grey darken-3"
                 :disabled="isMessageEmpty"
                 @click="sendMessage()"
+                class="border border-gray-200 rounded-full bg-gray-800 w-7"
             >
                 <BaseIcon name="send" />
             </button>
@@ -91,7 +92,7 @@ onMounted(() => humanGameStore.getGame(route.params.id as string))
     text-align: right;
     background-color: #607d8b;
     color: white;
-    border-radius: 8px 8px 0 8px;
+    border-radius: 8px 0 8px 8px;
 }
 .is-left {
     background-color: #d5d5d5;
