@@ -1,9 +1,10 @@
+// @ts-nocheck
 // @TODO maybe try fetch wasm_exec.js from public/ too
 import '../go-wasm-poc/wasm_exec.js'
 
 export default class GoWasmPOC {
-    stockfishWorker
-    computerLevel
+    stockfishWorker: any
+    computerLevel: any
 
     constructor() {
         if (process.client) this.loadWasm()

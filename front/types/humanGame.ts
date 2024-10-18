@@ -17,10 +17,10 @@ export interface IHumanGame {
 }
 
 export interface ICreateHumanGameRequestParams {
-    creator?: string
-    guest: string
-    hasToPlay: string
-    moves: string[]
+    creator_id: number
+    guest_id: number
+    has_to_play_id: number
+    moves: string
 }
 
 export interface IUpdateHumanGameRequestParams {

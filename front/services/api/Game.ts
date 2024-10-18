@@ -7,12 +7,12 @@ import type {
 export default class Game {
     async getUserGames() {
         const { data } = await useCustomFetch(`api/game`)
-        return data.value.data as unknown as Promise<ApiGame[]>
+        return data.value as unknown as Promise<{ data: ApiGame[] }>
     }
 
     async getGame(gameId: string) {
         const { data } = await useCustomFetch(`api/game/${gameId}`)
-        return data.value.data as Promise<ApiGame>
+        return data.value as Promise<{ data: ApiGame }>
     }
 
     async createGame(params: ICreateHumanGameRequestParams) {
@@ -20,14 +20,14 @@ export default class Game {
             method: 'post',
             body: params,
         })
-        return data.value.data as Promise<ApiGame>
+        return data.value as Promise<{ data: ApiGame }>
     }
 
     async deleteGame(gameId: string) {
         const { data } = await useCustomFetch(`api/game/${gameId}`, {
             method: 'delete',
         })
-        return data.value.data as Promise<ApiGame>
+        return data.value as Promise<{ data: ApiGame }>
     }
 
     async sendMove(params: IUpdateHumanGameRequestParams) {
@@ -35,6 +35,6 @@ export default class Game {
             method: 'post',
             body: params.moves,
         })
-        return data.value.data as Promise<ApiGame>
+        return data.value as Promise<{ data: ApiGame }>
     }
 }

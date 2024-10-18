@@ -10,7 +10,12 @@ defineEmits(['update:modelValue'])
     <input
         type="checkbox"
         :checked="props.modelValue"
-        @change="$emit('update:modelValue', $event.target.checked)"
+        @change="
+            $emit(
+                'update:modelValue',
+                ($event.target as HTMLInputElement).checked
+            )
+        "
     />
     <label v-if="props.label">{{ props.label }}</label>
 </template>

@@ -60,14 +60,14 @@ export const useUserStore = defineStore('user', {
             return services.user
                 .getAllOpponents(userId)
                 .then((opponentList) => {
-                    this.users = opponentList
-                    return opponentList
+                    this.users = opponentList.data
+                    return opponentList.data
                 })
         },
 
         async getUser(userId: string) {
             const user = await services.user.getUser(userId)
-            this.user = user
+            this.user = user.data
         },
     },
 })

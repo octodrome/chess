@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { useHumanGameStore } from '~/stores/humanGameStore'
 import { useComputerGameStore } from '~/stores/computerGameStore'
 import FenBoardParser from '~/helpers/FenBoardParser'
@@ -7,6 +8,7 @@ import {
     getNormalCoords,
 } from '~/helpers/stockfish'
 import services from '~/services/index'
+import type { IPiece } from 'chess-legal-moves/dist/types'
 
 export const useBoardStore = defineStore('board', {
     state: () => ({
@@ -20,8 +22,8 @@ export const useBoardStore = defineStore('board', {
         moves: [],
         moveStart: null,
         moveEnd: null,
-        playerCapturedPieces: [],
-        computerCapturedPieces: [],
+        playerCapturedPieces: [] as IPiece[],
+        computerCapturedPieces: [] as IPiece[],
     }),
 
     getters: {

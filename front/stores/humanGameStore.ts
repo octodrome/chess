@@ -31,11 +31,11 @@ export const useHumanGameStore = defineStore('humanGame', {
     actions: {
         async createGame(params: ICreateHumanGameRequestParams) {
             return services.game.createGame(params).then((game) => {
-                this.currentGame = game
-                this.gameList = [...this.gameList, game]
+                this.currentGame = game.data
+                this.gameList = [...this.gameList, game.data]
                 const boardStore = useBoardStore()
                 boardStore.startNewGame('human')
-                return game
+                return game.data
             })
         },
 
@@ -50,20 +50,20 @@ export const useHumanGameStore = defineStore('humanGame', {
 
         async sendMove(params: IUpdateHumanGameRequestParams) {
             return services.game.sendMove(params).then((game) => {
-                this.currentGame = game
+                this.currentGame = game.data
                 return game
             })
         },
 
         async getUserGames() {
             return services.game.getUserGames().then((gameList) => {
-                this.gameList = gameList
+                this.gameList = gameList.data
             })
         },
 
         async getGame(gameId: string) {
             return services.game.getGame(gameId).then((game) => {
-                this.currentGame = game
+                this.currentGame = game.data
                 const boardStore = useBoardStore()
                 boardStore.continueGame('human')
             })

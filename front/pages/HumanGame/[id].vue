@@ -19,10 +19,10 @@ onMounted(() => joinGame(route.params.id as string))
 
 const joinGame = (gameId: string) => {
     humanGameStore.getGame(gameId)
-    if (userStore.user?.data) {
+    if (userStore.user) {
         services.socket.joinGame({
             gameId: gameId,
-            userId: userStore.user.data.email,
+            userId: userStore.user.email,
         })
     }
 }

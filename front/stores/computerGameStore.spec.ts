@@ -47,7 +47,9 @@ describe('ComputerGame Store', () => {
 
         it('createGame()', async () => {
             const computerGameStore = useComputerGameStore()
-            services.localGame.createLocalGame.mockResolvedValue(fakeGame)
+            ;(services.localGame.createLocalGame as any).mockResolvedValue(
+                fakeGame
+            )
 
             expect(computerGameStore.currentGame).toStrictEqual(null)
             expect(computerGameStore.gameList).toStrictEqual([])
@@ -61,7 +63,7 @@ describe('ComputerGame Store', () => {
 
         it('getGames()', async () => {
             const computerGameStore = useComputerGameStore()
-            services.localGame.getLocalGames.mockResolvedValue([
+            ;(services.localGame.getLocalGames as any).mockResolvedValue([
                 fakeGame,
                 fakeGame,
             ])

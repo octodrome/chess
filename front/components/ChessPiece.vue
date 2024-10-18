@@ -5,8 +5,8 @@ import type { ICell } from '~/types/board'
 const props = defineProps<{
     color: string
     type: string
-    selected: boolean
-    cell: ICell
+    selected?: boolean
+    cell?: ICell
 }>()
 
 const boardStore = useBoardStore()

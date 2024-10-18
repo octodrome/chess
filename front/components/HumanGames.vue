@@ -31,8 +31,8 @@ const deleteThisGame = (gameId: string) => {
             icon="account"
             :content="game.guest.email"
             action="delete"
-            @click="goToGame(game.ID)"
-            @delete="deleteThisGame(game.ID)"
+            @click="goToGame(String(game.ID))"
+            @delete="deleteThisGame(String(game.ID))"
         />
     </ul>
 </template>

@@ -1,3 +1,18 @@
+export type IModalContent =
+    | 'Login'
+    | 'MyAccount'
+    | 'NewGameComputer'
+    | 'NewGameHuman'
+    | 'Signup'
+    | 'Chat'
+    | 'Settings'
+    | ''
+
+export interface IModal {
+    isOpened: boolean
+    content: IModalContent
+}
+
 export const useLayoutStore = defineStore('layout', {
     state: () => ({
         drawer: {
@@ -7,8 +22,8 @@ export const useLayoutStore = defineStore('layout', {
 
         modal: {
             isOpened: false,
-            content: '',
-        },
+            content: 'Login',
+        } as IModal,
 
         snackbar: {
             isOpened: false,
@@ -30,7 +45,7 @@ export const useLayoutStore = defineStore('layout', {
             this.drawer.rightIsOpened = false
         },
 
-        openModal(content: string) {
+        openModal(content: IModalContent) {
             this.modal.isOpened = true
             this.modal.content = content
         },

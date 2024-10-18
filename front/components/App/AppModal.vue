@@ -1,17 +1,8 @@
 <script setup lang="ts">
-import { useLayoutStore } from '~/stores/layoutStore'
+import { useLayoutStore, type IModalContent } from '~/stores/layoutStore'
 const layoutStore = useLayoutStore()
 
-const props = defineProps<{
-    content:
-        | 'Login'
-        | 'MyAccount'
-        | 'NewGameComputer'
-        | 'NewGameHuman'
-        | 'Signup'
-        | 'Chat'
-        | 'Settings'
-}>()
+const props = defineProps<{ content: IModalContent }>()
 
 const modals = {
     Login: resolveComponent('FormLogin'),
@@ -21,6 +12,7 @@ const modals = {
     Signup: resolveComponent('FormSignup'),
     Chat: resolveComponent('ChessChat'),
     Settings: resolveComponent('FormSettings'),
+    '': '',
 }
 </script>
 

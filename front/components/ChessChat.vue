@@ -3,6 +3,7 @@ import { useHumanGameStore } from '~/stores/humanGameStore'
 import { useUserStore } from '~/stores/userStore'
 import moment from 'moment'
 import services from '~/services'
+import type { IMessage } from '~/types/humanGame'
 
 const route = useRoute()
 const humanGameStore = useHumanGameStore()
@@ -17,7 +18,7 @@ const createdAt = computed(() =>
         : ''
 )
 const isUserMessage = computed(
-    () => (message) =>
+    () => (message: IMessage) =>
         humanGameStore.opponent
             ? message.from !== humanGameStore.opponent.email
             : false
@@ -27,11 +28,13 @@ const messages = computed(() =>
 )
 
 const sendMessage = () => {
-    services.socket.sendMessage({
-        from: userStore.user.data.email,
-        content: messageContent.value,
-    })
-    messageContent.value = ''
+    if (userStore.user) {
+        services.socket.sendMessage({
+            from: userStore.user.email,
+            content: messageContent.value,
+        })
+        messageContent.value = ''
+    }
 }
 
 onMounted(() => humanGameStore.getGame(route.params.id as string))

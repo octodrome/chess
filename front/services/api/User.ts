@@ -11,12 +11,12 @@ export default class User {
             await useCustomFetch('api/user', {
                 query: { except: userId },
             })
-        ).data.value.data as Promise<ApiUser[]>
+        ).data.value as Promise<{ data: ApiUser[] }>
     }
 
     async getUser(userId: string) {
         const { data } = await useCustomFetch(`api/user/${userId}`)
-        return data.value as Promise<ApiUser>
+        return data.value as Promise<{ data: ApiUser }>
     }
 
     async signup(params: ISignupUserRequestParams) {
@@ -25,10 +25,10 @@ export default class User {
                 method: 'post',
                 body: params,
             })
-        ).data.value as Promise<ApiUser>
+        ).data.value as Promise<{ data: ApiUser }>
     }
 
-    async login(params: ILoginUserRequestParams): Promise<ILoginUserResponse> {
+    async login(params: ILoginUserRequestParams) {
         const { data } = await useCustomFetch('auth/login', {
             method: 'post',
             body: params,

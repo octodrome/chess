@@ -13,8 +13,8 @@ const humanGameStore = useHumanGameStore()
 const boardStore = useBoardStore()
 const layoutStore = useLayoutStore()
 
-const userId = userStore.user?.data.ID
-const opponents = await userStore.getAllOpponents(userId)
+const userId = userStore.user?.ID
+const opponents = await userStore.getAllOpponents(String(userId))
 const selectedOpponentId = ref(opponents[0].ID)
 
 const opponentsOptions = computed(() => {
@@ -32,9 +32,9 @@ const start = () => {
     if (userStore.user && selectedOpponentId) {
         humanGameStore
             .createGame({
-                creator_id: userStore.user.data.ID,
+                creator_id: userStore.user.ID,
                 guest_id: selectedOpponentId.value,
-                has_to_play_id: userStore.user.data.ID,
+                has_to_play_id: userStore.user.ID,
                 moves: '',
             })
             .then((game) => {
