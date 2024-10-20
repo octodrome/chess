@@ -73,8 +73,8 @@ onMounted(() => humanGameStore.getGame(route.params.id as string))
             <button
                 color="blue-grey darken-3"
                 :disabled="isMessageEmpty"
-                @click="sendMessage()"
                 class="border border-gray-200 rounded-full bg-gray-800 w-7"
+                @click="sendMessage()"
             >
                 <BaseIcon name="send" />
             </button>
