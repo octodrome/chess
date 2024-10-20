@@ -28,7 +28,7 @@ const messages = computed(() =>
 )
 
 const sendMessage = () => {
-    if (userStore.user) {
+    if (userStore.user && !isMessageEmpty.value) {
         services.socket.sendMessage({
             from: userStore.user.email,
             content: messageContent.value,
