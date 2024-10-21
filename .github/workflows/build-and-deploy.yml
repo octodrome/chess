@@ -114,11 +114,10 @@ jobs:
                   host: ${{ secrets.DROPLET_HOST_IP }}
                   username: ${{ secrets.DROPLET_USERNAME }}
                   key: ${{ secrets.DROPLET_SSH_KEY }}
-                  envs: FRONT_IMAGE_NAME,BACK_IMAGE_NAME,REGISTRY
                   script: |
-                      echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
-                      docker pull $(echo $REGISTRY)/$(echo $FRONT_IMAGE_NAME)
-                      docker pull $(echo $REGISTRY)/$(echo $BACK_IMAGE_NAME)
+                      echo "${{ secrets.DOCKERHUB_PASSWORD }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
+                      docker pull colinfaivre/chess_front_prod
+                      docker pull colinfaivre/chess_back_prod
                       cd chess_app
                       docker compose -f docker-compose.prod.yml down
                       docker compose -f docker-compose.prod.yml up --build --detach
