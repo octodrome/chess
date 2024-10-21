@@ -16,108 +16,112 @@
 # @TODO see if networks, container names and host names can be removed, ports mapping?
 
 services:
-  front:
-    depends_on:
-      - socket-server
-    build:
-      context: ./front
-      target: dev
-    develop:
-      watch:
-        - action: sync
-          path: ./front
-          target: /usr/src/nuxt-app
-          ignore:
-            - node_modules/
-        - action: rebuild
-          path: ./front/package.json
-        - action: sync+restart
-          target: /usr/src/nuxt.config.ts
-          path: ./front/nuxt.config.ts
-    container_name: front
-    hostname: front
-    networks:
-      - mynet
-    ports:
-      - 3000:3000
+    front:
+        depends_on:
+            - socket-server
+        build:
+            context: ./front
+            target: dev
+        develop:
+            watch:
+                - action: sync
+                  path: ./front
+                  target: /usr/src/nuxt-app
+                  ignore:
+                      - node_modules/
+                - action: rebuild
+                  path: ./front/package.json
+                - action: sync+restart
+                  target: /usr/src/nuxt.config.ts
+                  path: ./front/nuxt.config.ts
+        container_name: front
+        hostname: front
+        networks:
+            - mynet
+        ports:
+            - 3000:3000
 
-  back:
-    depends_on:
-      db:
-        condition: service_healthy
-        restart: true
-    build:
-      context: ./back
-      target: dev
-    develop:
-      watch:
-        - action: rebuild
-          path: ./back
-          files:
-            - ./back/**/*.go
-            - ./back/go.mod
-            - ./back/go.sum
-    container_name: back
-    hostname: back
-    networks:
-      - mynet
-    ports:
-      - 8001:8001
-    environment:
-      - DB_HOST=${DB_HOST}
-      - POSTGRES_USER=${POSTGRES_USER}
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
-      - POSTGRES_DB=${POSTGRES_DB}
-      - DB_PORT=${DB_PORT}
-      - TOKEN_TTL=${TOKEN_TTL}
-      - JWT_PRIVATE_KEY=${JWT_PRIVATE_KEY}
-      - FRONT_URL=${FRONT_URL}
+    back:
+        depends_on:
+            db:
+                condition: service_healthy
+                restart: true
+        build:
+            context: ./back
+            target: dev
+        develop:
+            watch:
+                - action: rebuild
+                  path: ./back
+                  files:
+                      - ./back/**/*.go
+                      - ./back/go.mod
+                      - ./back/go.sum
+        container_name: back
+        hostname: back
+        networks:
+            - mynet
+        ports:
+            - 8001:8001
+        environment:
+            - DB_HOST=${DB_HOST}
+            - POSTGRES_USER=${POSTGRES_USER}
+            - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+            - POSTGRES_DB=${POSTGRES_DB}
+            - DB_PORT=${DB_PORT}
+            - TOKEN_TTL=${TOKEN_TTL}
+            - JWT_PRIVATE_KEY=${JWT_PRIVATE_KEY}
+            - FRONT_URL=${FRONT_URL}
 
-  socket-server:
-    restart: always
-    build:
-      context: ./socket-server
-      target: dev
-    develop:
-      watch:
-        - action: rebuild
-          path: ./socket-server
-          files:
-            - ./socket-server/**/*.go
-            - ./socket-server/go.mod
-            - ./socket-server/go.sum
-    container_name: socket-server
-    hostname: socket-server
-    networks:
-      - mynet
-    ports:
-      - 5000:5000
+    socket-server:
+        restart: always
+        build:
+            context: ./socket-server
+            target: dev
+        develop:
+            watch:
+                - action: rebuild
+                  path: ./socket-server
+                  files:
+                      - ./socket-server/**/*.go
+                      - ./socket-server/go.mod
+                      - ./socket-server/go.sum
+        container_name: socket-server
+        hostname: socket-server
+        networks:
+            - mynet
+        ports:
+            - 5000:5000
 
-  db:
-    image: postgres:16-alpine
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
-      interval: 10s
-      retries: 5
-      start_period: 30s
-      timeout: 10s
-    container_name: db
-    hostname: db
-    networks:
-      - mynet
-    ports:
-      - 5431:5432
-      - 8080:8080
-    volumes:
-      - db:/var/lib/postgresql/data
-    environment:
-      - POSTGRES_USER=${POSTGRES_USER}
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
-      - POSTGRES_DB=${POSTGRES_DB}
+    db:
+        image: postgres:16-alpine
+        healthcheck:
+            test:
+                [
+                    'CMD-SHELL',
+                    'pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}',
+                ]
+            interval: 10s
+            retries: 5
+            start_period: 30s
+            timeout: 10s
+        container_name: db
+        hostname: db
+        networks:
+            - mynet
+        ports:
+            - 5431:5432
+            - 8080:8080
+        volumes:
+            - db:/var/lib/postgresql/data
+        environment:
+            - POSTGRES_USER=${POSTGRES_USER}
+            - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+            - POSTGRES_DB=${POSTGRES_DB}
 
 volumes:
-  db:
+    db:
 
 networks:
-  mynet:
-    driver: bridge
+    mynet:
+        driver: bridge
