@@ -25,7 +25,7 @@ jobs:
                   username: ${{ secrets.DOCKERHUB_USERNAME }}
                   password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
-            - name: Build front image and export to Docker Engine
+            - name: Build dev front image
               uses: docker/build-push-action@v6
               with:
                   context: '{{defaultContext}}:front'
@@ -45,7 +45,7 @@ jobs:
                   npm run ts:check && \
                   npm run test:unit"
 
-            - name: Build back image and export to Docker Engine
+            - name: Build dev back image
               uses: docker/build-push-action@v6
               with:
                   context: '{{defaultContext}}:back'
@@ -60,7 +60,7 @@ jobs:
               run: |
                   docker run --rm ${{ github.run_id }} ginkgo -r
 
-            - name: Build and push front image to Docker Hub
+            - name: Build and push prod front image to Docker Hub
               uses: docker/build-push-action@v6
               with:
                   context: '{{defaultContext}}:front'
@@ -70,7 +70,7 @@ jobs:
                   cache-from: type=gha
                   cache-to: type=gha,mode=max
 
-            - name: Build and push back image to Docker Hub
+            - name: Build and push prod back image to Docker Hub
               uses: docker/build-push-action@v6
               with:
                   context: '{{defaultContext}}:back'
