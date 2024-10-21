@@ -1,3 +1,9 @@
+##################################
+#### COMPOSE DOCUMENTATION 🐳 ####
+##################################
+### Run e2e tests with this compose file
+# $ docker compose -f docker-compose.test.yml up --abort-on-container-exit
+
 services:
     front:
         depends_on:
@@ -89,6 +95,8 @@ services:
         volumes:
             - ./e2e:/e2e
         entrypoint: ['npx', 'cypress', 'run']
+        environment:
+            - BASE_URL=http://front:3000
 
 volumes:
     db:
