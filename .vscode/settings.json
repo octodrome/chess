@@ -1,5 +1,11 @@
 {
-    "conventionalCommits.scopes": ["chess-legal-moves", "front", "back", "e2e"],
+    "conventionalCommits.scopes": [
+        "chess-legal-moves",
+        "front",
+        "back",
+        "e2e",
+        "ci"
+    ],
     "go.toolsEnvVars": {
         "GOOS": "js",
         "GOARCH": "wasm"
