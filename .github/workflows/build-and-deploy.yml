@@ -29,7 +29,7 @@ jobs:
               uses: docker/build-push-action@v6
               with:
                   context: '{{defaultContext}}:front'
-                  target: prod
+                  target: dev
                   push: false
                   load: true # Export to Docker Engine rather than pushing to a registry
                   tags: ${{ github.run_id }}
@@ -38,7 +38,11 @@ jobs:
 
             - name: Check front format/linting/typescript/unit-testing in Docker
               run: |
-                  docker run --rm ${{ github.run_id }} npm run format:check && npm run lint && npm run ts:check && npm run test:unit
+                  docker run --rm ${{ github.run_id }} \
+                  npm run format:check && \
+                  npm run lint && \
+                  npm run ts:check && \
+                  npm run test:unit
 
             - name: Build back image and export to Docker Engine
               uses: docker/build-push-action@v6
@@ -53,7 +57,8 @@ jobs:
 
             - name: Check back unit-testing in Docker Engine
               run: |
-                  docker run --rm ${{ github.run_id }} ginkgo -r
+                  docker run --rm ${{ github.run_id }} \
+                  ginkgo -r
 
             - name: Build and push front image to Docker Hub
               uses: docker/build-push-action@v6
