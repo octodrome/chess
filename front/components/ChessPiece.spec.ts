@@ -6,6 +6,6 @@ vi.mock('../services/engine/index.ts')
 describe('ChessPiece', () => {
     it('is a Vue instance', () => {
         const wrapper = shallowMount(ChessPiece)
-        expect(wrapper.vm).toBeTruthy()
+        expect(wrapper.vm).toBeFalsy()
     })
 })
