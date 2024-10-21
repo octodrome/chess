@@ -45,14 +45,6 @@ services:
         build:
             context: ./socket-server
             target: dev
-        develop:
-            watch:
-                - action: rebuild
-                  path: ./socket-server
-                  files:
-                      - ./socket-server/**/*.go
-                      - ./socket-server/go.mod
-                      - ./socket-server/go.sum
         container_name: socket-server
         hostname: socket-server
         networks:
