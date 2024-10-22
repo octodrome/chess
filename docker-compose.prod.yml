@@ -18,63 +18,66 @@
 # @TODO Use docker swarm instead of compose in production
 
 services:
-  front:
-    image: colinfaivre/chess_front_prod
-    container_name: front
-    hostname: front
-    networks:
-      - mynet
-    ports:
-      - 80:3000
+    front:
+        image: colinfaivre/chess_front_prod
+        container_name: front
+        hostname: front
+        networks:
+            - mynet
+        ports:
+            - 80:3000
 
-  back:
-    depends_on:
-      db:
-        condition: service_healthy
-        restart: true
-    image: colinfaivre/chess_back_prod
-    container_name: back
-    hostname: back
-    networks:
-      - mynet
-    ports:
-      - 8001:8001
-    environment:
-      - DB_HOST=${DB_HOST}
-      - POSTGRES_USER=${POSTGRES_USER}
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
-      - POSTGRES_DB=${POSTGRES_DB}
-      - DB_PORT=${DB_PORT}
-      - TOKEN_TTL=${TOKEN_TTL}
-      - JWT_PRIVATE_KEY=${JWT_PRIVATE_KEY}
-      - GIN_MODE=release
-      - FRONT_URL=${FRONT_URL}
+    back:
+        depends_on:
+            db:
+                condition: service_healthy
+        image: colinfaivre/chess_back_prod
+        container_name: back
+        hostname: back
+        networks:
+            - mynet
+        ports:
+            - 8001:8001
+        environment:
+            - DB_HOST=${DB_HOST}
+            - POSTGRES_USER=${POSTGRES_USER}
+            - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+            - POSTGRES_DB=${POSTGRES_DB}
+            - DB_PORT=${DB_PORT}
+            - TOKEN_TTL=${TOKEN_TTL}
+            - JWT_PRIVATE_KEY=${JWT_PRIVATE_KEY}
+            - GIN_MODE=release
+            - FRONT_URL=${FRONT_URL}
 
-  db:
-    image: postgres:16-alpine
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
-      interval: 10s
-      retries: 5
-      start_period: 30s
-      timeout: 10s
-    container_name: db
-    hostname: db
-    networks:
-      - mynet
-    ports:
-      - 5431:5432
-      - 8080:8080
-    volumes:
-      - db:/var/lib/postgresql/data
-    environment:
-      - POSTGRES_USER=${POSTGRES_USER}
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
-      - POSTGRES_DB=${POSTGRES_DB}
+    db:
+        image: postgres:16-alpine
+        healthcheck:
+            test:
+                [
+                    'CMD-SHELL',
+                    'pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}',
+                ]
+            interval: 10s
+            retries: 5
+            start_period: 30s
+            timeout: 10s
+        container_name: db
+        hostname: db
+        networks:
+            - mynet
+        ports:
+            - 5431:5432
+            - 8080:8080
+        volumes:
+            - db:/var/lib/postgresql/data
+        environment:
+            - POSTGRES_USER=${POSTGRES_USER}
+            - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+            - POSTGRES_DB=${POSTGRES_DB}
 
 volumes:
-  db:
+    db:
 
 networks:
-  mynet:
-    driver: bridge
+    mynet:
+        driver: bridge
