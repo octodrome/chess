@@ -24,6 +24,7 @@ const cancel = () => emit('close')
             type="text"
             :label="$t('modals.account.email')"
             disabled
+            data-cy="form_account_email_field"
         />
 
         <BaseTextField

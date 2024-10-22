@@ -22,6 +22,7 @@ const layoutStore = useLayoutStore()
                 icon="login"
                 :content="$t('options.signup')"
                 @click="layoutStore.openModal('Signup')"
+                data-cy="app_drawer_left_signup_button"
             />
 
             <BaseDrawerItem
@@ -43,6 +44,7 @@ const layoutStore = useLayoutStore()
                 icon="card-account-details"
                 :content="$t('options.account')"
                 @click="layoutStore.openModal('MyAccount')"
+                data-cy="app_drawer_left_account_button"
             />
 
             <BaseDrawerSeparator />
