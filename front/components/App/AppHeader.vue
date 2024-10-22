@@ -7,8 +7,8 @@ const layoutStore = useLayoutStore()
     <header class="p-2">
         <BaseButton
             type="icon"
-            @click="layoutStore.toggleLeftDrawer"
             data-cy="app_header_left_button"
+            @click="layoutStore.toggleLeftDrawer"
         >
             <BaseIcon
                 v-if="!layoutStore.drawer.leftIsOpened"

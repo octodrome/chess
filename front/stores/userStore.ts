@@ -33,8 +33,8 @@ export const useUserStore = defineStore('user', {
                 cookie.value = this.token
                 location.reload()
 
-                const humanGameStore = useHumanGameStore()
-                humanGameStore.getUserGames()
+                // const humanGameStore = useHumanGameStore()
+                // humanGameStore.getUserGames()
 
                 return { user, token }
             })

@@ -14,7 +14,7 @@ services:
         container_name: front
         hostname: front
         networks:
-            - mynet
+            - e2e_net
         ports:
             - 3000:3000
         healthcheck:
@@ -27,13 +27,14 @@ services:
         depends_on:
             db:
                 condition: service_healthy
+                restart: true
         build:
             context: ./back
             target: dev
         container_name: back
         hostname: back
         networks:
-            - mynet
+            - e2e_net
         ports:
             - 8001:8001
         environment:
@@ -54,7 +55,7 @@ services:
         container_name: socket-server
         hostname: socket-server
         networks:
-            - mynet
+            - e2e_net
         ports:
             - 5000:5000
 
@@ -73,11 +74,10 @@ services:
         container_name: db
         hostname: db
         networks:
-            - mynet
+            - e2e_net
         ports:
             - 5431:5432
-        volumes:
-            - db:/var/lib/postgresql/data
+            - 8080:8080
         environment:
             - POSTGRES_USER=${POSTGRES_USER}
             - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
@@ -87,20 +87,19 @@ services:
         image: cypress/included:13.15.0
         container_name: cypress
         depends_on:
-            front:
-                condition: service_healthy
+            - front
+            - back
+            - db
+            - socket-server
         networks:
-            - mynet
+            - e2e_net
         working_dir: /e2e
         volumes:
             - ./e2e:/e2e
-        entrypoint: ['npx', 'cypress', 'run']
+        entrypoint: ['npm', 'run', 'cy']
         environment:
             - BASE_URL=http://front:3000
 
-volumes:
-    db:
-
 networks:
-    mynet:
+    e2e_net:
         driver: bridge

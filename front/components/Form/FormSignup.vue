@@ -61,8 +61,8 @@ const submit = handleSubmit((values) => {
             label="Email"
             required
             :error="errors.email"
-            @change="handleEmailChange"
             data-cy="form_signup_email_field"
+            @change="handleEmailChange"
         />
 
         <BaseTextField
@@ -71,8 +71,8 @@ const submit = handleSubmit((values) => {
             label="Password"
             required
             :error="errors.password"
-            @change="handlePasswordChange"
             data-cy="form_signup_password_field"
+            @change="handlePasswordChange"
         />
 
         <BaseCheckbox
@@ -88,8 +88,8 @@ const submit = handleSubmit((values) => {
 
         <BaseButton
             type="text"
-            @click="submit"
             data-cy="form_signup_confirm_button"
+            @click="submit"
         >
             Confirm
         </BaseButton>
