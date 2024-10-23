@@ -40,6 +40,8 @@ services:
             - mynet
         ports:
             - 3000:3000
+        environment:
+            - REST_API_URL=http://localhost:8001/
 
     back:
         depends_on:
@@ -70,7 +72,7 @@ services:
             - DB_PORT=${DB_PORT}
             - TOKEN_TTL=${TOKEN_TTL}
             - JWT_PRIVATE_KEY=${JWT_PRIVATE_KEY}
-            - FRONT_URL=${FRONT_URL}
+            - FRONT_URL=http://localhost:3000
 
     socket-server:
         restart: always

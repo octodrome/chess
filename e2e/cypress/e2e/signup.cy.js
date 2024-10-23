@@ -5,7 +5,7 @@ describe('Signup Test', () => {
         cy.get('[data-cy="app_header_left_button"]').click()
         cy.get('[data-cy="app_drawer_left_signup_button"]').click()
         cy.get('[data-cy="form_signup_email_field"]').type('test@test.com')
-        cy.get('[data-cy="form_signup_password_field"]').type('1234')
+        cy.get('[data-cy="form_signup_password_field"]').type('12345678')
         cy.get('[data-cy="form_signup_confirm_button"]').click()
         cy.wait(2000) // page reload
         cy.get('[data-cy="app_header_left_button"]').click()
