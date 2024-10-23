@@ -21,6 +21,7 @@ const layoutStore = useLayoutStore()
                 v-if="!userStore.loggedIn"
                 icon="login"
                 :content="$t('options.signup')"
+                data-cy="app_drawer_left_signup_button"
                 @click="layoutStore.openModal('Signup')"
             />
 
@@ -42,6 +43,7 @@ const layoutStore = useLayoutStore()
                 v-if="userStore.loggedIn"
                 icon="card-account-details"
                 :content="$t('options.account')"
+                data-cy="app_drawer_left_account_button"
                 @click="layoutStore.openModal('MyAccount')"
             />
 

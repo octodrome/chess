@@ -61,6 +61,7 @@ const submit = handleSubmit((values) => {
             label="Email"
             required
             :error="errors.email"
+            data-cy="form_signup_email_field"
             @change="handleEmailChange"
         />
 
@@ -70,6 +71,7 @@ const submit = handleSubmit((values) => {
             label="Password"
             required
             :error="errors.password"
+            data-cy="form_signup_password_field"
             @change="handlePasswordChange"
         />
 
@@ -84,6 +86,12 @@ const submit = handleSubmit((values) => {
             Cancel
         </BaseButton>
 
-        <BaseButton type="text" @click="submit"> Confirm </BaseButton>
+        <BaseButton
+            type="text"
+            data-cy="form_signup_confirm_button"
+            @click="submit"
+        >
+            Confirm
+        </BaseButton>
     </BaseCardFooter>
 </template>

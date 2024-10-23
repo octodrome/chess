@@ -5,7 +5,11 @@ const layoutStore = useLayoutStore()
 
 <template>
     <header class="p-2">
-        <BaseButton type="icon" @click="layoutStore.toggleLeftDrawer">
+        <BaseButton
+            type="icon"
+            data-cy="app_header_left_button"
+            @click="layoutStore.toggleLeftDrawer"
+        >
             <BaseIcon
                 v-if="!layoutStore.drawer.leftIsOpened"
                 name="menu"
