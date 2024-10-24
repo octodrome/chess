@@ -4,6 +4,7 @@ import (
 	"errors"
 	"net/http"
 	"net/http/httptest"
+	"net/url"
 
 	"github.com/gin-gonic/gin"
 	"github.com/octodrome/chess/go-rest-api-poc/controller"
@@ -17,7 +18,10 @@ func GetTestGinContext() (*gin.Context, *httptest.ResponseRecorder) {
 
 	w := httptest.NewRecorder()
 	ctx, _ := gin.CreateTestContext(w)
-	ctx.Request = &http.Request{Header: make(http.Header)}
+	ctx.Request = &http.Request{
+		Header: make(http.Header),
+		URL:    &url.URL{},
+	}
 
 	return ctx, w
 }
@@ -25,6 +29,15 @@ func GetTestGinContext() (*gin.Context, *httptest.ResponseRecorder) {
 type mockUserRepo struct{}
 
 func (m *mockUserRepo) FindAllUsers() ([]model.User, error) {
+	return []model.User{
+		{
+			Email:    "test.user@gmail.com",
+			Password: "b4idkGfI8",
+		},
+	}, nil
+}
+
+func (m *mockUserRepo) FindUsersExcept(query uint) ([]model.User, error) {
 	return []model.User{
 		{
 			Email:    "test.user@gmail.com",
@@ -43,6 +56,10 @@ func (m *mockUserRepo) FindUserById(id string) (model.User, error) {
 type mockErrorUserRepo struct{}
 
 func (m *mockErrorUserRepo) FindAllUsers() ([]model.User, error) {
+	return nil, errors.New("error fetching users")
+}
+
+func (m *mockErrorUserRepo) FindUsersExcept(query uint) ([]model.User, error) {
 	return nil, errors.New("error fetching users")
 }
 
@@ -78,6 +95,50 @@ var _ = Describe("user", func() {
 
 				Expect(w.Code).To(Equal(http.StatusOK))
 				Expect(w.Body.String()).To(ContainSubstring("test.user@gmail.com"))
+			})
+		})
+	})
+
+	Describe("GetAllUsers() with except query parameter", func() {
+		var (
+			ctx *gin.Context
+			w   *httptest.ResponseRecorder
+		)
+
+		BeforeEach(func() {
+			ctx, w = GetTestGinContext()
+		})
+
+		Context("When a valid except query is provided", func() {
+			It("should return a 200 and a filtered list of users", func() {
+				mockRepo := &mockUserRepo{}
+				ctx.Request.URL.RawQuery = "except=1"
+				controller.GetAllUsers(ctx, mockRepo)
+
+				Expect(w.Code).To(Equal(http.StatusOK))
+				Expect(w.Body.String()).To(ContainSubstring("test.user@gmail.com"))
+			})
+		})
+
+		Context("When an invalid except query is provided", func() {
+			It("should return a 400 bad request and an error message", func() {
+				mockRepo := &mockUserRepo{}
+				ctx.Request.URL.RawQuery = "except=invalid"
+				controller.GetAllUsers(ctx, mockRepo)
+
+				Expect(w.Code).To(Equal(http.StatusBadRequest))
+				Expect(w.Body.String()).To(ContainSubstring("invalid syntax"))
+			})
+		})
+
+		Context("When FindUsersExcept returns an error", func() {
+			It("should return a 400 bad request and an error message", func() {
+				mockRepo := &mockErrorUserRepo{}
+				ctx.Request.URL.RawQuery = "except=1"
+				controller.GetAllUsers(ctx, mockRepo)
+
+				Expect(w.Code).To(Equal(http.StatusBadRequest))
+				Expect(w.Body.String()).To(ContainSubstring("error fetching users"))
 			})
 		})
 	})

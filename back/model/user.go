@@ -18,8 +18,9 @@ type User struct {
 }
 
 type UserRepository interface {
-	FindAllUsers() ([]User, error)
 	FindUserById(id string) (User, error)
+	FindAllUsers() ([]User, error)
+	FindUsersExcept(query uint) ([]User, error)
 }
 
 type userRepoImpl struct{}
@@ -71,6 +72,15 @@ func (r *userRepoImpl) FindUserById(id string) (User, error) {
 func (r *userRepoImpl) FindAllUsers() ([]User, error) {
 	var userList []User
 	err := database.Database.Find(&userList).Error
+	if err != nil {
+		return []User{}, err
+	}
+	return userList, nil
+}
+
+func (r *userRepoImpl) FindUsersExcept(query uint) ([]User, error) {
+	var userList []User
+	err := database.Database.Where("id <> ?", query).Find(&userList).Error
 	if err != nil {
 		return []User{}, err
 	}
