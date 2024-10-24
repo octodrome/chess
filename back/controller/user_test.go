@@ -99,6 +99,50 @@ var _ = Describe("user", func() {
 		})
 	})
 
+	Describe("GetAllUsers() with except query parameter", func() {
+		var (
+			ctx *gin.Context
+			w   *httptest.ResponseRecorder
+		)
+
+		BeforeEach(func() {
+			ctx, w = GetTestGinContext()
+		})
+
+		Context("When a valid except query is provided", func() {
+			It("should return a 200 and a filtered list of users", func() {
+				mockRepo := &mockUserRepo{}
+				ctx.Request.URL.RawQuery = "except=1"
+				controller.GetAllUsers(ctx, mockRepo)
+
+				Expect(w.Code).To(Equal(http.StatusOK))
+				Expect(w.Body.String()).To(ContainSubstring("test.user@gmail.com"))
+			})
+		})
+
+		Context("When an invalid except query is provided", func() {
+			It("should return a 400 bad request and an error message", func() {
+				mockRepo := &mockUserRepo{}
+				ctx.Request.URL.RawQuery = "except=invalid"
+				controller.GetAllUsers(ctx, mockRepo)
+
+				Expect(w.Code).To(Equal(http.StatusBadRequest))
+				Expect(w.Body.String()).To(ContainSubstring("invalid syntax"))
+			})
+		})
+
+		Context("When FindUsersExcept returns an error", func() {
+			It("should return a 400 bad request and an error message", func() {
+				mockRepo := &mockErrorUserRepo{}
+				ctx.Request.URL.RawQuery = "except=1"
+				controller.GetAllUsers(ctx, mockRepo)
+
+				Expect(w.Code).To(Equal(http.StatusBadRequest))
+				Expect(w.Body.String()).To(ContainSubstring("error fetching users"))
+			})
+		})
+	})
+
 	Describe("GetUserById()", func() {
 		var (
 			ctx *gin.Context
