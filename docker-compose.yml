@@ -1,19 +1,23 @@
 ##################################
 #### COMPOSE DOCUMENTATION 🐳 ####
 ##################################
-### Execute a command inside a running compose service (ex: show tables inside db):
+
+### 🛢 Execute a command inside a running compose service (ex: show tables inside db):
 # $ docker compose exec db bash
 # db:/# psql -h localhost -d chess -U chess -p 5432
 # chess=# \dt
-### Run unit tests in front service
+
+### 🧪 Run unit tests in front service
 # $ docker compose exec front sh
 # # npm run test:unit
 
-# @TODO Don't use environment variables to pass sensitive information. Use secrets instead:
+### 🧪 Run unit tests in back service
+# $ docker compose exec back sh
+# # ginkgo -r
+
+# @TODO Don't use environment variables to pass sensitive information. Use docker secrets instead:
 # https://docs.docker.com/compose/how-tos/use-secrets/
-# @TODO how to access db from command line?
 # @TODO db port?
-# @TODO see if networks, container names and host names can be removed, ports mapping?
 
 services:
     front:
