@@ -55,4 +55,12 @@ export default {
         cancel: 'Cancel',
         confirm: 'Confirm',
     },
+    snackbar: {
+        error: {
+            email_password: 'Wrong email or password',
+            game_creation: 'Error creating the game',
+            game_update: 'Error updating the game',
+        },
+        success: {},
+    },
 }

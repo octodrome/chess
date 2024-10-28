@@ -55,4 +55,14 @@ export default {
         cancel: 'Annuler',
         confirm: 'Confirmer',
     },
+    snackbar: {
+        error: {
+            email_password: 'Adresse email ou mot de passe incorrect',
+            game_creation:
+                'Une erreur est survenue pendant la création de la partie',
+            game_update:
+                "Une erreur est survenue pendant la modification des donnees de l'utilisateur",
+        },
+        success: {},
+    },
 }
