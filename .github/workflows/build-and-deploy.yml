@@ -117,7 +117,8 @@ jobs:
                       echo "${{ secrets.DOCKERHUB_PASSWORD }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
                       docker pull colinfaivre/chess_front_prod
                       docker pull colinfaivre/chess_back_prod
-                      cd chess_app
+                      cd chess
+                      git pull origin main
                       docker compose -f docker-compose.prod.yml down
                       docker compose -f docker-compose.prod.yml up --build --detach
                       docker image prune -f
