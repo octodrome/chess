@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import { useBoardStore } from '~/stores/boardStore'
 import { useHumanGameStore } from '~/stores/humanGameStore'
+import { useUserStore } from '~/stores/userStore'
 
 const route = useRoute()
 
 const humanGameStore = useHumanGameStore()
+const userStore = useUserStore()
 const boardStore = useBoardStore()
 
 const goToGame = (gameId: string) => {
@@ -29,7 +31,11 @@ const deleteThisGame = (gameId: string) => {
             v-for="game in humanGameStore.gameList"
             :key="game.ID"
             icon="account"
-            :content="game.guest.email"
+            :content="
+                game.creator.email === userStore.user?.email
+                    ? game.guest.email
+                    : game.creator.email
+            "
             action="delete"
             @click="goToGame(String(game.ID))"
             @delete="deleteThisGame(String(game.ID))"
