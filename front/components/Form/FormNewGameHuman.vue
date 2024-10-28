@@ -15,7 +15,7 @@ const layoutStore = useLayoutStore()
 
 const userId = userStore.user?.ID
 const opponents = await userStore.getAllOpponents(String(userId))
-const selectedOpponentId = ref(opponents[0].ID)
+const selectedOpponentId = ref(opponents[0]?.ID)
 
 const opponentsOptions = computed(() => {
     return opponents.map((user) => {
@@ -25,6 +25,8 @@ const opponentsOptions = computed(() => {
         }
     })
 })
+
+const userIsNotAlone = computed(() => opponents.length >= 1)
 
 const close = () => emit('close')
 
@@ -54,7 +56,10 @@ const start = () => {
 <template>
     <BaseCardHeader :title="$t('options.newHumanGame')" />
 
-    <BaseCardMain :text="$t('modals.new_game_human.text')">
+    <BaseCardMain
+        :text="$t('modals.new_game_human.text')"
+        v-if="userIsNotAlone"
+    >
         <BaseRadioGroup
             v-model="selectedOpponentId"
             :options="opponentsOptions"
@@ -64,12 +69,17 @@ const start = () => {
         />
     </BaseCardMain>
 
+    <BaseCardMain
+        :text="`${$t('modals.new_game_human.default')}: http://165.22.119.201`"
+        v-else
+    ></BaseCardMain>
+
     <BaseCardFooter>
         <BaseButton type="text" class="mr-2" @click="close">{{
             $t('actions.cancel')
         }}</BaseButton>
 
-        <BaseButton type="text" @click="start">{{
+        <BaseButton type="text" @click="start" v-if="userIsNotAlone">{{
             $t('actions.confirm')
         }}</BaseButton>
     </BaseCardFooter>
