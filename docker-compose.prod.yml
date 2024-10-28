@@ -4,12 +4,10 @@
 ### Run in production: ###
 # $ ssh root@165.22.119.201
 # $ cd chess_app/
-# $ docker compose -f docker-compose.prod.yml up --detach
-# $ docker compose -f docker-compose.prod.yml down
 # $ docker pull colinfaivre/chess_front_prod:latest
 # $ docker pull colinfaivre/chess_back_prod:latest
-# $ docker compose -f docker-compose.prod.yml build
-# $ docker compose -f docker-compose.prod.yml up --detach
+# $ docker compose -f docker-compose.prod.yml up --detach --build
+# $ docker compose -f docker-compose.prod.yml down
 ### Execute a command inside a running compose service
 # $ docker compose -f docker-compose.prod.yml exec db bash
 # db:/# psql -h localhost -d chess -U chess -p 5432
@@ -47,7 +45,6 @@ services:
             - TOKEN_TTL=${TOKEN_TTL}
             - JWT_PRIVATE_KEY=${JWT_PRIVATE_KEY}
             - GIN_MODE=release
-            - FRONT_URL=${FRONT_URL}
 
     db:
         image: postgres:16-alpine
