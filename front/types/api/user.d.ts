@@ -10,4 +10,6 @@ export interface ApiUser {
     password: string
     games_as_creator: ApiGame[]
     games_as_guest: ApiGame[]
+    pseudo: string
+    about: string
 }

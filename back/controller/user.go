@@ -44,3 +44,18 @@ func GetUserById(context *gin.Context, repo model.UserRepository) {
 	}
 	context.JSON(http.StatusOK, gin.H{"data": user})
 }
+
+func PutUser(context *gin.Context) {
+	var input model.UpdateUserInput
+	if err := context.ShouldBindJSON(&input); err != nil {
+		context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	game, err := model.UpdateUser(context.Param("id"), input)
+	if err != nil {
+		context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+	context.JSON(http.StatusOK, gin.H{"data": game})
+}

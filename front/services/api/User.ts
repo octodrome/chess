@@ -3,6 +3,7 @@ import type {
     ILoginUserRequestParams,
     ISignupUserRequestParams,
     ILoginUserResponse,
+    IUpdateUserRequestParams,
 } from '~/types/user'
 
 export default class User {
@@ -16,6 +17,14 @@ export default class User {
 
     async getUser(userId: string) {
         const { data } = await useCustomFetch(`api/user/${userId}`)
+        return data.value as Promise<{ data: ApiUser }>
+    }
+
+    async updateUser(userId: string, newUser: IUpdateUserRequestParams) {
+        const { data } = await useCustomFetch(`api/user/${userId}`, {
+            method: 'put',
+            body: newUser,
+        })
         return data.value as Promise<{ data: ApiUser }>
     }
 

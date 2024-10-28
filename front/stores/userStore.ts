@@ -5,6 +5,7 @@ import type { ApiUser } from '~/types/api/user'
 import type {
     ILoginUserRequestParams,
     ISignupUserRequestParams,
+    IUpdateUserRequestParams,
 } from '~/types/user'
 
 export const useUserStore = defineStore('user', {
@@ -67,6 +68,11 @@ export const useUserStore = defineStore('user', {
 
         async getUser(userId: string) {
             const user = await services.user.getUser(userId)
+            this.user = user.data
+        },
+
+        async updateUser(userId: string, params: IUpdateUserRequestParams) {
+            const user = await services.user.updateUser(userId, params)
             this.user = user.data
         },
     },

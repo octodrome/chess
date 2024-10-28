@@ -55,6 +55,7 @@ func serveApplication() {
 	protectedRoutes.GET("/user/:id", func(c *gin.Context) {
 		controller.GetUserById(c, userRepo)
 	})
+	protectedRoutes.PUT("/user/:id", controller.PutUser)
 	protectedRoutes.POST("/game", controller.AddGame)
 	protectedRoutes.GET("/game", controller.GetAllUserGames)
 	protectedRoutes.GET("/game/:id", controller.GetGameById)
