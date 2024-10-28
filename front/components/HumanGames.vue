@@ -33,8 +33,8 @@ const deleteThisGame = (gameId: string) => {
             icon="account"
             :content="
                 game.creator.email === userStore.user?.email
-                    ? game.guest.email
-                    : game.creator.email
+                    ? game.guest.pseudo || game.guest.email
+                    : game.creator.pseudo || game.creator.email
             "
             action="delete"
             @click="goToGame(String(game.ID))"

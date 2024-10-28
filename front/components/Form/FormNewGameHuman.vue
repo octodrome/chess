@@ -20,7 +20,7 @@ const selectedOpponentId = ref(opponents[0]?.ID)
 const opponentsOptions = computed(() => {
     return opponents.map((user) => {
         return {
-            label: user.email,
+            label: user.pseudo || user.email,
             value: user.ID,
         }
     })

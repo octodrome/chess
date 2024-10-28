@@ -23,7 +23,7 @@ export const useHumanGameStore = defineStore('humanGame', {
                 : state.currentGame?.creator
         },
 
-        opponentPseudo() {
+        pseudoFromEmail() {
             // @ts-ignore
             return this.opponent?.email.split('@')[0]
         },

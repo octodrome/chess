@@ -9,7 +9,10 @@ const layoutStore = useLayoutStore()
     <div>
         <BaseDrawerItem
             icon="account-circle"
-            :content="humanGameStore.opponentPseudo"
+            :content="
+                humanGameStore.opponent?.pseudo ||
+                humanGameStore.pseudoFromEmail
+            "
             action="message"
             @message="layoutStore.openModal('Chat')"
         />

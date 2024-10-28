@@ -42,9 +42,15 @@ onMounted(() => humanGameStore.getGame(route.params.id as string))
 
 <template>
     <div>
-        <BaseCardHeader :title="humanGameStore.opponent?.email || ''" />
+        <BaseCardHeader
+            :title="
+                humanGameStore.opponent?.pseudo ||
+                humanGameStore.opponent?.email ||
+                ''
+            "
+        />
 
-        <BaseCardMain :text="`Registered ${createdAt}`">
+        <BaseCardMain :text="humanGameStore.opponent?.about || ''">
             <div
                 v-for="message in messages"
                 :key="message.ID"
