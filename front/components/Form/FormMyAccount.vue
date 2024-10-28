@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import { useUserStore } from '~/stores/userStore'
 import { useLayoutStore } from '~/stores/layoutStore'
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const layoutStore = useLayoutStore()
 
 const pseudo = ref('')
@@ -25,9 +27,7 @@ const update = () => {
             cancel()
         })
         .catch(() => {
-            layoutStore.openSnackbarError(
-                "Une erreur est survenue pendant la modification des donnees de l'utilisateur"
-            )
+            layoutStore.openSnackbarError(t('snackbar.error.game_update'))
         })
 }
 </script>

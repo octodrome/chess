@@ -3,11 +3,13 @@ import { useUserStore } from '~/stores/userStore'
 import { useHumanGameStore } from '~/stores/humanGameStore'
 import { useBoardStore } from '~/stores/boardStore'
 import { useLayoutStore } from '~/stores/layoutStore'
+import { useI18n } from 'vue-i18n'
 
 const emit = defineEmits<{
     (e: 'close'): void
 }>()
 
+const { t } = useI18n()
 const userStore = useUserStore()
 const humanGameStore = useHumanGameStore()
 const boardStore = useBoardStore()
@@ -45,9 +47,7 @@ const start = () => {
                 navigateTo({ path: `/HumanGame/${game.ID}` })
             })
             .catch(() => {
-                layoutStore.openSnackbarError(
-                    'Une erreur est survenue pendant la création de la partie'
-                )
+                layoutStore.openSnackbarError(t('snackbar.error.game_creation'))
             })
     }
 }

@@ -3,7 +3,9 @@ import { useField, useForm } from 'vee-validate'
 import { boolean, object, string } from 'yup'
 import { useUserStore } from '~/stores/userStore'
 import { useLayoutStore } from '~/stores/layoutStore'
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const userStore = useUserStore()
 const layoutStore = useLayoutStore()
 
@@ -42,9 +44,7 @@ const submit = handleSubmit((values) => {
         .then(() => userStore.login(signupUserParams))
         .then(() => close())
         .catch(() =>
-            layoutStore.openSnackbarError(
-                'Adresse email ou mot de passe incorrect'
-            )
+            layoutStore.openSnackbarError(t('snackbar.error.email_password'))
         )
 })
 </script>
