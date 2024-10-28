@@ -39,6 +39,8 @@ export default {
         },
         new_game_human: {
             text: 'Choisissez votre adversaire parmi la liste des joueurs.',
+            default:
+                "Pas d'autres joueurs, partager l'URL de chess avec vos amis pour jouer contre eux",
             players: 'Joueurs',
         },
         settings: {
