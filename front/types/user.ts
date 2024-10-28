@@ -25,6 +25,11 @@ export interface ILoginUserResponse {
     token: string
 }
 
+export interface IUpdateUserRequestParams {
+    pseudo: string
+    about: string
+}
+
 export interface IUser {
     email: string
     createdAt: Date

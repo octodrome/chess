@@ -15,6 +15,8 @@ type User struct {
 	Password       string `gorm:"size:255;not null;" json:"-"`
 	GamesAsCreator []Game `gorm:"foreignKey:CreatorID;constraint:OnUpdate:CASCADE,OnDelete:SET NULL" json:"games_as_creator"`
 	GamesAsGuest   []Game `gorm:"foreignKey:GuestID;constraint:OnUpdate:CASCADE,OnDelete:SET NULL" json:"games_as_guest"`
+	Pseudo         string `gorm:"size:255" json:"pseudo"`
+	About          string `gorm:"size:255" json:"about"`
 }
 
 type UserRepository interface {
@@ -85,4 +87,19 @@ func (r *userRepoImpl) FindUsersExcept(query uint) ([]User, error) {
 		return []User{}, err
 	}
 	return userList, nil
+}
+
+type UpdateUserInput struct {
+	Pseudo string `json:"pseudo"`
+	About  string `json:"about"`
+}
+
+func UpdateUser(id string, input UpdateUserInput) (User, error) {
+	var updatedUser User
+	err := database.Database.Where("ID=?", id).First(&updatedUser).Error
+	if err != nil {
+		return User{}, err
+	}
+	database.Database.Model(&updatedUser).Updates(input)
+	return updatedUser, nil
 }

@@ -18,9 +18,7 @@ export default {
         account: {
             text: "Ajoutez quelques informations à propos de vous. Elles seront visibles quand d'autres joueurs choisiront de jouer avec vous",
             email: 'Email',
-            first_name: 'Prénom',
-            last_name: 'Nom',
-            age: 'Âge',
+            pseudo: 'Pseudo',
             about: 'À propos de moi',
         },
         new_game_computer: {

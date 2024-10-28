@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import { useUserStore } from '~/stores/userStore'
+import { useLayoutStore } from '~/stores/layoutStore'
 
-const firstName = ref('')
-const lastName = ref('')
-const age = ref('')
-const bio = ref('')
+const layoutStore = useLayoutStore()
+
+const pseudo = ref('')
+const about = ref('')
 
 const userStore = useUserStore()
 
@@ -13,6 +14,22 @@ const emit = defineEmits<{
 }>()
 
 const cancel = () => emit('close')
+
+const update = () => {
+    userStore
+        .updateUser(String(userStore.user?.ID), {
+            pseudo: pseudo.value,
+            about: about.value,
+        })
+        .then(() => {
+            cancel()
+        })
+        .catch(() => {
+            layoutStore.openSnackbarError(
+                "Une erreur est survenue pendant la modification des donnees de l'utilisateur"
+            )
+        })
+}
 </script>
 
 <template>
@@ -28,25 +45,15 @@ const cancel = () => emit('close')
         />
 
         <BaseTextField
-            v-model="firstName"
+            :model-value="userStore.user?.pseudo"
+            @update:model-value="(e) => (pseudo = e)"
             type="text"
-            :label="$t('modals.account.first_name')"
+            :label="$t('modals.account.pseudo')"
         />
 
         <BaseTextField
-            v-model="lastName"
-            type="text"
-            :label="$t('modals.account.last_name')"
-        />
-
-        <BaseTextField
-            v-model="age"
-            type="text"
-            :label="$t('modals.account.age')"
-        />
-
-        <BaseTextField
-            v-model="bio"
+            :model-value="userStore.user?.about"
+            @update:model-value="(e) => (about = e)"
             type="text"
             :label="$t('modals.account.about')"
         />
@@ -57,6 +64,8 @@ const cancel = () => emit('close')
             $t('actions.cancel')
         }}</BaseButton>
 
-        <BaseButton type="text">{{ $t('actions.confirm') }}</BaseButton>
+        <BaseButton type="text" @click="update">{{
+            $t('actions.confirm')
+        }}</BaseButton>
     </BaseCardFooter>
 </template>
