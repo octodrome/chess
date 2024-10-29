@@ -2,12 +2,14 @@
 import { useBoardStore } from '~/stores/boardStore'
 import { useHumanGameStore } from '~/stores/humanGameStore'
 import { useUserStore } from '~/stores/userStore'
+import { useLayoutStore } from '~/stores/layoutStore'
 
 const route = useRoute()
 
 const humanGameStore = useHumanGameStore()
 const userStore = useUserStore()
 const boardStore = useBoardStore()
+const layoutStore = useLayoutStore()
 
 const goToGame = (gameId: string) => {
     if (route.params.id === gameId) return
@@ -20,8 +22,10 @@ const goToGame = (gameId: string) => {
 }
 
 const deleteThisGame = (gameId: string) => {
-    humanGameStore.deleteGame(gameId)
-    if (route.params.id === gameId) navigateTo({ path: '/' })
+    layoutStore.openModal('Confirm', () => {
+        humanGameStore.deleteGame(gameId)
+        if (route.params.id === gameId) navigateTo({ path: '/' })
+    })
 }
 </script>
 

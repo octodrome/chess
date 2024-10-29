@@ -54,6 +54,9 @@ export default {
                 fr: 'Français',
             },
         },
+        confirm: {
+            text: 'Voulez-vous vraiment supprimer ce jeu?',
+        },
     },
     actions: {
         cancel: 'Annuler',

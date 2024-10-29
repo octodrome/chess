@@ -54,6 +54,9 @@ export default {
                 fr: 'French',
             },
         },
+        confirm: {
+            text: 'Are you sure you want to delete this game?',
+        },
     },
     actions: {
         cancel: 'Cancel',
