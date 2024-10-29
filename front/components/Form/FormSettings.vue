@@ -1,15 +1,19 @@
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
+
 const emit = defineEmits<{
     (e: 'close'): void
 }>()
 
 const displaySchemes = ref([
     {
-        label: 'Dark mode',
+        label: t('modals.settings.display_scheme.dark'),
         value: 'dark_mode',
     },
     {
-        label: 'Light mode',
+        label: t('modals.settings.display_scheme.light'),
         value: 'light_mode',
     },
 ])
@@ -19,11 +23,11 @@ const displayScheme = ref(
 
 const languages = ref([
     {
-        label: 'English',
+        label: t('modals.settings.language.en'),
         value: 'en',
     },
     {
-        label: 'French',
+        label: t('modals.settings.language.fr'),
         value: 'fr',
     },
 ])
