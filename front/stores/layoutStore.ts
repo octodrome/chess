@@ -12,6 +12,7 @@ export type IModalContent =
 export interface IModal {
     isOpened: boolean
     content: IModalContent
+    onConfirm?: Function
 }
 
 export const useLayoutStore = defineStore('layout', {
@@ -24,6 +25,7 @@ export const useLayoutStore = defineStore('layout', {
         modal: {
             isOpened: false,
             content: '',
+            onConfirm: undefined,
         } as IModal,
 
         snackbar: {
@@ -46,14 +48,16 @@ export const useLayoutStore = defineStore('layout', {
             this.drawer.rightIsOpened = false
         },
 
-        openModal(content: IModalContent) {
+        openModal(content: IModalContent, onConfirm?: Function) {
             this.modal.isOpened = true
             this.modal.content = content
+            this.modal.onConfirm = onConfirm
         },
 
         closeModal() {
             this.modal.isOpened = false
             this.modal.content = ''
+            this.modal.onConfirm = undefined
         },
 
         openSnackbarError(message: string) {

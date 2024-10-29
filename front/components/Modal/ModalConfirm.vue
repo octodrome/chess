@@ -1,18 +1,25 @@
 <script setup lang="ts">
+import { useLayoutStore } from '~/stores/layoutStore'
+
+const layoutStore = useLayoutStore()
+
 const emit = defineEmits<{
     (e: 'close'): void
 }>()
 
-const cancel = () => emit('close')
+const close = () => emit('close')
 
-const confirm = () => {}
+const confirm = () => {
+    if (layoutStore.modal.onConfirm) layoutStore.modal.onConfirm()
+    close()
+}
 </script>
 
 <template>
     <BaseCardMain :text="$t('modals.confirm.text')"></BaseCardMain>
 
     <BaseCardFooter>
-        <BaseButton type="text" class="mr-2" @click="cancel">{{
+        <BaseButton type="text" class="mr-2" @click="close">{{
             $t('actions.cancel')
         }}</BaseButton>
 

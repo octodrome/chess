@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useBoardStore } from '~/stores/boardStore'
 import { useComputerGameStore } from '~/stores/computerGameStore'
+import { useLayoutStore } from '~/stores/layoutStore'
 import type { IComputerGame } from '~/types/computerGame'
 
 const props = defineProps<{
@@ -10,6 +11,7 @@ const props = defineProps<{
 const route = useRoute()
 const boardStore = useBoardStore()
 const computerGameStore = useComputerGameStore()
+const layoutStore = useLayoutStore()
 
 const goToGame = (gameId: string) => {
     if (route.params.id === gameId) return
@@ -20,8 +22,10 @@ const goToGame = (gameId: string) => {
 }
 
 const deleteThisGame = (gameId: string) => {
-    computerGameStore.deleteGame(gameId)
-    if (route.params.id === gameId) navigateTo({ path: '/' })
+    layoutStore.openModal('Confirm', () => {
+        computerGameStore.deleteGame(gameId)
+        if (route.params.id === gameId) navigateTo({ path: '/' })
+    })
 }
 </script>
 
