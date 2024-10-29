@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { useComputerGameStore } from '~/stores/computerGameStore'
 import type { IColor } from '~/types/computerGame'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 const emit = defineEmits<{
     (e: 'close'): void
@@ -10,15 +13,15 @@ const computerGameStore = useComputerGameStore()
 
 const levels = ref([
     {
-        label: 'Easy',
+        label: t('modals.new_game_computer.level.easy'),
         value: 1,
     },
     {
-        label: 'Medium',
+        label: t('modals.new_game_computer.level.medium'),
         value: 2,
     },
     {
-        label: 'Hard',
+        label: t('modals.new_game_computer.level.hard'),
         value: 3,
     },
 ])
@@ -27,11 +30,11 @@ const color = ref('white' as IColor)
 
 const colors = ref([
     {
-        label: 'White',
+        label: t('modals.new_game_computer.color.white'),
         value: 'white',
     },
     {
-        label: 'Black',
+        label: t('modals.new_game_computer.color.black'),
         value: 'black',
     },
 ])

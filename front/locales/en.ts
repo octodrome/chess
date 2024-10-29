@@ -45,9 +45,13 @@ export default {
             text: 'Manage your preferences.',
             display_scheme: {
                 label: 'Choose your display scheme:',
+                dark: 'Dark mode',
+                light: 'Light mode',
             },
             language: {
                 label: 'Choose your language:',
+                en: 'English',
+                fr: 'French',
             },
         },
     },
