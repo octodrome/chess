@@ -5,13 +5,14 @@ const layoutStore = useLayoutStore()
 const props = defineProps<{ content: IModalContent }>()
 
 const modals = {
-    Login: resolveComponent('FormLogin'),
-    MyAccount: resolveComponent('FormMyAccount'),
-    NewGameComputer: resolveComponent('FormNewGameComputer'),
-    NewGameHuman: resolveComponent('FormNewGameHuman'),
-    Signup: resolveComponent('FormSignup'),
-    Chat: resolveComponent('ChessChat'),
-    Settings: resolveComponent('FormSettings'),
+    Login: resolveComponent('ModalLogin'),
+    MyAccount: resolveComponent('ModalMyAccount'),
+    NewGameComputer: resolveComponent('ModalNewGameComputer'),
+    NewGameHuman: resolveComponent('ModalNewGameHuman'),
+    Signup: resolveComponent('ModalSignup'),
+    Chat: resolveComponent('ModalChat'),
+    Settings: resolveComponent('ModalSettings'),
+    Confirm: resolveComponent('ModalConfirm'),
     '': '',
 }
 </script>

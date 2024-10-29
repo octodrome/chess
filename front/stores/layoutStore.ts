@@ -6,6 +6,7 @@ export type IModalContent =
     | 'Signup'
     | 'Chat'
     | 'Settings'
+    | 'Confirm'
     | ''
 
 export interface IModal {
