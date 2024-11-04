@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"log"
 	"net/http"
+	"strconv"
 
 	"github.com/gorilla/websocket"
 	"github.com/octodrome/chess/socket-server/model"
@@ -97,14 +98,20 @@ func leaveGame(conn *websocket.Conn, params JoinGameParams) {
 }
 
 func broadcastMessage(msg model.Message) {
-	for _, connections := range gameConnections {
-		for _, conn := range connections {
-			if err := conn.WriteJSON(map[string]interface{}{
-				"event": "message",
-				"data":  msg,
-			}); err != nil {
-				log.Printf("Error broadcasting message: %v\n", err)
-			}
+	// Get the connections for the specific game ID
+	connections, ok := gameConnections[strconv.FormatUint(uint64(msg.GameID), 10)]
+	if !ok {
+		log.Printf("No connections found for game ID: %d\n", msg.GameID)
+		return
+	}
+
+	// Send the message to all connections in the specific game
+	for _, conn := range connections {
+		if err := conn.WriteJSON(map[string]interface{}{
+			"event": "message",
+			"data":  msg,
+		}); err != nil {
+			log.Printf("Error broadcasting message to connection: %v\n", err)
 		}
 	}
 }
