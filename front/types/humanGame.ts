@@ -30,6 +30,7 @@ export interface IUpdateHumanGameRequestParams {
 
 export interface IMessage {
     ID?: number
+    CreatedAt?: Date
     token: string
     game_id: number
     to_id: number
