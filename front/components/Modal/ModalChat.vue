@@ -76,6 +76,9 @@ onMounted(() => humanGameStore.getGame(route.params.id as string))
                     }"
                 >
                     {{ message.content }}
+                    <div class="time">
+                        {{ moment(message.CreatedAt).format('hh:mm') }}
+                    </div>
                 </div>
             </div>
         </BaseCardMain>
@@ -103,11 +106,12 @@ onMounted(() => humanGameStore.getGame(route.params.id as string))
     </div>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 .message {
     width: 70%;
     margin-top: 1px;
-    padding: 2px 6px 2px 6px;
+    padding: 2px 35px 10px 6px;
+    position: relative;
 }
 .is-right {
     text-align: right;
@@ -115,14 +119,26 @@ onMounted(() => humanGameStore.getGame(route.params.id as string))
     color: white;
     border-radius: 8px 0 8px 8px;
     align-self: flex-end;
+    .time {
+        color: #d5d5d5;
+    }
 }
 .is-left {
     background-color: #d5d5d5;
     border-radius: 0 8px 8px 8px;
+    .time {
+        color: #607d8b;
+    }
 }
 /* Add a space between groups of same user messages */
 .is-right + .is-left,
 .is-left + .is-right {
     margin-top: 4px;
+}
+.time {
+    position: absolute;
+    right: 5px;
+    bottom: 2px;
+    font-size: 9px;
 }
 </style>
