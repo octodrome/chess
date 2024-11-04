@@ -1,4 +1,4 @@
-module github/octodrome/chess/socket-server
+module github.com/octodrome/chess/socket-server
 
 go 1.23.1
 

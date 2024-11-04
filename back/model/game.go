@@ -22,7 +22,7 @@ func (game *Game) Save() (*Game, error) {
 		return &Game{}, err
 	}
 
-	err = database.Database.Preload("Creator").Preload("Guest").First(&game, game.ID).Error
+	err = database.Database.Preload("Creator").Preload("Guest").Preload("Messages").First(&game, game.ID).Error
 	if err != nil {
 		return &Game{}, err
 	}

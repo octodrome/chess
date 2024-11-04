@@ -56,11 +56,14 @@ func serveApplication() {
 		controller.GetUserById(c, userRepo)
 	})
 	protectedRoutes.PUT("/user/:id", controller.PutUser)
+
 	protectedRoutes.POST("/game", controller.AddGame)
 	protectedRoutes.GET("/game", controller.GetAllUserGames)
 	protectedRoutes.GET("/game/:id", controller.GetGameById)
 	protectedRoutes.DELETE("/game/:id", controller.DeleteGame)
 	protectedRoutes.PUT("/game/:id", controller.PutGame)
+	protectedRoutes.GET("/game/:id/messages", controller.GetGameMessages)
+	protectedRoutes.POST("/game/:id/messages", controller.AddGameMessage)
 
 	router.Run(":8001")
 	fmt.Println("Server running on port 8001")

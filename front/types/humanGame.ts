@@ -29,6 +29,10 @@ export interface IUpdateHumanGameRequestParams {
 }
 
 export interface IMessage {
-    from: string
+    ID?: number
+    token: string
+    game_id: number
+    to_id: number
+    from_id: number
     content: string
 }
