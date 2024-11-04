@@ -6,12 +6,9 @@ import (
 	"net/http"
 
 	"github.com/gorilla/websocket"
+	"github.com/octodrome/chess/socket-server/model"
+	"github.com/octodrome/chess/socket-server/services"
 )
-
-type Message struct {
-	From    string `json:"from"`
-	Content string `json:"content"`
-}
 
 type JoinGameParams struct {
 	UserID string `json:"userId"`
@@ -65,21 +62,29 @@ func handleConnections(w http.ResponseWriter, r *http.Request) {
 				leaveGame(ws, params)
 			}
 		case "message":
-			var msg Message
+			var msg model.Message
 			if err := mapToStruct(incoming["data"], &msg); err == nil {
-				broadcastMessage(msg)
+				gameID := msg.GameID
+				log.Printf("Successfully mapped message: %+v", msg) // Log the mapped message
+
+				if err := services.SendMessageToAPI(gameID, msg); err != nil {
+					log.Printf("Error sending message to API: %v", err)
+				} else {
+					broadcastMessage(msg)
+				}
+			} else {
+				log.Printf("Error mapping incoming data to Message struct: %v", err)
+				log.Printf("Incoming data for message: %+v", incoming["data"]) // Log the raw incoming data for inspection
 			}
 		}
 	}
 }
 
-// Join game logic
 func joinGame(conn *websocket.Conn, params JoinGameParams) {
 	gameConnections[params.GameID] = append(gameConnections[params.GameID], conn)
 	log.Printf("User %s joined game %s\n", params.UserID, params.GameID)
 }
 
-// Leave game logic
 func leaveGame(conn *websocket.Conn, params JoinGameParams) {
 	connections := gameConnections[params.GameID]
 	for i, c := range connections {
@@ -91,8 +96,7 @@ func leaveGame(conn *websocket.Conn, params JoinGameParams) {
 	log.Printf("User %s left game %s\n", params.UserID, params.GameID)
 }
 
-// Broadcast message to all connections
-func broadcastMessage(msg Message) {
+func broadcastMessage(msg model.Message) {
 	for _, connections := range gameConnections {
 		for _, conn := range connections {
 			if err := conn.WriteJSON(map[string]interface{}{

@@ -1,4 +1,5 @@
 import type { ApiUser } from './user'
+import type { IMessage } from '~/types/humanGame'
 
 export interface ApiGame {
     ID: number
@@ -12,5 +13,5 @@ export interface ApiGame {
     guest: ApiUser
     has_to_play_id: number
     moves: string
-    messages: ApiMessage[]
+    messages: IMessage[]
 }

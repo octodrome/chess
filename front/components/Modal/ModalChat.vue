@@ -20,17 +20,28 @@ const createdAt = computed(() =>
 const isUserMessage = computed(
     () => (message: IMessage) =>
         humanGameStore.opponent
-            ? message.from !== humanGameStore.opponent.email
+            ? message.from_id !== humanGameStore.opponent.ID
             : false
 )
 const messages = computed(() =>
     humanGameStore.currentGame ? humanGameStore.currentGame.messages : []
 )
 
+const userToken = useCookie('token')
+
 const sendMessage = () => {
-    if (userStore.user && !isMessageEmpty.value) {
+    if (
+        userStore.user &&
+        !isMessageEmpty.value &&
+        userToken.value &&
+        humanGameStore.currentGame &&
+        humanGameStore.opponent
+    ) {
         services.socket.sendMessage({
-            from: userStore.user.email,
+            token: userToken.value,
+            game_id: humanGameStore.currentGame.ID,
+            to_id: humanGameStore.opponent.ID,
+            from_id: userStore.user.ID,
             content: messageContent.value,
         })
         messageContent.value = ''
@@ -51,17 +62,18 @@ onMounted(() => humanGameStore.getGame(route.params.id as string))
         />
 
         <BaseCardMain :text="humanGameStore.opponent?.about || ''">
-            <div
-                v-for="message in messages"
-                :key="message.ID"
-                class="message"
-                :class="{
-                    'is-right': isUserMessage(message),
-                    'is-left': !isUserMessage(message),
-                    'align-self-end': isUserMessage(message),
-                }"
-            >
-                {{ message.content }}
+            <div class="flex flex-col">
+                <div
+                    v-for="message in messages"
+                    :key="message.ID"
+                    class="message"
+                    :class="{
+                        'is-right': isUserMessage(message),
+                        'is-left': !isUserMessage(message),
+                    }"
+                >
+                    {{ message.content }}
+                </div>
             </div>
         </BaseCardMain>
 
@@ -99,10 +111,11 @@ onMounted(() => humanGameStore.getGame(route.params.id as string))
     background-color: #607d8b;
     color: white;
     border-radius: 8px 0 8px 8px;
+    align-self: flex-end;
 }
 .is-left {
     background-color: #d5d5d5;
-    border-radius: 8px 8px 8px 0;
+    border-radius: 0 8px 8px 8px;
 }
 /* Add a space between groups of same user messages */
 .is-right + .is-left,
