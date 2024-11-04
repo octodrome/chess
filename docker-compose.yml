@@ -46,6 +46,7 @@ services:
             - 3000:3000
         environment:
             - REST_API_URL=http://localhost:8001/
+            - SOCKET_SERVER_URL=ws://localhost:5000/ws
 
     back:
         depends_on:

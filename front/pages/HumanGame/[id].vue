@@ -2,8 +2,10 @@
 import { useUserStore } from '~/stores/userStore'
 import { useHumanGameStore } from '~/stores/humanGameStore'
 import { useBoardStore } from '~/stores/boardStore'
-import services from '@/services'
+import { WebSocketClient } from '~/plugins/websocket.client'
 
+const { $webSocketClient } = useNuxtApp()
+const socketClient = $webSocketClient as WebSocketClient
 const route = useRoute()
 const userStore = useUserStore()
 const boardStore = useBoardStore()
@@ -20,7 +22,7 @@ onMounted(() => joinGame(route.params.id as string))
 const joinGame = (gameId: string) => {
     humanGameStore.getGame(gameId)
     if (userStore.user) {
-        services.socket.joinGame({
+        socketClient.joinGame({
             gameId: gameId,
             userId: userStore.user.email,
         })
@@ -29,7 +31,7 @@ const joinGame = (gameId: string) => {
 
 const leaveGame = (gameId: string) => {
     if (userStore.user) {
-        services.socket.leaveGame({
+        socketClient.leaveGame({
             gameId: gameId,
             userId: userStore.user.email,
         })
