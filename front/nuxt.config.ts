@@ -30,6 +30,7 @@ export default defineNuxtConfig({
     runtimeConfig: {
         public: {
             restApiUrl: process.env.REST_API_URL,
+            socketServerUrl: process.env.SOCKET_SERVER_URL,
         },
     },
 })

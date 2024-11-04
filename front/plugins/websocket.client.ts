@@ -1,3 +1,4 @@
+// plugins/webSocket.client.ts
 import { useHumanGameStore } from '~/stores/humanGameStore'
 import { useUserStore } from '~/stores/userStore'
 import type { IMessage } from '~/types/humanGame'
@@ -7,17 +8,17 @@ interface IjoinGameParams {
     gameId: string
 }
 
-export default class WebSocketClient {
+export class WebSocketClient {
     socket: WebSocket | null = null
 
-    constructor() {
+    constructor(socketUrl: string) {
         if (process.client) {
-            this.connect()
+            this.connect(socketUrl)
         }
     }
 
-    connect() {
-        this.socket = new WebSocket('ws://localhost:5000/ws')
+    connect(socketUrl: string) {
+        this.socket = new WebSocket(socketUrl)
 
         this.socket.onopen = () => {
             console.log('🧦 Connected to WebSocket server')
@@ -77,3 +78,14 @@ export default class WebSocketClient {
         }
     }
 }
+
+// Define the plugin to inject the WebSocketClient
+export default defineNuxtPlugin((nuxtApp) => {
+    const config = useRuntimeConfig()
+    const socketClient = new WebSocketClient(
+        config.public.socketServerUrl as string
+    )
+
+    // Inject into Nuxt’s global context
+    nuxtApp.provide('webSocketClient', socketClient as WebSocketClient)
+})

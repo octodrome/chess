@@ -2,8 +2,11 @@
 import { useHumanGameStore } from '~/stores/humanGameStore'
 import { useUserStore } from '~/stores/userStore'
 import moment from 'moment'
-import services from '~/services'
 import type { IMessage } from '~/types/humanGame'
+import { WebSocketClient } from '~/plugins/websocket.client'
+
+const { $webSocketClient } = useNuxtApp()
+const socketClient = $webSocketClient as WebSocketClient
 
 const route = useRoute()
 const humanGameStore = useHumanGameStore()
@@ -37,7 +40,7 @@ const sendMessage = () => {
         humanGameStore.currentGame &&
         humanGameStore.opponent
     ) {
-        services.socket.sendMessage({
+        socketClient.sendMessage({
             token: userToken.value,
             game_id: humanGameStore.currentGame.ID,
             to_id: humanGameStore.opponent.ID,
