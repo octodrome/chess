@@ -9,7 +9,6 @@ export default {
         account: 'Account',
     },
     gameInfos: {
-        level: 'Level',
         round: 'Round',
         whiteToPlay: 'White to play',
         blackToPlay: 'Black to play',
