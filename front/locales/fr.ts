@@ -9,7 +9,6 @@ export default {
         account: 'Mon compte',
     },
     gameInfos: {
-        level: 'Niveau',
         round: 'Tour',
         whiteToPlay: 'Trait aux blancs',
         blackToPlay: 'Trait aux noirs',

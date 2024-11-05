@@ -18,11 +18,7 @@ const isComputerThinking = computed(() => !boardStore.playerHasToPlay)
     <ul>
         <BaseDrawerItem
             :icon="isComputerThinking ? 'robot-angry' : 'robot'"
-            :content="computerName"
-        />
-
-        <BaseDrawerItem
-            :content="`${$t('gameInfos.level')} ${computerLevel}`"
+            :content="`${computerName} #${computerLevel}`"
         />
     </ul>
 </template>
