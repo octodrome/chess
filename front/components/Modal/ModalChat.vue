@@ -15,11 +15,6 @@ const userStore = useUserStore()
 const messageContent = ref('')
 
 const isMessageEmpty = computed(() => messageContent.value.trim().length === 0)
-const createdAt = computed(() =>
-    humanGameStore.opponent
-        ? moment(humanGameStore.opponent.CreatedAt).fromNow()
-        : ''
-)
 const isUserMessage = computed(
     () => (message: IMessage) =>
         humanGameStore.opponent
@@ -51,7 +46,24 @@ const sendMessage = () => {
     }
 }
 
-onMounted(() => humanGameStore.getGame(route.params.id as string))
+const chatContainer = ref(null)
+
+const scrollToBottom = () => {
+    if (chatContainer.value) {
+        ;(chatContainer.value as HTMLElement).scrollTop = (
+            chatContainer.value as HTMLElement
+        ).scrollHeight
+    }
+}
+
+watch(messages, () => {
+    nextTick(() => scrollToBottom())
+})
+
+onMounted(() => {
+    humanGameStore.getGame(route.params.id as string)
+    scrollToBottom()
+})
 </script>
 
 <template>
@@ -65,7 +77,10 @@ onMounted(() => humanGameStore.getGame(route.params.id as string))
         />
 
         <BaseCardMain :text="humanGameStore.opponent?.about || ''">
-            <div class="flex flex-col">
+            <div
+                class="flex flex-col max-h-80 overflow-y-scroll"
+                ref="chatContainer"
+            >
                 <div
                     v-for="message in messages"
                     :key="message.ID"
