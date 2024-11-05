@@ -83,7 +83,7 @@ const submit = handleSubmit((values) => {
 
     <BaseCardFooter>
         <BaseButton type="text" class="mr-2" @click="close">
-            Cancel
+            {{ $t('actions.cancel') }}
         </BaseButton>
 
         <BaseButton
@@ -91,7 +91,7 @@ const submit = handleSubmit((values) => {
             data-cy="form_signup_confirm_button"
             @click="submit"
         >
-            Confirm
+            {{ $t('actions.confirm') }}
         </BaseButton>
     </BaseCardFooter>
 </template>

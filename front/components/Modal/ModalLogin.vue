@@ -67,10 +67,12 @@ const submit = handleSubmit((values) => {
     </BaseCardMain>
 
     <BaseCardFooter>
-        <BaseButton type="text" class="mr-2" @click="close()"
-            >Cancel</BaseButton
-        >
+        <BaseButton type="text" class="mr-2" @click="close()">{{
+            $t('actions.cancel')
+        }}</BaseButton>
 
-        <BaseButton type="text" @click="submit">Confirm</BaseButton>
+        <BaseButton type="text" @click="submit">{{
+            $t('actions.confirm')
+        }}</BaseButton>
     </BaseCardFooter>
 </template>
