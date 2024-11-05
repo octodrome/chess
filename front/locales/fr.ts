@@ -71,4 +71,5 @@ export default {
         },
         success: {},
     },
+    credits: 'Fait avec ♥ par',
 }

@@ -69,4 +69,5 @@ export default {
         },
         success: {},
     },
+    credits: 'Made with ♥ by',
 }
