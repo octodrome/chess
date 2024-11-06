@@ -78,8 +78,8 @@ onMounted(() => {
 
         <BaseCardMain :text="humanGameStore.opponent?.about || ''">
             <div
-                class="flex flex-col max-h-80 overflow-y-scroll"
                 ref="chatContainer"
+                class="flex flex-col max-h-80 overflow-y-scroll"
             >
                 <div
                     v-for="message in messages"

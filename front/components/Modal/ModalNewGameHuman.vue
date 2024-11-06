@@ -57,8 +57,8 @@ const start = () => {
     <BaseCardHeader :title="$t('options.newHumanGame')" />
 
     <BaseCardMain
-        :text="$t('modals.new_game_human.text')"
         v-if="userIsNotAlone"
+        :text="$t('modals.new_game_human.text')"
     >
         <BaseRadioGroup
             v-model="selectedOpponentId"
@@ -70,8 +70,8 @@ const start = () => {
     </BaseCardMain>
 
     <BaseCardMain
-        :text="`${$t('modals.new_game_human.default')}: http://165.22.119.201`"
         v-else
+        :text="`${$t('modals.new_game_human.default')}: http://165.22.119.201`"
     ></BaseCardMain>
 
     <BaseCardFooter>
@@ -79,7 +79,7 @@ const start = () => {
             $t('actions.cancel')
         }}</BaseButton>
 
-        <BaseButton type="text" @click="start" v-if="userIsNotAlone">{{
+        <BaseButton v-if="userIsNotAlone" type="text" @click="start">{{
             $t('actions.confirm')
         }}</BaseButton>
     </BaseCardFooter>

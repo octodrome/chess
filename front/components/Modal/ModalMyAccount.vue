@@ -45,17 +45,17 @@ const update = () => {
         />
 
         <BaseTextField
-            :model-value="userStore.user?.pseudo"
-            @update:model-value="(e) => (pseudo = e)"
             type="text"
             :label="$t('modals.account.pseudo')"
+            :model-value="userStore.user?.pseudo"
+            @update:model-value="(e: Event) => (pseudo = e)"
         />
 
         <BaseTextField
-            :model-value="userStore.user?.about"
-            @update:model-value="(e) => (about = e)"
-            type="text"
             :label="$t('modals.account.about')"
+            type="text"
+            :model-value="userStore.user?.about"
+            @update:model-value="(e: Event) => (about = e)"
         />
     </BaseCardMain>
 
