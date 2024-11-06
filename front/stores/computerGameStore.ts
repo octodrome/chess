@@ -24,15 +24,17 @@ export const useComputerGameStore = defineStore('computerGame', {
                 })
         },
 
-        sendMove(move: string) {
+        sendMoves(moves: string[]) {
+            const lastMove = moves[moves.length - 1]
+
             if (this.currentGame) {
                 // @TODO update the lib to prevent from creating a second object like this
                 const game = new Game(this.currentGame.fen)
-                const newFen = game.addMove(move)
+                const newFen = game.addMove(lastMove)
                 const updatedGame = new Game(newFen)
 
                 return services.localGame
-                    .updateLocalGame({ id: this.currentGame.id, newFen })
+                    .updateLocalGame({ id: this.currentGame.id, newFen, moves })
                     .then((newGame) => {
                         this.SET_CURRENT_GAME(newGame)
                         const boardStore = useBoardStore()
@@ -43,6 +45,7 @@ export const useComputerGameStore = defineStore('computerGame', {
                             round: updatedGame.state.fullMoveClock,
                             fenBoard: updatedGame.state.fenBoard,
                             legalMoves: updatedGame.scan.legalMoves,
+                            moves: moves,
                         })
                         return newGame
                     })
@@ -59,6 +62,7 @@ export const useComputerGameStore = defineStore('computerGame', {
 
         async getGame(gameId: string) {
             return services.localGame.getLocalGame(gameId).then((game) => {
+                console.log('🤖___computer_game___', game)
                 const gameAnalysis = new Game(game.fen)
 
                 this.SET_CURRENT_GAME(game)
@@ -70,6 +74,7 @@ export const useComputerGameStore = defineStore('computerGame', {
                     round: gameAnalysis.state.fullMoveClock,
                     fenBoard: gameAnalysis.state.fenBoard,
                     legalMoves: gameAnalysis.scan.legalMoves,
+                    moves: game.moves,
                 })
                 return game
             })

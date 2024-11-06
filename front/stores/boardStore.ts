@@ -137,16 +137,14 @@ export const useBoardStore = defineStore('board', {
             // @TODO🐛 when coming back on a computer game played before
             // after playing one move the computer plays on white side
             const computerGameStore = useComputerGameStore()
-            computerGameStore
-                .sendMove(this.moves[this.moves.length - 1])
-                .then(() => {
-                    services.engine
-                        .sendMove(this.movesAsString)
-                        .then((move: string) => {
-                            this.move(getMoveFromAN(move))
-                            computerGameStore.sendMove(move)
-                        })
-                })
+            computerGameStore.sendMoves(this.moves).then(() => {
+                services.engine
+                    .sendMove(this.movesAsString)
+                    .then((move: string) => {
+                        this.move(getMoveFromAN(move))
+                        computerGameStore.sendMoves(this.moves)
+                    })
+            })
         },
 
         sendMoveToPlayer() {
@@ -181,6 +179,7 @@ export const useBoardStore = defineStore('board', {
             round,
             fenBoard,
             legalMoves,
+            moves,
         }) {
             this.SET_OPPONENT_TYPE(opponentType)
             this.SET_PLAYER_COLOR(playerColor)
@@ -188,6 +187,7 @@ export const useBoardStore = defineStore('board', {
             this.SET_ROUND(round)
             this.SET_BOARD(fenBoard)
             this.SET_LEGAL_MOVES(legalMoves)
+            this.moves = moves
         },
 
         initEmptyBoard() {

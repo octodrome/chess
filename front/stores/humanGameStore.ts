@@ -64,6 +64,7 @@ export const useHumanGameStore = defineStore('humanGame', {
 
         async getGame(gameId: string) {
             return services.game.getGame(gameId).then((game) => {
+                console.log('👨‍💻___human_game___', game)
                 this.currentGame = game.data
                 const boardStore = useBoardStore()
                 boardStore.continueGame('human')

@@ -34,11 +34,13 @@ export async function findOneGameInLocalDB(id: string): Promise<IComputerGame> {
 
 export async function updateOneGameInLocalDB(
     id: string,
-    newFen: string
+    newFen: string,
+    moves: string[]
 ): Promise<IComputerGame> {
     const gameToUpdate = await findOneGameInLocalDB(id)
     gameToUpdate.updatedAt = new Date()
     gameToUpdate.fen = newFen
+    gameToUpdate.moves = moves
     const newGameList = (await findAllGamesInLocalDB()).filter(
         (game) => game.id !== id
     )
