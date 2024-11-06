@@ -15,6 +15,7 @@ export interface ICreateComputerGameParams {
 export interface IUpdateComputerGameParams {
     id: string
     newFen: string
+    moves: string[]
 }
 
 export interface IComputerGame {
@@ -25,4 +26,5 @@ export interface IComputerGame {
     playerColor: IColor
     computerLevel: number
     fen: string
+    moves: string[]
 }

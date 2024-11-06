@@ -43,6 +43,7 @@ describe('ComputerGame Store', () => {
             playerColor: 'white',
             computerLevel: 1,
             fen: 'fake-fen',
+            moves: [],
         }
 
         it('createGame()', async () => {

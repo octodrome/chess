@@ -48,6 +48,7 @@ export default class LocalGame {
             computerLevel: params.computerLevel,
             computerName: uniqueNamesGenerator(nameGeneretorConfig),
             fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1',
+            moves: [],
         }
         return await createGameInLocalDB(game)
     }
@@ -55,7 +56,11 @@ export default class LocalGame {
     async updateLocalGame(
         params: IUpdateComputerGameParams
     ): Promise<IComputerGame> {
-        return await updateOneGameInLocalDB(params.id, params.newFen)
+        return await updateOneGameInLocalDB(
+            params.id,
+            params.newFen,
+            params.moves
+        )
     }
 
     async deleteLocalGame(id: string): Promise<IComputerGame> {
