@@ -180,6 +180,8 @@ export const useBoardStore = defineStore('board', {
             fenBoard,
             legalMoves,
             moves,
+            creator_captured_pieces,
+            guest_captured_pieces,
         }) {
             this.SET_OPPONENT_TYPE(opponentType)
             this.SET_PLAYER_COLOR(playerColor)
@@ -187,6 +189,8 @@ export const useBoardStore = defineStore('board', {
             this.SET_ROUND(round)
             this.SET_BOARD(fenBoard)
             this.SET_LEGAL_MOVES(legalMoves)
+            this.playerCapturedPieces = creator_captured_pieces
+            this.computerCapturedPieces = guest_captured_pieces
             this.moves = moves
         },
 

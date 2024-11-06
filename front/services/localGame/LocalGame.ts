@@ -49,6 +49,8 @@ export default class LocalGame {
             computerName: uniqueNamesGenerator(nameGeneretorConfig),
             fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1',
             moves: [],
+            creator_captured_pieces: [],
+            guest_captured_pieces: [],
         }
         return await createGameInLocalDB(game)
     }
@@ -59,7 +61,9 @@ export default class LocalGame {
         return await updateOneGameInLocalDB(
             params.id,
             params.newFen,
-            params.moves
+            params.moves,
+            params.creator_captured_pieces,
+            params.guest_captured_pieces
         )
     }
 

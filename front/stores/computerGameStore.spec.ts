@@ -44,6 +44,8 @@ describe('ComputerGame Store', () => {
             computerLevel: 1,
             fen: 'fake-fen',
             moves: [],
+            creator_captured_pieces: [],
+            guest_captured_pieces: [],
         }
 
         it('createGame()', async () => {
