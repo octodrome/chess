@@ -34,7 +34,15 @@ export const useComputerGameStore = defineStore('computerGame', {
                 const updatedGame = new Game(newFen)
 
                 return services.localGame
-                    .updateLocalGame({ id: this.currentGame.id, newFen, moves })
+                    .updateLocalGame({
+                        id: this.currentGame.id,
+                        newFen,
+                        moves,
+                        creator_captured_pieces:
+                            this.currentGame.creator_captured_pieces,
+                        guest_captured_pieces:
+                            this.currentGame.guest_captured_pieces,
+                    })
                     .then((newGame) => {
                         this.SET_CURRENT_GAME(newGame)
                         const boardStore = useBoardStore()
@@ -45,7 +53,11 @@ export const useComputerGameStore = defineStore('computerGame', {
                             round: updatedGame.state.fullMoveClock,
                             fenBoard: updatedGame.state.fenBoard,
                             legalMoves: updatedGame.scan.legalMoves,
-                            moves: moves,
+                            moves,
+                            creator_captured_pieces:
+                                newGame.creator_captured_pieces,
+                            guest_captured_pieces:
+                                newGame.guest_captured_pieces,
                         })
                         return newGame
                     })
@@ -75,6 +87,8 @@ export const useComputerGameStore = defineStore('computerGame', {
                     fenBoard: gameAnalysis.state.fenBoard,
                     legalMoves: gameAnalysis.scan.legalMoves,
                     moves: game.moves,
+                    creator_captured_pieces: game.creator_captured_pieces,
+                    guest_captured_pieces: game.guest_captured_pieces,
                 })
                 return game
             })

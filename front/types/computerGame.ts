@@ -16,6 +16,8 @@ export interface IUpdateComputerGameParams {
     id: string
     newFen: string
     moves: string[]
+    creator_captured_pieces: any[]
+    guest_captured_pieces: any[]
 }
 
 export interface IComputerGame {
@@ -27,4 +29,6 @@ export interface IComputerGame {
     computerLevel: number
     fen: string
     moves: string[]
+    creator_captured_pieces: any[]
+    guest_captured_pieces: any[]
 }
