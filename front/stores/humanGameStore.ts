@@ -67,7 +67,19 @@ export const useHumanGameStore = defineStore('humanGame', {
                 console.log('👨‍💻___human_game___', game)
                 this.currentGame = game.data
                 const boardStore = useBoardStore()
-                boardStore.continueGame('human')
+                boardStore.initBoard({
+                    opponentType: 'human',
+                    playerColor: 'white',
+                    hasToPlay: 'w',
+                    round: 1,
+                    fenBoard:
+                        'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1',
+                    legalMoves: [],
+                    moves: [],
+                    creator_captured_pieces: [],
+                    guest_captured_pieces: [],
+                })
+                return game
             })
         },
 
