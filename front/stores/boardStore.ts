@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { useHumanGameStore } from '~/stores/humanGameStore'
 import { useComputerGameStore } from '~/stores/computerGameStore'
 import FenBoardParser from '~/helpers/FenBoardParser'
@@ -8,7 +7,8 @@ import {
     getNormalCoords,
 } from '~/helpers/stockfish'
 import services from '~/services/index'
-import type { IPiece } from 'chess-legal-moves/dist/types'
+import type { ICellPosition, IMove, IPiece } from '~/types/board'
+import type { ILegalMoves } from 'chess-legal-moves/dist/types'
 
 export const useBoardStore = defineStore('board', {
     state: () => ({
@@ -16,12 +16,12 @@ export const useBoardStore = defineStore('board', {
         playerColor: 'white',
         board: FenBoardParser('8/8/8/8/8/8/8/8'),
         hasToPlay: 'white',
-        selectedPiece: null,
+        selectedPiece: null as IPiece | null,
         round: 1,
-        legalMoves: [],
-        moves: [],
-        moveStart: null,
-        moveEnd: null,
+        legalMoves: [] as ILegalMoves,
+        moves: [] as string[],
+        moveStart: '',
+        moveEnd: '',
         playerCapturedPieces: [] as IPiece[],
         computerCapturedPieces: [] as IPiece[],
     }),
@@ -62,7 +62,7 @@ export const useBoardStore = defineStore('board', {
     },
 
     actions: {
-        showPossibleMoves(cellPosition) {
+        showPossibleMoves(cellPosition: ICellPosition) {
             const fromInAN = getANCoords(cellPosition)
             const legalMovesFromHere = this.legalMoves.filter(
                 (legalMove) => legalMove.from === fromInAN
@@ -71,38 +71,36 @@ export const useBoardStore = defineStore('board', {
             if (legalMovesFromHere[0].quietMoves.length !== 0) {
                 legalMovesFromHere[0].quietMoves.map((to) => {
                     const destination = getNormalCoords(to)
-                    this.MARK_AS_POSSIBLE_DESTINATION({
-                        columnIndex: destination.columnIndex,
-                        rowIndex: destination.rowIndex,
-                    })
+                    this.board[destination.columnIndex][
+                        destination.rowIndex
+                    ].possibleDestination = true
                 })
             }
 
             if (legalMovesFromHere[0].killMoves.length !== 0) {
                 legalMovesFromHere[0].killMoves.map((to) => {
                     const destination = getNormalCoords(to)
-                    this.MARK_AS_POSSIBLE_KILL({
-                        columnIndex: destination.columnIndex,
-                        rowIndex: destination.rowIndex,
-                    })
+                    this.board[destination.columnIndex][
+                        destination.rowIndex
+                    ].possibleKill = true
                 })
             }
         },
 
-        selectOrigin(from) {
+        selectOrigin(from: ICellPosition) {
             this.UNSELECT_ALL_PIECES()
             this.HIDE_POSSIBLE_DESTINATIONS()
             this.HIDE_POSSIBLE_KILLS()
             if (
                 this.hasToPlay ===
-                this.board[from.columnIndex][from.rowIndex].piece.color
+                this.board[from.columnIndex][from.rowIndex].piece?.color
             ) {
                 this.SELECT_PIECE(from)
                 this.showPossibleMoves(from)
             }
         },
 
-        move(moves) {
+        move(moves: IMove[]) {
             // Takes moves as an array to be able to handle two moves at the same time for stockfish castling
             for (const move of moves) {
                 this.ADD_MOVE({
@@ -113,20 +111,25 @@ export const useBoardStore = defineStore('board', {
                     from: move.startPosition,
                     to: move.endPosition,
                 })
-                this.REMOVE_PIECE_FROM(move.startPosition)
+                this.board[move.startPosition.columnIndex][
+                    move.startPosition.rowIndex
+                ].piece = null
             }
         },
 
-        selectDestination(endPosition) {
+        selectDestination(endPosition: ICellPosition) {
             this.move([
-                { startPosition: this.selectedPiecePosition, endPosition },
+                {
+                    startPosition: this.selectedPiecePosition as ICellPosition,
+                    endPosition,
+                },
             ])
             // CLEAR BOARD
             this.UNSELECT_ALL_PIECES()
             this.HIDE_POSSIBLE_DESTINATIONS()
             this.HIDE_POSSIBLE_KILLS()
             // PREPARE NEXT ROUND
-            this.INCREMENT_ROUND()
+            this.round++
             this.TOGGLE_PLAYER()
             const humanGameStore = useHumanGameStore()
             if (!humanGameStore.isAgainstHuman) this.sendMoveToComputer()
@@ -137,7 +140,7 @@ export const useBoardStore = defineStore('board', {
             // @TODO🐛 when coming back on a computer game played before
             // after playing one move the computer plays on white side
             const computerGameStore = useComputerGameStore()
-            computerGameStore.sendMoves(this.moves).then(() => {
+            computerGameStore.sendMoves(this.moves)?.then(() => {
                 services.engine
                     .sendMove(this.movesAsString)
                     .then((move: string) => {
@@ -149,27 +152,22 @@ export const useBoardStore = defineStore('board', {
 
         sendMoveToPlayer() {
             // @TODO use it
-            services.game.sendMove(this.movesAsString).then((move) => {
-                this.move(getMoveFromAN(move))
-                this.INCREMENT_ROUND
-                this.TOGGLE_PLAYER
-            })
+            // services.game.sendMove(this.movesAsString).then((move) => {
+            //     this.move(getMoveFromAN(move))
+            //     this.round++
+            //     this.TOGGLE_PLAYER
+            // })
         },
 
-        setPlayerColor(color: string) {
-            // @TODO use it with computer games
-            this.SET_PLAYER_COLOR(color)
-        },
-
-        // @TODO use initBoard instead
-        startNewGame(opponentType) {
-            this.SET_OPPONENT_TYPE(opponentType)
+        startNewGame(opponentType: string) {
+            // @TODO use initBoard instead
+            this.opponent = opponentType
             this.RESET_GAME()
         },
 
-        // @TODO use initBoard instead
-        continueGame(opponentType) {
-            this.SET_OPPONENT_TYPE(opponentType)
+        continueGame(opponentType: string) {
+            // @TODO use initBoard instead
+            this.opponent = opponentType
         },
 
         initBoard({
@@ -182,13 +180,23 @@ export const useBoardStore = defineStore('board', {
             moves,
             creator_captured_pieces,
             guest_captured_pieces,
+        }: {
+            opponentType: string
+            playerColor: string
+            hasToPlay: string
+            round: number
+            fenBoard: string
+            legalMoves: ILegalMoves
+            moves: string[]
+            creator_captured_pieces: IPiece[]
+            guest_captured_pieces: IPiece[]
         }) {
-            this.SET_OPPONENT_TYPE(opponentType)
-            this.SET_PLAYER_COLOR(playerColor)
-            this.SET_HAS_TO_PLAY(hasToPlay)
-            this.SET_ROUND(round)
-            this.SET_BOARD(fenBoard)
-            this.SET_LEGAL_MOVES(legalMoves)
+            this.opponent = opponentType
+            this.playerColor = playerColor
+            this.hasToPlay = hasToPlay === 'w' ? 'white' : 'black'
+            this.round = round
+            this.board = FenBoardParser(fenBoard)
+            this.legalMoves = legalMoves
             this.playerCapturedPieces = creator_captured_pieces
             this.computerCapturedPieces = guest_captured_pieces
             this.moves = moves
@@ -202,16 +210,10 @@ export const useBoardStore = defineStore('board', {
             for (const row in this.board) {
                 for (const column in this.board[row]) {
                     if (this.board[row][column].piece !== null) {
-                        this.board[row][column].piece.selected = false
+                        this.board[row][column].piece!.selected = false
                     }
                 }
             }
-        },
-
-        MARK_AS_POSSIBLE_DESTINATION(cellPosition) {
-            this.board[cellPosition.columnIndex][
-                cellPosition.rowIndex
-            ].possibleDestination = true
         },
 
         HIDE_POSSIBLE_DESTINATIONS() {
@@ -222,12 +224,6 @@ export const useBoardStore = defineStore('board', {
             }
         },
 
-        MARK_AS_POSSIBLE_KILL(cellPosition) {
-            this.board[cellPosition.columnIndex][
-                cellPosition.rowIndex
-            ].possibleKill = true
-        },
-
         HIDE_POSSIBLE_KILLS() {
             for (const row in this.board) {
                 for (const column in this.board[row]) {
@@ -236,29 +232,30 @@ export const useBoardStore = defineStore('board', {
             }
         },
 
-        SELECT_PIECE(cellPosition) {
+        SELECT_PIECE(cellPosition: ICellPosition) {
             this.board[cellPosition.columnIndex][
                 cellPosition.rowIndex
-            ].piece.selected = true
+            ].piece!.selected = true
+
             this.selectedPiece =
                 this.board[cellPosition.columnIndex][
                     cellPosition.rowIndex
                 ].piece
         },
 
-        ADD_PIECE(path) {
+        ADD_PIECE(path: { from: ICellPosition; to: ICellPosition }) {
             if (
                 this.board[path.to.columnIndex][path.to.rowIndex].piece !== null
             ) {
                 if (this.hasToPlay === 'white') {
                     this.playerCapturedPieces.push(
-                        this.board[path.to.columnIndex][path.to.rowIndex].piece
+                        this.board[path.to.columnIndex][path.to.rowIndex].piece!
                     )
                 }
 
                 if (this.hasToPlay === 'black') {
                     this.computerCapturedPieces.push(
-                        this.board[path.to.columnIndex][path.to.rowIndex].piece
+                        this.board[path.to.columnIndex][path.to.rowIndex].piece!
                     )
                 }
             }
@@ -266,28 +263,11 @@ export const useBoardStore = defineStore('board', {
                 this.board[path.from.columnIndex][path.from.rowIndex].piece
         },
 
-        REMOVE_PIECE_FROM(cellPosition) {
-            this.board[cellPosition.columnIndex][cellPosition.rowIndex].piece =
-                null
-        },
-
         TOGGLE_PLAYER() {
             this.hasToPlay = this.hasToPlay === 'white' ? 'black' : 'white'
         },
 
-        INCREMENT_ROUND() {
-            this.round++
-        },
-
-        SET_ROUND(round: number) {
-            this.round = round
-        },
-
-        SET_PLAYER_COLOR(color: string) {
-            this.playerColor = color
-        },
-
-        ADD_MOVE(move) {
+        ADD_MOVE(move: IMove) {
             this.moveStart = getANCoords(move.startPosition)
             this.moveEnd = getANCoords(move.endPosition)
             if (this.moveStart && this.moveEnd) {
@@ -301,22 +281,6 @@ export const useBoardStore = defineStore('board', {
             this.round = 1
             this.playerCapturedPieces = []
             this.computerCapturedPieces = []
-        },
-
-        SET_OPPONENT_TYPE(opponentType) {
-            this.opponent = opponentType
-        },
-
-        SET_HAS_TO_PLAY(hasToPlay: 'w' | 'b') {
-            this.hasToPlay = hasToPlay === 'w' ? 'white' : 'black'
-        },
-
-        SET_BOARD(fenBoard: string) {
-            this.board = FenBoardParser(fenBoard)
-        },
-
-        SET_LEGAL_MOVES(legalMoves: string[]) {
-            this.legalMoves = legalMoves
         },
     },
 })

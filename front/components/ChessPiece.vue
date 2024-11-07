@@ -10,6 +10,9 @@ const props = defineProps<{
 }>()
 
 const boardStore = useBoardStore()
+const selectOrigin = () => {
+    if (props.cell) boardStore.selectOrigin(props.cell)
+}
 </script>
 
 <template>
@@ -17,7 +20,7 @@ const boardStore = useBoardStore()
         <div
             class="piece-container"
             :class="{ selected: props.selected }"
-            @click="boardStore.selectOrigin(props.cell)"
+            @click="selectOrigin"
         >
             <img
                 class="piece"
