@@ -15,6 +15,14 @@ const modals = {
     Confirm: resolveComponent('ModalConfirm'),
     '': '',
 }
+
+onMounted(() => {
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') {
+            layoutStore.closeModal()
+        }
+    })
+})
 </script>
 
 <template>
