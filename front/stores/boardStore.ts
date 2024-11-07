@@ -27,6 +27,20 @@ export const useBoardStore = defineStore('board', {
     }),
 
     getters: {
+        movesByRound: (state) => {
+            const res: string[] = []
+
+            let i = 0
+            let j = 1
+            while (j <= state.moves.length) {
+                res.push(`${state.moves[i]} ${state.moves[j] || ''}`)
+                i += 2
+                j += 2
+            }
+
+            return res
+        },
+
         playerHasToPlay: (state) => state.playerColor === state.hasToPlay,
 
         selectedPiecePosition: (state) => {

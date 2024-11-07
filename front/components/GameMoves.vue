@@ -2,15 +2,17 @@
 import { useBoardStore } from '~/stores/boardStore'
 
 const boardStore = useBoardStore()
-const moveColor = computed(
-    () => (index: number) => (index % 2 === 0 ? 'white' : 'black')
-)
 </script>
 
 <template>
-    <div class="ml-4 white--text">
-        <div v-for="(move, index) in boardStore.moves" :key="index">
-            <BaseIcon name="brightness-1" :color="moveColor(index)" />
+    <div class="ml-4 text-slate-500 text-sm">
+        <div
+            v-for="(move, index) in boardStore.movesByRound"
+            :key="index"
+            :class="{
+                'text-slate-200': index == boardStore.movesByRound.length - 1,
+            }"
+        >
             {{ index + 1 }}. {{ move }}
         </div>
     </div>
