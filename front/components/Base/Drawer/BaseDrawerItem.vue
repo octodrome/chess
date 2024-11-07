@@ -4,6 +4,7 @@ const props = defineProps<{
     icon?: string
     content: string
     action?: 'delete' | 'message'
+    highlighted?: boolean
 }>()
 defineEmits(['delete', 'message'])
 </script>
@@ -15,6 +16,7 @@ defineEmits(['delete', 'message'])
             'cursor-pointer': !props.disabled,
             'hover:bg-gray-600': !props.disabled,
             'text-gray-400': props.disabled,
+            'bg-gray-700': props.highlighted,
         }"
     >
         <div class="flex">
