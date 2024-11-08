@@ -1,10 +1,10 @@
 import type { ApiGame } from './game'
 
 export interface ApiUser {
-    ID: number
-    CreatedAt: Date
-    UpdatedAt: Date
-    DeletedAt: Date
+    id: number
+    created_at: Date
+    updated_at: Date
+    deleted_at: Date
 
     email: string
     password: string

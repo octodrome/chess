@@ -4,10 +4,8 @@ import { useComputerGameStore } from '~/stores/computerGameStore'
 
 const boardStore = useBoardStore()
 const computerGameStore = useComputerGameStore()
-const computerLevel = computed(
-    () => computerGameStore.currentGame?.computerLevel
-)
-const computerName = computed(() => computerGameStore.currentGame?.computerName)
+const computerLevel = computed(() => computerGameStore.currentGame?.guest_level)
+const computerName = computed(() => computerGameStore.currentGame?.guest_name)
 const isComputerThinking = computed(() => !boardStore.playerHasToPlay)
 </script>
 

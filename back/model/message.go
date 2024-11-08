@@ -1,17 +1,21 @@
 package model
 
 import (
+	"database/sql"
+	"time"
+
 	"github.com/octodrome/chess/go-rest-api-poc/database"
-	"gorm.io/gorm"
 )
 
 type Message struct {
-	gorm.Model
-	GameID uint `json:"game_id"`
-	// Game    Game   `gorm:"foreignKey:GameID" json:"game"`
-	FromID  uint   `json:"from_id"`
-	ToID    uint   `json:"to_id"`
-	Content string `gorm:"size:255;not null;" json:"content"`
+	ID        uint         `gorm:"primarykey" json:"id"`
+	CreatedAt time.Time    `json:"created_at"`
+	UpdatedAt time.Time    `json:"updated_at"`
+	DeletedAt sql.NullTime `gorm:"index" json:"deleted_at"`
+	GameID    uint         `json:"game_id"`
+	FromID    uint         `json:"from_id"`
+	ToID      uint         `json:"to_id"`
+	Content   string       `gorm:"size:255;not null;" json:"content"`
 }
 
 func (message *Message) Save() (*Message, error) {

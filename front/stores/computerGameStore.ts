@@ -48,7 +48,7 @@ export const useComputerGameStore = defineStore('computerGame', {
                         const boardStore = useBoardStore()
                         boardStore.initBoard({
                             opponentType: 'computer',
-                            playerColor: newGame.playerColor,
+                            playerColor: newGame.creator_color,
                             hasToPlay: updatedGame.state.hasToPlay,
                             round: updatedGame.state.fullMoveClock,
                             fenBoard: updatedGame.state.fenBoard,
@@ -81,7 +81,7 @@ export const useComputerGameStore = defineStore('computerGame', {
                 const boardStore = useBoardStore()
                 boardStore.initBoard({
                     opponentType: 'computer',
-                    playerColor: game.playerColor,
+                    playerColor: game.creator_color,
                     hasToPlay: gameAnalysis.state.hasToPlay,
                     round: gameAnalysis.state.fullMoveClock,
                     fenBoard: gameAnalysis.state.fenBoard,

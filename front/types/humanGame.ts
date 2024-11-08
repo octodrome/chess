@@ -11,9 +11,9 @@ export interface IHumanGame {
     guest: IUser
     hasToPlay: IUser
     moves: string[]
-    createdAt: Date
+    created_at: Date
     messages: IMessage[]
-    ID: string
+    id: string
 }
 
 export interface ICreateHumanGameRequestParams {
@@ -29,8 +29,8 @@ export interface IUpdateHumanGameRequestParams {
 }
 
 export interface IMessage {
-    ID?: number
-    CreatedAt?: Date
+    id?: number
+    created_at?: Date
     token: string
     game_id: number
     to_id: number

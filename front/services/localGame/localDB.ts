@@ -40,7 +40,7 @@ export async function updateOneGameInLocalDB(
     guest_captured_pieces: any[]
 ): Promise<IComputerGame> {
     const gameToUpdate = await findOneGameInLocalDB(id)
-    gameToUpdate.updatedAt = new Date()
+    gameToUpdate.updated_at = new Date()
     gameToUpdate.fen = newFen
     gameToUpdate.moves = moves
     gameToUpdate.creator_captured_pieces = creator_captured_pieces

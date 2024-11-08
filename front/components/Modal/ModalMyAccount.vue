@@ -19,7 +19,7 @@ const cancel = () => emit('close')
 
 const update = () => {
     userStore
-        .updateUser(String(userStore.user?.ID), {
+        .updateUser(String(userStore.user?.id), {
             pseudo: pseudo.value,
             about: about.value,
         })

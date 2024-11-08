@@ -15,15 +15,15 @@ const humanGameStore = useHumanGameStore()
 const boardStore = useBoardStore()
 const layoutStore = useLayoutStore()
 
-const userId = userStore.user?.ID
+const userId = userStore.user?.id
 const opponents = await userStore.getAllOpponents(String(userId))
-const selectedOpponentId = ref(opponents[0]?.ID)
+const selectedOpponentId = ref(opponents[0]?.id)
 
 const opponentsOptions = computed(() => {
     return opponents.map((user) => {
         return {
             label: user.pseudo || user.email,
-            value: user.ID,
+            value: user.id,
         }
     })
 })
@@ -36,15 +36,15 @@ const start = () => {
     if (userStore.user && selectedOpponentId) {
         humanGameStore
             .createGame({
-                creator_id: userStore.user.ID,
+                creator_id: userStore.user.id,
                 guest_id: selectedOpponentId.value,
-                has_to_play_id: userStore.user.ID,
+                has_to_play_id: userStore.user.id,
                 moves: '',
             })
             .then((game) => {
                 close()
                 boardStore.startNewGame('human')
-                navigateTo({ path: `/HumanGame/${game.ID}` })
+                navigateTo({ path: `/HumanGame/${game.id}` })
             })
             .catch(() => {
                 layoutStore.openSnackbarError(t('snackbar.error.game_creation'))

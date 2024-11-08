@@ -1,7 +1,7 @@
 import type { ApiGame } from './game'
 
 export interface ApiMessage {
-    ID: number
+    id: number
     created_at: Date
     updated_at: Date
     deleted_at: Date

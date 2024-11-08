@@ -2,16 +2,20 @@ import type { ApiUser } from './user'
 import type { IMessage } from '~/types/humanGame'
 
 export interface ApiGame {
-    ID: number
-    CreatedAt: Date
-    UpdatedAt: Date
-    DeletedAt: Date
+    id: number
+    created_at: Date
+    updated_at: Date
+    deleted_at: Date
 
     creator_id: number
     creator: ApiUser
+    creator_captured_pieces: string
+    creator_color: string
     guest_id: number
     guest: ApiUser
+    guest_captured_pieces: string
     has_to_play_id: number
     moves: string
     messages: IMessage[]
+    fen: string
 }

@@ -22,11 +22,12 @@ export interface IUpdateComputerGameParams {
 
 export interface IComputerGame {
     id: string
-    computerName: string
-    createdAt: Date
-    updatedAt: Date
-    playerColor: IColor
-    computerLevel: number
+    created_at: Date
+    updated_at: Date
+
+    guest_name: string
+    creator_color: IColor
+    guest_level: number
     fen: string
     moves: string[]
     creator_captured_pieces: any[]
