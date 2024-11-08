@@ -32,7 +32,7 @@ export interface IUpdateUserRequestParams {
 
 export interface IUser {
     email: string
-    createdAt: Date
+    created_at: Date
     id: string
 }
 

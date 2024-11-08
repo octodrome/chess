@@ -37,11 +37,11 @@ describe('ComputerGame Store', () => {
 
         const fakeGame: IComputerGame = {
             id: 'fake-id',
-            computerName: 'fake-name',
-            createdAt: new Date(),
-            updatedAt: new Date(),
-            playerColor: 'white',
-            computerLevel: 1,
+            guest_name: 'fake-name',
+            created_at: new Date(),
+            updated_at: new Date(),
+            creator_color: 'white',
+            guest_level: 1,
             fen: 'fake-fen',
             moves: [],
             creator_captured_pieces: [],

@@ -42,11 +42,11 @@ export default class LocalGame {
     ): Promise<IComputerGame> {
         const game = {
             id: uuidv4(),
-            createdAt: new Date(),
-            updatedAt: new Date(),
-            playerColor: params.playerColor,
-            computerLevel: params.computerLevel,
-            computerName: uniqueNamesGenerator(nameGeneretorConfig),
+            created_at: new Date(),
+            updated_at: new Date(),
+            creator_color: params.playerColor,
+            guest_level: params.computerLevel,
+            guest_name: uniqueNamesGenerator(nameGeneretorConfig),
             fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1',
             moves: [],
             creator_captured_pieces: [],

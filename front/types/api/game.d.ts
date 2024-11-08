@@ -10,6 +10,7 @@ export interface ApiGame {
     creator_id: number
     creator: ApiUser
     creator_captured_pieces: string
+    creator_color: string
     guest_id: number
     guest: ApiUser
     guest_captured_pieces: string

@@ -15,6 +15,7 @@ type Game struct {
 	CreatorID             uint         `json:"creator_id"`
 	Creator               User         `gorm:"foreignKey:CreatorID" json:"creator"`
 	CreatorCapturedPieces string       `json:"creator_captured_pieces"`
+	CreatorColor          string       `json:"creator_color"`
 	GuestID               uint         `json:"guest_id"`
 	Guest                 User         `gorm:"foreignKey:GuestID" json:"guest"`
 	GuestCapturedPieces   string       `json:"guest_captured_pieces"`

@@ -35,7 +35,7 @@ const deleteThisGame = (gameId: string) => {
             v-for="game in props.gameList"
             :key="game.id"
             icon="robot"
-            :content="game.computerName"
+            :content="game.guest_name"
             action="delete"
             @click="goToGame(game.id)"
             @delete="deleteThisGame(game.id)"

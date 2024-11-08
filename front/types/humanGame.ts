@@ -11,7 +11,7 @@ export interface IHumanGame {
     guest: IUser
     hasToPlay: IUser
     moves: string[]
-    createdAt: Date
+    created_at: Date
     messages: IMessage[]
     id: string
 }

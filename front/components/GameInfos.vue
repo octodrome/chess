@@ -11,7 +11,7 @@ const computerGameStore = useComputerGameStore()
 const gameStartedSince = computed(() => {
     if (humanGameStore.currentGame)
         return moment(humanGameStore.currentGame.created_at).fromNow()
-    else return moment(computerGameStore.currentGame?.createdAt).fromNow()
+    else return moment(computerGameStore.currentGame?.created_at).fromNow()
 })
 </script>
 
