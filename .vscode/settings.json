@@ -5,7 +5,8 @@
         "back",
         "e2e",
         "ci",
-        "socket-server"
+        "socket-server",
+        "fullstack"
     ],
     "go.toolsEnvVars": {
         "GOOS": "js",

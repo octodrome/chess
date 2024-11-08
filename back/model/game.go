@@ -8,17 +8,20 @@ import (
 )
 
 type Game struct {
-	ID          uint         `gorm:"primarykey" json:"id"`
-	CreatedAt   time.Time    `json:"created_at"`
-	UpdatedAt   time.Time    `json:"updated_at"`
-	DeletedAt   sql.NullTime `gorm:"index" json:"deleted_at"`
-	CreatorID   uint         `json:"creator_id"`
-	Creator     User         `gorm:"foreignKey:CreatorID" json:"creator"`
-	GuestID     uint         `json:"guest_id"`
-	Guest       User         `gorm:"foreignKey:GuestID" json:"guest"`
-	HasToPlayID uint         `json:"has_to_play_id"`
-	Moves       string       `gorm:"size:255;not null;" json:"moves"`
-	Messages    []Message    `gorm:"constraint:OnUpdate:CASCADE,OnDelete:SET NULL" json:"messages"`
+	ID                    uint         `gorm:"primarykey" json:"id"`
+	CreatedAt             time.Time    `json:"created_at"`
+	UpdatedAt             time.Time    `json:"updated_at"`
+	DeletedAt             sql.NullTime `gorm:"index" json:"deleted_at"`
+	CreatorID             uint         `json:"creator_id"`
+	Creator               User         `gorm:"foreignKey:CreatorID" json:"creator"`
+	CreatorCapturedPieces string       `json:"creator_captured_pieces"`
+	GuestID               uint         `json:"guest_id"`
+	Guest                 User         `gorm:"foreignKey:GuestID" json:"guest"`
+	GuestCapturedPieces   string       `json:"guest_captured_pieces"`
+	HasToPlayID           uint         `json:"has_to_play_id"`
+	Moves                 string       `gorm:"size:255;not null;" json:"moves"`
+	Messages              []Message    `gorm:"constraint:OnUpdate:CASCADE,OnDelete:SET NULL" json:"messages"`
+	Fen                   string       `json:"fen"`
 }
 
 func (game *Game) Save() (*Game, error) {

@@ -9,9 +9,12 @@ export interface ApiGame {
 
     creator_id: number
     creator: ApiUser
+    creator_captured_pieces: string
     guest_id: number
     guest: ApiUser
+    guest_captured_pieces: string
     has_to_play_id: number
     moves: string
     messages: IMessage[]
+    fen: string
 }
