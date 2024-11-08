@@ -33,7 +33,7 @@ export interface IUpdateUserRequestParams {
 export interface IUser {
     email: string
     createdAt: Date
-    ID: string
+    id: string
 }
 
 export interface ICreateGameRequestParams {}

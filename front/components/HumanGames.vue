@@ -33,7 +33,7 @@ const deleteThisGame = (gameId: string) => {
     <ul v-if="humanGameStore.gameList?.length !== 0">
         <BaseDrawerItem
             v-for="game in humanGameStore.gameList"
-            :key="game.ID"
+            :key="game.id"
             icon="account"
             :content="
                 game.creator.email === userStore.user?.email
@@ -41,9 +41,9 @@ const deleteThisGame = (gameId: string) => {
                     : game.creator.pseudo || game.creator.email
             "
             action="delete"
-            @click="goToGame(String(game.ID))"
-            @delete="deleteThisGame(String(game.ID))"
-            :highlighted="String(game.ID) == route.params.id"
+            @click="goToGame(String(game.id))"
+            @delete="deleteThisGame(String(game.id))"
+            :highlighted="String(game.id) == route.params.id"
         />
     </ul>
 </template>

@@ -31,7 +31,7 @@ export class WebSocketClient {
             console.log('🧦 onmessage', message)
             const humanGameStore = useHumanGameStore()
             const userStore = useUserStore()
-            if (userStore.user?.ID !== message.data.from_id) {
+            if (userStore.user?.id !== message.data.from_id) {
                 humanGameStore.addMessage(message.data)
             }
         }

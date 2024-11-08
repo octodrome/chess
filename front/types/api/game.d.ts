@@ -2,10 +2,10 @@ import type { ApiUser } from './user'
 import type { IMessage } from '~/types/humanGame'
 
 export interface ApiGame {
-    ID: number
-    CreatedAt: Date
-    UpdatedAt: Date
-    DeletedAt: Date
+    id: number
+    created_at: Date
+    updated_at: Date
+    deleted_at: Date
 
     creator_id: number
     creator: ApiUser

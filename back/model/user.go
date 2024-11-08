@@ -1,8 +1,10 @@
 package model
 
 import (
+	"database/sql"
 	"html"
 	"strings"
+	"time"
 
 	"github.com/octodrome/chess/go-rest-api-poc/database"
 	"golang.org/x/crypto/bcrypt"
@@ -10,13 +12,16 @@ import (
 )
 
 type User struct {
-	gorm.Model
-	Email          string `gorm:"size:255;not null;unique" json:"email"`
-	Password       string `gorm:"size:255;not null;" json:"-"`
-	GamesAsCreator []Game `gorm:"foreignKey:CreatorID;constraint:OnUpdate:CASCADE,OnDelete:SET NULL" json:"games_as_creator"`
-	GamesAsGuest   []Game `gorm:"foreignKey:GuestID;constraint:OnUpdate:CASCADE,OnDelete:SET NULL" json:"games_as_guest"`
-	Pseudo         string `gorm:"size:255" json:"pseudo"`
-	About          string `gorm:"size:255" json:"about"`
+	ID             uint         `gorm:"primarykey" json:"id"`
+	CreatedAt      time.Time    `json:"created_at"`
+	UpdatedAt      time.Time    `json:"updated_at"`
+	DeletedAt      sql.NullTime `gorm:"index" json:"deleted_at"`
+	Email          string       `gorm:"size:255;not null;unique" json:"email"`
+	Password       string       `gorm:"size:255;not null;" json:"-"`
+	GamesAsCreator []Game       `gorm:"foreignKey:CreatorID;constraint:OnUpdate:CASCADE,OnDelete:SET NULL" json:"games_as_creator"`
+	GamesAsGuest   []Game       `gorm:"foreignKey:GuestID;constraint:OnUpdate:CASCADE,OnDelete:SET NULL" json:"games_as_guest"`
+	Pseudo         string       `gorm:"size:255" json:"pseudo"`
+	About          string       `gorm:"size:255" json:"about"`
 }
 
 type UserRepository interface {

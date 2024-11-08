@@ -18,7 +18,7 @@ const isMessageEmpty = computed(() => messageContent.value.trim().length === 0)
 const isUserMessage = computed(
     () => (message: IMessage) =>
         humanGameStore.opponent
-            ? message.from_id !== humanGameStore.opponent.ID
+            ? message.from_id !== humanGameStore.opponent.id
             : false
 )
 const messages = computed(() =>
@@ -37,9 +37,9 @@ const sendMessage = () => {
     ) {
         socketClient.sendMessage({
             token: userToken.value,
-            game_id: humanGameStore.currentGame.ID,
-            to_id: humanGameStore.opponent.ID,
-            from_id: userStore.user.ID,
+            game_id: humanGameStore.currentGame.id,
+            to_id: humanGameStore.opponent.id,
+            from_id: userStore.user.id,
             content: messageContent.value,
         })
         messageContent.value = ''
@@ -83,7 +83,7 @@ onMounted(() => {
             >
                 <div
                     v-for="message in messages"
-                    :key="message.ID"
+                    :key="message.id"
                     class="message"
                     :class="{
                         'is-right': isUserMessage(message),
@@ -92,7 +92,7 @@ onMounted(() => {
                 >
                     {{ message.content }}
                     <div class="time">
-                        {{ moment(message.CreatedAt).format('hh:mm') }}
+                        {{ moment(message.created_at).format('hh:mm') }}
                     </div>
                 </div>
             </div>
