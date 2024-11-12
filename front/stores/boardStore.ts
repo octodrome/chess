@@ -102,15 +102,17 @@ export const useBoardStore = defineStore('board', {
         },
 
         selectOrigin(from: ICellPosition) {
-            this.UNSELECT_ALL_PIECES()
-            this.HIDE_POSSIBLE_DESTINATIONS()
-            this.HIDE_POSSIBLE_KILLS()
-            if (
-                this.hasToPlay ===
-                this.board[from.columnIndex][from.rowIndex].piece?.color
-            ) {
-                this.SELECT_PIECE(from)
-                this.showPossibleMoves(from)
+            if (this.playerHasToPlay) {
+                this.UNSELECT_ALL_PIECES()
+                this.HIDE_POSSIBLE_DESTINATIONS()
+                this.HIDE_POSSIBLE_KILLS()
+                if (
+                    this.hasToPlay ===
+                    this.board[from.columnIndex][from.rowIndex].piece?.color
+                ) {
+                    this.SELECT_PIECE(from)
+                    this.showPossibleMoves(from)
+                }
             }
         },
 
@@ -162,6 +164,17 @@ export const useBoardStore = defineStore('board', {
                         computerGameStore.sendMoves(this.moves)
                     })
             })
+        },
+
+        computerBegins() {
+            const computerGameStore = useComputerGameStore()
+
+            services.engine
+                .sendMove(this.movesAsString)
+                .then((move: string) => {
+                    this.move(getMoveFromAN(move))
+                    computerGameStore.sendMoves(this.moves)
+                })
         },
 
         sendMoveToPlayer() {
