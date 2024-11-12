@@ -15,6 +15,7 @@ const boardStore = useBoardStore()
             v-for="(column, columnIndex) in props.board"
             :key="columnIndex"
             class="board-row"
+            :class="{ 'from-black': boardStore.playerColor === 'black' }"
         >
             <div
                 v-for="(cell, rowIndex) in column"
@@ -53,8 +54,11 @@ const boardStore = useBoardStore()
 <style scoped lang="scss">
 .board-row {
     display: flex;
-    flex-direction: column-reverse;
     width: 400px;
+    flex-direction: column-reverse;
+}
+.from-black {
+    flex-direction: column;
 }
 
 .cell {
