@@ -9,13 +9,14 @@ import {
 import services from '~/services/index'
 import type { ICellPosition, IMove, IPiece } from '~/types/board'
 import type { ILegalMoves } from 'chess-legal-moves/dist/types'
+import type { IColor } from '~/types/computerGame'
 
 export const useBoardStore = defineStore('board', {
     state: () => ({
         opponent: 'computer',
-        playerColor: 'white',
+        playerColor: 'white' as IColor,
         board: FenBoardParser('8/8/8/8/8/8/8/8'),
-        hasToPlay: 'white',
+        hasToPlay: 'white' as IColor,
         selectedPiece: null as IPiece | null,
         round: 1,
         legalMoves: [] as ILegalMoves,
@@ -23,7 +24,7 @@ export const useBoardStore = defineStore('board', {
         moveStart: '',
         moveEnd: '',
         playerCapturedPieces: [] as IPiece[],
-        computerCapturedPieces: [] as IPiece[],
+        guestCapturedPieces: [] as IPiece[],
     }),
 
     getters: {
@@ -209,7 +210,7 @@ export const useBoardStore = defineStore('board', {
             guest_captured_pieces,
         }: {
             opponentType: string
-            playerColor: string
+            playerColor: IColor
             hasToPlay: string
             round: number
             fenBoard: string
@@ -225,7 +226,7 @@ export const useBoardStore = defineStore('board', {
             this.board = FenBoardParser(fenBoard)
             this.legalMoves = legalMoves
             this.playerCapturedPieces = creator_captured_pieces
-            this.computerCapturedPieces = guest_captured_pieces
+            this.guestCapturedPieces = guest_captured_pieces
             this.moves = moves
         },
 
@@ -281,7 +282,7 @@ export const useBoardStore = defineStore('board', {
                 }
 
                 if (this.hasToPlay === 'black') {
-                    this.computerCapturedPieces.push(
+                    this.guestCapturedPieces.push(
                         this.board[path.to.columnIndex][path.to.rowIndex].piece!
                     )
                 }
@@ -307,7 +308,7 @@ export const useBoardStore = defineStore('board', {
             this.moves = []
             this.round = 1
             this.playerCapturedPieces = []
-            this.computerCapturedPieces = []
+            this.guestCapturedPieces = []
         },
     },
 })

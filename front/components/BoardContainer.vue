@@ -11,10 +11,10 @@ const boardStore = useBoardStore()
 
 <template>
     <div class="board-container">
-        <CapturedPiecesArea side="computer" />
+        <CapturedPiecesArea side="opponent" />
 
         <HasToPlayLine
-            color="black"
+            side="opponent"
             :is-checked="boardStore.isOpponentKingChecked"
             :is-check-mated="false"
         />
@@ -24,10 +24,10 @@ const boardStore = useBoardStore()
         <HasToPlayLine
             :is-checked="boardStore.isPlayerKingChecked"
             :is-check-mated="false"
-            color="white"
+            side="player"
         />
 
-        <CapturedPiecesArea side="human" />
+        <CapturedPiecesArea side="player" />
     </div>
 </template>
 
