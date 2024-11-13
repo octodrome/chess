@@ -1,15 +1,15 @@
 <script setup lang="ts">
 import { useBoardStore } from '~/stores/boardStore'
-import type { IOpponentType } from '~/types/board'
 
 const props = defineProps<{
-    side: IOpponentType
+    side: 'opponent' | 'player'
 }>()
 
 const boardStore = useBoardStore()
 const capturedPieces = computed(() =>
-    props.side === 'computer'
-        ? boardStore.computerCapturedPieces
+    (props.side === 'opponent' && boardStore.playerColor === 'white') ||
+    (props.side === 'player' && boardStore.playerColor === 'black')
+        ? boardStore.guestCapturedPieces
         : boardStore.playerCapturedPieces
 )
 </script>
@@ -30,7 +30,7 @@ const capturedPieces = computed(() =>
     position: absolute;
     width: 100%;
 
-    &--computer {
+    &--opponent {
         top: -50px;
     }
 

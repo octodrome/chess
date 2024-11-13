@@ -11,7 +11,7 @@ export interface IBoardState {
     moveStart: string | null
     moveEnd: string | null
     playerCapturedPieces: IPiece[]
-    computerCapturedPieces: IPiece[]
+    guestCapturedPieces: IPiece[]
 }
 
 export interface ICell {
@@ -42,5 +42,3 @@ export interface IMove {
     startPosition: ICellPosition
     endPosition: ICellPosition
 }
-
-export type IOpponentType = 'computer' | 'human'

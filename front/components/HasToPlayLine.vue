@@ -4,7 +4,7 @@ import { useBoardStore } from '~/stores/boardStore'
 const boardStore = useBoardStore()
 
 const props = defineProps<{
-    color: string
+    side: 'player' | 'opponent'
     isChecked: boolean
     isCheckMated: boolean
 }>()
@@ -12,16 +12,25 @@ const props = defineProps<{
 const lineClasses = computed(() => {
     return {
         'has-to-play': true,
-        'has-to-play--white': props.color === 'white',
-        'has-to-play--black': props.color === 'black',
+        'has-to-play--white': props.side === 'player',
+        'has-to-play--black': props.side === 'opponent',
         'has-to-play--checked': props.isChecked,
         'has-to-play--checkmated': props.isCheckMated,
     }
 })
+
+const showLine = computed(() => {
+    return (
+        (boardStore.hasToPlay === boardStore.playerColor &&
+            props.side === 'player') ||
+        (boardStore.hasToPlay !== boardStore.playerColor &&
+            props.side === 'opponent')
+    )
+})
 </script>
 
 <template>
-    <div v-if="boardStore.hasToPlay === props.color" :class="lineClasses" />
+    <div v-if="showLine" :class="lineClasses" />
 </template>
 
 <style scoped lang="scss">
