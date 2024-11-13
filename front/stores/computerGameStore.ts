@@ -74,7 +74,6 @@ export const useComputerGameStore = defineStore('computerGame', {
 
         async getGame(gameId: string) {
             return services.localGame.getLocalGame(gameId).then((game) => {
-                console.log('🤖___computer_game___', game)
                 const gameAnalysis = new Game(game.fen)
 
                 this.SET_CURRENT_GAME(game)

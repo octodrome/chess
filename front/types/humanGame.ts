@@ -1,4 +1,5 @@
 import type { ApiGame } from './api/game'
+import type { IColor } from './computerGame'
 import type { IUser } from './user'
 
 export interface IHumanGameState {
@@ -18,9 +19,11 @@ export interface IHumanGame {
 
 export interface ICreateHumanGameRequestParams {
     creator_id: number
+    creator_color: IColor
     guest_id: number
     has_to_play_id: number
     moves: string
+    fen: string
 }
 
 export interface IUpdateHumanGameRequestParams {
