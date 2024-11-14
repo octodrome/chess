@@ -59,7 +59,7 @@ describe('ComputerGame Store', () => {
             expect(computerGameStore.gameList).toStrictEqual([])
             await computerGameStore.createGame({
                 playerColor: 'white',
-                guestColor: 'black',
+                opponentColor: 'black',
                 computerLevel: 1,
             })
             expect(computerGameStore.currentGame).toStrictEqual(fakeGame)

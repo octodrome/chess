@@ -76,7 +76,7 @@ export const useHumanGameStore = defineStore('humanGame', {
                         game.data.creator_id === userStore.user?.id // @TODO 🖐️ pb here if user is not already populated - get id from token ?
                             ? game.data.creator_color
                             : game.data.guest_color,
-                    guestColor:
+                    opponentColor:
                         game.data.creator_id === userStore.user?.id // @TODO 🖐️ pb here if user is not already populated - get id from token ?
                             ? game.data.guest_color
                             : game.data.creator_color,

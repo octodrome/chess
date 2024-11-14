@@ -15,7 +15,7 @@ export const useBoardStore = defineStore('board', {
     state: () => ({
         opponent: 'computer',
         playerColor: 'white' as IColor,
-        guestColor: 'black' as IColor,
+        opponentColor: 'black' as IColor,
         board: FenBoardParser('8/8/8/8/8/8/8/8'),
         hasToPlay: 'white' as IColor,
         selectedPiece: null as IPiece | null,
@@ -202,7 +202,7 @@ export const useBoardStore = defineStore('board', {
         initBoard({
             opponentType,
             playerColor,
-            guestColor,
+            opponentColor,
             hasToPlay,
             round,
             fenBoard,
@@ -213,7 +213,7 @@ export const useBoardStore = defineStore('board', {
         }: {
             opponentType: string
             playerColor: IColor
-            guestColor: IColor
+            opponentColor: IColor
             hasToPlay: string
             round: number
             fenBoard: string
@@ -224,7 +224,7 @@ export const useBoardStore = defineStore('board', {
         }) {
             this.opponent = opponentType
             this.playerColor = playerColor
-            this.guestColor = guestColor
+            this.opponentColor = opponentColor
             this.hasToPlay = hasToPlay === 'w' ? 'white' : 'black'
             this.round = round
             this.board = FenBoardParser(fenBoard)
