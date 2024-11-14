@@ -50,15 +50,13 @@ const submit = handleSubmit((values) => {
 </script>
 
 <template>
-    <BaseCardHeader title="Sign up" />
+    <BaseCardHeader :title="$t('options.signup')" />
 
-    <BaseCardMain
-        text="Create your Nuxt chess account to play with anybody around the world. You already have an account ? Click here to log in."
-    >
+    <BaseCardMain :text="$t('modals.signup.text')">
         <BaseTextField
             type="email"
             :model-value="email"
-            label="Email"
+            :label="$t('modals.signup.email')"
             required
             :error="errors.email"
             data-cy="form_signup_email_field"
@@ -68,7 +66,7 @@ const submit = handleSubmit((values) => {
         <BaseTextField
             type="password"
             :model-value="password"
-            label="Password"
+            :label="$t('modals.signup.password')"
             required
             :error="errors.password"
             data-cy="form_signup_password_field"
@@ -77,7 +75,7 @@ const submit = handleSubmit((values) => {
 
         <BaseCheckbox
             v-model="newsletterPermission"
-            label="Receive newsletter from Nuxt Chess"
+            :label="$t('modals.signup.newsletter')"
         />
     </BaseCardMain>
 

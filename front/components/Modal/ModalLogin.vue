@@ -40,16 +40,14 @@ const submit = handleSubmit((values) => {
 </script>
 
 <template>
-    <BaseCardHeader title="Login" />
+    <BaseCardHeader :title="$t('options.login')" />
 
-    <BaseCardMain
-        text="Login to you Nuxt chess account to play with anybody around the world. You don't have an account yet ? Click here to sign up."
-    >
+    <BaseCardMain :text="$t('modals.login.text')">
         <form>
             <BaseTextField
                 type="email"
                 :model-value="email"
-                label="Email"
+                :label="$t('modals.login.email')"
                 required
                 :error="errors.email"
                 @change="handleEmailChange"
@@ -58,7 +56,7 @@ const submit = handleSubmit((values) => {
             <BaseTextField
                 type="password"
                 :model-value="password"
-                label="Password"
+                :label="$t('modals.login.password')"
                 required
                 :error="errors.password"
                 @change="handlePasswordChange"
