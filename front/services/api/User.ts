@@ -8,40 +8,33 @@ import type {
 
 export default class User {
     async getAllOpponents(userId: string) {
-        return (
-            await useCustomFetch('api/user', {
-                query: { except: userId },
-            })
-        ).data.value as Promise<{ data: ApiUser[] }>
+        return await useCustomFetch<{ data: ApiUser[] }>('api/user', {
+            query: { except: userId },
+        })
     }
 
     async getUser(userId: string) {
-        const { data } = await useCustomFetch(`api/user/${userId}`)
-        return data.value as Promise<{ data: ApiUser }>
+        return await useCustomFetch<{ data: ApiUser }>(`api/user/${userId}`)
     }
 
     async updateUser(userId: string, newUser: IUpdateUserRequestParams) {
-        const { data } = await useCustomFetch(`api/user/${userId}`, {
+        return await useCustomFetch<{ data: ApiUser }>(`api/user/${userId}`, {
             method: 'put',
             body: newUser,
         })
-        return data.value as Promise<{ data: ApiUser }>
     }
 
     async signup(params: ISignupUserRequestParams) {
-        return (
-            await useCustomFetch('auth/register', {
-                method: 'post',
-                body: params,
-            })
-        ).data.value as Promise<{ data: ApiUser }>
-    }
-
-    async login(params: ILoginUserRequestParams) {
-        const { data } = await useCustomFetch('auth/login', {
+        return await useCustomFetch<{ data: ApiUser }>('auth/register', {
             method: 'post',
             body: params,
         })
-        return data.value as Promise<ILoginUserResponse>
+    }
+
+    async login(params: ILoginUserRequestParams) {
+        return await useCustomFetch<ILoginUserResponse>('auth/login', {
+            method: 'post',
+            body: params,
+        })
     }
 }
