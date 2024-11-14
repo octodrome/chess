@@ -69,9 +69,17 @@ export const useHumanGameStore = defineStore('humanGame', {
 
                 this.currentGame = game.data
                 const boardStore = useBoardStore()
+                const userStore = useUserStore()
                 boardStore.initBoard({
                     opponentType: 'human',
-                    playerColor: boardStore.playerColor,
+                    playerColor:
+                        game.data.creator_id === userStore.user?.id // @TODO 🖐️ pb here if user is not already populated - get id from token ?
+                            ? game.data.creator_color
+                            : game.data.guest_color,
+                    guestColor:
+                        game.data.creator_id === userStore.user?.id // @TODO 🖐️ pb here if user is not already populated - get id from token ?
+                            ? game.data.guest_color
+                            : game.data.creator_color,
                     hasToPlay: gameAnalysis.state.hasToPlay,
                     round: gameAnalysis.state.fullMoveClock,
                     fenBoard: gameAnalysis.state.fenBoard,

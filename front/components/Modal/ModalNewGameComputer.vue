@@ -48,6 +48,7 @@ const start = () => {
         .createGame({
             playerColor: color.value,
             computerLevel: computerLevel.value,
+            guestColor: color.value === 'white' ? 'black' : 'white',
         })
         .then((game) => {
             emit('close')

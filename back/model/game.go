@@ -19,6 +19,7 @@ type Game struct {
 	GuestID               uint         `json:"guest_id"`
 	Guest                 User         `gorm:"foreignKey:GuestID" json:"guest"`
 	GuestCapturedPieces   string       `json:"guest_captured_pieces"`
+	GuestColor            string       `json:"guest_color"`
 	HasToPlayID           uint         `json:"has_to_play_id"`
 	Moves                 string       `gorm:"size:255;not null;" json:"moves"`
 	Messages              []Message    `gorm:"constraint:OnUpdate:CASCADE,OnDelete:SET NULL" json:"messages"`

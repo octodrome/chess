@@ -20,6 +20,7 @@ export interface IHumanGame {
 export interface ICreateHumanGameRequestParams {
     creator_id: number
     creator_color: IColor
+    guest_color: IColor
     guest_id: number
     has_to_play_id: number
     moves: string
