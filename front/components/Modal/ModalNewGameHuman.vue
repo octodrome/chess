@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useUserStore } from '~/stores/userStore'
 import { useHumanGameStore } from '~/stores/humanGameStore'
+import type { IColor } from '~/types/computerGame'
 import { useBoardStore } from '~/stores/boardStore'
 import { useLayoutStore } from '~/stores/layoutStore'
 import { useI18n } from 'vue-i18n'
@@ -28,6 +29,19 @@ const opponentsOptions = computed(() => {
     })
 })
 
+const color = ref('white' as IColor)
+
+const colors = ref([
+    {
+        label: t('modals.new_game_computer.color.white'),
+        value: 'white',
+    },
+    {
+        label: t('modals.new_game_computer.color.black'),
+        value: 'black',
+    },
+])
+
 const userIsNotAlone = computed(() => opponents.length >= 1)
 
 const close = () => emit('close')
@@ -39,7 +53,9 @@ const start = () => {
                 creator_id: userStore.user.id,
                 guest_id: selectedOpponentId.value,
                 has_to_play_id: userStore.user.id,
+                creator_color: color.value,
                 moves: '',
+                fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1',
             })
             .then((game) => {
                 close()
@@ -65,6 +81,16 @@ const start = () => {
             :options="opponentsOptions"
             name="users"
             :label="$t('modals.new_game_human.players')"
+            vertical
+        />
+
+        <br />
+
+        <BaseRadioGroup
+            v-model="color"
+            :options="colors"
+            name="colors"
+            :label="$t('modals.new_game_human.color.label')"
             vertical
         />
     </BaseCardMain>

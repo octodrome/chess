@@ -1,33 +1,28 @@
-import type { UseFetchOptions } from '#app'
+import type { FetchOptions } from 'ofetch'
 import { defu } from 'defu'
+import { ofetch } from 'ofetch'
 
-export function useCustomFetch<T>(
-    url: string,
-    options: UseFetchOptions<T> = {}
-) {
+export function useCustomFetch<T>(url: string, options: FetchOptions = {}) {
     const config = useRuntimeConfig()
     const userAuth = useCookie('token')
 
-    const defaults: UseFetchOptions<T> = {
+    const defaults: FetchOptions = {
         baseURL: config.public.restApiUrl as string,
-        key: url,
-
-        // set user token if connected
         headers: userAuth.value
             ? { Authorization: `Bearer ${userAuth.value}` }
             : {},
-
-        // onResponse(_ctx) {
-        //     // _ctx.response._data = new myBusinessResponse(_ctx.response._data)
-        // },
-
-        // onResponseError(_ctx) {
-        //     // throw new myBusinessError()
-        // },
+        responseType: 'json', // Set default responseType to 'json'
     }
 
-    // for nice deep defaults, please use unjs/defu
-    const params = defu(options, defaults)
+    // Merge user-provided options with defaults using defu
+    const params = defu(options, defaults) as FetchOptions
 
-    return useFetch(url, params)
+    // Explicitly type-cast params to enforce the correct 'json' responseType
+    const finalParams = {
+        ...params,
+        responseType: 'json',
+    } as FetchOptions<'json'> // Narrow to 'json'
+
+    // Use ofetch (or $fetch) with the adjusted params
+    return ofetch<T>(url, finalParams)
 }

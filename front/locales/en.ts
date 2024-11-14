@@ -39,6 +39,11 @@ export default {
             default:
                 'No other players, share chess URL with your friends to play against them',
             players: 'Players',
+            color: {
+                label: 'Choose your color:',
+                white: 'White',
+                black: 'Black',
+            },
         },
         settings: {
             text: 'Manage your preferences.',
