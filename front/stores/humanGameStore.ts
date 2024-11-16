@@ -9,6 +9,17 @@ import type {
 } from '~/types/humanGame'
 import type { ApiGame } from '~/types/api/game'
 
+function getCookie(name: string) {
+    const cookies = document.cookie
+        .split('; ')
+        .find((row) => row.startsWith(`${name}=`))
+    return cookies ? cookies.split('=')[1] : null
+}
+
+async function parseToken(token: string) {
+    return await JSON.parse(atob(token.split('.')[1]))
+}
+
 export const useHumanGameStore = defineStore('humanGame', {
     state: () => ({
         gameList: [] as ApiGame[],
@@ -64,20 +75,21 @@ export const useHumanGameStore = defineStore('humanGame', {
         },
 
         async getGame(gameId: string) {
-            return services.game.getGame(gameId).then((game) => {
+            return services.game.getGame(gameId).then(async (game) => {
                 const gameAnalysis = new Game(game.data.fen)
-
                 this.currentGame = game.data
                 const boardStore = useBoardStore()
-                const userStore = useUserStore()
+                const userToken = getCookie('token')
+                const userId = (await parseToken(userToken!)).id
+
                 boardStore.initBoard({
                     opponentType: 'human',
                     playerColor:
-                        game.data.creator_id === userStore.user?.id // @TODO 🖐️ pb here if user is not already populated - get id from token ?
+                        game.data.creator_id === userId
                             ? game.data.creator_color
                             : game.data.guest_color,
                     opponentColor:
-                        game.data.creator_id === userStore.user?.id // @TODO 🖐️ pb here if user is not already populated - get id from token ?
+                        game.data.creator_id === userId
                             ? game.data.guest_color
                             : game.data.creator_color,
                     hasToPlay: gameAnalysis.state.hasToPlay,
