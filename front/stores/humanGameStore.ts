@@ -80,7 +80,7 @@ export const useHumanGameStore = defineStore('humanGame', {
                 this.currentGame = game.data
                 const boardStore = useBoardStore()
                 const userToken = getCookie('token')
-                const userId = (await parseToken(userToken!)).id
+                const userId = Number((await parseToken(userToken!)).id)
 
                 boardStore.initBoard({
                     opponentType: 'human',

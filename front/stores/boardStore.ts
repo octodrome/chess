@@ -10,6 +10,7 @@ import services from '~/services/index'
 import type { ICellPosition, IMove, IPiece } from '~/types/board'
 import type { ILegalMoves } from 'chess-legal-moves/dist/types'
 import type { IColor } from '~/types/computerGame'
+import Game from 'chess-legal-moves'
 
 export const useBoardStore = defineStore('board', {
     state: () => ({
@@ -149,9 +150,8 @@ export const useBoardStore = defineStore('board', {
             // PREPARE NEXT ROUND
             this.round++
             this.TOGGLE_PLAYER()
-            const humanGameStore = useHumanGameStore()
-            if (!humanGameStore.isAgainstHuman) this.sendMoveToComputer()
-            if (humanGameStore.isAgainstHuman) this.sendMoveToPlayer()
+            if (this.opponent === 'computer') this.sendMoveToComputer()
+            else this.sendMoveToPlayer()
         },
 
         sendMoveToComputer() {
@@ -180,12 +180,22 @@ export const useBoardStore = defineStore('board', {
         },
 
         sendMoveToPlayer() {
-            // @TODO use it
-            // services.game.sendMove(this.movesAsString).then((move) => {
-            //     this.move(getMoveFromAN(move))
-            //     this.round++
-            //     this.TOGGLE_PLAYER
-            // })
+            const humanGameStore = useHumanGameStore()
+            const lastMove = this.moves[this.moves.length - 1]
+            const game = new Game(humanGameStore.currentGame!.fen)
+            const newFen = game.addMove(lastMove)
+            console.log('sendMoveToPlayer', { lastMove, newFen })
+
+            services.game
+                .sendMove({
+                    gameId: humanGameStore.currentGame!.id,
+                    moves: this.movesAsString,
+                    fen: newFen,
+                })
+                .then(() => {
+                    this.round++
+                    this.TOGGLE_PLAYER
+                })
         },
 
         startNewGame(opponentType: string) {
@@ -214,7 +224,7 @@ export const useBoardStore = defineStore('board', {
             opponentType: string
             playerColor: IColor
             opponentColor: IColor
-            hasToPlay: string
+            hasToPlay: 'w' | 'b'
             round: number
             fenBoard: string
             legalMoves: ILegalMoves

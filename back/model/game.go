@@ -20,10 +20,9 @@ type Game struct {
 	Guest                 User         `gorm:"foreignKey:GuestID" json:"guest"`
 	GuestCapturedPieces   string       `json:"guest_captured_pieces"`
 	GuestColor            string       `json:"guest_color"`
-	HasToPlayID           uint         `json:"has_to_play_id"`
-	Moves                 string       `gorm:"size:255;not null;" json:"moves"`
+	Moves                 string       `json:"moves"`
 	Messages              []Message    `gorm:"constraint:OnUpdate:CASCADE,OnDelete:SET NULL" json:"messages"`
-	Fen                   string       `json:"fen"`
+	Fen                   string       `gorm:"size:255;not null;" json:"fen"`
 }
 
 func (game *Game) Save() (*Game, error) {
@@ -69,6 +68,7 @@ func RemoveGame(id string) (Game, error) {
 
 type UpdateGameInput struct {
 	Moves string `json:"moves"`
+	Fen   string `json:"fen"`
 }
 
 func UpdateGame(id string, input UpdateGameInput) (Game, error) {

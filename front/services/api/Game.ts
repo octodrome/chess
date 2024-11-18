@@ -30,8 +30,11 @@ export default class Game {
         return await useCustomFetch<{ data: ApiGame }>(
             `api/game/${params.gameId}`,
             {
-                method: 'post',
-                body: params.moves,
+                method: 'put',
+                body: {
+                    moves: params.moves,
+                    fen: params.fen,
+                },
             }
         )
     }

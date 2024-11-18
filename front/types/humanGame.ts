@@ -28,8 +28,9 @@ export interface ICreateHumanGameRequestParams {
 }
 
 export interface IUpdateHumanGameRequestParams {
-    gameId: string
-    moves: string[]
+    gameId: number
+    moves: string
+    fen: string
 }
 
 export interface IMessage {
