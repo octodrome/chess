@@ -1,6 +1,6 @@
 import type { IColor } from '../computerGame'
 import type { ApiUser } from './user'
-import type { IMessage } from '~/types/humanGame'
+import type { ApiMessage } from '~/types/humanGame'
 
 export interface ApiGame {
     id: number
@@ -18,6 +18,6 @@ export interface ApiGame {
     guest_color: IColor
     has_to_play_id: number
     moves: string
-    messages: IMessage[]
+    messages: ApiMessage[]
     fen: string
 }

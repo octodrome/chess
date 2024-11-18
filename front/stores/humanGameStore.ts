@@ -4,7 +4,7 @@ import services from '~/services/index'
 import Game from 'chess-legal-moves'
 import type {
     ICreateHumanGameRequestParams,
-    IMessage,
+    ApiMessage,
     IUpdateHumanGameRequestParams,
 } from '~/types/humanGame'
 import type { ApiGame } from '~/types/api/game'
@@ -104,7 +104,7 @@ export const useHumanGameStore = defineStore('humanGame', {
             })
         },
 
-        addMessage(message: IMessage) {
+        addMessage(message: ApiMessage) {
             if (this.currentGame) {
                 this.currentGame.messages = [
                     ...this.currentGame.messages,

@@ -1,11 +1,12 @@
 // plugins/webSocket.client.ts
+import type { IMove } from 'chess-legal-moves/dist/types'
 import { useHumanGameStore } from '~/stores/humanGameStore'
 import { useUserStore } from '~/stores/userStore'
-import type { IMessage } from '~/types/humanGame'
+import type { ApiMessage } from '~/types/humanGame'
 
 interface IjoinGameParams {
-    userId: string
-    gameId: string
+    userId: number
+    gameId: number
 }
 
 export class WebSocketClient {
@@ -25,7 +26,7 @@ export class WebSocketClient {
         }
 
         this.socket.onmessage = (event) => {
-            const message: { data: IMessage; event: 'message' } = JSON.parse(
+            const message: { data: ApiMessage; event: 'message' } = JSON.parse(
                 event.data
             )
             console.log('🧦 onmessage', message)
@@ -45,7 +46,7 @@ export class WebSocketClient {
         }
     }
 
-    sendMessage(message: IMessage): void {
+    sendMessage(message: ApiMessage): void {
         if (this.socket && this.socket.readyState === WebSocket.OPEN) {
             const humanGameStore = useHumanGameStore()
             humanGameStore.addMessage(message)

@@ -13,7 +13,7 @@ export interface IHumanGame {
     hasToPlay: IUser
     moves: string[]
     created_at: Date
-    messages: IMessage[]
+    messages: ApiMessage[]
     id: string
 }
 
@@ -33,7 +33,7 @@ export interface IUpdateHumanGameRequestParams {
     fen: string
 }
 
-export interface IMessage {
+export interface ApiMessage {
     id?: number
     created_at?: Date
     token: string

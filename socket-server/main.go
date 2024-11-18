@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"log"
 	"net/http"
-	"strconv"
 
 	"github.com/gorilla/websocket"
 	"github.com/octodrome/chess/socket-server/model"
@@ -12,8 +11,8 @@ import (
 )
 
 type JoinGameParams struct {
-	UserID string `json:"userId"`
-	GameID string `json:"gameId"`
+	UserID uint `json:"userId"`
+	GameID uint `json:"gameId"`
 }
 
 // Upgrader to upgrade HTTP requests to WebSocket connections.
@@ -26,7 +25,7 @@ var upgrader = websocket.Upgrader{
 }
 
 // Map to keep track of connections per game ID.
-var gameConnections = make(map[string][]*websocket.Conn)
+var gameConnections = make(map[uint][]*websocket.Conn)
 
 func handleConnections(w http.ResponseWriter, r *http.Request) {
 	ws, err := upgrader.Upgrade(w, r, nil)
@@ -34,6 +33,7 @@ func handleConnections(w http.ResponseWriter, r *http.Request) {
 		log.Printf("Error upgrading connection: %v\n", err)
 		return
 	}
+	log.Println("New WebSocket connection established")
 	defer ws.Close()
 
 	// Main loop to listen for events.
@@ -83,7 +83,7 @@ func handleConnections(w http.ResponseWriter, r *http.Request) {
 
 func joinGame(conn *websocket.Conn, params JoinGameParams) {
 	gameConnections[params.GameID] = append(gameConnections[params.GameID], conn)
-	log.Printf("User %s joined game %s\n", params.UserID, params.GameID)
+	log.Printf("User %d joined game %d\n. Current connections: %v\n", params.UserID, params.GameID, gameConnections[params.GameID])
 }
 
 func leaveGame(conn *websocket.Conn, params JoinGameParams) {
@@ -94,12 +94,12 @@ func leaveGame(conn *websocket.Conn, params JoinGameParams) {
 			break
 		}
 	}
-	log.Printf("User %s left game %s\n", params.UserID, params.GameID)
+	log.Printf("User %d left game %d\n", params.UserID, params.GameID)
 }
 
 func broadcastMessage(msg model.Message) {
 	// Get the connections for the specific game ID
-	connections, ok := gameConnections[strconv.FormatUint(uint64(msg.GameID), 10)]
+	connections, ok := gameConnections[msg.GameID]
 	if !ok {
 		log.Printf("No connections found for game ID: %d\n", msg.GameID)
 		return
