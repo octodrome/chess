@@ -24,7 +24,6 @@ onMounted(() => joinGame(route.params.id as string))
 
 const joinGame = async (gameId: string) => {
     humanGameStore.getGame(gameId)
-    console.log('[id] user', userStore.user)
     if (userToken.value) {
         socketClient.joinGame({
             gameId: Number(gameId),
