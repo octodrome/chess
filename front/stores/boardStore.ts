@@ -11,6 +11,7 @@ import type { ICellPosition, IMove, IPiece } from '~/types/board'
 import type { ILegalMoves } from 'chess-legal-moves/dist/types'
 import type { IColor } from '~/types/computerGame'
 import Game from 'chess-legal-moves'
+import type { WebSocketClient } from '~/plugins/websocket.client'
 
 export const useBoardStore = defineStore('board', {
     state: () => ({
@@ -181,20 +182,27 @@ export const useBoardStore = defineStore('board', {
 
         sendMoveToPlayer() {
             const humanGameStore = useHumanGameStore()
+            const userStore = useUserStore()
             const lastMove = this.moves[this.moves.length - 1]
             const game = new Game(humanGameStore.currentGame!.fen)
             const newFen = game.addMove(lastMove)
             console.log('sendMoveToPlayer', { lastMove, newFen })
+            const { $webSocketClient } = useNuxtApp()
 
-            services.game
+            humanGameStore
                 .sendMove({
                     gameId: humanGameStore.currentGame!.id,
                     moves: this.movesAsString,
                     fen: newFen,
                 })
                 .then(() => {
-                    this.round++
-                    this.TOGGLE_PLAYER
+                    ;($webSocketClient as WebSocketClient).sendMove({
+                        content: lastMove,
+                        token: userStore.token as string,
+                        game_id: humanGameStore.currentGame?.id as number,
+                        to_id: humanGameStore.opponent?.id as number,
+                        from_id: userStore.user?.id as number,
+                    })
                 })
         },
 

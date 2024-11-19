@@ -1,13 +1,17 @@
-// plugins/webSocket.client.ts
 import type { IMove } from 'chess-legal-moves/dist/types'
+import { getMoveFromAN } from '~/helpers/stockfish'
 import { useHumanGameStore } from '~/stores/humanGameStore'
 import { useUserStore } from '~/stores/userStore'
 import type { ApiMessage } from '~/types/humanGame'
 
-interface IJoinGameParams {
+interface SocketJoinGameParams {
     userId: number
     gameId: number
 }
+
+type SocketGameMessage = { data: ApiMessage; event: 'message' }
+type SocketGameMove = { data: ApiMessage; event: 'move' }
+type SocketMessage = SocketGameMessage | SocketGameMove
 
 export class WebSocketClient {
     socket: WebSocket | null = null
@@ -22,14 +26,20 @@ export class WebSocketClient {
             }
 
             this.socket.onmessage = (event) => {
-                const message: { data: ApiMessage; event: 'message' } =
-                    JSON.parse(event.data)
+                const message: SocketMessage = JSON.parse(event.data)
                 console.log('🧦 onmessage', message)
 
-                const humanGameStore = useHumanGameStore()
-                const userStore = useUserStore()
-                if (userStore.user?.id !== message.data.from_id) {
-                    humanGameStore.addMessage(message.data)
+                if (message.event === 'message') {
+                    const humanGameStore = useHumanGameStore()
+                    const userStore = useUserStore()
+                    if (userStore.user?.id !== message.data.from_id) {
+                        humanGameStore.addMessage(message.data)
+                    }
+                }
+
+                if (message.event === 'move') {
+                    const humanGameStore = useHumanGameStore()
+                    humanGameStore.getGame(String(message.data.game_id))
                 }
             }
 
@@ -56,15 +66,15 @@ export class WebSocketClient {
         }
     }
 
-    sendMove(move: IMove): void {
+    sendMove(move: ApiMessage): void {
         if (this.socket && this.socket.readyState === WebSocket.OPEN) {
-            this.socket.send(JSON.stringify({ event: 'message', data: move }))
+            this.socket.send(JSON.stringify({ event: 'move', data: move }))
         } else {
             console.error('🧦[sendMove] WebSocket is not connected.')
         }
     }
 
-    joinGame(params: IJoinGameParams): void {
+    joinGame(params: SocketJoinGameParams): void {
         console.log('🧦[joinGame] params', params)
         if (this.socket && this.socket.readyState === WebSocket.OPEN) {
             this.socket.send(
@@ -75,7 +85,7 @@ export class WebSocketClient {
         }
     }
 
-    leaveGame(params: IJoinGameParams): void {
+    leaveGame(params: SocketJoinGameParams): void {
         if (this.socket && this.socket.readyState === WebSocket.OPEN) {
             this.socket.send(
                 JSON.stringify({ event: 'leaveGame', data: params })

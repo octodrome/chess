@@ -77,6 +77,16 @@ func handleConnections(w http.ResponseWriter, r *http.Request) {
 				log.Printf("Error mapping incoming data to Message struct: %v", err)
 				log.Printf("Incoming data for message: %+v", incoming["data"]) // Log the raw incoming data for inspection
 			}
+		case "move":
+			var move model.Message
+			if err := mapToStruct(incoming["data"], &move); err == nil {
+				log.Printf("Successfully mapped move: %+v", move)
+
+				broadcastMove(move, ws)
+			} else {
+				log.Printf("Error mapping incoming data to Message struct: %v", err)
+				log.Printf("Incoming data for message: %+v", incoming["data"]) // Log the raw incoming data for inspection
+			}
 		}
 	}
 }
@@ -112,6 +122,27 @@ func broadcastMessage(msg model.Message) {
 			"data":  msg,
 		}); err != nil {
 			log.Printf("Error broadcasting message to connection: %v\n", err)
+		}
+	}
+}
+
+func broadcastMove(move model.Message, sender *websocket.Conn) {
+	connections, ok := gameConnections[move.GameID]
+	if !ok {
+		log.Printf("No connections found for game ID: %d\n", move.GameID)
+		return
+	}
+
+	for _, conn := range connections {
+		if conn == sender {
+			// only broadcast the move to the opponent
+			continue
+		}
+		if err := conn.WriteJSON(map[string]interface{}{
+			"event": "move",
+			"data":  move,
+		}); err != nil {
+			log.Printf("Error broadcasting move to connection: %v\n", err)
 		}
 	}
 }
