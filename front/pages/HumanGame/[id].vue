@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { useUserStore } from '~/stores/userStore'
 import { useHumanGameStore } from '~/stores/humanGameStore'
 import { useBoardStore } from '~/stores/boardStore'
 import { WebSocketClient } from '~/plugins/websocket.client'
@@ -7,7 +6,6 @@ import { WebSocketClient } from '~/plugins/websocket.client'
 const { $webSocketClient } = useNuxtApp()
 const socketClient = $webSocketClient as WebSocketClient
 const route = useRoute()
-const userStore = useUserStore()
 const boardStore = useBoardStore()
 const humanGameStore = useHumanGameStore()
 const userToken = useCookie('token')

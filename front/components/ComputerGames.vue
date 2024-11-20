@@ -37,9 +37,9 @@ const deleteThisGame = (gameId: string) => {
             icon="robot"
             :content="game.guest_name"
             action="delete"
+            :highlighted="game.id == route.params.id"
             @click="goToGame(game.id)"
             @delete="deleteThisGame(game.id)"
-            :highlighted="game.id == route.params.id"
         />
     </ul>
 </template>
