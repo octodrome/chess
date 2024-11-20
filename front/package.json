@@ -54,18 +54,18 @@
     },
     "dependencies": {
         "@mdi/font": "7.4.47",
-        "@pinia/nuxt": "^0.5.1",
+        "@pinia/nuxt": "0.7.0",
         "chess-legal-moves": "2.3.2",
         "defu": "6.1.4",
-        "moment": "^2.29.4",
+        "moment": "2.30.1",
         "nuxt": "3.14.1592",
         "unique-names-generator": "4.7.1",
-        "uuid": "^8.3.2",
-        "vee-validate": "^4.5.8",
+        "uuid": "11.0.3",
+        "vee-validate": "4.14.7",
         "vue": "3.5.13",
         "vue-i18n": "10.0.4",
         "vue-router": "4.4.5",
-        "yup": "^0.32.11"
+        "yup": "1.4.0"
     },
     "type": "module"
 }
