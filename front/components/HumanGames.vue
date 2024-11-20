@@ -41,9 +41,9 @@ const deleteThisGame = (gameId: string) => {
                     : game.creator.pseudo || game.creator.email
             "
             action="delete"
+            :highlighted="String(game.id) == route.params.id"
             @click="goToGame(String(game.id))"
             @delete="deleteThisGame(String(game.id))"
-            :highlighted="String(game.id) == route.params.id"
         />
     </ul>
 </template>
