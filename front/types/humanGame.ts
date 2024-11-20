@@ -13,13 +13,14 @@ export interface IHumanGame {
     hasToPlay: IUser
     moves: string[]
     created_at: Date
-    messages: IMessage[]
+    messages: ApiMessage[]
     id: string
 }
 
 export interface ICreateHumanGameRequestParams {
     creator_id: number
     creator_color: IColor
+    guest_color: IColor
     guest_id: number
     has_to_play_id: number
     moves: string
@@ -27,11 +28,12 @@ export interface ICreateHumanGameRequestParams {
 }
 
 export interface IUpdateHumanGameRequestParams {
-    gameId: string
-    moves: string[]
+    gameId: number
+    moves: string
+    fen: string
 }
 
-export interface IMessage {
+export interface ApiMessage {
     id?: number
     created_at?: Date
     token: string

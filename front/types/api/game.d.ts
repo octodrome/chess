@@ -1,5 +1,6 @@
+import type { IColor } from '../computerGame'
 import type { ApiUser } from './user'
-import type { IMessage } from '~/types/humanGame'
+import type { ApiMessage } from '~/types/humanGame'
 
 export interface ApiGame {
     id: number
@@ -10,12 +11,13 @@ export interface ApiGame {
     creator_id: number
     creator: ApiUser
     creator_captured_pieces: string
-    creator_color: string
+    creator_color: IColor
     guest_id: number
     guest: ApiUser
     guest_captured_pieces: string
+    guest_color: IColor
     has_to_play_id: number
     moves: string
-    messages: IMessage[]
+    messages: ApiMessage[]
     fen: string
 }

@@ -45,6 +45,7 @@ export default class LocalGame {
             created_at: new Date(),
             updated_at: new Date(),
             creator_color: params.playerColor,
+            guest_color: params.opponentColor,
             guest_level: params.computerLevel,
             guest_name: uniqueNamesGenerator(nameGeneretorConfig),
             fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1',

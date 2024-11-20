@@ -54,6 +54,7 @@ const start = () => {
                 guest_id: selectedOpponentId.value,
                 has_to_play_id: userStore.user.id,
                 creator_color: color.value,
+                guest_color: color.value === 'white' ? 'black' : 'white',
                 moves: '',
                 fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1',
             })

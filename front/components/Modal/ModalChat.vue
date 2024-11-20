@@ -2,7 +2,7 @@
 import { useHumanGameStore } from '~/stores/humanGameStore'
 import { useUserStore } from '~/stores/userStore'
 import moment from 'moment'
-import type { IMessage } from '~/types/humanGame'
+import type { ApiMessage } from '~/types/humanGame'
 import { WebSocketClient } from '~/plugins/websocket.client'
 
 const { $webSocketClient } = useNuxtApp()
@@ -16,7 +16,7 @@ const messageContent = ref('')
 
 const isMessageEmpty = computed(() => messageContent.value.trim().length === 0)
 const isUserMessage = computed(
-    () => (message: IMessage) =>
+    () => (message: ApiMessage) =>
         humanGameStore.opponent
             ? message.from_id !== humanGameStore.opponent.id
             : false

@@ -9,6 +9,7 @@ export type IColor = 'white' | 'black'
 
 export interface ICreateComputerGameParams {
     playerColor: IColor
+    opponentColor: IColor
     computerLevel: number
 }
 
@@ -27,6 +28,7 @@ export interface IComputerGame {
 
     guest_name: string
     creator_color: IColor
+    guest_color: IColor
     guest_level: number
     fen: string
     moves: string[]

@@ -10,6 +10,10 @@ const route = useRoute()
 const userStore = useUserStore()
 const boardStore = useBoardStore()
 const humanGameStore = useHumanGameStore()
+const userToken = useCookie('token')
+async function parseToken(token: string) {
+    return await JSON.parse(atob(token.split('.')[1]))
+}
 
 watch(route, (newValue, oldValue) => {
     leaveGame(oldValue.params.id as string)
@@ -18,21 +22,21 @@ watch(route, (newValue, oldValue) => {
 
 onMounted(() => joinGame(route.params.id as string))
 
-const joinGame = (gameId: string) => {
+const joinGame = async (gameId: string) => {
     humanGameStore.getGame(gameId)
-    if (userStore.user) {
+    if (userToken.value) {
         socketClient.joinGame({
-            gameId: gameId,
-            userId: userStore.user.email,
+            gameId: Number(gameId),
+            userId: (await parseToken(userToken.value)).id,
         })
     }
 }
 
-const leaveGame = (gameId: string) => {
-    if (userStore.user) {
+const leaveGame = async (gameId: string) => {
+    if (userToken.value) {
         socketClient.leaveGame({
-            gameId: gameId,
-            userId: userStore.user.email,
+            gameId: Number(gameId),
+            userId: (await parseToken(userToken.value)).id,
         })
     }
 }

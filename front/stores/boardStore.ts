@@ -10,11 +10,14 @@ import services from '~/services/index'
 import type { ICellPosition, IMove, IPiece } from '~/types/board'
 import type { ILegalMoves } from 'chess-legal-moves/dist/types'
 import type { IColor } from '~/types/computerGame'
+import Game from 'chess-legal-moves'
+import type { WebSocketClient } from '~/plugins/websocket.client'
 
 export const useBoardStore = defineStore('board', {
     state: () => ({
         opponent: 'computer',
         playerColor: 'white' as IColor,
+        opponentColor: 'black' as IColor,
         board: FenBoardParser('8/8/8/8/8/8/8/8'),
         hasToPlay: 'white' as IColor,
         selectedPiece: null as IPiece | null,
@@ -148,9 +151,8 @@ export const useBoardStore = defineStore('board', {
             // PREPARE NEXT ROUND
             this.round++
             this.TOGGLE_PLAYER()
-            const humanGameStore = useHumanGameStore()
-            if (!humanGameStore.isAgainstHuman) this.sendMoveToComputer()
-            if (humanGameStore.isAgainstHuman) this.sendMoveToPlayer()
+            if (this.opponent === 'computer') this.sendMoveToComputer()
+            else this.sendMoveToPlayer()
         },
 
         sendMoveToComputer() {
@@ -179,12 +181,29 @@ export const useBoardStore = defineStore('board', {
         },
 
         sendMoveToPlayer() {
-            // @TODO use it
-            // services.game.sendMove(this.movesAsString).then((move) => {
-            //     this.move(getMoveFromAN(move))
-            //     this.round++
-            //     this.TOGGLE_PLAYER
-            // })
+            const humanGameStore = useHumanGameStore()
+            const userStore = useUserStore()
+            const lastMove = this.moves[this.moves.length - 1]
+            const game = new Game(humanGameStore.currentGame!.fen)
+            const newFen = game.addMove(lastMove)
+            console.log('sendMoveToPlayer', { lastMove, newFen })
+            const { $webSocketClient } = useNuxtApp()
+
+            humanGameStore
+                .sendMove({
+                    gameId: humanGameStore.currentGame!.id,
+                    moves: this.movesAsString,
+                    fen: newFen,
+                })
+                .then(() => {
+                    ;($webSocketClient as WebSocketClient).sendMove({
+                        content: lastMove,
+                        token: userStore.token as string,
+                        game_id: humanGameStore.currentGame?.id as number,
+                        to_id: humanGameStore.opponent?.id as number,
+                        from_id: userStore.user?.id as number,
+                    })
+                })
         },
 
         startNewGame(opponentType: string) {
@@ -201,6 +220,7 @@ export const useBoardStore = defineStore('board', {
         initBoard({
             opponentType,
             playerColor,
+            opponentColor,
             hasToPlay,
             round,
             fenBoard,
@@ -211,7 +231,8 @@ export const useBoardStore = defineStore('board', {
         }: {
             opponentType: string
             playerColor: IColor
-            hasToPlay: string
+            opponentColor: IColor
+            hasToPlay: 'w' | 'b'
             round: number
             fenBoard: string
             legalMoves: ILegalMoves
@@ -221,6 +242,7 @@ export const useBoardStore = defineStore('board', {
         }) {
             this.opponent = opponentType
             this.playerColor = playerColor
+            this.opponentColor = opponentColor
             this.hasToPlay = hasToPlay === 'w' ? 'white' : 'black'
             this.round = round
             this.board = FenBoardParser(fenBoard)
