@@ -60,8 +60,6 @@
         "defu": "^6.1.4",
         "moment": "^2.29.4",
         "nuxt": "3.14.1592",
-        "socket.io": "^4.7.5",
-        "socket.io-client": "^4.4.1",
         "unique-names-generator": "^4.7.1",
         "uuid": "^8.3.2",
         "vee-validate": "^4.5.8",
