@@ -1,21 +1,23 @@
-// Mock Worker for tests
+import { vi } from 'vitest'
+import type { WebSocketClient } from '~/plugins/websocket.client'
+
 globalThis.Worker = class {
     constructor() {}
     postMessage() {}
     terminate() {}
 } as any
 
-globalThis.WebSocket = class WebSocketMock {
-    url: string
-    readyState: number
-    constructor(url: string) {
-        this.url = url
-        this.readyState = 1 // open
+vi.mock('~/plugins/websocket.client.ts', async (importOriginal) => {
+    const actual = (await importOriginal()) as {
+        default: typeof WebSocketClient
     }
-    close() {
-        this.readyState = 3 // closed
+
+    return {
+        ...actual,
+        default: {
+            ...actual.default,
+            connect: vi.fn().mockResolvedValue(undefined),
+            sendMessage: vi.fn(),
+        },
     }
-    send(data: any) {
-        console.log('Sending data:', data)
-    }
-} as any
+})
