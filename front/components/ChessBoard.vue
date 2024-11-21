@@ -10,12 +10,15 @@ const boardStore = useBoardStore()
 </script>
 
 <template>
-    <div class="flex relative drop-shadow-lg">
+    <div
+        class="flex relative drop-shadow-lg"
+        :class="{ 'flex-row-reverse': boardStore.playerColor === 'black' }"
+    >
         <div
             v-for="(column, columnIndex) in props.board"
             :key="columnIndex"
             class="board-row"
-            :class="{ 'from-black': boardStore.playerColor === 'black' }"
+            :class="{ 'row-from-black': boardStore.playerColor === 'black' }"
         >
             <div
                 v-for="(cell, rowIndex) in column"
@@ -57,7 +60,7 @@ const boardStore = useBoardStore()
     width: 400px;
     flex-direction: column-reverse;
 }
-.from-black {
+.row-from-black {
     flex-direction: column;
 }
 
