@@ -74,6 +74,7 @@ onMounted(() => {
                 humanGameStore.opponent?.email ||
                 ''
             "
+            @close="$emit('close')"
         />
 
         <BaseCardMain :text="humanGameStore.opponent?.about || ''">

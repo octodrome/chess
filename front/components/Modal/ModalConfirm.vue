@@ -16,6 +16,8 @@ const confirm = () => {
 </script>
 
 <template>
+    <BaseCardHeader @close="close" />
+
     <BaseCardMain :text="$t('modals.confirm.text')"></BaseCardMain>
 
     <BaseCardFooter>

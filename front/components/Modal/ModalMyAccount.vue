@@ -15,7 +15,7 @@ const emit = defineEmits<{
     (e: 'close'): void
 }>()
 
-const cancel = () => emit('close')
+const close = () => emit('close')
 
 const update = () => {
     userStore
@@ -24,7 +24,7 @@ const update = () => {
             about: about.value,
         })
         .then(() => {
-            cancel()
+            close()
         })
         .catch(() => {
             layoutStore.openSnackbarError(t('snackbar.error.game_update'))
@@ -33,7 +33,7 @@ const update = () => {
 </script>
 
 <template>
-    <BaseCardHeader :title="$t('options.account')" />
+    <BaseCardHeader :title="$t('options.account')" @close="close" />
 
     <BaseCardMain :text="$t('modals.account.text')">
         <BaseTextField
@@ -60,7 +60,7 @@ const update = () => {
     </BaseCardMain>
 
     <BaseCardFooter>
-        <BaseButton type="text" class="mr-2" @click="cancel()">{{
+        <BaseButton type="text" class="mr-2" @click="close()">{{
             $t('actions.cancel')
         }}</BaseButton>
 

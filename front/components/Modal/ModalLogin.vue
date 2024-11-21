@@ -40,7 +40,7 @@ const submit = handleSubmit((values) => {
 </script>
 
 <template>
-    <BaseCardHeader :title="$t('options.login')" />
+    <BaseCardHeader :title="$t('options.login')" @close="close" />
 
     <BaseCardMain :text="$t('modals.login.text')">
         <form>
