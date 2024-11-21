@@ -81,8 +81,8 @@ const boardStore = useBoardStore()
 
     .possible-destination,
     .possible-kill {
-        width: 35%;
-        height: 35%;
+        width: 97%;
+        height: 97%;
         border-radius: 50%;
 
         &:hover {
@@ -92,6 +92,7 @@ const boardStore = useBoardStore()
 
     .possible-destination {
         background-color: #65d6a7;
+        opacity: 0.5;
 
         &:hover {
             background-color: #4ea782;
@@ -101,7 +102,7 @@ const boardStore = useBoardStore()
     .possible-kill {
         position: absolute;
         background-color: #d34444;
-        opacity: 0.8;
+        opacity: 0.5;
 
         &:hover {
             background-color: #b32f2f;
