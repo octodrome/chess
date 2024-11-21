@@ -186,7 +186,6 @@ export const useBoardStore = defineStore('board', {
             const lastMove = this.moves[this.moves.length - 1]
             const game = new Game(humanGameStore.currentGame!.fen)
             const newFen = game.addMove(lastMove)
-            console.log('sendMoveToPlayer', { lastMove, newFen })
             const { $webSocketClient } = useNuxtApp()
 
             humanGameStore
