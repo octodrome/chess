@@ -34,7 +34,7 @@ const languages = ref([
 
 const language = ref(localStorage.getItem('locale') || 'en')
 
-const cancel = () => emit('close')
+const close = () => emit('close')
 
 const confirm = () => {
     localStorage.setItem('locale', language.value)
@@ -45,7 +45,7 @@ const confirm = () => {
 </script>
 
 <template>
-    <BaseCardHeader :title="$t('options.settings')" />
+    <BaseCardHeader :title="$t('options.settings')" @close="close" />
 
     <BaseCardMain :text="$t('modals.settings.text')">
         <BaseRadioGroup
@@ -68,7 +68,7 @@ const confirm = () => {
     </BaseCardMain>
 
     <BaseCardFooter>
-        <BaseButton type="text" class="mr-2" @click="cancel">{{
+        <BaseButton type="text" class="mr-2" @click="close">{{
             $t('actions.cancel')
         }}</BaseButton>
 

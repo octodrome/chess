@@ -41,7 +41,7 @@ const colors = ref([
 
 const computerLevel = ref(1)
 
-const cancel = () => emit('close')
+const close = () => emit('close')
 
 const start = () => {
     computerGameStore
@@ -61,7 +61,7 @@ const start = () => {
 </script>
 
 <template>
-    <BaseCardHeader :title="$t('options.newComputerGame')" />
+    <BaseCardHeader :title="$t('options.newComputerGame')" @close="close" />
 
     <BaseCardMain :text="$t('modals.new_game_computer.text')">
         <BaseRadioGroup
@@ -84,7 +84,7 @@ const start = () => {
     </BaseCardMain>
 
     <BaseCardFooter>
-        <BaseButton type="text" class="mr-2" @click="cancel">{{
+        <BaseButton type="text" class="mr-2" @click="close">{{
             $t('actions.cancel')
         }}</BaseButton>
 

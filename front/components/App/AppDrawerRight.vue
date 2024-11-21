@@ -1,7 +1,27 @@
+<script setup lang="ts">
+import { useLayoutStore } from '~/stores/layoutStore'
+const layoutStore = useLayoutStore()
+</script>
+
 <template>
     <BaseDrawer>
         <div>
-            <GameOpponent />
+            <div class="flex justify-between items-center">
+                <GameOpponent />
+
+                <BaseButton
+                    v-if="$route.path !== '/'"
+                    type="icon"
+                    @click="layoutStore.toggleRightDrawer"
+                    class="sm:absolute -left-14 top-1 text-white sm:text-black mr-1"
+                >
+                    <BaseIcon
+                        v-if="!layoutStore.drawer.rightIsOpened"
+                        name="dots-vertical"
+                    />
+                    <BaseIcon v-else name="arrow-right" />
+                </BaseButton>
+            </div>
 
             <BaseDrawerSeparator />
 

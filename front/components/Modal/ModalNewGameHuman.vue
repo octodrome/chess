@@ -71,7 +71,7 @@ const start = () => {
 </script>
 
 <template>
-    <BaseCardHeader :title="$t('options.newHumanGame')" />
+    <BaseCardHeader :title="$t('options.newHumanGame')" @close="close" />
 
     <BaseCardMain
         v-if="userIsNotAlone"

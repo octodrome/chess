@@ -1,9 +1,14 @@
 <script setup lang="ts">
 const props = defineProps<{
-    title: string
+    title?: string
 }>()
 </script>
 
 <template>
-    <h2 class="text-2xl">{{ props.title }}</h2>
+    <div class="flex justify-between items-center">
+        <h2 class="text-2xl">{{ props.title }}</h2>
+        <BaseButton type="icon" @click="$emit('close')">
+            <BaseIcon name="close" color="black"></BaseIcon>
+        </BaseButton>
+    </div>
 </template>

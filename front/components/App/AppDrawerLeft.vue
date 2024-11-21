@@ -11,9 +11,24 @@ const layoutStore = useLayoutStore()
 <template>
     <BaseDrawer>
         <ul>
-            <NuxtLink to="/">
-                <BaseDrawerItem icon="chess-knight" content="Chess" />
-            </NuxtLink>
+            <div class="flex justify-between items-center">
+                <NuxtLink to="/">
+                    <BaseDrawerItem icon="chess-knight" content="Chess" />
+                </NuxtLink>
+
+                <BaseButton
+                    type="icon"
+                    data-cy="app_header_left_button"
+                    @click="layoutStore.toggleLeftDrawer"
+                    class="sm:absolute -right-14 top-1 z-50 text-white sm:text-black mr-1"
+                >
+                    <BaseIcon
+                        v-if="!layoutStore.drawer.leftIsOpened"
+                        name="menu"
+                    />
+                    <BaseIcon v-else name="arrow-left" />
+                </BaseButton>
+            </div>
 
             <BaseDrawerSeparator />
 
