@@ -30,7 +30,10 @@ onMounted(async () => {
 
 <template>
     <div class="bg-gray-200 h-screen flex justify-between">
-        <AppDrawerLeft v-if="layoutStore.drawer.leftIsOpened" />
+        <AppDrawerLeft
+            v-if="layoutStore.drawer.leftIsOpened"
+            class="absolute h-full left-0"
+        />
 
         <div class="basis-full flex flex-col justify-between">
             <AppHeader class="flex justify-between" />
@@ -42,7 +45,10 @@ onMounted(async () => {
             <AppFooter class="flex justify-between" />
         </div>
 
-        <AppDrawerRight v-if="layoutStore.drawer.rightIsOpened" />
+        <AppDrawerRight
+            v-if="layoutStore.drawer.rightIsOpened"
+            class="absolute h-full right-0"
+        />
 
         <AppSnackbar
             v-if="layoutStore.snackbar.isOpened"
@@ -56,3 +62,9 @@ onMounted(async () => {
         />
     </div>
 </template>
+
+<style>
+body {
+    background-color: #e5e7eb;
+}
+</style>

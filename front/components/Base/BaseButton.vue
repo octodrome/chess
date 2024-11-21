@@ -10,7 +10,7 @@ const props = defineProps<{
         <button
             v-if="props.type === 'icon'"
             :disabled="props.disabled"
-            class="hover:bg-gray-300 transition duration-300 w-12 h-12 rounded-full"
+            class="hover:bg-gray-500 transition duration-300 w-12 h-12 rounded-full"
         >
             <slot />
         </button>
@@ -18,7 +18,7 @@ const props = defineProps<{
         <button
             v-if="props.type === 'text'"
             :disabled="props.disabled"
-            class="hover:bg-gray-300 transition duration-300 p-2 rounded"
+            class="hover:bg-gray-500 transition duration-300 p-2 rounded"
         >
             <slot />
         </button>
