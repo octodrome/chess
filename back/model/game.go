@@ -73,10 +73,21 @@ type UpdateGameInput struct {
 
 func UpdateGame(id string, input UpdateGameInput) (Game, error) {
 	var updatedGame Game
-	err := database.Database.Where("ID=?", id).First(&updatedGame).Error
+
+	err := database.Database.Where("ID = ?", id).First(&updatedGame).Error
 	if err != nil {
 		return Game{}, err
 	}
-	database.Database.Model(&updatedGame).Updates(input)
+
+	err = database.Database.Model(&updatedGame).Updates(input).Error
+	if err != nil {
+		return Game{}, err
+	}
+
+	err = database.Database.Preload("Creator").Preload("Guest").First(&updatedGame, id).Error
+	if err != nil {
+		return Game{}, err
+	}
+
 	return updatedGame, nil
 }
