@@ -44,6 +44,10 @@ export const useLayoutStore = defineStore('layout', {
             this.drawer.rightIsOpened = !this.drawer.rightIsOpened
         },
 
+        closeLeftDrawer() {
+            this.drawer.leftIsOpened = false
+        },
+
         closeRightDrawer() {
             this.drawer.rightIsOpened = false
         },

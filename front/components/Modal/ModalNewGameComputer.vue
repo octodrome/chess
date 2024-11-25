@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useComputerGameStore } from '~/stores/computerGameStore'
+import { useLayoutStore } from '~/stores/layoutStore'
 import type { IColor } from '~/types/computerGame'
 import { useI18n } from 'vue-i18n'
 
@@ -10,6 +11,7 @@ const emit = defineEmits<{
 }>()
 
 const computerGameStore = useComputerGameStore()
+const layoutStore = useLayoutStore()
 
 const levels = ref([
     {
@@ -51,11 +53,11 @@ const start = () => {
             opponentColor: color.value === 'white' ? 'black' : 'white',
         })
         .then((game) => {
-            emit('close')
-
+            close()
             navigateTo({
                 path: `/ComputerGame/${game.id}`,
             })
+            layoutStore.closeLeftDrawer()
         })
 }
 </script>

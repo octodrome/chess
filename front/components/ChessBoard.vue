@@ -57,7 +57,6 @@ const boardStore = useBoardStore()
 <style scoped lang="scss">
 .board-row {
     display: flex;
-    width: 400px;
     flex-direction: column-reverse;
 }
 .row-from-black {
@@ -67,6 +66,8 @@ const boardStore = useBoardStore()
 .cell {
     height: 50px;
     width: 50px;
+    max-width: calc(100vw / 8);
+    max-height: calc(100vw / 8);
     display: flex;
     justify-content: center;
     align-items: center;

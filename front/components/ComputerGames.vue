@@ -19,6 +19,7 @@ const goToGame = (gameId: string) => {
     navigateTo({
         path: `/ComputerGame/${gameId}`,
     })
+    layoutStore.closeLeftDrawer()
 }
 
 const deleteThisGame = (gameId: string) => {

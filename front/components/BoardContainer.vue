@@ -35,6 +35,8 @@ const boardStore = useBoardStore()
 .board-container {
     height: 400px;
     width: 400px;
+    max-width: 100vw;
+    max-height: 100vw;
     position: relative;
 }
 </style>

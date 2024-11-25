@@ -29,10 +29,10 @@ onMounted(async () => {
 </script>
 
 <template>
-    <div class="bg-gray-200 h-screen flex justify-between">
+    <div class="bg-gray-200 h-svh flex justify-between">
         <AppDrawerLeft
             v-if="layoutStore.drawer.leftIsOpened"
-            class="absolute h-full left-0"
+            class="absolute h-svh left-0 overflow-y-clip"
         />
 
         <div class="basis-full flex flex-col justify-between">
@@ -47,7 +47,7 @@ onMounted(async () => {
 
         <AppDrawerRight
             v-if="layoutStore.drawer.rightIsOpened"
-            class="absolute h-full right-0"
+            class="absolute h-svh right-0 overflow-y-clip"
         />
 
         <AppSnackbar
