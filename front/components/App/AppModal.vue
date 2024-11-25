@@ -27,11 +27,11 @@ onMounted(() => {
 
 <template>
     <div
-        class="bg-slate-600/50 absolute top-0 left-0 z-40 w-screen h-screen flex justify-center items-center"
+        class="bg-slate-600/50 absolute top-0 left-0 z-40 w-screen h-svh flex justify-center items-center"
         @click.self="layoutStore.closeModal()"
     >
         <div
-            class="bg-white text-slate-800 sm:rounded drop-shadow-2xl p-5 w-full h-full sm:w-[550px] sm:h-auto flex flex-col justify-between"
+            class="bg-white text-slate-800 sm:rounded drop-shadow-2xl p-5 w-full h-svh sm:w-[550px] sm:h-auto flex flex-col justify-between"
         >
             <component
                 :is="modals[props.content]"

@@ -62,6 +62,7 @@ const start = () => {
                 close()
                 boardStore.startNewGame('human')
                 navigateTo({ path: `/HumanGame/${game.id}` })
+                layoutStore.closeLeftDrawer()
             })
             .catch(() => {
                 layoutStore.openSnackbarError(t('snackbar.error.game_creation'))
