@@ -1,6 +1,13 @@
 <script setup lang="ts">
 import { useLayoutStore } from '~/stores/layoutStore'
+import { useBoardStore } from '~/stores/boardStore'
+import { useHumanGameStore } from '~/stores/humanGameStore'
+
 const layoutStore = useLayoutStore()
+const boardStore = useBoardStore()
+const humanGameStore = useHumanGameStore()
+const computerGameStore = useComputerGameStore()
+const isAgainstHuman = computed(() => boardStore.opponent === 'human')
 </script>
 
 <template>
@@ -17,6 +24,23 @@ const layoutStore = useLayoutStore()
             />
             <BaseIcon v-else name="arrow-left" color="black" />
         </BaseButton>
+
+        <div class="text-gray-500">
+            <div v-if="isAgainstHuman && humanGameStore.currentGame">
+                {{
+                    humanGameStore.opponent?.pseudo ||
+                    humanGameStore.pseudoFromEmail
+                }}
+            </div>
+            <div v-if="!isAgainstHuman && computerGameStore.currentGame">
+                <BaseIcon
+                    :name="boardStore.playerHasToPlay ? 'robot' : 'robot-angry'"
+                />
+                {{ computerGameStore.currentGame?.guest_name }} ★{{
+                    computerGameStore.currentGame.guest_level
+                }}
+            </div>
+        </div>
 
         <BaseButton
             v-if="$route.path !== '/'"
