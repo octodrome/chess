@@ -5,7 +5,7 @@ This project started as a frontend portfolio app I worked on during my freelance
 -   🎮 Play it online: http://165.22.119.201/
 -   📉 Follow the project board: https://github.com/orgs/octodrome/projects/3
 -   🕵️‍♂️ Explore the code on github: https://github.com/octodrome/chess
--   💻 Torture me with coding interviews: https://www.linkedin.com/in/colin-faivre/
+-   💻 Connect with me: https://www.linkedin.com/in/colin-faivre/
 
 ![alt text](./documentation/app_screenshot.png?raw=true)
 
