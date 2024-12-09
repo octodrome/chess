@@ -11,11 +11,13 @@ This project started as a frontend portfolio app I worked on during my freelance
 
 ## 👾 Tech Stack
 
+![alt text](./documentation/chess_stack.png?raw=true)
+
 -   [**Front**](/front/README.md): [Typescript](https://www.typescriptlang.org/) - [Nuxt](https://nuxt.com/)
--   [**Back**](/back/README.md): [Go](https://go.dev/) - [Gin](https://gin-gonic.com/)
+-   [**Api-Server**](/back/README.md): [Go](https://go.dev/) - [Gin](https://gin-gonic.com/)
 -   [**Socket-Server**](/socket-server/README.md): [Go](https://go.dev/)
 -   [**Move Validation Library**](/chess-legal-moves/): [Typescript](https://www.typescriptlang.org/)
--   [**E2E Tests**](/e2e/): [Cypress](https://www.cypress.io/)
+-   [**Chess Engine**](https://stockfishchess.org/): [C++](https://en.wikipedia.org/wiki/C%2B%2B) --> [Web Assembly](https://webassembly.org/)
 -   **Database**: [PostgreSQL](https://www.postgresql.org/)
 
 ## 🥷 Run Chess locally
