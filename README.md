@@ -40,6 +40,8 @@ This project started as a frontend portfolio app I worked on during my freelance
 
 ## Continuous Integration and Deployment
 
+![alt text](./documentation/ci-cd.png?raw=true)
+
 The Chess app uses an automated pipeline to streamline the process from code changes to a live production environment: [.github/workflows/build-and-deploy.yml](.github/workflows/build-and-deploy.yml)
 
 The pipeline leverages [**GitHub Actions**](https://github.com/features/actions) for continuous integration and deployment, [**Docker Hub**](https://hub.docker.com/) for container images storage, a small droplet on [**DigitalOcean**](https://www.digitalocean.com/) for hosting the application and [**Docker Compose**](https://docs.docker.com/compose/) as a first easy solution to run the prod containers. The key stages include building, testing, and deploying the application across the frontend, backend, and socket-server components.
