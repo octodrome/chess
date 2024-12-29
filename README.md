@@ -13,12 +13,11 @@ This project started as a frontend portfolio app I worked on during my freelance
 
 ![alt text](./documentation/chess_stack.png?raw=true)
 
--   [**Front**](/front/README.md): [Typescript](https://www.typescriptlang.org/) - [Nuxt](https://nuxt.com/)
--   [**Api-Server**](/back/README.md): [Go](https://go.dev/) - [Gin](https://gin-gonic.com/)
--   [**Socket-Server**](/socket-server/README.md): [Go](https://go.dev/)
--   [**Move Validation Library**](/chess-legal-moves/): [Typescript](https://www.typescriptlang.org/)
--   [**Chess Engine**](https://stockfishchess.org/): [C++](https://en.wikipedia.org/wiki/C%2B%2B) --> [Web Assembly](https://webassembly.org/)
--   **Database**: [PostgreSQL](https://www.postgresql.org/)
+![TypeScript](https://img.shields.io/badge/Typescript-%23007ACC.svg?style=flat&logo=typescript&logoColor=white)
+![Nuxt.js](https://img.shields.io/badge/Nuxt3-002E3B?style=flat&logo=nuxtdotjs&logoColor=#00DC82)
+![Go](https://img.shields.io/badge/Go-%2300ADD8.svg?style=flat&logo=go&logoColor=white)
+![Gin](https://img.shields.io/badge/Gin-%2300ADD8.svg?style=flat&logo=go&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-%23316192.svg?style=flat&logo=postgresql&logoColor=white)
 
 ## 🥷 Run Chess locally
 
