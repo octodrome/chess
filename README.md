@@ -37,7 +37,7 @@ This project started as a frontend portfolio app I worked on during my freelance
     docker compose up
     ```
 
-## Continuous Integration and Deployment
+## 🚀 Continuous Integration and Deployment
 
 ![alt text](./documentation/ci-cd.png?raw=true)
 
