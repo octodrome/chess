@@ -20,22 +20,10 @@ This project started as a frontend portfolio app I worked on during my freelance
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-%23316192.svg?style=flat&logo=postgresql&logoColor=white)
 
 ## 🥷 Run Chess locally
-
-1. **Install Docker**:  
-   Follow the installation guide for your operating system:  
-   https://docs.docker.com/desktop/install/linux/ubuntu/
-2. **Clone the project**:
-
-    ```bash
-    git clone https://github.com/octodrome/chess.git
-    cd chess
-    ```
-
-3. **Run the project locally**:  
-   Use the provided [docker-compose.yml](/docker-compose.yml) to get started:
-    ```bash
-    docker compose up
-    ```
+Use the provided [docker-compose.yml](/docker-compose.yml) to get started:
+```bash
+docker compose up
+```
 
 ## 🚀 Continuous Integration and Deployment
 
