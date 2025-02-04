@@ -15,6 +15,9 @@
 # $ docker compose exec back sh
 # # ginkgo -r
 
+### 👀 Run compose watching changes
+# $ docker compose watch
+
 # @TODO Don't use environment variables to pass sensitive information. Use docker secrets instead:
 # https://docs.docker.com/compose/how-tos/use-secrets/
 # @TODO db port?
