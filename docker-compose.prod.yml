@@ -39,8 +39,8 @@ services:
         hostname: front
         networks:
             - mynet
-        exposes:
-            - '3000'
+        ports:
+            - '3000:3000'
         environment:
             - SOCKET_SERVER_URL=wss://socket-server:5000/ws
 
@@ -102,6 +102,8 @@ services:
             - mynet
         ports:
             - 5000:5000
+        volumes:
+            - /etc/letsencrypt:/etc/letsencrypt
 
 volumes:
     db:
