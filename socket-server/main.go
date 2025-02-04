@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"log"
 	"net/http"
+	"os"
 
 	"github.com/gorilla/websocket"
 	"github.com/octodrome/chess/socket-server/model"
@@ -156,9 +157,23 @@ func mapToStruct(data interface{}, v interface{}) error {
 func main() {
 	http.HandleFunc("/ws", handleConnections)
 
-	log.Println("Server started on :5000")
-	err := http.ListenAndServe(":5000", nil)
-	if err != nil {
-		log.Fatalf("Server error: %v\n", err)
+	// Check for HTTPS certificate and key environment variables or default to HTTP
+	certFile := os.Getenv("SSL_CERT_FILE")
+	keyFile := os.Getenv("SSL_KEY_FILE")
+
+	if certFile != "" && keyFile != "" {
+		// If SSL certs are provided, use HTTPS
+		log.Println("Starting HTTPS server on :5000")
+		err := http.ListenAndServeTLS(":5000", certFile, keyFile, nil)
+		if err != nil {
+			log.Fatalf("Server error: %v\n", err)
+		}
+	} else {
+		// Fallback to HTTP
+		log.Println("Starting HTTP server on :5000")
+		err := http.ListenAndServe(":5000", nil)
+		if err != nil {
+			log.Fatalf("Server error: %v\n", err)
+		}
 	}
 }
