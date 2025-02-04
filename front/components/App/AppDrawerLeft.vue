@@ -13,7 +13,7 @@ const layoutStore = useLayoutStore()
         <ul>
             <div class="flex justify-between items-center">
                 <NuxtLink to="/">
-                    <BaseDrawerItem icon="chess-knight" content="Chess" />
+                    <BaseDrawerItem icon="chess-knight" content="Nuxt Chess" />
                 </NuxtLink>
 
                 <BaseButton

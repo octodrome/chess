@@ -15,15 +15,15 @@ export default {
     },
     modals: {
         login: {
-            text: "Login to your Chess account to play with anybody around the world. You don't have an account yet ? Click here to sign up.",
+            text: "Login to your Nuxt Chess account to play with anybody around the world. You don't have an account yet ? Click here to sign up.",
             email: 'Email',
             password: 'Password',
         },
         signup: {
-            text: 'Create your Chess account to play with anybody around the world. You already have an account ? Click here to log in.',
+            text: 'Create your Nuxt Chess account to play with anybody around the world. You already have an account ? Click here to log in.',
             email: 'Email',
             password: 'Password',
-            newsletter: 'I want to subscribe to the Chess newsletter',
+            newsletter: 'I want to subscribe to the Nuxt Chess newsletter',
         },
         account: {
             text: 'Add some information about you. This will be visible when other players choose to play with you.',
