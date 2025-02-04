@@ -31,7 +31,7 @@ EXPOSE 8001
 CMD ["./main"]
 
 FROM base AS prod
-ENV FRONT_URL=http://165.22.119.201
+ENV FRONT_URL=http://nuxtchess.com
 RUN go build -o main .
 EXPOSE 8001
 CMD ["./main"]

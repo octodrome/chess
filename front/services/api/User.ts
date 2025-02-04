@@ -8,17 +8,17 @@ import type {
 
 export default class User {
     async getAllOpponents(userId: string) {
-        return await useCustomFetch<{ data: ApiUser[] }>('api/user', {
+        return await useCustomFetch<{ data: ApiUser[] }>('user', {
             query: { except: userId },
         })
     }
 
     async getUser(userId: string) {
-        return await useCustomFetch<{ data: ApiUser }>(`api/user/${userId}`)
+        return await useCustomFetch<{ data: ApiUser }>(`user/${userId}`)
     }
 
     async updateUser(userId: string, newUser: IUpdateUserRequestParams) {
-        return await useCustomFetch<{ data: ApiUser }>(`api/user/${userId}`, {
+        return await useCustomFetch<{ data: ApiUser }>(`user/${userId}`, {
             method: 'put',
             body: newUser,
         })

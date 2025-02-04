@@ -15,6 +15,9 @@
 # $ docker compose exec back sh
 # # ginkgo -r
 
+### 👀 Run compose watching changes
+# $ docker compose watch
+
 # @TODO Don't use environment variables to pass sensitive information. Use docker secrets instead:
 # https://docs.docker.com/compose/how-tos/use-secrets/
 # @TODO db port?
@@ -45,7 +48,7 @@ services:
         ports:
             - 3000:3000
         environment:
-            - REST_API_URL=http://localhost:8001/
+            - REST_API_URL=http://localhost:8001/api
             - SOCKET_SERVER_URL=ws://localhost:5000/ws
 
     back:

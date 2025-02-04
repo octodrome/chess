@@ -23,7 +23,7 @@ export default {
             text: "Créez votre compte pour jouer contre n'importe quel utilisateur connecté. Vous avez déjà un compte? Cliquez ici pour vous connecter.",
             email: 'Email',
             password: 'Mot de passe',
-            newsletter: 'Je souhaite recevoir la newsletter de Chess',
+            newsletter: 'Je souhaite recevoir la newsletter de Nuxt Chess',
         },
         account: {
             text: "Ajoutez quelques informations à propos de vous. Elles seront visibles quand d'autres joueurs choisiront de jouer avec vous",
