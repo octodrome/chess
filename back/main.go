@@ -42,11 +42,11 @@ func serveApplication() {
 	router := gin.Default()
 	router.Use(CORSMiddleware())
 
-	publicRoutes := router.Group("/auth")
+	api := router.Group("/api")
+	publicRoutes := api.Group("/auth")
 	publicRoutes.POST("/register", controller.Register)
 	publicRoutes.POST("/login", controller.Login)
-
-	protectedRoutes := router.Group("/api")
+	protectedRoutes := api.Group("/")
 	protectedRoutes.Use(middleware.JWTAuthMiddleware())
 	userRepo := model.NewUserRepository()
 	protectedRoutes.GET("/user", func(c *gin.Context) {
@@ -56,7 +56,6 @@ func serveApplication() {
 		controller.GetUserById(c, userRepo)
 	})
 	protectedRoutes.PUT("/user/:id", controller.PutUser)
-
 	protectedRoutes.POST("/game", controller.AddGame)
 	protectedRoutes.GET("/game", controller.GetAllUserGames)
 	protectedRoutes.GET("/game/:id", controller.GetGameById)

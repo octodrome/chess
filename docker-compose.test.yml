@@ -23,7 +23,7 @@ services:
             timeout: 5s
             retries: 5
         environment:
-            - REST_API_URL=http://back:8001/
+            - REST_API_URL=http://back:8001/api
             - SOCKET_SERVER_URL=ws://socket-server:5000/ws
 
     back:

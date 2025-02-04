@@ -6,29 +6,29 @@ import type {
 
 export default class Game {
     async getUserGames() {
-        return await useCustomFetch<{ data: ApiGame[] }>(`api/game`)
+        return await useCustomFetch<{ data: ApiGame[] }>(`game`)
     }
 
     async getGame(gameId: string) {
-        return await useCustomFetch<{ data: ApiGame }>(`api/game/${gameId}`)
+        return await useCustomFetch<{ data: ApiGame }>(`game/${gameId}`)
     }
 
     async createGame(params: ICreateHumanGameRequestParams) {
-        return await useCustomFetch<{ data: ApiGame }>('api/game', {
+        return await useCustomFetch<{ data: ApiGame }>('game', {
             method: 'post',
             body: params,
         })
     }
 
     async deleteGame(gameId: string) {
-        return await useCustomFetch<{ data: ApiGame }>(`api/game/${gameId}`, {
+        return await useCustomFetch<{ data: ApiGame }>(`game/${gameId}`, {
             method: 'delete',
         })
     }
 
     async sendMove(params: IUpdateHumanGameRequestParams) {
         return await useCustomFetch<{ data: ApiGame }>(
-            `api/game/${params.gameId}`,
+            `game/${params.gameId}`,
             {
                 method: 'put',
                 body: {

@@ -36,8 +36,8 @@ EXPOSE 3000
 CMD ["npm", "run", "dev"]
 
 FROM base AS prod
-ENV REST_API_URL=http://165.22.119.201:8001/
-ENV SOCKET_SERVER_URL=ws://165.22.119.201:5000/ws
+ENV REST_API_URL=http://nuxtchess.com:8001/api
+ENV SOCKET_SERVER_URL=wss://nuxtchess.com:5000/ws
 RUN npm run build
 EXPOSE 3000
 CMD [ "node", ".output/server/index.mjs" ]
