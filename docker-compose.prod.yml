@@ -42,7 +42,7 @@ services:
         ports:
             - '3000:3000'
         environment:
-            - SOCKET_SERVER_URL=wss://socket-server:5000/ws
+            - SOCKET_SERVER_URL=wss://nuxtchess.com/ws
 
     back:
         depends_on:
