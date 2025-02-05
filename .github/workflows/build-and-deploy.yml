@@ -140,8 +140,11 @@ jobs:
                       docker pull colinfaivre/chess_front_prod
                       docker pull colinfaivre/chess_back_prod
                       docker pull colinfaivre/chess_socket_server_prod
-                      cd chess
-                      git pull origin main
+
+                      cd ~/chess
+                      git fetch origin main
+                      git reset --hard origin/main
+
                       docker compose -f docker-compose.prod.yml down
                       docker compose -f docker-compose.prod.yml up --build --detach
                       docker image prune -f
