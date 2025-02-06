@@ -22,7 +22,7 @@
 # $ docker image push colinfaivre/chess_front_prod
 ##########################
 
-FROM node:20.1-alpine AS base
+FROM node:20.17-alpine AS base
 RUN mkdir -p /usr/src/nuxt-app
 WORKDIR /usr/src/nuxt-app
 RUN apk update && apk upgrade
