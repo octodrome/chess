@@ -12,8 +12,8 @@ const layoutStore = useLayoutStore()
                 <BaseButton
                     v-if="$route.path !== '/'"
                     type="icon"
-                    @click="layoutStore.toggleRightDrawer"
                     class="sm:absolute -left-14 top-1 text-white sm:text-black mr-1"
+                    @click="layoutStore.toggleRightDrawer"
                 >
                     <BaseIcon
                         v-if="!layoutStore.drawer.rightIsOpened"

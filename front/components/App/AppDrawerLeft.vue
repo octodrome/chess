@@ -19,8 +19,8 @@ const layoutStore = useLayoutStore()
                 <BaseButton
                     type="icon"
                     data-cy="app_header_left_button"
-                    @click="layoutStore.toggleLeftDrawer"
                     class="sm:absolute -right-14 top-1 z-50 text-white sm:text-black mr-1"
+                    @click="layoutStore.toggleLeftDrawer"
                 >
                     <BaseIcon
                         v-if="!layoutStore.drawer.leftIsOpened"
