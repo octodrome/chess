@@ -2,7 +2,7 @@
 
 This project started as a frontend portfolio app I worked on during my freelance developer days. Over time, it grew into an opportunity to learn and practice every part of the development process—UI/UX design, frontend, backend, and DevOps. My goal is to build a fully functional online chess game, combining real-world chess mechanics with modern web technologies, while growing full-stack skills.
 
--   🎮 Play it online: http://165.22.119.201
+-   🎮 Play it online: https://nuxtchess.com
 -   📉 Follow the project board: https://github.com/orgs/octodrome/projects/3
 -   🕵️‍♂️ Explore the code on github: https://github.com/octodrome/chess
 -   💻 Connect with me: https://www.linkedin.com/in/colin-faivre
