@@ -7,7 +7,7 @@ This project started as a frontend portfolio app I worked on during my freelance
 -   🕵️‍♂️ Explore the code on github: https://github.com/octodrome/chess
 -   💻 Connect with me: https://www.linkedin.com/in/colin-faivre
 
-![alt text](./documentation/app_screenshot.png?raw=true)
+![cover image](./documentation/nuxtchess.gif?raw=true)
 
 ## 👾 Tech Stack
 
