@@ -23,7 +23,7 @@ onMounted(() => {
             <h1 class="text-5xl font-black">
                 <span>Nuxt</span>
                 <br />
-                <span class="text-green-500">Chess</span>
+                <span class="text-green-700">Chess</span>
             </h1>
         </div>
 

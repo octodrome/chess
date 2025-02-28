@@ -18,7 +18,6 @@ const close = () => emit('close')
 const validationSchema = object({
     email: string().required().email(),
     password: string().required().min(4),
-    newsletterPermission: boolean(),
 })
 
 const { handleSubmit, errors } = useForm({
@@ -29,9 +28,6 @@ const { value: email, handleChange: handleEmailChange } =
     useField<string>('email')
 const { value: password, handleChange: handlePasswordChange } =
     useField<string>('password')
-const { value: newsletterPermission } = useField<boolean>(
-    'newsletterPermission'
-)
 
 const submit = handleSubmit((values) => {
     const signupUserParams = {
@@ -71,11 +67,6 @@ const submit = handleSubmit((values) => {
             :error="errors.password"
             data-cy="form_signup_password_field"
             @change="handlePasswordChange"
-        />
-
-        <BaseCheckbox
-            v-model="newsletterPermission"
-            :label="$t('modals.signup.newsletter')"
         />
     </BaseCardMain>
 
