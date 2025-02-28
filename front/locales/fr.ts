@@ -87,5 +87,8 @@ export default {
         },
         success: {},
     },
-    credits: 'Fait avec ♥ par',
+    credits: {
+        start: 'Fait avec ♥ par',
+        middle: 'sur',
+    },
 }

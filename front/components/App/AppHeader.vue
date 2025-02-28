@@ -26,7 +26,7 @@ const route = useRoute()
             <BaseIcon v-else name="arrow-left" color="black" />
         </BaseButton>
 
-        <div class="text-gray-500" v-if="route.path != '/'">
+        <div class="text-gray-500 mt-2" v-if="route.path != '/'">
             <div v-if="isAgainstHuman && humanGameStore.currentGame">
                 {{
                     humanGameStore.opponent?.pseudo ||
