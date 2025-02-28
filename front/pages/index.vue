@@ -18,6 +18,7 @@ onMounted(() => {
                 src="/img/pieces/knight_black.svg"
                 width="112px"
                 class="mx-[-10px]"
+                alt="NuxtChess Logo"
             />
             <h1 class="text-5xl font-black">
                 <span>Nuxt</span>

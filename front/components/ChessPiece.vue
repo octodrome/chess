@@ -25,6 +25,7 @@ const selectOrigin = () => {
             <img
                 class="piece"
                 :src="`/img/pieces/${props.type}_${props.color}.svg`"
+                :alt="`${props.color} ${props.type}`"
             />
         </div>
     </transition>
