@@ -1,6 +1,6 @@
 <template>
     <footer class="p-2 mb-2">
-        <div class="text-center text-gray-500 w-full">
+        <div class="text-center text-gray-600 w-full">
             --- {{ $t('credits.start') }}
             <span class="mdi mdi-linkedin"></span>
             <a
