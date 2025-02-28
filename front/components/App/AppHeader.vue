@@ -8,6 +8,7 @@ const boardStore = useBoardStore()
 const humanGameStore = useHumanGameStore()
 const computerGameStore = useComputerGameStore()
 const isAgainstHuman = computed(() => boardStore.opponent === 'human')
+const route = useRoute()
 </script>
 
 <template>
@@ -25,7 +26,7 @@ const isAgainstHuman = computed(() => boardStore.opponent === 'human')
             <BaseIcon v-else name="arrow-left" color="black" />
         </BaseButton>
 
-        <div class="text-gray-500">
+        <div class="text-gray-500" v-if="route.path != '/'">
             <div v-if="isAgainstHuman && humanGameStore.currentGame">
                 {{
                     humanGameStore.opponent?.pseudo ||
