@@ -7,9 +7,6 @@ import { useHumanGameStore } from './stores/humanGameStore'
 useHead({
     title: 'Nuxt Chess',
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
-    htmlAttrs: {
-        lang: localStorage.getItem('locale') || 'en',
-    },
 })
 
 const layoutStore = useLayoutStore()
