@@ -29,7 +29,7 @@ onMounted(() => {
         <BaseButton
             @click="layoutStore.openModal('NewGameComputer')"
             type="text"
-            >New Game VS Computer</BaseButton
+            >{{ $t('options.newComputerGame') }}</BaseButton
         >
     </div>
 </template>

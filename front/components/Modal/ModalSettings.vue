@@ -47,8 +47,9 @@ const confirm = () => {
 <template>
     <BaseCardHeader :title="$t('options.settings')" @close="close" />
 
-    <BaseCardMain :text="$t('modals.settings.text')">
-        <BaseRadioGroup
+    <BaseCardMain text="">
+        <!-- <BaseRadioGroup
+            $t('modals.settings.text')
             v-model="displayScheme"
             :options="displaySchemes"
             name="displaySchemes"
@@ -56,7 +57,7 @@ const confirm = () => {
             vertical
         />
 
-        <br />
+        <br /> -->
 
         <BaseRadioGroup
             v-model="language"
