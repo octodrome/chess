@@ -50,6 +50,7 @@
     },
     "dependencies": {
         "@mdi/font": "7.4.47",
+        "@nuxt/image": "^1.9.0",
         "@pinia/nuxt": "0.7.0",
         "chess-legal-moves": "2.3.2",
         "defu": "6.1.4",

@@ -22,10 +22,13 @@ const selectOrigin = () => {
             :class="{ selected: props.selected }"
             @click="selectOrigin"
         >
-            <img
+            <NuxtImg
+                width="50px"
+                height="50px"
                 class="piece"
                 :src="`/img/pieces/${props.type}_${props.color}.svg`"
                 :alt="`${props.color} ${props.type}`"
+                preload
             />
         </div>
     </transition>

@@ -7,6 +7,16 @@ import { useHumanGameStore } from './stores/humanGameStore'
 useHead({
     title: 'Nuxt Chess',
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+    meta: [
+        {
+            name: 'description',
+            content:
+                'A chess web app built with Nuxt, offering real-time gameplay and a smooth user experience.',
+        },
+    ],
+    htmlAttrs: {
+        lang: 'en',
+    },
 })
 
 const layoutStore = useLayoutStore()
