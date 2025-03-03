@@ -14,11 +14,13 @@ onMounted(() => {
 <template>
     <div class="flex flex-col justify-between items-center h-[200px]">
         <div class="flex justify-center items-center">
-            <img
+            <NuxtImg
                 src="/img/pieces/knight_black.svg"
                 width="112px"
+                height="122px"
                 class="mx-[-10px]"
                 alt="NuxtChess Logo"
+                preload
             />
             <h1 class="text-5xl font-black">
                 <span>Nuxt</span>

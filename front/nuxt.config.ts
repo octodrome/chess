@@ -15,6 +15,7 @@ export default defineNuxtConfig({
         '@nuxtjs/eslint-module',
         '@nuxt/test-utils/module',
         '@nuxtjs/storybook',
+        '@nuxt/image',
     ],
     css: ['@mdi/font/css/materialdesignicons.min.css', '@/assets/css/main.css'],
     devtools: {
