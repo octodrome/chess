@@ -33,7 +33,7 @@ export default {
         new_game_computer: {
             text: 'Set your new game choosing the level and which color you will play with.',
             level: {
-                label: 'Choose your level',
+                label: 'Choose your level:',
                 easy: 'Easy',
                 medium: 'Medium',
                 hard: 'Hard',
@@ -48,7 +48,7 @@ export default {
             text: 'Choose your opponent among the players list.',
             default:
                 'No other players, share chess URL with your friends to play against them',
-            players: 'Players',
+            players: 'Players:',
             color: {
                 label: 'Choose your color:',
                 white: 'White',

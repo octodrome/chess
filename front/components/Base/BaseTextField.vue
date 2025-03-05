@@ -18,15 +18,15 @@ const updateInput = (event: Event) =>
 </script>
 
 <template>
-    <div class="mt-2 mb-2 flex flex-col h-16 relative">
-        <label v-if="props.label" :for="uniqueName" class="mb-1"
+    <div class="mt-2 mb-2 flex flex-col relative bg-gray-100 rounded p-3">
+        <label v-if="props.label" :for="uniqueName" class="mb-1 font-bold"
             >{{ props.label }} :</label
         >
 
         <input
             :id="uniqueName"
             :type="props.type"
-            class="border border-solid border-slate-300 rounded pl-1"
+            class="border border-solid border-slate-300 rounded p-[8px]"
             :class="{ 'border-red-500': props.error }"
             :value="props.modelValue"
             :required="props.required"

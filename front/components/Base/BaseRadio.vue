@@ -8,7 +8,7 @@ defineEmits(['update:modelValue'])
 </script>
 
 <template>
-    <label>
+    <label class="flex items-center">
         <input
             type="radio"
             :checked="props.modelValue === props.value"
@@ -16,6 +16,7 @@ defineEmits(['update:modelValue'])
             name="pets"
             v-bind="$attrs"
             @change="$emit('update:modelValue', props.value)"
+            class="mt-[4px] mb-[4px] h-[35.75px]"
         />
         <span v-if="props.label" class="ml-2">{{ props.label }}</span>
     </label>

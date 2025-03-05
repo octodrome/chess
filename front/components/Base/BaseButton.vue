@@ -18,7 +18,7 @@ const props = defineProps<{
         <button
             v-if="props.type === 'text'"
             :disabled="props.disabled"
-            class="bg-gray-800 text-white hover:bg-gray-500 transition duration-300 p-2 rounded"
+            class="bg-gray-800 text-white hover:bg-gray-500 transition duration-300 p-2 rounded h-[48px]"
         >
             <slot />
         </button>

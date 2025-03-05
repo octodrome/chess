@@ -10,23 +10,24 @@ defineEmits(['update:modelValue'])
 </script>
 
 <template>
-    <label v-if="props.label">{{ props.label }}</label>
+    <div class="bg-gray-100 rounded p-3">
+        <label class="font-bold" v-if="props.label">{{ props.label }}</label>
 
-    <br v-if="props.vertical" />
+        <br v-if="props.vertical" />
 
-    <component
-        :is="props.vertical ? 'div' : 'span'"
-        v-for="option in props.options"
-        :key="option.value"
-        :class="{ 'mr-3': !props.vertical }"
-    >
-        <BaseRadio
-            :label="option.label"
-            :value="option.value"
-            :name="props.name"
-            :model-value="props.modelValue"
-            class="mt-1 mb-1"
-            @update:model-value="$emit('update:modelValue', $event)"
-        />
-    </component>
+        <component
+            :is="props.vertical ? 'div' : 'span'"
+            v-for="option in props.options"
+            :key="option.value"
+            :class="{ 'mr-3': !props.vertical }"
+        >
+            <BaseRadio
+                :label="option.label"
+                :value="option.value"
+                :name="props.name"
+                :model-value="props.modelValue"
+                @update:model-value="$emit('update:modelValue', $event)"
+            />
+        </component>
+    </div>
 </template>
