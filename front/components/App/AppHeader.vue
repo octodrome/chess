@@ -17,6 +17,7 @@ const route = useRoute()
             type="icon"
             data-cy="app_header_left_button"
             @click="layoutStore.toggleLeftDrawer"
+            aria-label="Open app menu"
         >
             <BaseIcon
                 v-if="!layoutStore.drawer.leftIsOpened"
@@ -47,6 +48,7 @@ const route = useRoute()
             v-if="$route.path !== '/'"
             type="icon"
             @click="layoutStore.toggleRightDrawer"
+            aria-label="Open game menu"
         >
             <BaseIcon
                 v-if="!layoutStore.drawer.rightIsOpened"

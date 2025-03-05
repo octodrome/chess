@@ -2,6 +2,7 @@
 const props = defineProps<{
     type: 'text' | 'icon'
     disabled?: boolean
+    ariaLabel?: string
 }>()
 </script>
 
@@ -11,6 +12,7 @@ const props = defineProps<{
             v-if="props.type === 'icon'"
             :disabled="props.disabled"
             class="hover:bg-gray-500 transition duration-300 w-12 h-12 rounded-full"
+            :aria-label="ariaLabel"
         >
             <slot />
         </button>

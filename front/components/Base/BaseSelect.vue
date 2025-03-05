@@ -18,9 +18,12 @@ const updateInput = (event: Event) => {
 
 <template>
     <div class="flex flex-col relative bg-gray-100 rounded p-3">
-        <label v-if="label" class="mb-1 font-bold">{{ label }}</label>
+        <label for="select" v-if="label" class="mb-1 font-bold">{{
+            label
+        }}</label>
 
         <select
+            id="select"
             :value="modelValue"
             @change="updateInput"
             class="border border-solid border-slate-300 rounded p-[8px]"

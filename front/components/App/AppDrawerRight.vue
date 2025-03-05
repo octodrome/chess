@@ -18,8 +18,13 @@ const layoutStore = useLayoutStore()
                     <BaseIcon
                         v-if="!layoutStore.drawer.rightIsOpened"
                         name="dots-vertical"
+                        aria-label="Open game menu"
                     />
-                    <BaseIcon v-else name="arrow-right" />
+                    <BaseIcon
+                        v-else
+                        name="arrow-right"
+                        aria-label="Close game menu"
+                    />
                 </BaseButton>
             </div>
 

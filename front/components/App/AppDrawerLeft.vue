@@ -10,7 +10,7 @@ const layoutStore = useLayoutStore()
 
 <template>
     <BaseDrawer>
-        <ul>
+        <div>
             <div class="flex justify-between items-center">
                 <NuxtLink to="/" @click="layoutStore.closeLeftDrawer()">
                     <BaseDrawerItem icon="chess-knight" content="Nuxt Chess" />
@@ -21,6 +21,7 @@ const layoutStore = useLayoutStore()
                     data-cy="app_header_left_button"
                     class="sm:absolute -right-14 top-1 z-50 text-white sm:text-black mr-1"
                     @click="layoutStore.toggleLeftDrawer"
+                    aria-label="Close app menu"
                 >
                     <BaseIcon
                         v-if="!layoutStore.drawer.leftIsOpened"
@@ -95,6 +96,6 @@ const layoutStore = useLayoutStore()
                 :content="$t('options.settings')"
                 @click="layoutStore.openModal('Settings')"
             />
-        </ul>
+        </div>
     </BaseDrawer>
 </template>

@@ -102,12 +102,12 @@ onMounted(() => {
         <BaseCardFooter class="mt-3">
             <input
                 v-model="messageContent"
-                label="Your message"
                 outlined
                 dense
                 hide-details="auto"
                 class="mr-2 border border-gray-200 rounded-full px-3 w-full"
                 @keyup.enter="sendMessage()"
+                aria-label="Type your message"
             />
 
             <button
@@ -115,6 +115,7 @@ onMounted(() => {
                 :disabled="isMessageEmpty"
                 class="border border-gray-200 rounded-full bg-gray-800 w-7"
                 @click="sendMessage()"
+                aria-label="Send message"
             >
                 <BaseIcon name="send" />
             </button>
@@ -131,19 +132,19 @@ onMounted(() => {
 }
 .is-right {
     text-align: right;
-    background-color: #607d8b;
+    background-color: #3a5766;
     color: white;
     border-radius: 8px 0 8px 8px;
     align-self: flex-end;
     .time {
-        color: #d5d5d5;
+        color: #ffffff;
     }
 }
 .is-left {
     background-color: #d5d5d5;
     border-radius: 0 8px 8px 8px;
     .time {
-        color: #607d8b;
+        color: #ffffff;
     }
 }
 /* Add a space between groups of same user messages */
@@ -155,6 +156,7 @@ onMounted(() => {
     position: absolute;
     right: 5px;
     bottom: 2px;
-    font-size: 9px;
+    font-size: 10px;
+    font-weight: bold;
 }
 </style>

@@ -7,7 +7,11 @@ const props = defineProps<{
 <template>
     <div class="flex justify-between items-center">
         <h2 class="text-2xl font-bold">{{ props.title }}</h2>
-        <BaseButton type="icon" @click="$emit('close')">
+        <BaseButton
+            type="icon"
+            @click="$emit('close')"
+            aria-label="Close modal"
+        >
             <BaseIcon name="close" color="black"></BaseIcon>
         </BaseButton>
     </div>

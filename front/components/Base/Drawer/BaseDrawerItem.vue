@@ -31,6 +31,7 @@ defineEmits(['delete', 'message'])
                 name="delete"
                 class="hover:text-gray-400"
                 @click.stop="$emit('delete')"
+                aria-label="Delete game"
             />
 
             <BaseIcon
@@ -38,6 +39,7 @@ defineEmits(['delete', 'message'])
                 name="message"
                 class="hover:text-gray-400"
                 @click.stop="$emit('message')"
+                aria-label="Open chat"
             />
         </div>
     </div>

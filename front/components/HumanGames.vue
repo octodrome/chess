@@ -31,8 +31,8 @@ const deleteThisGame = (gameId: string) => {
 </script>
 
 <template>
-    <ul
-        class="max-h-[160px] overflow-auto"
+    <div
+        class="max-h-[160px] overflow-auto scrollbar-hide"
         v-if="humanGameStore.gameList?.length !== 0"
     >
         <BaseDrawerItem
@@ -49,5 +49,15 @@ const deleteThisGame = (gameId: string) => {
             @click="goToGame(String(game.id))"
             @delete="deleteThisGame(String(game.id))"
         />
-    </ul>
+    </div>
 </template>
+
+<style scoped>
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
+}
+.scrollbar-hide {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}
+</style>
