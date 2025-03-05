@@ -12,7 +12,7 @@ const props = defineProps<{
             @click="$emit('close')"
             aria-label="Close modal"
         >
-            <BaseIcon name="close" color="black"></BaseIcon>
+            <BaseIcon name="close"></BaseIcon>
         </BaseButton>
     </div>
 </template>
