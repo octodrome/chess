@@ -78,12 +78,10 @@ const start = () => {
         v-if="userIsNotAlone"
         :text="$t('modals.new_game_human.text')"
     >
-        <BaseRadioGroup
+        <BaseSelect
             v-model="selectedOpponentId"
             :options="opponentsOptions"
-            name="users"
             :label="$t('modals.new_game_human.players')"
-            vertical
         />
 
         <br />

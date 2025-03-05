@@ -19,7 +19,13 @@ const updateInput = (event: Event) =>
 
 <template>
     <div class="mt-2 mb-2 flex flex-col relative bg-gray-100 rounded p-3">
-        <label v-if="props.label" :for="uniqueName" class="mb-1 font-bold"
+        <label
+            v-if="props.label"
+            :for="uniqueName"
+            class="mb-1 font-bold"
+            :class="{
+                'text-gray-500': disabled,
+            }"
             >{{ props.label }} :</label
         >
 
@@ -27,7 +33,10 @@ const updateInput = (event: Event) =>
             :id="uniqueName"
             :type="props.type"
             class="border border-solid border-slate-300 rounded p-[8px]"
-            :class="{ 'border-red-500': props.error }"
+            :class="{
+                'border-red-500': props.error,
+                'text-gray-500': disabled,
+            }"
             :value="props.modelValue"
             :required="props.required"
             :disabled="props.disabled"
