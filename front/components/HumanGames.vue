@@ -31,7 +31,10 @@ const deleteThisGame = (gameId: string) => {
 </script>
 
 <template>
-    <ul v-if="humanGameStore.gameList?.length !== 0">
+    <ul
+        class="max-h-[160px] overflow-auto"
+        v-if="humanGameStore.gameList?.length !== 0"
+    >
         <BaseDrawerItem
             v-for="game in humanGameStore.gameList"
             :key="game.id"
