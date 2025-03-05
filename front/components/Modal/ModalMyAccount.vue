@@ -42,6 +42,7 @@ const update = () => {
             :label="$t('modals.account.email')"
             disabled
             data-cy="form_account_email_field"
+            class="mb-2"
         />
 
         <BaseTextField
@@ -49,6 +50,7 @@ const update = () => {
             :label="$t('modals.account.pseudo')"
             :model-value="userStore.user?.pseudo"
             @update:model-value="(e: string) => (pseudo = e)"
+            class="mb-2"
         />
 
         <BaseTextField

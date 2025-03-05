@@ -51,6 +51,7 @@ const submit = handleSubmit((values) => {
                 required
                 :error="errors.email"
                 @change="handleEmailChange"
+                class="mb-2"
             />
 
             <BaseTextField

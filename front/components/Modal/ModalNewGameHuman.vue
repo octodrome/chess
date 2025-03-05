@@ -82,9 +82,8 @@ const start = () => {
             v-model="selectedOpponentId"
             :options="opponentsOptions"
             :label="$t('modals.new_game_human.players')"
+            class="mb-2"
         />
-
-        <br />
 
         <BaseRadioGroup
             v-model="color"

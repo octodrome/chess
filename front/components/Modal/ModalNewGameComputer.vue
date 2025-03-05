@@ -72,9 +72,8 @@ const start = () => {
             name="levels"
             :label="$t('modals.new_game_computer.level.label')"
             vertical
+            class="mb-2"
         />
-
-        <br />
 
         <BaseRadioGroup
             v-model="color"

@@ -17,7 +17,7 @@ const updateInput = (event: Event) => {
 </script>
 
 <template>
-    <div class="mt-2 mb-2 flex flex-col relative bg-gray-100 rounded p-3">
+    <div class="flex flex-col relative bg-gray-100 rounded p-3">
         <label v-if="label" class="mb-1 font-bold">{{ label }}</label>
 
         <select

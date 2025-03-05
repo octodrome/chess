@@ -57,6 +57,7 @@ const submit = handleSubmit((values) => {
             :error="errors.email"
             data-cy="form_signup_email_field"
             @change="handleEmailChange"
+            class="mb-2"
         />
 
         <BaseTextField

@@ -31,7 +31,7 @@ onMounted(() => {
         @click.self="layoutStore.closeModal()"
     >
         <div
-            class="bg-white text-slate-800 sm:rounded drop-shadow-2xl p-5 w-full h-svh sm:w-[550px] sm:h-[600px] flex flex-col justify-between"
+            class="bg-white text-slate-800 sm:rounded drop-shadow-2xl p-5 w-full sm:w-[550px] h-svh sm:h-auto sm:max-h-[600px] flex flex-col justify-between overflow-y-auto"
         >
             <component
                 :is="modals[props.content]"
