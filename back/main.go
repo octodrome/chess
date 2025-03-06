@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"os"
+	"strings"
 
 	"github.com/gin-gonic/gin"
 	"github.com/octodrome/chess/go-rest-api-poc/controller"
@@ -23,8 +24,15 @@ func loadDatabase() {
 
 func CORSMiddleware() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		frontUrl := os.Getenv("FRONT_URL")
-		c.Writer.Header().Set("Access-Control-Allow-Origin", frontUrl)
+		allowedOrigins := strings.Split(os.Getenv("FRONT_URL"), ",")
+
+		origin := c.Request.Header.Get("Origin")
+		for _, allowed := range allowedOrigins {
+			if origin == allowed {
+				c.Writer.Header().Set("Access-Control-Allow-Origin", allowed)
+				break
+			}
+		}
 		c.Writer.Header().Set("Access-Control-Allow-Credentials", "true")
 		c.Writer.Header().Set("Access-Control-Allow-Headers", "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, accept, origin, Cache-Control, X-Requested-With")
 		c.Writer.Header().Set("Access-Control-Allow-Methods", "POST, OPTIONS, GET, PUT, DELETE")
