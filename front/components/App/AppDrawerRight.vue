@@ -7,7 +7,7 @@ const layoutStore = useLayoutStore()
     <BaseDrawer>
         <div>
             <div class="flex justify-between items-center">
-                <GameOpponent />
+                <GameOpponent class="flex-1" />
 
                 <BaseButton
                     v-if="$route.path !== '/'"
