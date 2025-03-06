@@ -67,60 +67,59 @@ onMounted(() => {
 </script>
 
 <template>
-    <div>
-        <BaseCardHeader
-            :title="
-                humanGameStore.opponent?.pseudo ||
-                humanGameStore.opponent?.email ||
-                ''
-            "
-            @close="$emit('close')"
-        />
+    <BaseCardHeader
+        :title="`${$t('modals.chat.title_start')} ${
+            humanGameStore.opponent?.pseudo ||
+            humanGameStore.opponent?.email ||
+            ''
+        }
+        `"
+        @close="$emit('close')"
+    />
 
-        <BaseCardMain :text="humanGameStore.opponent?.about || ''">
+    <BaseCardMain
+        :text="humanGameStore.opponent?.about || ''"
+        class="flex-1 max-h-max overflow-y-scroll"
+    >
+        <div ref="chatContainer" class="flex flex-col">
             <div
-                ref="chatContainer"
-                class="flex flex-col max-h-80 overflow-y-scroll"
+                v-for="message in messages"
+                :key="message.id"
+                class="message"
+                :class="{
+                    'is-right': isUserMessage(message),
+                    'is-left': !isUserMessage(message),
+                }"
             >
-                <div
-                    v-for="message in messages"
-                    :key="message.id"
-                    class="message"
-                    :class="{
-                        'is-right': isUserMessage(message),
-                        'is-left': !isUserMessage(message),
-                    }"
-                >
-                    {{ message.content }}
-                    <div class="time">
-                        {{ moment(message.created_at).format('hh:mm') }}
-                    </div>
+                {{ message.content }}
+                <div class="time">
+                    {{ moment(message.created_at).format('hh:mm') }}
                 </div>
             </div>
-        </BaseCardMain>
+        </div>
+    </BaseCardMain>
 
-        <BaseCardFooter class="mt-3">
-            <input
-                v-model="messageContent"
-                outlined
-                dense
-                hide-details="auto"
-                class="mr-2 border border-gray-200 rounded-full px-3 w-full"
-                @keyup.enter="sendMessage()"
-                aria-label="Type your message"
-            />
+    <BaseCardFooter>
+        <input
+            v-model="messageContent"
+            outlined
+            dense
+            hide-details="auto"
+            class="mr-3 border border-gray-200 rounded-full p-[8px] px-[20px] flex-1"
+            @keyup.enter="sendMessage()"
+            aria-label="Type your message"
+        />
 
-            <button
-                color="blue-grey darken-3"
-                :disabled="isMessageEmpty"
-                class="border border-gray-200 rounded-full bg-gray-800 w-7"
-                @click="sendMessage()"
-                aria-label="Send message"
-            >
-                <BaseIcon name="send" />
-            </button>
-        </BaseCardFooter>
-    </div>
+        <button
+            color="blue-grey darken-3"
+            :disabled="isMessageEmpty"
+            class="border border-gray-800 rounded-full bg-gray-800 w-[48px] h-[48px] text-white disabled:bg-gray-500 disabled:border-gray-500"
+            @click="sendMessage()"
+            aria-label="Send message"
+        >
+            <BaseIcon name="send" />
+        </button>
+    </BaseCardFooter>
 </template>
 
 <style lang="scss" scoped>
