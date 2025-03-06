@@ -77,6 +77,9 @@ export default {
         confirm: {
             text: 'Voulez-vous vraiment supprimer ce jeu?',
         },
+        chat: {
+            title_start: 'Chat: ',
+        },
     },
     actions: {
         cancel: 'Annuler',
