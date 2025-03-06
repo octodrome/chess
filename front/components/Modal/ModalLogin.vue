@@ -37,12 +37,27 @@ const submit = handleSubmit((values) => {
             layoutStore.openSnackbarError(t('snackbar.error.email_password'))
         )
 })
+
+const goToSignup = () => {
+    close()
+    layoutStore.openModal('Signup')
+}
 </script>
 
 <template>
     <BaseCardHeader :title="$t('options.login')" @close="close" />
 
-    <BaseCardMain :text="$t('modals.login.text')">
+    <BaseCardMain>
+        <div class="mt-5 mb-5">
+            {{ $t('modals.login.text_start') }}
+            <span
+                @click="goToSignup"
+                class="underline cursor-pointer font-bold"
+                >{{ $t('modals.login.link') }}</span
+            >
+            {{ $t('modals.login.text_end') }}
+        </div>
+
         <form>
             <BaseTextField
                 type="email"

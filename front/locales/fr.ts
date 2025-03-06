@@ -15,12 +15,18 @@ export default {
     },
     modals: {
         login: {
-            text: "Connectez-vous pour jouer contre n'importe qui. Vous n'avez pas encore de compte? Cliquez ici pour en créer un.",
+            text_start:
+                "Connectez-vous pour jouer contre n'importe qui. Vous n'avez pas encore de compte? Cliquez ",
+            link: 'ici',
+            text_end: ' pour en créer un.',
             email: 'Email',
             password: 'Mot de passe',
         },
         signup: {
-            text: "Créez votre compte pour jouer contre n'importe quel utilisateur connecté. Vous avez déjà un compte? Cliquez ici pour vous connecter.",
+            text_start:
+                "Créez votre compte pour jouer contre n'importe quel utilisateur connecté. Vous avez déjà un compte? Cliquez ",
+            link: 'ici',
+            text_end: ' pour vous connecter.',
             email: 'Email',
             password: 'Mot de passe',
         },
