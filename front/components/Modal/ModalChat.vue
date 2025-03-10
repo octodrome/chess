@@ -46,23 +46,24 @@ const sendMessage = () => {
     }
 }
 
-const chatContainer = ref(null)
+const chatContainer = useTemplateRef('chatContainer')
 
 const scrollToBottom = () => {
-    if (chatContainer.value) {
-        ;(chatContainer.value as HTMLElement).scrollTop = (
-            chatContainer.value as HTMLElement
-        ).scrollHeight
-    }
+    nextTick(() => {
+        if (chatContainer.value) {
+            chatContainer.value.$el.scrollTop =
+                chatContainer.value.$el.scrollHeight
+        }
+    })
 }
 
 watch(messages, () => {
-    nextTick(() => scrollToBottom())
+    scrollToBottom()
 })
 
 onMounted(() => {
     humanGameStore.getGame(route.params.id as string)
-    scrollToBottom()
+    nextTick(() => scrollToBottom())
 })
 </script>
 
@@ -79,22 +80,21 @@ onMounted(() => {
 
     <BaseCardMain
         :text="humanGameStore.opponent?.about || ''"
-        class="flex-1 max-h-max overflow-y-scroll"
+        class="overflow-y-scroll flex flex-col"
+        ref="chatContainer"
     >
-        <div ref="chatContainer" class="flex flex-col">
-            <div
-                v-for="message in messages"
-                :key="message.id"
-                class="message"
-                :class="{
-                    'is-right': isUserMessage(message),
-                    'is-left': !isUserMessage(message),
-                }"
-            >
-                {{ message.content }}
-                <div class="time">
-                    {{ moment(message.created_at).format('hh:mm') }}
-                </div>
+        <div
+            v-for="message in messages"
+            :key="message.id"
+            class="message"
+            :class="{
+                'is-right': isUserMessage(message),
+                'is-left': !isUserMessage(message),
+            }"
+        >
+            {{ message.content }}
+            <div class="time">
+                {{ moment(message.created_at).format('hh:mm') }}
             </div>
         </div>
     </BaseCardMain>
