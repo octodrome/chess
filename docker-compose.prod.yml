@@ -102,11 +102,6 @@ services:
             - mynet
         ports:
             - 5000:5000
-        volumes:
-            - /etc/letsencrypt:/etc/letsencrypt
-        environment:
-            SSL_CERT_FILE: /etc/letsencrypt/live/nuxtchess.com/fullchain.pem
-            SSL_KEY_FILE: /etc/letsencrypt/live/nuxtchess.com/privkey.pem
 
 volumes:
     db:
