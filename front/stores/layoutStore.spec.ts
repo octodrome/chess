@@ -19,20 +19,16 @@ describe('Layout Store', () => {
     })
 
     describe('actions', () => {
-        it('toggleLeftDrawer()', () => {
+        it('openLeftDrawer()', () => {
             const layoutStore = useLayoutStore()
-            layoutStore.toggleLeftDrawer()
+            layoutStore.openLeftDrawer()
             expect(layoutStore.drawer.leftIsOpened).toBe(true)
-            layoutStore.toggleLeftDrawer()
-            expect(layoutStore.drawer.leftIsOpened).toBe(false)
         })
 
-        it('toggleRightDrawer()', () => {
+        it('openRightDrawer()', () => {
             const layoutStore = useLayoutStore()
-            layoutStore.toggleRightDrawer()
+            layoutStore.openRightDrawer()
             expect(layoutStore.drawer.rightIsOpened).toBe(true)
-            layoutStore.toggleRightDrawer()
-            expect(layoutStore.drawer.rightIsOpened).toBe(false)
         })
 
         it('closeRightDrawer()', () => {

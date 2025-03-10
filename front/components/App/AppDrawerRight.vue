@@ -13,18 +13,9 @@ const layoutStore = useLayoutStore()
                     v-if="$route.path !== '/'"
                     type="icon"
                     class="sm:absolute -left-14 top-1 text-white sm:text-black mr-1"
-                    @click="layoutStore.toggleRightDrawer"
+                    @click="layoutStore.closeRightDrawer()"
                 >
-                    <BaseIcon
-                        v-if="!layoutStore.drawer.rightIsOpened"
-                        name="dots-vertical"
-                        aria-label="Open game menu"
-                    />
-                    <BaseIcon
-                        v-else
-                        name="arrow-right"
-                        aria-label="Close game menu"
-                    />
+                    <BaseIcon name="arrow-right" aria-label="Close game menu" />
                 </BaseButton>
             </div>
 

@@ -19,17 +19,20 @@ export interface IModal {
 }
 
 export const useLayoutStore = defineStore('layout', () => {
+    const router = useRouter()
+    const route = useRoute()
+
     const drawer = ref({
         leftIsOpened: false,
         rightIsOpened: false,
     })
 
-    const toggleLeftDrawer = () => {
-        drawer.value.leftIsOpened = !drawer.value.leftIsOpened
+    const openLeftDrawer = () => {
+        drawer.value.leftIsOpened = true
     }
 
-    const toggleRightDrawer = () => {
-        drawer.value.rightIsOpened = !drawer.value.rightIsOpened
+    const openRightDrawer = () => {
+        drawer.value.rightIsOpened = true
     }
 
     const closeLeftDrawer = () => {
@@ -78,8 +81,8 @@ export const useLayoutStore = defineStore('layout', () => {
 
     return {
         drawer,
-        toggleLeftDrawer,
-        toggleRightDrawer,
+        openLeftDrawer,
+        openRightDrawer,
         closeLeftDrawer,
         closeRightDrawer,
 
