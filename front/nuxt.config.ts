@@ -1,5 +1,10 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+    app: {
+        head: {
+            link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+        },
+    },
     experimental: {
         // fix pieces images not showing on prod
         appManifest: false,
