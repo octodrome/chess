@@ -1,85 +1,94 @@
-export type IModalContent =
-    | 'Login'
-    | 'MyAccount'
-    | 'NewGameComputer'
-    | 'NewGameHuman'
-    | 'Signup'
-    | 'Chat'
-    | 'Settings'
-    | 'Confirm'
-    | ''
+export const ModalContentTypes = [
+    'Login',
+    'MyAccount',
+    'NewGameComputer',
+    'NewGameHuman',
+    'Signup',
+    'Chat',
+    'Settings',
+    'Confirm',
+    '',
+] as const
+
+export type ModalContent = (typeof ModalContentTypes)[number]
 
 export interface IModal {
     isOpened: boolean
-    content: IModalContent
+    content: ModalContent
     onConfirm?: Function
 }
 
-export const useLayoutStore = defineStore('layout', {
-    state: () => ({
-        drawer: {
-            leftIsOpened: false,
-            rightIsOpened: false,
-        },
+export const useLayoutStore = defineStore('layout', () => {
+    const drawer = ref({
+        leftIsOpened: false,
+        rightIsOpened: false,
+    })
 
-        modal: {
-            isOpened: false,
-            content: '',
-            onConfirm: undefined,
-        } as IModal,
+    const toggleLeftDrawer = () => {
+        drawer.value.leftIsOpened = !drawer.value.leftIsOpened
+    }
 
-        snackbar: {
-            isOpened: false,
-            message: '',
-            color: '',
-        },
-    }),
+    const toggleRightDrawer = () => {
+        drawer.value.rightIsOpened = !drawer.value.rightIsOpened
+    }
 
-    actions: {
-        toggleLeftDrawer() {
-            this.drawer.leftIsOpened = !this.drawer.leftIsOpened
-        },
+    const closeLeftDrawer = () => {
+        drawer.value.leftIsOpened = false
+    }
 
-        toggleRightDrawer() {
-            this.drawer.rightIsOpened = !this.drawer.rightIsOpened
-        },
+    const closeRightDrawer = () => {
+        drawer.value.rightIsOpened = false
+    }
 
-        closeLeftDrawer() {
-            this.drawer.leftIsOpened = false
-        },
+    const modal = ref<IModal>({
+        isOpened: false,
+        content: '',
+        onConfirm: undefined,
+    })
 
-        closeRightDrawer() {
-            this.drawer.rightIsOpened = false
-        },
+    const openModal = (content: ModalContent, onConfirm?: Function) => {
+        modal.value.isOpened = true
+        modal.value.content = content
+        modal.value.onConfirm = onConfirm
+    }
 
-        openModal(content: IModalContent, onConfirm?: Function) {
-            this.modal.isOpened = true
-            this.modal.content = content
-            this.modal.onConfirm = onConfirm
-        },
+    const closeModal = () => {
+        modal.value.isOpened = false
+        modal.value.content = ''
+        modal.value.onConfirm = undefined
+    }
 
-        closeModal() {
-            this.modal.isOpened = false
-            this.modal.content = ''
-            this.modal.onConfirm = undefined
-        },
+    const snackbar = ref({
+        isOpened: false,
+        message: '',
+        color: '',
+    })
 
-        openSnackbarError(message: string) {
-            this.snackbar.message = message
-            this.snackbar.color = 'error'
-            this.snackbar.isOpened = true
-        },
+    const openSnackbar = (message: string, color: 'success' | 'error') => {
+        snackbar.value.message = message
+        snackbar.value.color = color
+        snackbar.value.isOpened = true
+    }
 
-        openSnackbarSuccess(message: string) {
-            this.snackbar.message = message
-            this.snackbar.color = 'success'
-            this.snackbar.isOpened = true
-        },
+    const closeSnackbar = () => {
+        snackbar.value.isOpened = false
+        snackbar.value.message = ''
+        snackbar.value.color = ''
+    }
 
-        closeSnackbar() {
-            this.snackbar.isOpened = false
-            this.snackbar.message = ''
-            this.snackbar.color = ''
-        },
-    },
+    return {
+        drawer,
+        toggleLeftDrawer,
+        toggleRightDrawer,
+        closeLeftDrawer,
+        closeRightDrawer,
+
+        modal,
+        openModal,
+        closeModal,
+
+        snackbar,
+        openSnackbar,
+        closeSnackbar,
+    }
 })

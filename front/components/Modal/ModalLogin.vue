@@ -34,7 +34,10 @@ const submit = handleSubmit((values) => {
         .login({ email: values.email, password: values.password })
         .then(() => close())
         .catch(() =>
-            layoutStore.openSnackbarError(t('snackbar.error.email_password'))
+            layoutStore.openSnackbar(
+                t('snackbar.error.email_password'),
+                'error'
+            )
         )
 })
 

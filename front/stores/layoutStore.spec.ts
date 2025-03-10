@@ -58,17 +58,17 @@ describe('Layout Store', () => {
             expect(layoutStore.modal.content).toBe('')
         })
 
-        it('openSnackbarError()', () => {
+        it('openSnackbar() with error', () => {
             const layoutStore = useLayoutStore()
-            layoutStore.openSnackbarError('error message')
+            layoutStore.openSnackbar('error message', 'error')
             expect(layoutStore.snackbar.isOpened).toBe(true)
             expect(layoutStore.snackbar.message).toBe('error message')
             expect(layoutStore.snackbar.color).toBe('error')
         })
 
-        it('openSnackbarSuccess()', () => {
+        it('openSnackbar() with success', () => {
             const layoutStore = useLayoutStore()
-            layoutStore.openSnackbarSuccess('success message')
+            layoutStore.openSnackbar('success message', 'success')
             expect(layoutStore.snackbar.isOpened).toBe(true)
             expect(layoutStore.snackbar.message).toBe('success message')
             expect(layoutStore.snackbar.color).toBe('success')

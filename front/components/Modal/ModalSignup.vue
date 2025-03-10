@@ -40,7 +40,10 @@ const submit = handleSubmit((values) => {
         .then(() => userStore.login(signupUserParams))
         .then(() => close())
         .catch(() =>
-            layoutStore.openSnackbarError(t('snackbar.error.email_password'))
+            layoutStore.openSnackbar(
+                t('snackbar.error.email_password'),
+                'error'
+            )
         )
 })
 

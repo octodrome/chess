@@ -65,7 +65,10 @@ const start = () => {
                 layoutStore.closeLeftDrawer()
             })
             .catch(() => {
-                layoutStore.openSnackbarError(t('snackbar.error.game_creation'))
+                layoutStore.openSnackbar(
+                    t('snackbar.error.game_creation'),
+                    'error'
+                )
             })
     }
 }

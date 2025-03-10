@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { useLayoutStore, type IModalContent } from '~/stores/layoutStore'
+import { useLayoutStore, type ModalContent } from '~/stores/layoutStore'
 const layoutStore = useLayoutStore()
 
-const props = defineProps<{ content: IModalContent }>()
+const props = defineProps<{ content: ModalContent }>()
 
 const modals = {
     Login: resolveComponent('ModalLogin'),
