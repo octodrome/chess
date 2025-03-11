@@ -56,8 +56,8 @@ const start = () => {
             close()
             navigateTo({
                 path: `/ComputerGame/${game.id}`,
+                query: { ld: undefined },
             })
-            layoutStore.closeLeftDrawer()
         })
 }
 </script>

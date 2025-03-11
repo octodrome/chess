@@ -22,26 +22,36 @@ export const useLayoutStore = defineStore('layout', () => {
     const router = useRouter()
     const route = useRoute()
 
-    const drawer = ref({
-        leftIsOpened: false,
-        rightIsOpened: false,
-    })
+    const drawerLeftIsOpened = computed(() => route.query.ld === 'o')
+    const drawerRightIsOpened = computed(() => route.query.rd === 'o')
 
-    const openLeftDrawer = () => {
-        drawer.value.leftIsOpened = true
-    }
+    const openLeftDrawer = () =>
+        router.push({
+            name: route.name,
+            params: route.params,
+            query: { ...route.query, ld: 'o' },
+        })
 
-    const openRightDrawer = () => {
-        drawer.value.rightIsOpened = true
-    }
+    const openRightDrawer = () =>
+        router.push({
+            name: route.name,
+            params: route.params,
+            query: { ...route.query, rd: 'o' },
+        })
 
-    const closeLeftDrawer = () => {
-        drawer.value.leftIsOpened = false
-    }
+    const closeLeftDrawer = () =>
+        router.push({
+            name: route.name,
+            params: route.params,
+            query: { ...route.query, ld: undefined },
+        })
 
-    const closeRightDrawer = () => {
-        drawer.value.rightIsOpened = false
-    }
+    const closeRightDrawer = () =>
+        router.push({
+            name: route.name,
+            params: route.params,
+            query: { ...route.query, rd: undefined },
+        })
 
     const modal = ref<IModal>({
         isOpened: false,
@@ -80,7 +90,8 @@ export const useLayoutStore = defineStore('layout', () => {
     }
 
     return {
-        drawer,
+        drawerLeftIsOpened,
+        drawerRightIsOpened,
         openLeftDrawer,
         openRightDrawer,
         closeLeftDrawer,

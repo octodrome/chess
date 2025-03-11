@@ -5,6 +5,7 @@ import { useUserStore } from '~/stores/userStore'
 import { useLayoutStore } from '~/stores/layoutStore'
 
 const route = useRoute()
+const router = useRouter()
 
 const humanGameStore = useHumanGameStore()
 const userStore = useUserStore()
@@ -16,10 +17,10 @@ const goToGame = (gameId: string) => {
 
     humanGameStore.getGame(gameId)
     boardStore.continueGame('human')
-    navigateTo({
+    router.push({
         path: `/HumanGame/${gameId}`,
+        query: { rd: undefined },
     })
-    layoutStore.closeLeftDrawer()
 }
 
 const deleteThisGame = (gameId: string) => {

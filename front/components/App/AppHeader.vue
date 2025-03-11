@@ -20,7 +20,7 @@ const route = useRoute()
             aria-label="Open app menu"
         >
             <BaseIcon
-                v-if="!layoutStore.drawer.leftIsOpened"
+                v-if="!layoutStore.drawerLeftIsOpened"
                 name="menu"
                 color="black"
             />
@@ -51,7 +51,7 @@ const route = useRoute()
             aria-label="Open game menu"
         >
             <BaseIcon
-                v-if="!layoutStore.drawer.rightIsOpened"
+                v-if="!layoutStore.drawerRightIsOpened"
                 name="dots-vertical"
                 color="black"
             />

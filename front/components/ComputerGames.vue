@@ -9,6 +9,7 @@ const props = defineProps<{
 }>()
 
 const route = useRoute()
+const router = useRouter()
 const boardStore = useBoardStore()
 const computerGameStore = useComputerGameStore()
 const layoutStore = useLayoutStore()
@@ -16,10 +17,10 @@ const layoutStore = useLayoutStore()
 const goToGame = (gameId: string) => {
     if (route.params.id === gameId) return
     boardStore.continueGame('computer')
-    navigateTo({
+    router.push({
         path: `/ComputerGame/${gameId}`,
+        query: { ld: undefined },
     })
-    layoutStore.closeLeftDrawer()
 }
 
 const deleteThisGame = (gameId: string) => {

@@ -6,19 +6,20 @@ import { useLayoutStore } from '~~/stores/layoutStore'
 const userStore = useUserStore()
 const computerGameStore = useComputerGameStore()
 const layoutStore = useLayoutStore()
+const router = useRouter()
+
+const goToHome = () => {
+    router.push({ path: '/', query: { ld: undefined } })
+}
 </script>
 
 <template>
     <BaseDrawer>
         <div>
             <div class="flex justify-between items-center">
-                <NuxtLink
-                    to="/"
-                    @click="layoutStore.closeLeftDrawer()"
-                    class="flex-1"
-                >
+                <div @click="goToHome" class="flex-1">
                     <BaseDrawerItem icon="chess-knight" content="Nuxt Chess" />
-                </NuxtLink>
+                </div>
 
                 <BaseButton
                     type="icon"
@@ -28,7 +29,7 @@ const layoutStore = useLayoutStore()
                     aria-label="Close app menu"
                 >
                     <BaseIcon
-                        v-if="!layoutStore.drawer.leftIsOpened"
+                        v-if="!layoutStore.drawerLeftIsOpened"
                         name="menu"
                     />
                     <BaseIcon v-else name="arrow-left" />

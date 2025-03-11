@@ -6,7 +6,6 @@ const boardStore = useBoardStore()
 const layoutStore = useLayoutStore()
 
 onMounted(() => {
-    layoutStore.closeRightDrawer()
     boardStore.initEmptyBoard()
 })
 </script>
