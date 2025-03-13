@@ -23,7 +23,6 @@ const goToHome = () => {
 
                 <BaseButton
                     type="icon"
-                    data-cy="app_header_left_button"
                     class="sm:absolute -right-14 top-1 z-50 text-white sm:text-black mr-1"
                     @click="layoutStore.closeLeftDrawer()"
                     aria-label="Close app menu"

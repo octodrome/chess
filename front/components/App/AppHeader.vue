@@ -14,17 +14,16 @@ const route = useRoute()
 <template>
     <header class="p-2">
         <BaseButton
+            v-if="!layoutStore.drawerLeftIsOpened"
             type="icon"
-            data-cy="app_header_left_button"
             @click="layoutStore.openLeftDrawer()"
             aria-label="Open app menu"
         >
             <BaseIcon
-                v-if="!layoutStore.drawerLeftIsOpened"
                 name="menu"
                 color="black"
+                data-cy="app_header_open_left"
             />
-            <BaseIcon v-else name="arrow-left" color="black" />
         </BaseButton>
 
         <div class="text-gray-600 mt-2" v-if="route.path != '/'">
@@ -45,17 +44,12 @@ const route = useRoute()
         </div>
 
         <BaseButton
-            v-if="$route.path !== '/'"
+            v-if="$route.path !== '/' && !layoutStore.drawerRightIsOpened"
             type="icon"
             @click="layoutStore.openRightDrawer()"
             aria-label="Open game menu"
         >
-            <BaseIcon
-                v-if="!layoutStore.drawerRightIsOpened"
-                name="dots-vertical"
-                color="black"
-            />
-            <BaseIcon v-else name="arrow-right" color="black" />
+            <BaseIcon name="dots-vertical" color="black" />
         </BaseButton>
     </header>
 </template>
