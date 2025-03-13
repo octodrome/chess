@@ -41,7 +41,7 @@ onMounted(async () => {
 <template>
     <div class="bg-gray-200 h-svh flex justify-between">
         <AppDrawerLeft
-            v-if="layoutStore.drawer.leftIsOpened"
+            v-if="layoutStore.drawerLeftIsOpened"
             class="absolute h-svh left-0 overflow-y-clip"
         />
 
@@ -56,7 +56,7 @@ onMounted(async () => {
         </div>
 
         <AppDrawerRight
-            v-if="layoutStore.drawer.rightIsOpened"
+            v-if="layoutStore.drawerRightIsOpened"
             class="absolute h-svh right-0 overflow-y-clip"
         />
 
@@ -67,8 +67,8 @@ onMounted(async () => {
         />
 
         <AppModal
-            v-if="layoutStore.modal.isOpened"
-            :content="layoutStore.modal.content"
+            v-if="layoutStore.openedModal"
+            :content="layoutStore.openedModal"
         />
     </div>
 </template>

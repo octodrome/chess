@@ -1,85 +1,112 @@
-export type IModalContent =
-    | 'Login'
-    | 'MyAccount'
-    | 'NewGameComputer'
-    | 'NewGameHuman'
-    | 'Signup'
-    | 'Chat'
-    | 'Settings'
-    | 'Confirm'
-    | ''
+export const ModalContentTypes = [
+    'Login',
+    'MyAccount',
+    'NewGameComputer',
+    'NewGameHuman',
+    'Signup',
+    'Chat',
+    'Settings',
+    'Confirm',
+    undefined,
+] as const
+
+export type ModalContent = (typeof ModalContentTypes)[number]
 
 export interface IModal {
     isOpened: boolean
-    content: IModalContent
+    content: ModalContent
     onConfirm?: Function
 }
 
-export const useLayoutStore = defineStore('layout', {
-    state: () => ({
-        drawer: {
-            leftIsOpened: false,
-            rightIsOpened: false,
-        },
+export const useLayoutStore = defineStore('layout', () => {
+    const router = useRouter()
+    const route = useRoute()
 
-        modal: {
-            isOpened: false,
-            content: '',
-            onConfirm: undefined,
-        } as IModal,
+    const drawerLeftIsOpened = computed(() => route.query.ld === 'o')
+    const drawerRightIsOpened = computed(() => route.query.rd === 'o')
 
-        snackbar: {
-            isOpened: false,
-            message: '',
-            color: '',
-        },
-    }),
+    const openLeftDrawer = () =>
+        router.push({
+            name: route.name,
+            params: route.params,
+            query: { ...route.query, ld: 'o' },
+        })
 
-    actions: {
-        toggleLeftDrawer() {
-            this.drawer.leftIsOpened = !this.drawer.leftIsOpened
-        },
+    const openRightDrawer = () =>
+        router.push({
+            name: route.name,
+            params: route.params,
+            query: { ...route.query, rd: 'o' },
+        })
 
-        toggleRightDrawer() {
-            this.drawer.rightIsOpened = !this.drawer.rightIsOpened
-        },
+    const closeLeftDrawer = () =>
+        router.push({
+            name: route.name,
+            params: route.params,
+            query: { ...route.query, ld: undefined },
+        })
 
-        closeLeftDrawer() {
-            this.drawer.leftIsOpened = false
-        },
+    const closeRightDrawer = () =>
+        router.push({
+            name: route.name,
+            params: route.params,
+            query: { ...route.query, rd: undefined },
+        })
 
-        closeRightDrawer() {
-            this.drawer.rightIsOpened = false
-        },
+    const openedModal = computed(() => route.query.modal as ModalContent)
+    const onConfirmModal = ref<Function | undefined>(undefined)
 
-        openModal(content: IModalContent, onConfirm?: Function) {
-            this.modal.isOpened = true
-            this.modal.content = content
-            this.modal.onConfirm = onConfirm
-        },
+    const openModal = async (content: ModalContent, onConfirm?: Function) => {
+        router.push({
+            name: route.name,
+            params: route.params,
+            query: { ...route.query, modal: content },
+        })
+        if (onConfirm) onConfirmModal.value = onConfirm
+    }
 
-        closeModal() {
-            this.modal.isOpened = false
-            this.modal.content = ''
-            this.modal.onConfirm = undefined
-        },
+    const closeModal = () => {
+        router.push({
+            name: route.name,
+            params: route.params,
+            query: { ...route.query, modal: undefined },
+        })
+        onConfirmModal.value = undefined
+    }
 
-        openSnackbarError(message: string) {
-            this.snackbar.message = message
-            this.snackbar.color = 'error'
-            this.snackbar.isOpened = true
-        },
+    const snackbar = ref({
+        isOpened: false,
+        message: '',
+        color: '',
+    })
 
-        openSnackbarSuccess(message: string) {
-            this.snackbar.message = message
-            this.snackbar.color = 'success'
-            this.snackbar.isOpened = true
-        },
+    const openSnackbar = (message: string, color: 'success' | 'error') => {
+        snackbar.value.message = message
+        snackbar.value.color = color
+        snackbar.value.isOpened = true
+    }
 
-        closeSnackbar() {
-            this.snackbar.isOpened = false
-            this.snackbar.message = ''
-            this.snackbar.color = ''
-        },
-    },
+    const closeSnackbar = () => {
+        snackbar.value.isOpened = false
+        snackbar.value.message = ''
+        snackbar.value.color = ''
+    }
+
+    return {
+        drawerLeftIsOpened,
+        drawerRightIsOpened,
+        openLeftDrawer,
+        openRightDrawer,
+        closeLeftDrawer,
+        closeRightDrawer,
+
+        openedModal,
+        onConfirmModal,
+        openModal,
+        closeModal,
+
+        snackbar,
+        openSnackbar,
+        closeSnackbar,
+    }
 })

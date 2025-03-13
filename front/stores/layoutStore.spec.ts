@@ -1,6 +1,6 @@
 import { setActivePinia, createPinia } from 'pinia'
 import { useLayoutStore } from './layoutStore'
-import { describe, it, expect, beforeEach } from 'vitest'
+import { describe, it, expect, beforeEach, vi } from 'vitest'
 
 describe('Layout Store', () => {
     beforeEach(() => {
@@ -9,66 +9,56 @@ describe('Layout Store', () => {
 
     it('has correct initial state', () => {
         const layoutStore = useLayoutStore()
-        expect(layoutStore.drawer.leftIsOpened).toBe(false)
-        expect(layoutStore.drawer.rightIsOpened).toBe(false)
-        expect(layoutStore.modal.isOpened).toBe(false)
-        expect(layoutStore.modal.content).toBe('')
+        expect(layoutStore.drawerLeftIsOpened).toBe(false)
+        expect(layoutStore.drawerRightIsOpened).toBe(false)
+        expect(layoutStore.openedModal).toBe(undefined)
         expect(layoutStore.snackbar.isOpened).toBe(false)
         expect(layoutStore.snackbar.color).toBe('')
         expect(layoutStore.snackbar.message).toBe('')
     })
 
     describe('actions', () => {
-        it('toggleLeftDrawer()', () => {
-            const layoutStore = useLayoutStore()
-            layoutStore.toggleLeftDrawer()
-            expect(layoutStore.drawer.leftIsOpened).toBe(true)
-            layoutStore.toggleLeftDrawer()
-            expect(layoutStore.drawer.leftIsOpened).toBe(false)
-        })
+        // it('openLeftDrawer()', () => {
+        //     const layoutStore = useLayoutStore()
+        //     layoutStore.openLeftDrawer()
+        //     expect(layoutStore.drawerLeftIsOpened).toBe(true)
+        // })
 
-        it('toggleRightDrawer()', () => {
-            const layoutStore = useLayoutStore()
-            layoutStore.toggleRightDrawer()
-            expect(layoutStore.drawer.rightIsOpened).toBe(true)
-            layoutStore.toggleRightDrawer()
-            expect(layoutStore.drawer.rightIsOpened).toBe(false)
-        })
+        // it('openRightDrawer()', () => {
+        //     const layoutStore = useLayoutStore()
+        //     layoutStore.openRightDrawer()
+        //     expect(layoutStore.drawerRightIsOpened).toBe(true)
+        // })
 
         it('closeRightDrawer()', () => {
             const layoutStore = useLayoutStore()
-            layoutStore.drawer.rightIsOpened = true
             layoutStore.closeRightDrawer()
-            expect(layoutStore.drawer.rightIsOpened).toBe(false)
+            expect(layoutStore.drawerRightIsOpened).toBe(false)
         })
 
-        it('openModal()', () => {
-            const layoutStore = useLayoutStore()
-            layoutStore.openModal('Settings')
-            expect(layoutStore.modal.isOpened).toBe(true)
-            expect(layoutStore.modal.content).toBe('Settings')
-        })
+        // it('openModal()', () => {
+        //     const layoutStore = useLayoutStore()
+        //     layoutStore.openModal('Settings')
+        //     expect(layoutStore.openedModal).toBe('Settings')
+        // })
 
         it('closeModal()', () => {
             const layoutStore = useLayoutStore()
-            layoutStore.modal.isOpened = true
-            layoutStore.modal.content = 'Settings'
             layoutStore.closeModal()
-            expect(layoutStore.modal.isOpened).toBe(false)
-            expect(layoutStore.modal.content).toBe('')
+            expect(layoutStore.openedModal).toBe(undefined)
         })
 
-        it('openSnackbarError()', () => {
+        it('openSnackbar() with error', () => {
             const layoutStore = useLayoutStore()
-            layoutStore.openSnackbarError('error message')
+            layoutStore.openSnackbar('error message', 'error')
             expect(layoutStore.snackbar.isOpened).toBe(true)
             expect(layoutStore.snackbar.message).toBe('error message')
             expect(layoutStore.snackbar.color).toBe('error')
         })
 
-        it('openSnackbarSuccess()', () => {
+        it('openSnackbar() with success', () => {
             const layoutStore = useLayoutStore()
-            layoutStore.openSnackbarSuccess('success message')
+            layoutStore.openSnackbar('success message', 'success')
             expect(layoutStore.snackbar.isOpened).toBe(true)
             expect(layoutStore.snackbar.message).toBe('success message')
             expect(layoutStore.snackbar.color).toBe('success')

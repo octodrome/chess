@@ -27,7 +27,7 @@ const update = () => {
             close()
         })
         .catch(() => {
-            layoutStore.openSnackbarError(t('snackbar.error.game_update'))
+            layoutStore.openSnackbar(t('snackbar.error.game_update'), 'error')
         })
 }
 </script>

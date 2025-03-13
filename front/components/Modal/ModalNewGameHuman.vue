@@ -15,6 +15,8 @@ const userStore = useUserStore()
 const humanGameStore = useHumanGameStore()
 const boardStore = useBoardStore()
 const layoutStore = useLayoutStore()
+const route = useRoute()
+const router = useRouter()
 
 const userId = userStore.user?.id
 const opponents = await userStore.getAllOpponents(String(userId))
@@ -46,6 +48,15 @@ const userIsNotAlone = computed(() => opponents.length >= 1)
 
 const close = () => emit('close')
 
+const goToGame = (gameId: string) => {
+    if (route.params.id === gameId) return
+    boardStore.continueGame('human')
+    router.push({
+        path: `/HumanGame/${gameId}`,
+        query: { ld: undefined },
+    })
+}
+
 const start = () => {
     if (userStore.user && selectedOpponentId) {
         humanGameStore
@@ -61,11 +72,13 @@ const start = () => {
             .then((game) => {
                 close()
                 boardStore.startNewGame('human')
-                navigateTo({ path: `/HumanGame/${game.id}` })
-                layoutStore.closeLeftDrawer()
+                goToGame(String(game.id))
             })
             .catch(() => {
-                layoutStore.openSnackbarError(t('snackbar.error.game_creation'))
+                layoutStore.openSnackbar(
+                    t('snackbar.error.game_creation'),
+                    'error'
+                )
             })
     }
 }
