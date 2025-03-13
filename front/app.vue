@@ -67,8 +67,8 @@ onMounted(async () => {
         />
 
         <AppModal
-            v-if="layoutStore.modal.isOpened"
-            :content="layoutStore.modal.content"
+            v-if="layoutStore.openedModal"
+            :content="layoutStore.openedModal"
         />
     </div>
 </template>

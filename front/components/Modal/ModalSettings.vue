@@ -1,25 +1,13 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
+import { useLayoutStore } from '@/stores/layoutStore'
 
 const { t } = useI18n()
+const layoutStore = useLayoutStore()
 
 const emit = defineEmits<{
     (e: 'close'): void
 }>()
-
-const displaySchemes = ref([
-    {
-        label: t('modals.settings.display_scheme.dark'),
-        value: 'dark_mode',
-    },
-    {
-        label: t('modals.settings.display_scheme.light'),
-        value: 'light_mode',
-    },
-])
-const displayScheme = ref(
-    localStorage.getItem('display_scheme') || 'light_mode'
-)
 
 const languages = ref([
     {
@@ -32,14 +20,13 @@ const languages = ref([
     },
 ])
 
-const language = ref(localStorage.getItem('locale') || 'en')
+const language = ref('en')
+if (process.client) language.value = localStorage.getItem('locale') || 'en'
 
 const close = () => emit('close')
 
 const confirm = () => {
-    localStorage.setItem('locale', language.value)
-    localStorage.setItem('display_scheme', displayScheme.value)
-
+    if (process.client) localStorage.setItem('locale', language.value)
     location.reload()
 }
 </script>
@@ -48,17 +35,6 @@ const confirm = () => {
     <BaseCardHeader :title="$t('options.settings')" @close="close" />
 
     <BaseCardMain text="">
-        <!-- <BaseRadioGroup
-            $t('modals.settings.text')
-            v-model="displayScheme"
-            :options="displaySchemes"
-            name="displaySchemes"
-            :label="$t('modals.settings.display_scheme.label')"
-            vertical
-        />
-
-        <br /> -->
-
         <BaseRadioGroup
             v-model="language"
             :options="languages"

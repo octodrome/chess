@@ -62,12 +62,6 @@ export default {
             },
         },
         settings: {
-            text: 'Gérez vos preferences.',
-            display_scheme: {
-                label: 'Choisissez votre thème:',
-                dark: 'Mode sombre',
-                light: 'Mode clair',
-            },
             language: {
                 label: 'Choisissez votre langue:',
                 en: 'Anglais',

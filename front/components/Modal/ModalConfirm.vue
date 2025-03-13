@@ -10,7 +10,7 @@ const emit = defineEmits<{
 const close = () => emit('close')
 
 const confirm = () => {
-    if (layoutStore.modal.onConfirm) layoutStore.modal.onConfirm()
+    if (layoutStore.onConfirmModal) layoutStore.onConfirmModal()
     close()
 }
 </script>

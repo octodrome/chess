@@ -7,7 +7,7 @@ export const ModalContentTypes = [
     'Chat',
     'Settings',
     'Confirm',
-    '',
+    undefined,
 ] as const
 
 export type ModalContent = (typeof ModalContentTypes)[number]
@@ -53,22 +53,25 @@ export const useLayoutStore = defineStore('layout', () => {
             query: { ...route.query, rd: undefined },
         })
 
-    const modal = ref<IModal>({
-        isOpened: false,
-        content: '',
-        onConfirm: undefined,
-    })
+    const openedModal = computed(() => route.query.modal as ModalContent)
+    const onConfirmModal = ref<Function | undefined>(undefined)
 
-    const openModal = (content: ModalContent, onConfirm?: Function) => {
-        modal.value.isOpened = true
-        modal.value.content = content
-        modal.value.onConfirm = onConfirm
+    const openModal = async (content: ModalContent, onConfirm?: Function) => {
+        router.push({
+            name: route.name,
+            params: route.params,
+            query: { ...route.query, modal: content },
+        })
+        if (onConfirm) onConfirmModal.value = onConfirm
     }
 
     const closeModal = () => {
-        modal.value.isOpened = false
-        modal.value.content = ''
-        modal.value.onConfirm = undefined
+        router.push({
+            name: route.name,
+            params: route.params,
+            query: { ...route.query, modal: undefined },
+        })
+        onConfirmModal.value = undefined
     }
 
     const snackbar = ref({
@@ -97,7 +100,8 @@ export const useLayoutStore = defineStore('layout', () => {
         closeLeftDrawer,
         closeRightDrawer,
 
-        modal,
+        openedModal,
+        onConfirmModal,
         openModal,
         closeModal,
 

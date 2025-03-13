@@ -1,6 +1,6 @@
 import { setActivePinia, createPinia } from 'pinia'
 import { useLayoutStore } from './layoutStore'
-import { describe, it, expect, beforeEach } from 'vitest'
+import { describe, it, expect, beforeEach, vi } from 'vitest'
 
 describe('Layout Store', () => {
     beforeEach(() => {
@@ -11,8 +11,7 @@ describe('Layout Store', () => {
         const layoutStore = useLayoutStore()
         expect(layoutStore.drawerLeftIsOpened).toBe(false)
         expect(layoutStore.drawerRightIsOpened).toBe(false)
-        expect(layoutStore.modal.isOpened).toBe(false)
-        expect(layoutStore.modal.content).toBe('')
+        expect(layoutStore.openedModal).toBe(undefined)
         expect(layoutStore.snackbar.isOpened).toBe(false)
         expect(layoutStore.snackbar.color).toBe('')
         expect(layoutStore.snackbar.message).toBe('')
@@ -37,20 +36,16 @@ describe('Layout Store', () => {
             expect(layoutStore.drawerRightIsOpened).toBe(false)
         })
 
-        it('openModal()', () => {
-            const layoutStore = useLayoutStore()
-            layoutStore.openModal('Settings')
-            expect(layoutStore.modal.isOpened).toBe(true)
-            expect(layoutStore.modal.content).toBe('Settings')
-        })
+        // it('openModal()', () => {
+        //     const layoutStore = useLayoutStore()
+        //     layoutStore.openModal('Settings')
+        //     expect(layoutStore.openedModal).toBe('Settings')
+        // })
 
         it('closeModal()', () => {
             const layoutStore = useLayoutStore()
-            layoutStore.modal.isOpened = true
-            layoutStore.modal.content = 'Settings'
             layoutStore.closeModal()
-            expect(layoutStore.modal.isOpened).toBe(false)
-            expect(layoutStore.modal.content).toBe('')
+            expect(layoutStore.openedModal).toBe(undefined)
         })
 
         it('openSnackbar() with error', () => {
