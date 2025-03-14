@@ -10,7 +10,8 @@ useSeoMeta({
     ogTitle: 'Nuxt Chess',
     ogDescription:
         'A chess web app built with Nuxt, offering real-time gameplay and a smooth user experience.',
-    ogImage: '/og_image.png',
+    ogImage: 'https://nuxtchess.com/og_image.png',
+    ogUrl: 'https://nuxtchess.com',
 })
 
 const layoutStore = useLayoutStore()
