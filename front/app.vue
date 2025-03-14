@@ -4,18 +4,13 @@ import { useComputerGameStore } from './stores/computerGameStore'
 import { useUserStore } from './stores/userStore'
 import { useHumanGameStore } from './stores/humanGameStore'
 
-useHead({
-    title: 'Nuxt Chess',
-    meta: [
-        {
-            name: 'description',
-            content:
-                'A chess web app built with Nuxt, offering real-time gameplay and a smooth user experience.',
-        },
-    ],
-    htmlAttrs: {
-        lang: 'en',
-    },
+useSeoMeta({
+    description:
+        'A chess web app built with Nuxt, offering real-time gameplay and a smooth user experience.',
+    ogTitle: 'Nuxt Chess',
+    ogDescription:
+        'A chess web app built with Nuxt, offering real-time gameplay and a smooth user experience.',
+    ogImage: '/og_image.png',
 })
 
 const layoutStore = useLayoutStore()
