@@ -11,10 +11,6 @@ services:
         build:
             context: ./front
             target: dev
-        container_name: front
-        hostname: front
-        networks:
-            - e2e_net
         ports:
             - 3000:3000
         healthcheck:
@@ -33,10 +29,6 @@ services:
         build:
             context: ./back
             target: dev
-        container_name: back
-        hostname: back
-        networks:
-            - e2e_net
         ports:
             - 8001:8001
         environment:
@@ -54,10 +46,6 @@ services:
         build:
             context: ./socket-server
             target: dev
-        container_name: socket-server
-        hostname: socket-server
-        networks:
-            - e2e_net
         ports:
             - 5000:5000
 
@@ -73,10 +61,6 @@ services:
             retries: 5
             start_period: 30s
             timeout: 10s
-        container_name: db
-        hostname: db
-        networks:
-            - e2e_net
         ports:
             - 5431:5432
             - 8080:8080
@@ -89,21 +73,14 @@ services:
 
     cypress:
         image: cypress/included:13.15.0
-        container_name: cypress
         depends_on:
             - front
             - back
             - db
             - socket-server
-        networks:
-            - e2e_net
         working_dir: /e2e
         volumes:
             - ./e2e:/e2e
         entrypoint: ['npm', 'run', 'cy']
         environment:
             - BASE_URL=http://front:3000
-
-networks:
-    e2e_net:
-        driver: bridge
