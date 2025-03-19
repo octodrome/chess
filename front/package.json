@@ -40,6 +40,7 @@
         "eslint-plugin-nuxt": "4.0.0",
         "eslint-plugin-prettier": "5.2.1",
         "eslint-plugin-vitest": "0.5.4",
+        "happy-dom": "^15.11.7",
         "prettier": "3.3.3",
         "sass": "1.66.1",
         "storybook": "8.4.4",
