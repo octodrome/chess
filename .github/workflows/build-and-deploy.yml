@@ -86,7 +86,7 @@ jobs:
                   DB_PORT: ${{ secrets.DB_PORT }}
                   TOKEN_TTL: ${{ secrets.TOKEN_TTL }}
                   JWT_PRIVATE_KEY: ${{ secrets.JWT_PRIVATE_KEY }}
-                  FRONT_URL: ${{ secrets.FRONT_URL }}
+                  # FRONT_URL: ${{ secrets.FRONT_URL }}
 
     push-images:
         name: Push images to Docker Hub
