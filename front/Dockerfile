@@ -27,7 +27,7 @@ RUN mkdir -p /usr/src/nuxt-app
 WORKDIR /usr/src/nuxt-app
 RUN apk update && apk upgrade
 COPY package-lock.json package.json ./
-RUN npm install
+RUN npm ci
 COPY . .
 
 FROM base AS dev
