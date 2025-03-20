@@ -77,7 +77,7 @@ jobs:
               run: sudo apt-get install docker-compose
 
             - name: Run E2E tests
-              run: docker-compose -f docker-compose.test.yml up --abort-on-container-exit
+              run: docker-compose -f docker-compose.test.yml up --build --abort-on-container-exit
               # env:
               #     DB_HOST: ${{ secrets.DB_HOST }}
               #     POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
