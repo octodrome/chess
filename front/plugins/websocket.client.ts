@@ -1,5 +1,3 @@
-import type { IMove } from 'chess-legal-moves/dist/types'
-import { getMoveFromAN } from '~/helpers/stockfish'
 import { useHumanGameStore } from '~/stores/humanGameStore'
 import { useUserStore } from '~/stores/userStore'
 import type { ApiMessage } from '~/types/humanGame'

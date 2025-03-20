@@ -9,10 +9,12 @@ export default defineNuxtConfig({
             },
         },
     },
+
     experimental: {
         // fix pieces images not showing on prod
         appManifest: false,
     },
+
     modules: [
         [
             '@pinia/nuxt',
@@ -26,7 +28,9 @@ export default defineNuxtConfig({
         '@nuxtjs/storybook',
         '@nuxt/image',
     ],
+
     css: ['@mdi/font/css/materialdesignicons.min.css', '@/assets/css/main.css'],
+
     devtools: {
         enabled: true,
 
@@ -34,13 +38,23 @@ export default defineNuxtConfig({
             enabled: true,
         },
     },
+
     typescript: {
         strict: true,
     },
+
     runtimeConfig: {
         public: {
             restApiUrl: process.env.REST_API_URL,
             socketServerUrl: process.env.SOCKET_SERVER_URL,
+            allowedHosts: '*', // Allow all hosts for e2e testing
         },
     },
+
+    devServer: {
+        host: '0.0.0.0', // Ensure it listens on all interfaces for e2e testing
+        port: 3000,
+    },
+
+    compatibilityDate: '2025-03-20',
 })
