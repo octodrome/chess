@@ -5,82 +5,91 @@
 # $ docker compose -f docker-compose.test.yml up --abort-on-container-exit
 
 services:
-    front:
+    front-test:
         depends_on:
-            - socket-server
+            - socket-server-test
         build:
             context: ./front
             target: dev
         ports:
             - 3000:3000
         healthcheck:
-            test: ['CMD', 'curl', '-f', 'http://localhost:3000']
+            test: ['CMD', 'curl', '-f', 'http://front-test:3000']
             interval: 10s
             timeout: 5s
             retries: 5
         environment:
-            - REST_API_URL=http://back:8001/api
-            - SOCKET_SERVER_URL=ws://socket-server:5000/ws
+            - REST_API_URL=http://back-test:8001/api
+            - SOCKET_SERVER_URL=ws://socket-server-test:5000/ws
+        volumes:
+            - ./front:/usr/src/nuxt-app
+        networks:
+            - test_net
 
-    back:
+    back-test:
         depends_on:
-            db:
+            db-test:
                 condition: service_healthy
         build:
             context: ./back
             target: dev
+        environment:
+            - DB_HOST=db-test
+            - POSTGRES_USER=test_db_user
+            - POSTGRES_PASSWORD=test_db_password
+            - POSTGRES_DB=test_db
+            - DB_PORT=5432
+            - TOKEN_TTL=test_token_ttl
+            - JWT_PRIVATE_KEY=test_jwt_private_key
+            - FRONT_URL=http://front-test:3000
+        networks:
+            - test_net
         ports:
             - 8001:8001
-        environment:
-            - DB_HOST=${DB_HOST}
-            - POSTGRES_USER=${POSTGRES_USER}
-            - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
-            - POSTGRES_DB=${POSTGRES_DB}
-            - DB_PORT=${DB_PORT}
-            - TOKEN_TTL=${TOKEN_TTL}
-            - JWT_PRIVATE_KEY=${JWT_PRIVATE_KEY}
-            - FRONT_URL=http://front:3000
 
-    socket-server:
+    socket-server-test:
         restart: always
         build:
             context: ./socket-server
             target: dev
-        ports:
-            - 5000:5000
+        networks:
+            - test_net
 
-    db:
+    db-test:
         image: postgres:16-alpine
         healthcheck:
-            test:
-                [
-                    'CMD-SHELL',
-                    'pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}',
-                ]
+            test: ['CMD-SHELL', 'pg_isready -U test_db_user -d test_db']
             interval: 10s
             retries: 5
             start_period: 30s
             timeout: 10s
-        ports:
-            - 5431:5432
-            - 8080:8080
         environment:
-            - POSTGRES_USER=${POSTGRES_USER}
-            - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
-            - POSTGRES_DB=${POSTGRES_DB}
+            - POSTGRES_USER=test_db_user
+            - POSTGRES_PASSWORD=test_db_password
+            - POSTGRES_DB=test_db
         tmpfs:
             - /var/lib/postgresql/data # In-memory storage for database data
+        networks:
+            - test_net
+        ports:
+            - 5431:5432
 
     cypress:
         image: cypress/included:13.15.0
         depends_on:
-            - front
-            - back
-            - db
-            - socket-server
+            - front-test
+            - back-test
+            - db-test
+            - socket-server-test
         working_dir: /e2e
         volumes:
             - ./e2e:/e2e
         entrypoint: ['npm', 'run', 'cy']
+        networks:
+            - test_net
         environment:
-            - BASE_URL=http://front:3000
+            - BASE_URL=http://front-test:3000
+
+networks:
+    test_net:
+        driver: bridge
