@@ -31,15 +31,11 @@ RUN npm ci
 COPY . .
 
 FROM base AS dev
-ENV REST_API_URL=http://localhost:8001/api
-ENV SOCKET_SERVER_URL=ws://localhost:5000/ws
 RUN apk add curl
 EXPOSE 3000
 CMD ["npm", "run", "dev"]
 
 FROM base AS prod
-ENV REST_API_URL=https://nuxtchess.com/api
-ENV SOCKET_SERVER_URL=wss://nuxtchess.com/ws
 RUN npm run build
 EXPOSE 3000
 CMD [ "node", ".output/server/index.mjs" ]

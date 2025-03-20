@@ -36,6 +36,7 @@ services:
         ports:
             - '3000:3000'
         environment:
+            - REST_API_URL=https://nuxtchess.com/api
             - SOCKET_SERVER_URL=wss://nuxtchess.com/ws
 
     back:
@@ -55,6 +56,7 @@ services:
             - TOKEN_TTL=${TOKEN_TTL}
             - JWT_PRIVATE_KEY=${JWT_PRIVATE_KEY}
             - GIN_MODE=release
+            - FRONT_URL=https://nuxtchess.com
 
     db:
         image: postgres:16-alpine

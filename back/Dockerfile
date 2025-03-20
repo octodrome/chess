@@ -25,14 +25,12 @@ RUN go mod download && go mod verify
 COPY . .
 
 FROM base AS dev
-ENV FRONT_URL=http://localhost:3000
 RUN go build -o main .
 RUN go install github.com/onsi/ginkgo/ginkgo
 EXPOSE 8001
 CMD ["./main"]
 
 FROM base AS prod
-ENV FRONT_URL=https://nuxtchess.com
 RUN go build -o main .
 EXPOSE 8001
 CMD ["./main"]
