@@ -29,19 +29,21 @@ services:
             - /etc/letsencrypt:/etc/letsencrypt
 
     front:
+        image: colinfaivre/chess_front_prod
+        restart: always
         depends_on:
             - socket-server
-        image: colinfaivre/chess_front_prod
         ports:
             - '3000:3000'
         environment:
             - SOCKET_SERVER_URL=wss://nuxtchess.com/ws
 
     back:
+        image: colinfaivre/chess_back_prod
+        restart: always
         depends_on:
             db:
                 condition: service_healthy
-        image: colinfaivre/chess_back_prod
         ports:
             - 8001:8001
         environment:
@@ -56,6 +58,7 @@ services:
 
     db:
         image: postgres:16-alpine
+        restart: always
         healthcheck:
             test:
                 [
