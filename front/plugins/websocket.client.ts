@@ -98,6 +98,7 @@ export class WebSocketClient {
 export default defineNuxtPlugin(async (nuxtApp) => {
     const config = useRuntimeConfig()
     const socketClient = new WebSocketClient()
+    console.log('🧦[WebSocketClient] config', config.public.socketServerUrl)
     await socketClient.connect(config.public.socketServerUrl as string)
 
     nuxtApp.provide('webSocketClient', socketClient as WebSocketClient)
