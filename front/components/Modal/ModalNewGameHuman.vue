@@ -109,7 +109,7 @@ const start = () => {
 
     <BaseCardMain
         v-else
-        :text="`${$t('modals.new_game_human.default')}: http://165.22.119.201`"
+        :text="`${$t('modals.new_game_human.default')}: https://nuxtchess.com`"
     ></BaseCardMain>
 
     <BaseCardFooter>
