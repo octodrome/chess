@@ -46,8 +46,8 @@ services:
         ports:
             - 3000:3000
         environment:
-            - REST_API_URL=http://localhost:8001/api
-            - SOCKET_SERVER_URL=ws://localhost:5000/ws
+            - NUXT_PUBLIC_REST_API_URL=http://localhost:8001/api
+            - NUXT_PUBLIC_SOCKET_SERVER_URL=ws://localhost:5000/ws
 
     back:
         depends_on:

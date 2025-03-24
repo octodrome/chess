@@ -45,8 +45,8 @@ export default defineNuxtConfig({
 
     runtimeConfig: {
         public: {
-            restApiUrl: process.env.REST_API_URL,
-            socketServerUrl: process.env.SOCKET_SERVER_URL,
+            restApiUrl: process.env.NUXT_PUBLIC_REST_API_URL,
+            socketServerUrl: process.env.NUXT_PUBLIC_SOCKET_SERVER_URL,
             allowedHosts: '*', // Allow all hosts for e2e testing
         },
     },

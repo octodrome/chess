@@ -36,8 +36,8 @@ services:
         ports:
             - '3000:3000'
         environment:
-            - REST_API_URL=https://nuxtchess.com/api
-            - SOCKET_SERVER_URL=wss://nuxtchess.com/ws
+            - NUXT_PUBLIC_REST_API_URL=https://nuxtchess.com/api
+            - NUXT_PUBLIC_SOCKET_SERVER_URL=wss://nuxtchess.com/ws
 
     back:
         image: colinfaivre/chess_back_prod
