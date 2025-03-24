@@ -82,10 +82,8 @@ services:
             - POSTGRES_DB=${POSTGRES_DB}
 
     socket-server:
+        image: colinfaivre/chess_socket_server_prod
         restart: always
-        build:
-            context: ./socket-server
-            target: prod
         ports:
             - 5000:5000
 
