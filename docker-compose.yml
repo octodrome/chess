@@ -27,22 +27,22 @@ services:
         depends_on:
             - socket-server
         build:
-            context: ./front
+            context: ./apps/front
             target: dev
         develop:
             watch:
                 - action: sync
-                  path: ./front
+                  path: ./apps/front
                   target: /usr/src/nuxt-app
                   ignore:
                       - node_modules/
                 - action: rebuild
-                  path: ./front/package.json
+                  path: ./apps/front/package.json
                 - action: sync+restart
                   target: /usr/src/nuxt.config.ts
-                  path: ./front/nuxt.config.ts
+                  path: ./apps/front/nuxt.config.ts
         volumes:
-            - ./front:/usr/src/nuxt-app
+            - ./apps/front:/usr/src/nuxt-app
         ports:
             - 3000:3000
         environment:
@@ -54,16 +54,16 @@ services:
             db:
                 condition: service_healthy
         build:
-            context: ./rest-server
+            context: ./apps/rest-server
             target: dev
         develop:
             watch:
                 - action: rebuild
-                  path: ./rest-server
+                  path: ./apps/rest-server
                   files:
-                      - ./rest-server/**/*.go
-                      - ./rest-server/go.mod
-                      - ./rest-server/go.sum
+                      - ./apps/rest-server/**/*.go
+                      - ./apps/rest-server/go.mod
+                      - ./apps/rest-server/go.sum
         ports:
             - 8001:8001
         environment:
@@ -79,16 +79,16 @@ services:
     socket-server:
         restart: always
         build:
-            context: ./socket-server
+            context: ./apps/socket-server
             target: dev
         develop:
             watch:
                 - action: rebuild
-                  path: ./socket-server
+                  path: ./apps/socket-server
                   files:
-                      - ./socket-server/**/*.go
-                      - ./socket-server/go.mod
-                      - ./socket-server/go.sum
+                      - ./apps/socket-server/**/*.go
+                      - ./apps/socket-server/go.mod
+                      - ./apps/socket-server/go.sum
         ports:
             - 5000:5000
 

@@ -1,6 +1,6 @@
 // @ts-nocheck
 // @TODO maybe try fetch wasm_exec.js from public/ too
-import '../go-wasm-poc/wasm_exec.js'
+import './wasm_exec.js'
 
 export default class GoWasmPOC {
     stockfishWorker: any

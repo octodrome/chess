@@ -18,7 +18,7 @@
     "[typescript]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
-    "prettier.configPath": "./front/.prettierrc.json",
+    "prettier.configPath": "./apps/front/.prettierrc.json",
     "[go]": {
         "editor.defaultFormatter": "golang.go",
         "editor.formatOnSave": true

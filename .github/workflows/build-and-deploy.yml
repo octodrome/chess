@@ -24,7 +24,7 @@ jobs:
             - name: Build dev front image
               uses: docker/build-push-action@v6
               with:
-                  context: '{{defaultContext}}:front'
+                  context: '{{defaultContext}}:apps/front'
                   target: dev
                   push: false
                   load: true
@@ -42,7 +42,7 @@ jobs:
             - name: Build dev rest-server image
               uses: docker/build-push-action@v6
               with:
-                  context: '{{defaultContext}}:rest-server'
+                  context: '{{defaultContext}}:apps/rest-server'
                   target: dev
                   push: false
                   load: true # Export to Docker Engine rather than pushing to a registry
@@ -55,7 +55,7 @@ jobs:
             - name: Build dev socket-server image
               uses: docker/build-push-action@v6
               with:
-                  context: '{{defaultContext}}:socket-server'
+                  context: '{{defaultContext}}:apps/socket-server'
                   target: dev
                   push: false
                   load: true # Export to Docker Engine rather than pushing to a registry
@@ -94,7 +94,7 @@ jobs:
             - name: Build and push prod front image to Docker Hub
               uses: docker/build-push-action@v6
               with:
-                  context: '{{defaultContext}}:front'
+                  context: '{{defaultContext}}:apps/front'
                   target: prod
                   push: true
                   tags: colinfaivre/chess_front_prod
@@ -102,7 +102,7 @@ jobs:
             - name: Build and push prod rest-server image to Docker Hub
               uses: docker/build-push-action@v6
               with:
-                  context: '{{defaultContext}}:rest-server'
+                  context: '{{defaultContext}}:apps/rest-server'
                   target: prod
                   push: true
                   tags: colinfaivre/chess_rest_server_prod
@@ -110,7 +110,7 @@ jobs:
             - name: Build and push prod socket-server image to Docker Hub
               uses: docker/build-push-action@v6
               with:
-                  context: '{{defaultContext}}:socket-server'
+                  context: '{{defaultContext}}:apps/socket-server'
                   target: prod
                   push: true
                   tags: colinfaivre/chess_socket_server_prod

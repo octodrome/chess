@@ -1,7 +1,7 @@
 import { IColor, ILegalMoves } from '../../types';
 import Board from '../Board/Board';
 import BitBoard from '../BitBoard/BitBoard';
-import { positionsTable } from './../BitBoard/positionsHashTable';
+import { positionsTable } from '../BitBoard/positionsHashTable';
 
 export function kingMoves(board: Board, hasToPlay: IColor): ILegalMoves {
   // @TODO document
