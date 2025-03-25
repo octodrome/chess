@@ -4,7 +4,7 @@ import (
 	"database/sql"
 	"time"
 
-	"github.com/octodrome/chess/go-rest-api-poc/database"
+	"github.com/octodrome/chess/rest-server/database"
 )
 
 type Game struct {

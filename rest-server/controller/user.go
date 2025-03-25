@@ -5,7 +5,7 @@ import (
 	"strconv"
 
 	"github.com/gin-gonic/gin"
-	"github.com/octodrome/chess/go-rest-api-poc/model"
+	"github.com/octodrome/chess/rest-server/model"
 )
 
 func GetAllUsers(context *gin.Context, repo model.UserRepository) {

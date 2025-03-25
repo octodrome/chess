@@ -10,7 +10,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/golang-jwt/jwt/v4"
-	"github.com/octodrome/chess/go-rest-api-poc/model"
+	"github.com/octodrome/chess/rest-server/model"
 )
 
 var privateKey = []byte(os.Getenv("JWT_PRIVATE_KEY"))

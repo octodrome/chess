@@ -4,7 +4,7 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"github.com/octodrome/chess/go-rest-api-poc/model"
+	"github.com/octodrome/chess/rest-server/model"
 )
 
 func AddGameMessage(context *gin.Context) {

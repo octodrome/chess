@@ -5,8 +5,8 @@ import (
 	"strconv"
 
 	"github.com/gin-gonic/gin"
-	"github.com/octodrome/chess/go-rest-api-poc/helper"
-	"github.com/octodrome/chess/go-rest-api-poc/model"
+	"github.com/octodrome/chess/rest-server/helper"
+	"github.com/octodrome/chess/rest-server/model"
 )
 
 func GetGameById(context *gin.Context) {

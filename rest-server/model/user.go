@@ -6,7 +6,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/octodrome/chess/go-rest-api-poc/database"
+	"github.com/octodrome/chess/rest-server/database"
 	"golang.org/x/crypto/bcrypt"
 	"gorm.io/gorm"
 )

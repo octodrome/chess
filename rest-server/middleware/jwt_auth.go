@@ -4,7 +4,7 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"github.com/octodrome/chess/go-rest-api-poc/helper"
+	"github.com/octodrome/chess/rest-server/helper"
 )
 
 func JWTAuthMiddleware() gin.HandlerFunc {

@@ -1,4 +1,4 @@
-# Backend
+# REST Server
 
 ## Install Go
 

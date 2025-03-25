@@ -11,7 +11,7 @@ import (
 
 func SendMessageToAPI(gameID uint, msg model.Message) error {
 	// Construct the API endpoint URL
-	url := fmt.Sprintf("http://back:8001/api/game/%d/messages", gameID)
+	url := fmt.Sprintf("http://rest-server:8001/api/game/%d/messages", gameID)
 
 	// Create the JSON payload
 	payload := struct {
