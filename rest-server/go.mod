@@ -1,4 +1,4 @@
-module github.com/octodrome/chess/go-rest-api-poc
+module github.com/octodrome/chess/rest-server
 
 go 1.22.2
 

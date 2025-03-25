@@ -5,10 +5,10 @@ import (
 	"os"
 
 	"github.com/gin-gonic/gin"
-	"github.com/octodrome/chess/go-rest-api-poc/controller"
-	"github.com/octodrome/chess/go-rest-api-poc/database"
-	"github.com/octodrome/chess/go-rest-api-poc/middleware"
-	"github.com/octodrome/chess/go-rest-api-poc/model"
+	"github.com/octodrome/chess/rest-server/controller"
+	"github.com/octodrome/chess/rest-server/database"
+	"github.com/octodrome/chess/rest-server/middleware"
+	"github.com/octodrome/chess/rest-server/model"
 )
 
 func main() {
