@@ -1,6 +1,6 @@
 import { IColor, IPieceScope } from '../../types';
 import Board from '../Board/Board';
-import { positionsTable } from './../BitBoard/positionsHashTable';
+import { positionsTable } from '../BitBoard/positionsHashTable';
 
 export function generatePieceMoves(
   pieceScope: IPieceScope[],

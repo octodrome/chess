@@ -2,7 +2,7 @@ import { IColor, ISlidingPiece, IPieceCategory } from '../../../types';
 import {
   getNegativeRayAttacks,
   getPositiveRayAttacks,
-} from '../rayAttacks/occupiedBoardRayAttacks';
+} from './occupiedBoardRayAttacks';
 import Board from '../../Board/Board';
 
 export function generateSlidingPieceScope(

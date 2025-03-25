@@ -9,7 +9,7 @@ services:
         depends_on:
             - socket-server-test
         build:
-            context: ./front
+            context: ./apps/front
             target: dev
         ports:
             - 3000:3000
@@ -29,7 +29,7 @@ services:
             db-test:
                 condition: service_healthy
         build:
-            context: ./rest-server
+            context: ./apps/rest-server
             target: dev
         environment:
             - DB_HOST=db-test
@@ -48,7 +48,7 @@ services:
     socket-server-test:
         restart: always
         build:
-            context: ./socket-server
+            context: ./apps/socket-server
             target: dev
         networks:
             - test_net
@@ -81,7 +81,7 @@ services:
             - socket-server-test
         working_dir: /e2e
         volumes:
-            - ./e2e:/e2e
+            - ./apps/e2e:/e2e
         entrypoint: ['npm', 'run', 'cy']
         networks:
             - test_net
