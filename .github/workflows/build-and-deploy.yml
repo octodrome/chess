@@ -9,7 +9,7 @@ on:
 env:
     REGISTRY: 'colinfaivre'
     FRONT_IMAGE_NAME: 'chess_front_prod'
-    BACK_IMAGE_NAME: 'chess_back_prod'
+    BACK_IMAGE_NAME: 'chess_rest_server_prod'
 
 jobs:
     build-push-images:
@@ -39,16 +39,16 @@ jobs:
                   npm run ts:check && \
                   npm run test:unit"
 
-            - name: Build dev back image
+            - name: Build dev rest-server image
               uses: docker/build-push-action@v6
               with:
-                  context: '{{defaultContext}}:back'
+                  context: '{{defaultContext}}:rest-server'
                   target: dev
                   push: false
                   load: true # Export to Docker Engine rather than pushing to a registry
                   tags: ${{ github.run_id }}
 
-            - name: Check back unit-testing in Docker Engine
+            - name: Check rest-server unit-testing in Docker Engine
               run: |
                   docker run --rm ${{ github.run_id }} ginkgo -r
 
@@ -99,13 +99,13 @@ jobs:
                   push: true
                   tags: colinfaivre/chess_front_prod
 
-            - name: Build and push prod back image to Docker Hub
+            - name: Build and push prod rest-server image to Docker Hub
               uses: docker/build-push-action@v6
               with:
-                  context: '{{defaultContext}}:back'
+                  context: '{{defaultContext}}:rest-server'
                   target: prod
                   push: true
-                  tags: colinfaivre/chess_back_prod
+                  tags: colinfaivre/chess_rest_server_prod
 
             - name: Build and push prod socket-server image to Docker Hub
               uses: docker/build-push-action@v6
@@ -129,7 +129,7 @@ jobs:
                   script: |
                       echo "${{ secrets.DOCKERHUB_PASSWORD }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
                       docker pull colinfaivre/chess_front_prod
-                      docker pull colinfaivre/chess_back_prod
+                      docker pull colinfaivre/chess_rest_server_prod
                       docker pull colinfaivre/chess_socket_server_prod
 
                       cd ~/chess

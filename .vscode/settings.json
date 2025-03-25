@@ -2,9 +2,7 @@
     "conventionalCommits.scopes": [
         "chess-legal-moves",
         "front",
-        "back",
-        "e2e",
-        "ci",
+        "rest-server",
         "socket-server",
         "fullstack"
     ],

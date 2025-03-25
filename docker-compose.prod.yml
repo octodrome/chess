@@ -5,7 +5,7 @@
 # $ ssh root@165.22.119.201
 # $ cd chess_app/
 # $ docker pull colinfaivre/chess_front_prod:latest
-# $ docker pull colinfaivre/chess_back_prod:latest
+# $ docker pull colinfaivre/chess_rest_server_prod:latest
 # $ docker compose -f docker-compose.prod.yml up --detach --build
 # $ docker compose -f docker-compose.prod.yml down
 ### Execute a command inside a running compose service
@@ -39,8 +39,8 @@ services:
             - NUXT_PUBLIC_REST_API_URL=https://nuxtchess.com/api
             - NUXT_PUBLIC_SOCKET_SERVER_URL=wss://nuxtchess.com/ws
 
-    back:
-        image: colinfaivre/chess_back_prod
+    rest-server:
+        image: colinfaivre/chess_rest_server_prod
         restart: always
         depends_on:
             db:

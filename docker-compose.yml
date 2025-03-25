@@ -11,8 +11,8 @@
 # $ docker compose exec front sh
 # # npm run test:unit
 
-### 🧪 Run unit tests in back service
-# $ docker compose exec back sh
+### 🧪 Run unit tests in rest-server service
+# $ docker compose exec rest-server sh
 # # ginkgo -r
 
 ### 👀 Run compose watching changes
@@ -49,21 +49,21 @@ services:
             - NUXT_PUBLIC_REST_API_URL=http://localhost:8001/api
             - NUXT_PUBLIC_SOCKET_SERVER_URL=ws://localhost:5000/ws
 
-    back:
+    rest-server:
         depends_on:
             db:
                 condition: service_healthy
         build:
-            context: ./back
+            context: ./rest-server
             target: dev
         develop:
             watch:
                 - action: rebuild
-                  path: ./back
+                  path: ./rest-server
                   files:
-                      - ./back/**/*.go
-                      - ./back/go.mod
-                      - ./back/go.sum
+                      - ./rest-server/**/*.go
+                      - ./rest-server/go.mod
+                      - ./rest-server/go.sum
         ports:
             - 8001:8001
         environment:

@@ -9,12 +9,12 @@
 
 ##########################
 ### Test dev container ###
-# $ docker image build --target dev -t chess_rest_server_dev ./back
+# $ docker image build --target dev -t chess_rest_server_dev ./rest-server
 # $ docker container run -p 8080:8080 chess_rest_server_dev
 
 ##########################
 ### Test prod container ##
-# $ docker image build --target prod -t colinfaivre/chess_rest_server_prod ./back
+# $ docker image build --target prod -t colinfaivre/chess_rest_server_prod ./rest-server
 # $ docker container run -p 8080:8080 chess_rest_server_prod
 # $ docker image push colinfaivre/chess_rest_server_prod
 
