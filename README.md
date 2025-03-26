@@ -29,7 +29,7 @@ docker compose up
 
 ## 🚀 Continuous Integration and Deployment
 
-![alt text](./documentation/ci-cd.png?raw=true)
+![alt text](./documentation/environments.png?raw=true)
 
 The Nuxt Chess app uses an automated pipeline to streamline the process from code changes to a live production environment: [.github/workflows/build-and-deploy.yml](.github/workflows/build-and-deploy.yml)
 

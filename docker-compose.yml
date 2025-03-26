@@ -2,6 +2,8 @@
 #### COMPOSE DOCUMENTATION 🐳 ####
 ##################################
 
+### 📦 This compose file is designed to run npm install from docker instead of locally
+
 ### 🛢 Execute a command inside a running compose service (ex: show tables inside db):
 # $ docker compose exec db bash
 # db:/# psql -h localhost -d chess -U chess -p 5432
