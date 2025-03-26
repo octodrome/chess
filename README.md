@@ -11,7 +11,7 @@ This project started as a frontend portfolio app I worked on during my freelance
 
 ## 👾 Tech Stack
 
-![alt text](./documentation/chess_stack.png?raw=true)
+![alt text](./documentation/stack.png?raw=true)
 
 ![TypeScript](https://img.shields.io/badge/Typescript-%23007ACC.svg?style=flat&logo=typescript&logoColor=white)
 ![Nuxt.js](https://img.shields.io/badge/Nuxt3-002E3B?style=flat&logo=nuxtdotjs&logoColor=#00DC82)
